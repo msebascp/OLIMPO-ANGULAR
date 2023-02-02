@@ -1,10 +1,37 @@
-<nav>
-  <ul>
-    <li><a>Inicio</a></li>
-    <li><a>Sobre nosotros</a></li>
-    <li><a>Información</a></li>
-    <li><a>Nuestro Blog</a></li>
-    <li><a>Contáctanos</a></li>
-    <li><button></button></li>
-  </ul>
-</nav>
+<header>
+<div class="flex flex-wrap place-items-center">
+  <section class="relative mx-auto">
+      <!-- navbar -->
+    <nav class="flex justify-between bg-black text-white w-screen">
+      <div class="px-5 xl:px-12 py-6 flex w-full items-center">
+        <a class="text-3xl font-bold font-heading" href="#">
+          <img class="mr-12 h-14 md:h-16 lg:h-24 sm:h-16" src="../../assets/LOGO.png"> 
+        </a>
+        <!-- Nav Links -->
+        <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+          <li><a class= " text-red-800 hover:text-red-800" href="#">INICIO</a></li>
+          <li><a class="hover:text-red-800" href="#">SOBRE NOSOTROS</a></li>
+          <li><a class="hover:text-red-800" href="#">INFORMACIÓN</a></li>
+          <li><a class="hover:text-red-800" href="#">NUESTRO BLOG</a></li>
+          <li><a class="hover:text-red-800" href="#">CONTÁCTANOS</a></li>
+        </ul>
+        <!-- Header Icons -->
+        <div class="hidden md:flex space-x-8 items-center text-2xl">
+          <!-- Sign In / Register      -->
+          <a class=" items-center hover:text-gray-200 hidden md:flex" href="#">
+            <i class="fa fa-user"></i>
+          </a>
+          
+        </div>
+      </div>
+      <!-- Responsive navbar -->
+      <a class="navbar-burger self-center text-2xl mr-12 md:hidden" href="#">
+        <i class="fa fa-bars"></i>
+      </a>
+    </nav>
+  </section>
+</div>
+</header>
+<body>
+  
+</body>
