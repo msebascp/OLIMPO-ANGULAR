@@ -2,13 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
-body{
-    width: 100%;
+html,body {
+    font-family: 'Rufina';
     height: 100%;
-    background-image: url(./assets/fondo.jpg);
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    opacity: .6;
 }
