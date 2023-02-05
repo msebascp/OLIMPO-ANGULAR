@@ -11,6 +11,8 @@ import { BlogComponent } from './blog/blog.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UsersAdminComponent } from './users-admin/users-admin.component';
+import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { RegisterComponent } from './register/register.component';
     BlogComponent,
     ContactUsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UsersAdminComponent,
+    NavbarAdminComponent
   ],
   imports: [
     BrowserModule,

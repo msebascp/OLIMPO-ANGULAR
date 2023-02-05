@@ -1,0 +1,16 @@
+<nav class="w-full bg-gray-800 px-2">
+    <ul class="flex justify-center columns-2 md:flex-row items-center align-middle gap-4 text-white">
+        <div class="flex items-center justify-center flex-col md:flex-row align-middle text-center bg-gray-700 rounded-xl p-2 m-2 md:bg-transparent">
+            <li class="uppercase "><a routerLink="/admin/account" *ngIf="router.url === '/admin/account'" class="text-black md:mx-5 text-center">Mi cuenta</a></li>
+            <li class="uppercase "><a routerLink="/admin/account" *ngIf="router.url !== '/admin/account'" class="hover:text-black md:mx-5 text-center">Mi cuenta</a></li>
+            <li class="uppercase "><a routerLink="/admin/users" *ngIf="router.url === '/admin/users'" class="text-black md:mx-5 text-center">Usuarios</a></li>
+            <li class="uppercase "><a routerLink="/admin/users" *ngIf="router.url !== '/admin/users'" class="hover:text-black md:mx-5 text-center">Usuarios</a></li>
+        </div>
+        <div class="flex items-center justify-center flex-col md:flex-row align-middle text-center bg-gray-700 rounded-xl p-2 m-2 md:bg-transparent">
+            <li class="uppercase "><a routerLink="/admin/editBlog" *ngIf="router.url === '/admin/editBlog'" class="text-black md:mx-5 text-center">Blog</a></li>
+            <li class="uppercase "><a routerLink="/admin/editBlog" *ngIf="router.url !== '/admin/editBlog'" class="hover:text-black md:mx-5 text-center">Blog</a></li>
+            <li class="uppercase "><a routerLink="/admin/aboutSettings" *ngIf="router.url === '/admin/aboutSettings'" class="text-black md:mx-5 text-center">Sobre el Gimnasio</a></li>
+            <li class="uppercase "><a routerLink="/admin/aboutSettings" *ngIf="router.url !== '/admin/aboutSettings'" class="hover:text-black md:mx-5 text-center">Sobre el Gimnasio</a></li>
+        </div>
+    </ul>
+</nav>
