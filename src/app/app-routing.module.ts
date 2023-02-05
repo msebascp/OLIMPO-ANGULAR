@@ -8,6 +8,9 @@ import {ContactUsComponent} from "./contact-us/contact-us.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import { UsersAdminComponent } from './users-admin/users-admin.component';
+import { AdminAccountComponent } from './admin-account/admin-account.component';
+import { AdminBlogComponent } from './admin-blog/admin-blog.component';
+import { AdminAboutComponent } from './admin-about/admin-about.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -17,7 +20,10 @@ const routes: Routes = [
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'admin/account', component: AdminAccountComponent},
   {path: 'admin/users', component: UsersAdminComponent},
+  {path: 'admin/editBlog', component: AdminBlogComponent},
+  {path: 'admin/aboutSettings', component: AdminAboutComponent},
   {path: '**', redirectTo: 'home', pathMatch:'full'},
 ];
 

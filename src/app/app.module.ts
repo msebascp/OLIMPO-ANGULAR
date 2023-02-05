@@ -13,6 +13,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UsersAdminComponent } from './users-admin/users-admin.component';
 import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
+import { AdminAccountComponent } from './admin-account/admin-account.component';
+import { AdminBlogComponent } from './admin-blog/admin-blog.component';
+import { AdminAboutComponent } from './admin-about/admin-about.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
     LoginComponent,
     RegisterComponent,
     UsersAdminComponent,
-    NavbarAdminComponent
+    NavbarAdminComponent,
+    AdminAccountComponent,
+    AdminBlogComponent,
+    AdminAboutComponent
   ],
   imports: [
     BrowserModule,
