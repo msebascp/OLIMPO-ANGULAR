@@ -1,7 +1,7 @@
-    <nav class="px-2 sm:px-4 py-2.5 bg-black w-full shadow">
+    <nav class="px-2 sm:px-4 py-2.5 bg-black w-full shadow sticky z-20 top-0">
       <div class="container flex flex-wrap items-center justify-between mx-auto">
         <div class="flex md:hidden"></div>
-        <a class="text-3xl md:ml-0 md:pl-0 font-bold font-heading flex items-center justify-center" href="#">
+        <a routerLink="/home" class="text-3xl md:ml-0 md:pl-0 font-bold font-heading flex items-center justify-center">
           <img class="ml-12 pl-6 md:mr-12 md:ml-80 md:pl-6 lg:ml-0 lg:pl-0 h-16 md:h-16 lg:h-24 sm:h-20" src="../../assets/LOGO.png"> 
         </a>
         <a data-collapse-toggle="navbar-default" type="button"
@@ -10,15 +10,23 @@
         </a>
         <div class="hidden w-full md:flex md:flex-row md:w-auto" id="navbar-default">
           <ul
-          class="flex flex-col p-4 mt-4 md:flex-row md:align-middle md:items-center md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 text-white">
-            <li><a class= "text-red-800 hover:text-red-800 flex" href="#">INICIO</a></li>
-            <li><a class="hover:text-red-800 flex" href="#">SOBRE NOSOTROS</a></li>
-            <li><a class="hover:text-red-800 flex" href="#">INFORMACIÓN</a></li>
-            <li><a class="hover:text-red-800 flex" href="#">NUESTRO BLOG</a></li>
-            <li><a class="hover:text-red-800 flex" href="#">CONTÁCTANOS</a></li>
+          class="flex flex-col p-4 mt-4 md:flex-row md:align-middle md:items-center md:mt-0 md:text-sm md:font-medium md:border-0 text-white">
+            <li><a routerLink="/home" *ngIf="router.url === '/home'" class= "text-red-800 flex md:mx-5">INICIO</a></li>
+            <li><a routerLink="/home" *ngIf="router.url !== '/home'" class= "hover:text-red-800 flex md:mx-5">INICIO</a></li>
+            <li><a routerLink="/aboutUs" *ngIf="router.url === '/aboutUs'" class="text-red-800 flex md:mx-5">SOBRE NOSOTROS</a></li>
+            <li><a routerLink="/aboutUs" *ngIf="router.url !== '/aboutUs'" class="hover:text-red-800 flex md:mx-5">SOBRE NOSOTROS</a></li>
+            <li><a routerLink="/information" *ngIf="router.url === '/information'" class="text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
+            <li><a routerLink="/information" *ngIf="router.url !== '/information'" class="hover:text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
+            <li><a routerLink="/blog" *ngIf="router.url === '/blog'" class="text-red-800 flex md:mx-5">NUESTRO BLOG</a></li>
+            <li><a routerLink="/blog" *ngIf="router.url !== '/blog'" class="hover:text-red-800 flex md:mx-5">NUESTRO BLOG</a></li>
+            <li><a routerLink="/contactUs" *ngIf="router.url === '/contactUs'" class="text-red-800 flex md:mx-5">CONTÁCTANOS</a></li>
+            <li><a routerLink="/contactUs" *ngIf="router.url !== '/contactUs'" class="hover:text-red-800 flex md:mx-5">CONTÁCTANOS</a></li>
             <li>
               <div class="flex space-x-8 items-center text-2xl text-white">
-                <a class=" items-center hover:text-red-800 flex m-5" href="#">
+                <a routerLink="/login" *ngIf="router.url === '/login'" class=" items-center text-red-800 flex m-5">
+                  <i class="fa fa-user"></i>
+                </a>
+                <a routerLink="/login" *ngIf="router.url !== '/login'" class=" items-center hover:text-red-800 flex m-5">
                   <i class="fa fa-user"></i>
                 </a>
               </div>
@@ -27,15 +35,23 @@
               <!-- Dropdown menu -->
               <div id="dropdown"
                 class="z-10 hidden divide-y  rounded shadow w-44">
-                <ul class="flex flex-col md:flex md:flex-row items-center align-middle px-4 mx-auto font-semibold sm:text-sm font-heading space-x-12 text-white">
-                  <li><a class= "text-red-800 hover:text-red-800 flex" href="#">INICIO</a></li>
-                  <li><a class="hover:text-red-800 flex" href="#">SOBRE NOSOTROS</a></li>
-                  <li><a class="hover:text-red-800 flex" href="#">INFORMACIÓN</a></li>
-                  <li><a class="hover:text-red-800 flex" href="#">NUESTRO BLOG</a></li>
-                  <li><a class="hover:text-red-800 flex" href="#">CONTÁCTANOS</a></li>
+                <ul class="flex flex-col md:flex md:flex-row items-center align-middle px-4 mx-auto font-semibold sm:text-sm font-heading  text-white">
+                  <li><a routerLink="/home" *ngIf="router.url === '/home'" class= "text-red-800 flex md:mx-5">INICIO</a></li>
+                  <li><a routerLink="/home" *ngIf="router.url !== '/home'" class= "hover:text-red-800 flex md:mx-5">INICIO</a></li>
+                  <li><a routerLink="/aboutUs" *ngIf="router.url === '/aboutUs'" class="text-red-800 flex md:mx-5">SOBRE NOSOTROS</a></li>
+                  <li><a routerLink="/aboutUs" *ngIf="router.url !== '/aboutUs'" class="hover:text-red-800 flex md:mx-5">SOBRE NOSOTROS</a></li>
+                  <li><a routerLink="/information" *ngIf="router.url === '/information'" class="text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
+                  <li><a routerLink="/information" *ngIf="router.url !== '/information'" class="hover:text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
+                  <li><a routerLink="/blog" *ngIf="router.url === '/blog'" class="text-red-800 flex md:mx-5">NUESTRO BLOG</a></li>
+                  <li><a routerLink="/blog" *ngIf="router.url !== '/blog'" class="hover:text-red-800 flex md:mx-5">NUESTRO BLOG</a></li>
+                  <li><a routerLink="/contactUs" *ngIf="router.url === '/contactUs'" class="text-red-800 flex md:mx-5">CONTÁCTANOS</a></li>
+                  <li><a routerLink="/contactUs" *ngIf="router.url !== '/contactUs'" class="hover:text-red-800 flex md:mx-5">CONTÁCTANOS</a></li>
                   <li>
                     <div class="flex space-x-8 items-center text-2xl text-white">
-                      <a class=" items-center hover:text-red-800 flex m-5" href="#">
+                      <a routerLink="/login" *ngIf="router.url === '/login'" class=" items-center text-red-800 flex m-5">
+                        <i class="fa fa-user"></i>
+                      </a>
+                      <a routerLink="/login" *ngIf="router.url !== '/login'" class=" items-center hover:text-red-800 flex m-5">
                         <i class="fa fa-user"></i>
                       </a>
                     </div>
