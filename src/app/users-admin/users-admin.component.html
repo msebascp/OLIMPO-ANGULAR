@@ -24,18 +24,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr class=" border-b bg-gray-800 border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
-                    Apple MacBook Pro 17"
+            <tr *ngFor="let customer of customers" class=" border-b bg-gray-800 border-gray-700">
+                <th  scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
+                    {{ customer.name }}
                 </th>
                 <td class="px-6 py-4">
-                    Sliver
+                    {{ customer.email }}
+                </td>
+                <td *ngIf="customer.trainer !== undefined" class="px-6 py-4">
+                    {{ customer.trainer.name }}
+                </td>
+                <td *ngIf="customer.trainer === undefined" class="px-6 py-4">
+                    Entrenador no asignado
                 </td>
                 <td class="px-6 py-4">
-                    Laptop
-                </td>
-                <td class="px-6 py-4">
-                    $2999
+                    {{ customer.phone }}
                 </td>
                 <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
                     <button><i class="fa fa-pencil-square-o px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>

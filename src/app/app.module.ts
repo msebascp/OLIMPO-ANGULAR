@@ -16,6 +16,7 @@ import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 import { AdminAccountComponent } from './admin-account/admin-account.component';
 import { AdminBlogComponent } from './admin-blog/admin-blog.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AdminAboutComponent } from './admin-about/admin-about.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
