@@ -49,10 +49,9 @@
                         {{ customer.dateInscription }}
                     </td>
                     <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
-                        <button><i
-                                class="fa fa-pencil-square-o px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
+                        <button><i class="fa fa-pencil-square-o px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
                         <button><i class="fa fa-upload px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
-                        <button><i class="fa fa-trash px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
+                        <button><i (click)="deleteCustomer(customer.id)" class="fa fa-trash px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
                     </td>
                 </tr>
             </tbody>

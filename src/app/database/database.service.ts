@@ -76,6 +76,19 @@ export class DatabaseService {
     );
   }
 
+  public deleteCustomer(id: number): Observable<Customer> {
+    let url = this.API_URL + `/customers`;
+    if (id !== undefined) {
+      url += `/${id}`
+    }
+    return this.http.delete<Customer>(url).pipe(
+      catchError(e => {
+        console.error(e);
+        return [];
+      })
+    );
+  }
+
   public searchCustomers(text: string): Observable<Customer[]> {
     let url = this.API_URL + `/customers/search`;
     if (!text.trim()) {
