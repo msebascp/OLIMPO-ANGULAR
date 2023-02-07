@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DataCustomer } from '../interfaces/dataCustomer';
 import { DataTrainer } from '../interfaces/dataTrainer';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Customer } from '../interfaces/customer';
 import { Trainer } from '../interfaces/trainer';
 
@@ -75,4 +75,17 @@ export class DatabaseService {
       }),
     );
   }
+
+  public searchCustomers(text: string): Observable<Customer[]> {
+    let url = this.API_URL + `/customers/search`;
+    if (!text.trim()) {
+      return of([]);
+    }
+    let params = new HttpParams().set('limit', 5);
+    if (text) {
+      params = params.set('name[value]', text);
+    }
+    return this.http.get<Customer[]>(url, {params});
+  }
 }
+

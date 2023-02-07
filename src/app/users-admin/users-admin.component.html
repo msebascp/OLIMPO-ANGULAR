@@ -1,54 +1,61 @@
-
-<div class="w-full h-full">
-    <navbar-admin></navbar-admin>
-    
-<div class="relative overflow-x-auto shadow-md rounded sm:rounded-lg m-5">
-    <table class="w-full text-sm text-left text-gray-400">
-        <thead class="text-xs uppercase  bg-gray-900 text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Nombre
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Entrenamiento
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Entrenador
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Fecha Inscripción
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Edit</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let customer of customers" class=" border-b bg-gray-800 border-gray-700">
-                <th  scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
-                    {{ customer.name }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ customer.email }}
-                </td>
-                <td *ngIf="customer.trainer !== undefined" class="px-6 py-4">
-                    {{ customer.trainer.name }}
-                </td>
-                <td *ngIf="customer.trainer === undefined" class="px-6 py-4">
-                    Entrenador no asignado
-                </td>
-                <td class="px-6 py-4">
-                    {{ customer.phone }}
-                </td>
-                <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
-                    <button><i class="fa fa-pencil-square-o px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
-                    <button><i class="fa fa-upload px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
-                    <button><i class="fa fa-trash px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
+<navbar-admin></navbar-admin>
+<div class="flex flex-col w-full justify-center items-center">
+    <div class="mb-6 w-72 md:w-96 mt-6">
+        <input placeholder="Buscar por nombre" #inputSearch (input)="search(inputSearch.value)" type="text"
+            id="input-search"
+            class=" border text-sm rounded-lg block w-full p-2.5 bg-gray-500 border-gray-600 placeholder-gray-400 text-white ">
+    </div>
 </div>
-
+<div class="w-full h-full">
+    <div class="relative overflow-x-auto shadow-md rounded sm:rounded-lg m-5">
+        <table class="w-full text-sm text-left text-gray-400">
+            <thead class="text-xs uppercase  bg-gray-900 text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Nombre
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Entrenamiento
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Entrenador
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Fecha Inscripción
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Edit</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers" class=" border-b bg-gray-800 border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
+                        {{ customer.name }}
+                    </th>
+                    <td *ngIf="customer.typeTraining === null" class="px-6 py-4">
+                        Entrenamiento no asignado
+                    </td>
+                    <td *ngIf="customer.typeTraining !== null" class="px-6 py-4">
+                        {{ customer.typeTraining }}
+                    </td>
+                    <td *ngIf="customer.trainer !== undefined" class="px-6 py-4">
+                        {{ customer.trainer.name }}
+                    </td>
+                    <td *ngIf="customer.trainer === undefined" class="px-6 py-4">
+                        Entrenador no asignado
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ customer.dateInscription }}
+                    </td>
+                    <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
+                        <button><i
+                                class="fa fa-pencil-square-o px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
+                        <button><i class="fa fa-upload px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
+                        <button><i class="fa fa-trash px-2 text-xl text-gray-600 hover:text-gray-400"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

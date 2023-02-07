@@ -8,5 +8,7 @@ export interface Customer {
     phone: string;
     api_token: string;
     trainer_id: number;
+    dateInscription: string;
+    typeTraining: string;
     trainer: Trainer
 }
