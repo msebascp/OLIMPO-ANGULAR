@@ -1,7 +1,7 @@
 import { Trainer } from "./trainer";
 
-export interface DataTrainer {
-    data: Trainer;
+export interface DataTrainers {
+    data: Trainer[];
     message: string;
     success: boolean;
 }

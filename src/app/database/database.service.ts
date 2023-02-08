@@ -5,6 +5,8 @@ import { DataTrainer } from '../interfaces/dataTrainer';
 import { catchError, map, Observable, of } from 'rxjs';
 import { Customer } from '../interfaces/customer';
 import { Trainer } from '../interfaces/trainer';
+import { DataCustomers } from '../interfaces/dataCustomers';
+import { DataTrainers } from '../interfaces/DataTrainers';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,8 @@ export class DatabaseService {
 
   public getAllCustomers(): Observable<Customer[]> {
     let url = this.API_URL + '/customers';
-    return this.http.get<DataCustomer>(url).pipe(
-      map((data: DataCustomer) => {
+    return this.http.get<DataCustomers>(url).pipe(
+      map((data: DataCustomers) => {
         return data.data;
       }),
       catchError(e => {
@@ -33,11 +35,11 @@ export class DatabaseService {
   public getCustomerById(id: number): Observable<Customer> {
     let url = this.API_URL + `/customers`;
     if (id !== undefined) {
-      url += `?id=${id}`
+      url += `/${id}`
     }
     return this.http.get<DataCustomer>(url).pipe(
       map((data: DataCustomer) => {
-        return data.data[0];
+        return data.data;
       }),
       catchError(e => {
         console.error(e);
@@ -48,9 +50,8 @@ export class DatabaseService {
 
   public getAllTrainers(): Observable<Trainer[]> {
     let url = this.API_URL + '/trainers';
-    return this.http.get<DataTrainer>(url).pipe(
-      map((data: DataTrainer) => {
-        console.log(data)
+    return this.http.get<DataTrainers>(url).pipe(
+      map((data: DataTrainers) => {
         return data.data;
       }),
       catchError(e => {
@@ -60,13 +61,13 @@ export class DatabaseService {
     );
   }
 
-  public getTrainerByCustomer(id: number): Observable<Trainer[]> {
+  public getTrainerByCustomer(id: number): Observable<Customer> {
     let url = this.API_URL + `/customers`;
     if (id !== undefined) {
       url += `/${id}/trainers`
     }
-    return this.http.get<DataTrainer>(url).pipe(
-      map((data: DataTrainer) => {
+    return this.http.get<DataCustomer>(url).pipe(
+      map((data: DataCustomer) => {
         return data.data;
       }),
       catchError(e => {
@@ -99,6 +100,23 @@ export class DatabaseService {
       params = params.set('name[value]', text);
     }
     return this.http.get<Customer[]>(url, {params});
+  }
+
+  public updateCustomer(id: number, customer: Customer): Observable<Customer> {
+    let url = this.API_URL + `/customers`;
+    if (id !== undefined) {
+      url += `/${id}?name=${customer.name}&typeTraining=${customer.typeTraining}&trainer_id=${customer.trainer_id}&email=${customer.email}`
+    }
+    return this.http.patch<DataCustomer>(url, customer).pipe(
+      map((data: DataCustomer) => {
+        console.log(data)
+        return data.data;
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
   }
 }
 

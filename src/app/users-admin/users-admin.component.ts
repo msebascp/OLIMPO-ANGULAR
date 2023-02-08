@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { Customer } from '../interfaces/customer';
 import { DatabaseService } from '../database/database.service';
-import { Trainer } from '../interfaces/trainer';
-import { ActivatedRoute } from '@angular/router';
-import { debounceTime, distinctUntilChanged, empty, Observable, of, Subject, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged,  Observable, of, Subject, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-users-admin',
   templateUrl: './users-admin.component.html',
@@ -21,6 +18,7 @@ export class UsersAdminComponent {
   ) { }
 
   ngOnInit(): void {
+
     this.getClientes();
 
     this.customersFound$.subscribe(customersFound => {
@@ -51,19 +49,20 @@ export class UsersAdminComponent {
         }
       })
     });
+
+
   }
 
   public getClientes(): void {
     this.databaseService.getAllCustomers().subscribe(customers => {
-      this.customers = customers;
-      this.customers.forEach(customer => {
+      //this.customers = customers;
+      customers.forEach(customer => {
         if (customer.trainer_id !== null) {
           this.databaseService.getTrainerByCustomer(customer.id).subscribe(trainer => {
-            const values = Object.values(trainer)[9];
-            if (customer.trainer_id === values.id) {
-              Object.assign(customer, { trainer: values });
-            }
+            this.customers.push(trainer);
           });
+        } else {
+          this.customers.push(customer);
         }
       })
 

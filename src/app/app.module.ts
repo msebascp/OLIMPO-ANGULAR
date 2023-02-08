@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderNavComponent } from './header-nav/header-nav.component';
@@ -17,6 +17,7 @@ import { AdminAccountComponent } from './admin-account/admin-account.component';
 import { AdminBlogComponent } from './admin-blog/admin-blog.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminEditCustomersComponent } from './admin-edit-customers/admin-edit-customers.component';
 
 @NgModule({
   declarations: [
@@ -33,12 +34,14 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarAdminComponent,
     AdminAccountComponent,
     AdminBlogComponent,
-    AdminAboutComponent
+    AdminAboutComponent,
+    AdminEditCustomersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
