@@ -1,16 +1,17 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from "./home/home.component";
-import {AboutUsComponent} from "./about-us/about-us.component";
-import {InformationComponent} from "./information/information.component";
-import {BlogComponent} from "./blog/blog.component";
-import {ContactUsComponent} from "./contact-us/contact-us.component";
-import {LoginComponent} from "./login/login.component";
-import {RegisterComponent} from "./register/register.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from "./home/home.component";
+import { AboutUsComponent } from "./about-us/about-us.component";
+import { InformationComponent } from "./information/information.component";
+import { BlogComponent } from "./blog/blog.component";
+import { ContactUsComponent } from "./contact-us/contact-us.component";
+import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
 import { UsersAdminComponent } from './users-admin/users-admin.component';
 import { AdminAccountComponent } from './admin-account/admin-account.component';
 import { AdminBlogComponent } from './admin-blog/admin-blog.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
+import { AdminEditCustomersComponent } from './admin-edit-customers/admin-edit-customers.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'admin/users', component: UsersAdminComponent},
   {path: 'admin/editBlog', component: AdminBlogComponent},
   {path: 'admin/aboutSettings', component: AdminAboutComponent},
+  {path: 'admin/editCustomer/:id', component: AdminEditCustomersComponent},
   {path: '**', redirectTo: 'home', pathMatch:'full'},
 ];
 
