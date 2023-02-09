@@ -17,6 +17,7 @@ import { AdminAccountComponent } from './admin-account/admin-account.component';
 import { AdminBlogComponent } from './admin-blog/admin-blog.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
 import { HttpClientModule } from '@angular/common/http';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -33,12 +34,13 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarAdminComponent,
     AdminAccountComponent,
     AdminBlogComponent,
-    AdminAboutComponent
+    AdminAboutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
