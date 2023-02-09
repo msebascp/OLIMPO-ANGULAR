@@ -1,3 +1,4 @@
+import { Payments } from "./payments";
 import { Trainer } from "./trainer";
 
 export interface Customer {
@@ -10,5 +11,6 @@ export interface Customer {
     trainer_id: number;
     dateInscription: string;
     typeTraining: string;
-    trainer: Trainer
+    trainer: Trainer;
+    payment: Payments[]
 }

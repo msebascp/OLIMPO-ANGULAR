@@ -17,7 +17,7 @@
     <div class="relative overflow-x-auto shadow-md rounded sm:rounded-lg m-5">
         <table class="w-full text-sm text-left text-gray-300">
             <thead class="text-xs uppercase  bg-gray-800 text-gray-300">
-                <tr>
+                <tr class="text-sm md:text-lg">
                     <th scope="col" class="px-6 py-3">
                         Nombre
                     </th>
@@ -31,12 +31,18 @@
                         Fecha Inscripción
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Fecha del último pago
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Pagado
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         <span class="sr-only">Edit</span>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let customer of customers" class=" border-b bg-gray-600 border-gray-600">
+                <tr *ngFor="let customer of customers" class=" border-b bg-gray-600 border-gray-600 text-sm md:text-lg">
                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
                         {{ customer.name }}
                     </th>
@@ -55,10 +61,23 @@
                     <td class="px-6 py-4">
                         {{ customer.dateInscription }}
                     </td>
+                    <td class="px-6 py-4">
+                        <div *ngFor="let payment of customer.payment ? customer.payment : []">
+                            <p *ngIf="payment === undefined">No hay fecha de último pago</p>
+                            <p *ngIf="payment !== undefined">{{ payment.payment_date }}</p>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div *ngFor="let payment of customer.payment ? customer.payment : []">
+                            <p *ngIf="payment === undefined">No hay información de pago</p>
+                            <p *ngIf="payment !== undefined">{{ payment.paid ? 'Pagado' : 'No Pagado' }}</p>
+                        </div>
+                    </td>
                     <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
-                        <button><i routerLink="/admin/editCustomer/{{ customer.id }}" class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i></button>
-                        <button><i class="fa fa-upload px-2 text-xl text-gray-700 hover:text-gray-400"></i></button>
-                        <button><i (click)="deleteCustomer(customer.id)" class="fa fa-trash px-2 text-xl text-gray-700 hover:text-gray-400"></i></button>
+                        <button><i class="fa fa-euro px-2 text-xl text-gray-700 hover:text-gray-400"></i><span class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip -translate-x-12 -translate-y-9">Pagar</span></button>
+                        <button><i routerLink="/admin/editCustomer/{{ customer.id }}" class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-24 -translate-y-9">Editar Cliente</span></button>
+                        <button><i class="fa fa-upload px-2 text-xl text-gray-700 hover:text-gray-400"></i><span class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-28 -translate-y-10">Subir Entrenamiento</span></button>
+                        <button><i (click)="deleteCustomer(customer.id)" class="fa fa-trash px-2 text-xl text-gray-700 hover:text-gray-400"></i><span class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-14 -translate-y-12">Borrar Cliente</span></button>
                     </td>
                 </tr>
             </tbody>

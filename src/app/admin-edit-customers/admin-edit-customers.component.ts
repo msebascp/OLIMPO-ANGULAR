@@ -69,8 +69,8 @@ export class AdminEditCustomersComponent {
       icon: 'warning',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#90EE90',
-      cancelButtonColor: '#3085d6',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#FF0000',
       confirmButtonText: 'Modificar',
       background: '#1F2937'
     }).then((result:any) => {

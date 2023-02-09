@@ -15,7 +15,6 @@
         <label for="trainer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Entrenador</label>
         <select id="trainer" formControlName="trainer_id"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option [value]="selectedCustomer.trainer_id" disabled  selected>{{ selectedCustomer.trainer.name }}</option>
             <option disabled>Selecciona un Entrenador</option>
             <option *ngFor="let trainer of trainers" [value]="trainer.id" >{{ trainer.name }}</option>
         </select>
@@ -42,7 +41,7 @@
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Entrenamiento no asignado" [(ngModel)]="selectedCustomer.typeTraining" formControlName="typeTraining">
     </div>
-    <button (click)="goBack()"
+    <button type="button" (click)="goBack()"
         class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-white  focus:outline-none focus:ring-pink-200 ">
         <span
             class="relative px-5 py-2.5 transition-all ease-in duration-75  bg-gray-800 rounded-md group-hover:bg-opacity-0">

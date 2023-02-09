@@ -6,7 +6,8 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { Customer } from '../interfaces/customer';
 import { Trainer } from '../interfaces/trainer';
 import { DataCustomers } from '../interfaces/dataCustomers';
-import { DataTrainers } from '../interfaces/DataTrainers';
+import { DataTrainers } from '../interfaces/dataTrainers';
+
 
 @Injectable({
   providedIn: 'root'
@@ -109,7 +110,6 @@ export class DatabaseService {
     }
     return this.http.patch<DataCustomer>(url, customer).pipe(
       map((data: DataCustomer) => {
-        console.log(data)
         return data.data;
       }),
       catchError(e => {
@@ -118,5 +118,22 @@ export class DatabaseService {
       }),
     );
   }
+
+  public getPaymentByCustomer(id: number): Observable<Customer> {
+    let url = this.API_URL + `/customers`;
+    if (id !== undefined) {
+      url += `/${id}/payments`
+    }
+    return this.http.get<DataCustomer>(url).pipe(
+      map((data: DataCustomer) => {
+        return data.data
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    )
+  }
+
 }
 
