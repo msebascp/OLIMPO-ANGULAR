@@ -22,7 +22,6 @@ export class LoginComponent {
   }
 
   ngOnInit(){
-    this.auth.isLoggedIn();
   }
 
   login() {

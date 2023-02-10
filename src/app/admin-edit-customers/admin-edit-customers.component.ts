@@ -34,11 +34,6 @@ export class AdminEditCustomersComponent {
   ) { }
 
   ngOnInit(): void {
-    this.auth.isLoggedIn();
-    this.auth.isTrainer().subscribe(data=>{
-      console.log(data);
-      if (!data.data.isTrainer) {this.router.navigate(['/home'])}
-    })
 
     this.getCustomerById();
     this.getAllTrainers();
