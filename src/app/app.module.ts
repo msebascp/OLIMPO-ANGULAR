@@ -19,6 +19,7 @@ import { AdminAboutComponent } from './admin-about/admin-about.component';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 import {AdminEditCustomersComponent} from "./admin-edit-customers/admin-edit-customers.component";
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {AdminEditCustomersComponent} from "./admin-edit-customers/admin-edit-cus
     AdminAccountComponent,
     AdminBlogComponent,
     AdminAboutComponent,
-    AdminEditCustomersComponent
+    AdminEditCustomersComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
