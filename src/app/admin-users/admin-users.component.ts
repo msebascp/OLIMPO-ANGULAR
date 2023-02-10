@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { Customer } from '../interfaces/customer';
 import { DatabaseService } from '../database/database.service';
-import { debounceTime, distinctUntilChanged,  empty,  Observable, of, Subject, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged,  Observable, of, Subject, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
-import {AuthPassportService} from "../database/auth-passport.service";
-import {ResponseToken} from "../interfaces/response-token";
-import {Router} from "@angular/router";
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
@@ -18,19 +15,47 @@ export class AdminUsersComponent {
 
   constructor(
     private databaseService: DatabaseService,
-    private auth: AuthPassportService,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.auth.isLoggedIn();
-    this.auth.isTrainer().subscribe(data=>{
-      console.log(data);
-      if (!data.data.isTrainer) {this.router.navigate(['/home'])}
-    })
 
     this.getClientes();
 
+    this.searchCustomers();
+
+  }
+
+  public getClientes(): void {
+    this.databaseService.getAllCustomers().subscribe(customers => {
+      //this.customers = customers;
+      customers.forEach(customer => {
+        if (customer.trainer_id !== null) {
+          this.databaseService.getTrainerByCustomer(customer.id).subscribe(trainer => {
+            this.customers.push(trainer);
+          });
+        } else {
+          this.customers.push(customer);
+        }
+        this.databaseService.getPaymentByCustomer(customer.id).subscribe(payments => {
+          if (payments.payment.length !== 0) {
+            let payment = payments.payment[payments.payment.length -1];
+            if (payment.customer_id === customer.id) {
+              for (let i = 0; i < this.customers.length; i++) {
+                if (this.customers[i].id === customer.id) {
+                  this.customers[i].payment = [
+                    ...(this.customers[i].payment || []),
+                    payment,
+                  ];
+                }
+              }
+            }
+          }
+        })
+      })
+    })
+  }
+
+  public searchCustomers() {
     this.customersFound$.subscribe(customersFound => {
       this.customers = customersFound;
     });
@@ -69,29 +94,14 @@ export class AdminUsersComponent {
                   }
                 }
               }
-              this.databaseService.getPaymentByCustomer(customer.id).subscribe(payments => {
-                if (payments.payment.length !== 0) {
-                  let payment = payments.payment[payments.payment.length -1];
-                  if (payment.customer_id === customer.id) {
-                    for (let i = 0; i < this.customers.length; i++) {
-                      if (this.customers[i].id === customer.id) {
-                        this.customers[i].payment = [
-                          ...(this.customers[i].payment || []),
-                          payment,
-                        ];
-                      }
-                    }
-                  }
-                }
-              })
-            });
-          }
-        })
-      });
+            })
+          });
+        }
+      })
+    });
 
-    }
+  }
 
->>>>>>> dfbdafcf538fccf81677757a685b222b3b3d6894:src/app/users-admin/users-admin.component.ts
 
   public search(value: string): void {
     //this.heroesFound$ = this.heroService.searchHeroes(value);
