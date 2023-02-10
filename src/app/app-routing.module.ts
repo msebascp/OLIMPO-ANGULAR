@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  
+
   {path: 'admin/account', component: AdminAccountComponent},
   {path: 'admin/users', component: AdminUsersComponent},
   {path: 'admin/editBlog', component: AdminBlogComponent},
