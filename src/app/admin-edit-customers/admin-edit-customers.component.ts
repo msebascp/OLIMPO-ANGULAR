@@ -8,6 +8,7 @@ import { Trainer } from '../interfaces/trainer';
 import Swal from 'sweetalert2';
 
 
+
 @Component({
   selector: 'admin-edit-customers',
   templateUrl: './admin-edit-customers.component.html',
