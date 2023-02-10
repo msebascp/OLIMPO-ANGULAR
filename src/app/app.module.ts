@@ -17,7 +17,9 @@ import { AdminAccountComponent } from './admin-account/admin-account.component';
 import { AdminBlogComponent } from './admin-blog/admin-blog.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminEditCustomersComponent } from './admin-edit-customers/admin-edit-customers.component';
+import {FormsModule} from "@angular/forms";
+import {AdminEditCustomersComponent} from "./admin-edit-customers/admin-edit-customers.component";
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -35,12 +37,14 @@ import { AdminEditCustomersComponent } from './admin-edit-customers/admin-edit-c
     AdminAccountComponent,
     AdminBlogComponent,
     AdminAboutComponent,
-    AdminEditCustomersComponent
+    AdminEditCustomersComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [],
