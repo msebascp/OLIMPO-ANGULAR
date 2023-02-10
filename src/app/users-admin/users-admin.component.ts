@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Customer } from '../interfaces/customer';
 import { DatabaseService } from '../database/database.service';
-import { debounceTime, distinctUntilChanged,  empty,  Observable, of, Subject, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged,  Observable, of, Subject, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-users-admin',
