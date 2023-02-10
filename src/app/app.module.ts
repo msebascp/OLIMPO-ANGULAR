@@ -11,7 +11,7 @@ import { BlogComponent } from './blog/blog.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { UsersAdminComponent } from './users-admin/users-admin.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 import { AdminAccountComponent } from './admin-account/admin-account.component';
 import { AdminBlogComponent } from './admin-blog/admin-blog.component';
@@ -19,6 +19,7 @@ import { AdminAboutComponent } from './admin-about/admin-about.component';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 import {AdminEditCustomersComponent} from "./admin-edit-customers/admin-edit-customers.component";
+import { CustomerAccountComponent } from './customer-account/customer-account.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +32,13 @@ import {AdminEditCustomersComponent} from "./admin-edit-customers/admin-edit-cus
     ContactUsComponent,
     LoginComponent,
     RegisterComponent,
-    UsersAdminComponent,
+    AdminUsersComponent,
     NavbarAdminComponent,
     AdminAccountComponent,
     AdminBlogComponent,
     AdminAboutComponent,
-    AdminEditCustomersComponent
+    AdminEditCustomersComponent,
+    CustomerAccountComponent
   ],
   imports: [
     BrowserModule,

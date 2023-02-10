@@ -3,11 +3,11 @@ import {AuthPassportService} from "../database/auth-passport.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-admin-about',
-  templateUrl: './admin-about.component.html',
-  styleUrls: ['./admin-about.component.scss']
+  selector: 'app-customer-account',
+  templateUrl: './customer-account.component.html',
+  styleUrls: ['./customer-account.component.scss']
 })
-export class AdminAboutComponent {
+export class CustomerAccountComponent {
   constructor(
     private auth: AuthPassportService,
     private router: Router
@@ -17,7 +17,7 @@ export class AdminAboutComponent {
     this.auth.isLoggedIn();
     this.auth.isTrainer().subscribe(data=>{
       console.log(data);
-      if (!data.data.isTrainer) {this.router.navigate(['/home'])}
+      if (data.data.isTrainer) {this.router.navigate(['/home'])}
     })
   }
 }

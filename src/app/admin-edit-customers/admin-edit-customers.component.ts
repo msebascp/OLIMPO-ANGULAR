@@ -6,6 +6,7 @@ import { Location } from "@angular/common";
 import { FormControl, FormGroup } from '@angular/forms';
 import { Trainer } from '../interfaces/trainer';
 import Swal from 'sweetalert2';
+import {AuthPassportService} from "../database/auth-passport.service";
 
 
 @Component({
@@ -27,9 +28,17 @@ export class AdminEditCustomersComponent {
     private route: ActivatedRoute,
     private databaseService: DatabaseService,
     private location: Location,
+    private auth: AuthPassportService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.auth.isLoggedIn();
+    this.auth.isTrainer().subscribe(data=>{
+      console.log(data);
+      if (!data.data.isTrainer) {this.router.navigate(['/home'])}
+    })
+
     this.getCustomerById();
     this.getAllTrainers();
   }
@@ -101,6 +110,6 @@ export class AdminEditCustomersComponent {
       }
     })
   }
-  
-  
+
+
 }

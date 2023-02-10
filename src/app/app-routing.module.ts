@@ -7,11 +7,12 @@ import { BlogComponent } from "./blog/blog.component";
 import { ContactUsComponent } from "./contact-us/contact-us.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
-import { UsersAdminComponent } from './users-admin/users-admin.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminAccountComponent } from './admin-account/admin-account.component';
 import { AdminBlogComponent } from './admin-blog/admin-blog.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
 import { AdminEditCustomersComponent } from './admin-edit-customers/admin-edit-customers.component';
+import {CustomerAccountComponent} from "./customer-account/customer-account.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -21,11 +22,14 @@ const routes: Routes = [
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  
   {path: 'admin/account', component: AdminAccountComponent},
-  {path: 'admin/users', component: UsersAdminComponent},
+  {path: 'admin/users', component: AdminUsersComponent},
   {path: 'admin/editBlog', component: AdminBlogComponent},
   {path: 'admin/aboutSettings', component: AdminAboutComponent},
   {path: 'admin/editCustomer/:id', component: AdminEditCustomersComponent},
+
+  {path: 'customer/account', component: CustomerAccountComponent},
   {path: '**', redirectTo: 'home', pathMatch:'full'},
 ];
 

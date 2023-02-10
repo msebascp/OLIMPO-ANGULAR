@@ -1,5 +1,9 @@
 export interface ResponseToken {
-    data: string;
+    data: {
+      token:string,
+      isTrainer:boolean,
+      isLogin:boolean
+    };
     message: string;
     success: boolean;
 }

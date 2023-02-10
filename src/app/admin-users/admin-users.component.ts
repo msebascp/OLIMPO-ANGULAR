@@ -3,21 +3,31 @@ import { Customer } from '../interfaces/customer';
 import { DatabaseService } from '../database/database.service';
 import { debounceTime, distinctUntilChanged,  empty,  Observable, of, Subject, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
+import {AuthPassportService} from "../database/auth-passport.service";
+import {ResponseToken} from "../interfaces/response-token";
+import {Router} from "@angular/router";
 @Component({
-  selector: 'app-users-admin',
-  templateUrl: './users-admin.component.html',
-  styleUrls: ['./users-admin.component.scss']
+  selector: 'app-admin-users',
+  templateUrl: './admin-users.component.html',
+  styleUrls: ['./admin-users.component.scss']
 })
-export class UsersAdminComponent {
+export class AdminUsersComponent {
   public customersFound$: Observable<Customer[]> = of([]);
   public searchTerm: Subject<string> = new Subject();
   public customers: Customer[] = [];
 
   constructor(
     private databaseService: DatabaseService,
+    private auth: AuthPassportService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.auth.isLoggedIn();
+    this.auth.isTrainer().subscribe(data=>{
+      console.log(data);
+      if (!data.data.isTrainer) {this.router.navigate(['/home'])}
+    })
 
     this.getClientes();
 
@@ -97,7 +107,7 @@ export class UsersAdminComponent {
         })
     })
     }
-    
+
 
   public search(value: string): void {
     //this.heroesFound$ = this.heroService.searchHeroes(value);
