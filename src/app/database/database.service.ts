@@ -6,7 +6,9 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { Customer } from '../interfaces/customer';
 import { Trainer } from '../interfaces/trainer';
 import { DataCustomers } from '../interfaces/dataCustomers';
-import { DataTrainers } from '../interfaces/dataTrainers';
+import { DataTrainers } from '../interfaces/DataTrainers';
+import { Trainings } from '../interfaces/trainings';
+import { DataTrainings } from '../interfaces/dataTrainings';
 
 
 @Injectable({
@@ -134,6 +136,21 @@ export class DatabaseService {
       }),
     )
   }
+
+  public savePdf(pdf: File, training: Trainings): Observable<Trainings> {
+    const formData = new FormData();
+    formData.append('pdfTraining', pdf, pdf.name);
+    formData.append('name', training.name);
+    formData.append('id_customer', training.id_customer.toString());
+  
+    let url = this.API_URL + '/savePdf';
+    return this.http.post<Trainings>(url, formData).pipe(
+      map((data: Trainings) => {
+        return data
+      })
+    );
+  }
+  
 
 }
 

@@ -11,7 +11,7 @@ import {data} from "autoprefixer";
 export class AuthPassportService {
   public options;
   private url: string = 'http://localhost:8000/api';
-  private clientSecret: string = 'aOBZTnCaS0Jf8EIflJA9rKMJ0WrMwufnL4OeUqWO';
+  private clientSecret: string = 'GOezWhY8FKrMOPH153HZGdymvomKWtrI1wDWY9d8';
   private clientId: number = 2;
 
   constructor(

@@ -3,6 +3,7 @@ import { Customer } from '../interfaces/customer';
 import { DatabaseService } from '../database/database.service';
 import { debounceTime, distinctUntilChanged,  Observable, of, Subject, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
+import { Trainings } from '../interfaces/trainings';
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
@@ -12,6 +13,8 @@ export class AdminUsersComponent {
   public customersFound$: Observable<Customer[]> = of([]);
   public searchTerm: Subject<string> = new Subject();
   public customers: Customer[] = [];
+  public pdfFile!: File;
+  public training: Trainings = { name : 'Entrenamiento prueba', id_customer: 1}
 
   constructor(
     private databaseService: DatabaseService,
@@ -134,5 +137,35 @@ export class AdminUsersComponent {
         });
       }
     })
+  }
+
+  
+  public onFileChange(event: any, customer_id: number) {
+    this.pdfFile = event.target.files[0];
+
+    if (this.pdfFile.type !== 'application/pdf') {
+      Swal.fire({
+        title: 'El archivo seleccionado no es un PDF. Por favor, seleccione un archivo PDF.',
+        color: 'white',
+        icon: 'error',
+        background: '#1F2937',
+      })
+      return;
+    }
+    this.training.name = this.pdfFile.name;
+    this.training.id_customer = customer_id
+  }
+
+
+  saveTraining() {
+    this.databaseService.savePdf( this.pdfFile, this.training)
+      .subscribe(data => {
+        Swal.fire({
+          title: "<h5 style='color:white'>" + 'Subido' + "</h5>",
+          text: 'Entrenamiento guardado correctamente',
+          icon: 'success',
+          background: '#1F2937'
+        })
+      })
   }
 }
