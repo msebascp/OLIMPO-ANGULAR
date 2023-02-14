@@ -1,5 +1,5 @@
-<header-nav></header-nav>
-<div class="w-full h-full">
+<loading *ngIf="!isLogin"></loading>
+<div *ngIf="isLogin" class="w-full h-full">
     <navbar-admin></navbar-admin>
     <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="bg-gray-800 m-5 rounded-lg p-5">
         <h2 class="text-white text-center text-2xl font-bold">Crear Nuevo Post</h2>
@@ -31,3 +31,4 @@
         </button>
     </form>
 </div>
+

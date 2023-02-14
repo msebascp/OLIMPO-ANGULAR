@@ -1,5 +1,4 @@
-
-<div>
-  <header-nav></header-nav>
+<loading *ngIf="!isLogin"></loading>
+<div *ngIf="isLogin">
   <p class="text-3xl text-white">customer-account works!</p>
 </div>

@@ -1,6 +1,6 @@
-<header-nav></header-nav>
-<navbar-admin></navbar-admin>
-<div class="flex flex-row w-full justify-center items-center align-middle gap-9 sm:gap-32 my-9">
+<loading *ngIf="!isLogin"></loading>
+<navbar-admin *ngIf="isLogin"></navbar-admin>
+<div *ngIf="isLogin" class="flex flex-row w-full justify-center items-center align-middle gap-9 sm:gap-32 my-9">
     <div class="ml-5 sm:ml-0 w-72 md:w-96">
         <input placeholder="Buscar por nombre" #inputSearch (input)="search(inputSearch.value)" type="text"
             id="input-search"
@@ -14,7 +14,7 @@
         </span>
     </button>
 </div>
-<div class="w-full h-full">
+<div *ngIf="isLogin" class="w-full h-full">
     <div class="relative overflow-x-auto shadow-md rounded sm:rounded-lg m-5">
         <table class="w-full text-sm text-left text-gray-300">
             <thead class="text-xs uppercase  bg-gray-800 text-gray-300">

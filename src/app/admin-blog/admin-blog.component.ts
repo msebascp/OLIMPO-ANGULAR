@@ -19,6 +19,7 @@ export class AdminBlogComponent {
   public newPost: Blog = {title: '', description: '', photo: ''};
   public image!: File;
 
+  isLogin: boolean = false;
   constructor(
     private auth: AuthPassportService,
     private router: Router,
@@ -26,7 +27,11 @@ export class AdminBlogComponent {
   ) {
   }
   ngOnInit() {
-    //this.auth.checkLoginTrainer();
+    this.auth.checkLoginTrainer().then((isLogin) => {
+      if (isLogin) {
+        this.isLogin = true;
+      }
+    });
   }
 
   public onFileChange(event: any) {

@@ -14,6 +14,7 @@ export class LoginTrainerComponent {
   password: string = '';
   token: string = '';
   response!: ResponseToken;
+  isLogin:boolean = true;
   constructor(
     private auth: AuthPassportService,
     private router: Router
@@ -23,7 +24,11 @@ export class LoginTrainerComponent {
   ngOnInit(){
     this.auth.checkLoginTrainer().then((isLogin) => {
       if (!isLogin){
-        this.auth.checkLogin();
+        this.auth.checkLogin().then((isLogin) => {
+          if (!isLogin){
+            this.isLogin = false;
+          }
+        });
       }
     });
   }

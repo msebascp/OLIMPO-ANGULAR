@@ -16,6 +16,7 @@ import {AuthPassportService} from "../database/auth-passport.service";
   styleUrls: ['./admin-edit-customers.component.scss']
 })
 export class AdminEditCustomersComponent {
+  isLogin: boolean = false;
   public selectedCustomer!: Customer;
   public trainers: Trainer[] = [];
   customerForm = new FormGroup({
@@ -34,7 +35,11 @@ export class AdminEditCustomersComponent {
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLoginTrainer();
+    this.auth.checkLoginTrainer().then((isLogin) => {
+      if (isLogin) {
+        this.isLogin = true;
+      }
+    });
 
     this.getCustomerById();
     this.getAllTrainers();
