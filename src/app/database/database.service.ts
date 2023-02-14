@@ -150,7 +150,24 @@ export class DatabaseService {
       })
     );
   }
+
+  public getAllTrainingsByCustomer(id: number): Observable<Trainings[]> {
+    let url = this.API_URL + `/customers`;
+    if (id !== undefined) {
+      url += `/${id}/trainings`
+    }
+    return this.http.get<DataTrainings>(url).pipe(
+      map((data: DataTrainings) => {
+        return data.data
+      })
+    )
+  }
   
+
+  public downloadTraining(fileName: string): Observable<any> {
+    let url = this.API_URL + `/customers/download/pdf/${fileName}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
 }
 

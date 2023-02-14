@@ -21,6 +21,7 @@ import {FormsModule} from "@angular/forms";
 import {AdminEditCustomersComponent} from "./admin-edit-customers/admin-edit-customers.component";
 import { CustomerAccountComponent } from './customer-account/customer-account.component';
 import { LoadingComponent } from './loading/loading.component';
+import { CustomerTrainingsComponent } from './customer-trainings/customer-trainings.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { LoadingComponent } from './loading/loading.component';
     AdminEditCustomersComponent,
     CustomerAccountComponent,
     LoadingComponent,
+    CustomerTrainingsComponent,
   ],
   imports: [
     BrowserModule,

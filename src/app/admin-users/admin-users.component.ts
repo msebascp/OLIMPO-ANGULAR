@@ -14,7 +14,7 @@ export class AdminUsersComponent {
   public searchTerm: Subject<string> = new Subject();
   public customers: Customer[] = [];
   public pdfFile!: File;
-  public training: Trainings = { name : 'Entrenamiento prueba', id_customer: 1}
+  public training: Trainings = { name : 'Entrenamiento prueba', pdfTraining: '', id_customer: 1}
 
   constructor(
     private databaseService: DatabaseService,
