@@ -13,6 +13,7 @@ import { AdminBlogComponent } from './admin-blog/admin-blog.component';
 import { AdminAboutComponent } from './admin-about/admin-about.component';
 import { AdminEditCustomersComponent } from './admin-edit-customers/admin-edit-customers.component';
 import {CustomerAccountComponent} from "./customer-account/customer-account.component";
+import {LoginTrainerComponent} from "./login-trainer/login-trainer.component";
 import { CustomerTrainingsComponent } from './customer-trainings/customer-trainings.component';
 
 const routes: Routes = [
@@ -23,6 +24,8 @@ const routes: Routes = [
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+
+  {path: 'admin/login', component: LoginTrainerComponent},
 
   {path: 'customer/trainings/:id', component: CustomerTrainingsComponent},
 

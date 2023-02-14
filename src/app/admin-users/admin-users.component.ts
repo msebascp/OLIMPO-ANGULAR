@@ -4,6 +4,7 @@ import { DatabaseService } from '../database/database.service';
 import { debounceTime, distinctUntilChanged,  Observable, of, Subject, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Trainings } from '../interfaces/trainings';
+import {AuthPassportService} from "../database/auth-passport.service";
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
@@ -18,9 +19,11 @@ export class AdminUsersComponent {
 
   constructor(
     private databaseService: DatabaseService,
+    private auth: AuthPassportService
   ) { }
 
   ngOnInit(): void {
+    this.auth.checkLoginTrainer();
 
     this.getClientes();
 
@@ -139,7 +142,7 @@ export class AdminUsersComponent {
     })
   }
 
-  
+
   public onFileChange(event: any, customer_id: number) {
     this.pdfFile = event.target.files[0];
 

@@ -1,38 +1,32 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ResponseToken} from "../interfaces/response-token";
 import {Observable, catchError, of, map} from "rxjs";
 import {Router} from "@angular/router";
-import {data} from "autoprefixer";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthPassportService {
-  public options;
   private url: string = 'http://localhost:8000/api';
-  private clientSecret: string = 'GOezWhY8FKrMOPH153HZGdymvomKWtrI1wDWY9d8';
-  private clientId: number = 2;
-
+  public options = {
+    headers: new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+    })
+  };
   constructor(
     private http: HttpClient,
     private router: Router
   ) {
-    this.options = {
-      headers: new HttpHeaders({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-      })
-    };
   }
 
   login(email: string, password: string): Observable<ResponseToken> {
-    console.log('El login de auth service se ejecuta');
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    console.log('El login de clientes se ejecuta');
     return this.http.post<ResponseToken>(`${this.url}/login`, {
       grant_type: 'password',
-      client_id: this.clientId,
-      client_secret: this.clientSecret,
       email: email,
       password: password,
       scope: ''
@@ -44,50 +38,88 @@ export class AuthPassportService {
     );
   }
 
-  isLoggedIn(): void {
-    let params = new HttpParams();
-    params = params.append('client_id', this.clientId.toString());
-    params = params.append('client_secret', this.clientSecret);
-    params = params.append('scope', '');
-    this.http.get<ResponseToken>(`${this.url}/isLogin`, {headers: this.options.headers, params})
-      .pipe(catchError(error => {
+  loginTrainer(email: string, password: string): Observable<ResponseToken> {
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    console.log('El login de admins se ejecuta');
+    return this.http.post<ResponseToken>(`${this.url}/trainer/login`, {
+      grant_type: 'password',
+      email: email,
+      password: password,
+      scope: ''
+    }, this.options).pipe(
+      catchError((error) => {
+        console.log(error.error);
         return of(error.error as ResponseToken);
-      }))
-      .subscribe(
-        data => {
-          console.log(data);
-          if (data.data.isLogin) {
-            if (data.data.isTrainer) {
-              if (this.router.url == '/login') {
-                this.router.navigate(['/admin/account']);
-              }
-            } else {
-              if (this.router.url == '/login') {
-                this.router.navigate(['/customer/account']);
-              }
-            }
-          } else {
-            if (this.router.url != '/login') {
-              this.router.navigate(['/login'])
-            }
-          }
-        }
-      )
+      })
+    );
   }
 
-  isTrainer(): Observable<ResponseToken> {
-    let params = new HttpParams();
-    params = params.append('client_id', this.clientId.toString());
-    params = params.append('client_secret', this.clientSecret);
-    params = params.append('scope', '');
-    return this.http.get<ResponseToken>(`${this.url}/whoIam`, {headers: this.options.headers, params})
-      .pipe(
-        catchError(error => {
-        return of(error.error as ResponseToken);
-        }),
-        map(data => {
-          return data
-        })
-      )
+  checkLogin(): Promise<boolean> {
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    console.log('check login cliente');
+    return new Promise((resolve, reject) => {
+      this.http.get<ResponseToken>(`${this.url}/isLogin`, this.options)
+        .pipe(catchError(error => {
+          reject(error);
+          return of(error.error as ResponseToken);
+        }))
+        .subscribe(
+          data => {
+            console.log(data);
+            if (data.data.isLogin) {
+              if (this.router.url == '/login' || this.router.url == '/admin/login') {
+                this.router.navigate(['/customer/account']);
+              }
+              resolve(true);
+            } else {
+              if (this.router.url != '/login' && this.router.url != '/admin/login') {
+                this.router.navigate(['/login']);
+              }
+              resolve(false);
+            }
+          }
+        )
+    });
   }
+
+  checkLoginTrainer(): Promise<boolean> {
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    console.log('check login admin');
+    return new Promise((resolve, reject) => {
+      this.http.get<ResponseToken>(`${this.url}/trainer/isLogin`, this.options)
+        .pipe(catchError(error => {
+          reject(error);
+          return of(error.error as ResponseToken);
+        }))
+        .subscribe(
+          data => {
+            console.log(data);
+            if (data.data.isLogin) {
+              if (this.router.url == '/admin/login' || this.router.url == '/login') {
+                this.router.navigate(['/admin/account']);
+              }
+              resolve(true);
+            } else {
+              if (this.router.url != '/admin/login' && this.router.url != '/login') {
+                this.router.navigate(['/admin/login']);
+              }
+              resolve(false);
+            }
+          }
+        )
+    });
+  }
+/**
+  obtainInfo():{isLogin:boolean, isTrainer:boolean} {
+    return {
+      "isLogin": this.isLogin,
+      "isTrainer": this.isTrainer
+    }
+  }
+
+  setInfo(isLogin:boolean,  isTrainer:boolean):void {
+    this.isLogin = isLogin;
+    this.isTrainer = isTrainer;
+  }
+ */
 }

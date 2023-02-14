@@ -1,54 +1,76 @@
-    <nav class="px-2 sm:px-4 py-2.5 bg-black w-full shadow sticky z-20 top-0">
-      <div class="container flex flex-wrap items-center mx-auto md:flex-nowrap">
-        <div class="container flex justify-between items-center align-middle">
-          <a routerLink="/home" class="text-3xl md:ml-0 md:pl-0 font-bold font-heading flex items-center justify-center">
-            <img class="ml-8 md:mr-12 md:pl-6 lg:ml-0 lg:pl-0 h-16 md:h-16 lg:h-24 sm:h-20 md:ml-0" src="../../assets/LOGO.png">
-          </a>
-          <div class="hidden w-full md:flex md:flex-row md:w-auto" id="navbar-default">
-            <ul
-            class="flex flex-col p-4 w-100% w-full mt-4 md:flex-row md:align-middle md:items-center md:mt-0 md:text-lg lg:text-xl text-sm md:font-normal md:border-0 text-white">
-              <li><a routerLink="/home" *ngIf="router.url === '/home'" class= "text-red-800 flex md:mx-5 md:hidden lg:inline">INICIO</a></li>
-              <li><a routerLink="/home" *ngIf="router.url !== '/home'" class= "hover:text-red-800 flex md:mx-5 md:hidden lg:inline">INICIO</a></li>
-              <li><a routerLink="/aboutUs" *ngIf="router.url === '/aboutUs'" class="text-red-800 flex md:mx-5">SOBRE NOSOTROS</a></li>
-              <li><a routerLink="/aboutUs" *ngIf="router.url !== '/aboutUs'" class="hover:text-red-800 flex md:mx-5">SOBRE NOSOTROS</a></li>
-              <li><a routerLink="/information" *ngIf="router.url === '/information'" class="text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
-              <li><a routerLink="/information" *ngIf="router.url !== '/information'" class="hover:text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
-              <li><a routerLink="/blog" *ngIf="router.url === '/blog'" class="text-red-800 flex md:mx-5">NUESTRO BLOG</a></li>
-              <li><a routerLink="/blog" *ngIf="router.url !== '/blog'" class="hover:text-red-800 flex md:mx-5">NUESTRO BLOG</a></li>
-              <li><a routerLink="/contactUs" *ngIf="router.url === '/contactUs'" class="text-red-800 flex md:mx-5">CONTÁCTANOS</a></li>
-              <li><a routerLink="/contactUs" *ngIf="router.url !== '/contactUs'" class="hover:text-red-800 flex md:mx-5">CONTÁCTANOS</a></li>
-              <li>
-                <div id="dropdown"
-                  class="z-10 hidden divide-y  rounded shadow w-44">
-                  <ul class="flex flex-col md:flex md:flex-row items-center align-middle px-4 mx-auto font-semibold sm:text-sm font-heading  text-white">
-                    <li><a routerLink="/home" *ngIf="router.url === '/home'" class= "text-red-800 flex md:mx-5">INICIO</a></li>
-                    <li><a routerLink="/home" *ngIf="router.url !== '/home'" class= "hover:text-red-800 flex md:mx-5">INICIO</a></li>
-                    <li><a routerLink="/aboutUs" *ngIf="router.url === '/aboutUs'" class="text-red-800 flex md:mx-5">SOBRE NOSOTROS</a></li>
-                    <li><a routerLink="/aboutUs" *ngIf="router.url !== '/aboutUs'" class="hover:text-red-800 flex md:mx-5">SOBRE NOSOTROS</a></li>
-                    <li><a routerLink="/information" *ngIf="router.url === '/information'" class="text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
-                    <li><a routerLink="/information" *ngIf="router.url !== '/information'" class="hover:text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
-                    <li><a routerLink="/blog" *ngIf="router.url === '/blog'" class="text-red-800 flex md:mx-5">NUESTRO BLOG</a></li>
-                    <li><a routerLink="/blog" *ngIf="router.url !== '/blog'" class="hover:text-red-800 flex md:mx-5">NUESTRO BLOG</a></li>
-                    <li><a routerLink="/contactUs" *ngIf="router.url === '/contactUs'" class="text-red-800 flex md:mx-5">CONTÁCTANOS</a></li>
-                    <li><a routerLink="/contactUs" *ngIf="router.url !== '/contactUs'" class="hover:text-red-800 flex md:mx-5">CONTÁCTANOS</a></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="flex space-x-8 items-center text-2xl text-white">
-            <a routerLink="/login" *ngIf="router.url === '/login'" class="lg:mr-5 items-center text-red-800 flex">
-              <i class="fa fa-user"></i>
-            </a>
-            <a routerLink="/login" *ngIf="router.url !== '/login'" class="lg:mr-5 items-center hover:text-red-800 flex">
-              <i class="fa fa-user"></i>
-            </a>
-            <a data-collapse-toggle="navbar-default" type="button"
-            class="inline-flex items-center p-2 text-sm text-white rounded-lg md:hidden focus:outline-none hover:bg-gray-900"
-            aria-controls="navbar-default" aria-expanded="false"><i class="fa fa-bars text-4xl"></i>
-          </a>
-          </div>
-        </div>
-
+<nav class="px-2 sm:px-4 py-2.5 bg-black w-full shadow sticky z-20 top-0">
+  <div class="container flex flex-wrap items-center mx-auto md:flex-nowrap">
+    <div class="container flex justify-between items-center align-middle">
+      <a routerLink="/home" class="text-3xl md:ml-0 md:pl-0 font-bold font-heading flex items-center justify-center">
+        <img class="ml-8 md:mr-12 md:pl-6 lg:ml-0 lg:pl-0 h-16 md:h-16 lg:h-24 sm:h-20 md:ml-0"
+             src="../../assets/LOGO.png">
+      </a>
+      <div class="hidden w-full md:flex md:flex-row md:w-auto" id="navbar-default">
+        <ul
+          class="flex flex-col p-4 w-100% w-full mt-4 md:flex-row md:align-middle md:items-center md:mt-0 md:text-lg lg:text-xl text-sm md:font-normal md:border-0 text-white">
+          <li><a routerLink="/home" *ngIf="router.url === '/home'"
+                 class="text-red-800 flex md:mx-5 md:hidden lg:inline">INICIO</a></li>
+          <li><a routerLink="/home" *ngIf="router.url !== '/home'"
+                 class="hover:text-red-800 flex md:mx-5 md:hidden lg:inline">INICIO</a></li>
+          <li><a routerLink="/aboutUs" *ngIf="router.url === '/aboutUs'" class="text-red-800 flex md:mx-5">SOBRE
+            NOSOTROS</a></li>
+          <li><a routerLink="/aboutUs" *ngIf="router.url !== '/aboutUs'" class="hover:text-red-800 flex md:mx-5">SOBRE
+            NOSOTROS</a></li>
+          <li><a routerLink="/information" *ngIf="router.url === '/information'" class="text-red-800 flex md:mx-5">INFORMACIÓN</a>
+          </li>
+          <li><a routerLink="/information" *ngIf="router.url !== '/information'"
+                 class="hover:text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
+          <li><a routerLink="/blog" *ngIf="router.url === '/blog'" class="text-red-800 flex md:mx-5">NUESTRO BLOG</a>
+          </li>
+          <li><a routerLink="/blog" *ngIf="router.url !== '/blog'" class="hover:text-red-800 flex md:mx-5">NUESTRO
+            BLOG</a></li>
+          <li><a routerLink="/contactUs" *ngIf="router.url === '/contactUs'" class="text-red-800 flex md:mx-5">CONTÁCTANOS</a>
+          </li>
+          <li><a routerLink="/contactUs" *ngIf="router.url !== '/contactUs'" class="hover:text-red-800 flex md:mx-5">CONTÁCTANOS</a>
+          </li>
+          <li>
+            <div id="dropdown"
+                 class="z-10 hidden divide-y  rounded shadow w-44">
+              <ul
+                class="flex flex-col md:flex md:flex-row items-center align-middle px-4 mx-auto font-semibold sm:text-sm font-heading  text-white">
+                <li><a routerLink="/home" *ngIf="router.url === '/home'" class="text-red-800 flex md:mx-5">INICIO</a>
+                </li>
+                <li><a routerLink="/home" *ngIf="router.url !== '/home'"
+                       class="hover:text-red-800 flex md:mx-5">INICIO</a></li>
+                <li><a routerLink="/aboutUs" *ngIf="router.url === '/aboutUs'" class="text-red-800 flex md:mx-5">SOBRE
+                  NOSOTROS</a></li>
+                <li><a routerLink="/aboutUs" *ngIf="router.url !== '/aboutUs'" class="hover:text-red-800 flex md:mx-5">SOBRE
+                  NOSOTROS</a></li>
+                <li><a routerLink="/information" *ngIf="router.url === '/information'"
+                       class="text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
+                <li><a routerLink="/information" *ngIf="router.url !== '/information'"
+                       class="hover:text-red-800 flex md:mx-5">INFORMACIÓN</a></li>
+                <li><a routerLink="/blog" *ngIf="router.url === '/blog'" class="text-red-800 flex md:mx-5">NUESTRO
+                  BLOG</a></li>
+                <li><a routerLink="/blog" *ngIf="router.url !== '/blog'" class="hover:text-red-800 flex md:mx-5">NUESTRO
+                  BLOG</a></li>
+                <li><a routerLink="/contactUs" *ngIf="router.url === '/contactUs'" class="text-red-800 flex md:mx-5">CONTÁCTANOS</a>
+                </li>
+                <li><a routerLink="/contactUs" *ngIf="router.url !== '/contactUs'"
+                       class="hover:text-red-800 flex md:mx-5">CONTÁCTANOS</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
       </div>
-    </nav>
+      <div class="flex space-x-8 items-center text-2xl text-white">
+        <a routerLink="/login" *ngIf="router.url === '/login'" class="lg:mr-5 items-center text-red-800 flex">
+          <i class="fa fa-user"></i>
+        </a>
+        <a routerLink="/login" *ngIf="router.url !== '/login'" class="lg:mr-5 items-center hover:text-red-800 flex">
+          <i class="fa fa-user"></i>
+        </a>
+        <a data-collapse-toggle="navbar-default" type="button"
+           class="inline-flex items-center p-2 text-sm text-white rounded-lg md:hidden focus:outline-none hover:bg-gray-900"
+           aria-controls="navbar-default" aria-expanded="false"><i class="fa fa-bars text-4xl"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</nav>

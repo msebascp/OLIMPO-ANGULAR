@@ -34,6 +34,7 @@ export class AdminEditCustomersComponent {
   ) { }
 
   ngOnInit(): void {
+    this.auth.checkLoginTrainer();
 
     this.getCustomerById();
     this.getAllTrainers();

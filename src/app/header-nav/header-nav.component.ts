@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {AuthPassportService} from "../database/auth-passport.service";
 
 @Component({
   selector: 'header-nav',
@@ -8,8 +9,10 @@ import { Router } from '@angular/router';
 })
 export class HeaderNavComponent {
   constructor(
-    public router: Router
+    public router: Router,
+    public auth: AuthPassportService
   ) { }
 
-
+  ngOnInit() {
+  }
 }

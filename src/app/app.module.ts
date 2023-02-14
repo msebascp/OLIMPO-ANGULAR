@@ -21,6 +21,7 @@ import {FormsModule} from "@angular/forms";
 import {AdminEditCustomersComponent} from "./admin-edit-customers/admin-edit-customers.component";
 import { CustomerAccountComponent } from './customer-account/customer-account.component';
 import { LoadingComponent } from './loading/loading.component';
+import { LoginTrainerComponent } from './login-trainer/login-trainer.component';
 import { CustomerTrainingsComponent } from './customer-trainings/customer-trainings.component';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { CustomerTrainingsComponent } from './customer-trainings/customer-traini
     AdminEditCustomersComponent,
     CustomerAccountComponent,
     LoadingComponent,
+    LoginTrainerComponent,
     CustomerTrainingsComponent,
   ],
   imports: [

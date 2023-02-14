@@ -1,16 +1,15 @@
-import {Component} from '@angular/core';
-import {AuthPassportService} from "../database/auth-passport.service";
-import {Router } from "@angular/router";
-import Swal from "sweetalert2";
+import { Component } from '@angular/core';
 import {ResponseToken} from "../interfaces/response-token";
-
+import {AuthPassportService} from "../database/auth-passport.service";
+import {Router} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-login-trainer',
+  templateUrl: './login-trainer.component.html',
+  styleUrls: ['./login-trainer.component.scss']
 })
-export class LoginComponent {
+export class LoginTrainerComponent {
   email: string = '';
   password: string = '';
   token: string = '';
@@ -30,13 +29,13 @@ export class LoginComponent {
   }
 
   login() {
-    this.auth.login(this.email, this.password).subscribe(
+    this.auth.loginTrainer(this.email, this.password).subscribe(
       data  => {
         console.log(data);
         if (data.success) {
           this.token = data.data.token;
           localStorage.setItem('access_token', this.token);
-          this.router.navigate(['/customer/account']);
+          this.router.navigate(['/admin/account']);
         }
         else {
           Swal.fire(data.message);
@@ -44,6 +43,4 @@ export class LoginComponent {
       }
     );
   }
-
-
 }

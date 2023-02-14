@@ -14,5 +14,6 @@ export class AdminAccountComponent {
   ) {
   }
   ngOnInit(){
+    this.auth.checkLoginTrainer();
   }
 }

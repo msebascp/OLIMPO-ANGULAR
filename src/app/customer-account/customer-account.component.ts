@@ -8,12 +8,13 @@ import {Router} from "@angular/router";
   styleUrls: ['./customer-account.component.scss']
 })
 export class CustomerAccountComponent {
+
   constructor(
     private auth: AuthPassportService,
     private router: Router
   ) {
   }
   ngOnInit(){
-    
+    this.auth.checkLogin();
   }
 }
