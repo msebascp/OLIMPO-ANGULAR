@@ -16,6 +16,7 @@ export class AdminUsersComponent {
   public customers: Customer[] = [];
   public pdfFile!: File;
   public training: Trainings = { name : 'Entrenamiento prueba', pdfTraining: '', id_customer: 1}
+  isLogin: boolean = false;
 
   constructor(
     private databaseService: DatabaseService,
@@ -23,12 +24,13 @@ export class AdminUsersComponent {
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLoginTrainer();
-
-    this.getClientes();
-
-    this.searchCustomers();
-
+    this.auth.checkLoginTrainer().then((isLogin) => {
+      if (isLogin) {
+        this.isLogin = true;
+        this.getClientes();
+        this.searchCustomers();
+      }
+    });
   }
 
   public getClientes(): void {

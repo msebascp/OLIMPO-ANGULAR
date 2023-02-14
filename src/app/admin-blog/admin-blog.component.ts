@@ -8,12 +8,17 @@ import {Router} from "@angular/router";
   styleUrls: ['./admin-blog.component.scss']
 })
 export class AdminBlogComponent {
+  isLogin: boolean = false;
   constructor(
     private auth: AuthPassportService,
     private router: Router
   ) {
   }
   ngOnInit(){
-    this.auth.checkLoginTrainer();
+    this.auth.checkLoginTrainer().then((isLogin) => {
+      if (isLogin) {
+        this.isLogin = true;
+      }
+    });
   }
 }

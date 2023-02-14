@@ -1,4 +1,5 @@
 <header-nav></header-nav>
-<div class="w-full h-full">
+<loading *ngIf="!isLogin"></loading>
+<div *ngIf="isLogin" class="w-full h-full">
     <navbar-admin></navbar-admin>
 </div>
