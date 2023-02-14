@@ -160,7 +160,7 @@ export class AdminUsersComponent {
   }
 
 
-  saveTraining() {
+  public saveTraining() {
     this.databaseService.savePdf( this.pdfFile, this.training)
       .subscribe(data => {
         Swal.fire({

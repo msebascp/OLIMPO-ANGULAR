@@ -6,9 +6,10 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { Customer } from '../interfaces/customer';
 import { Trainer } from '../interfaces/trainer';
 import { DataCustomers } from '../interfaces/dataCustomers';
-import { DataTrainers } from '../interfaces/DataTrainers';
+import { DataTrainers } from '../interfaces/dataTrainers';
 import { Trainings } from '../interfaces/trainings';
 import { DataTrainings } from '../interfaces/dataTrainings';
+import { Blog } from '../interfaces/blog';
 
 
 @Injectable({
@@ -167,6 +168,21 @@ export class DatabaseService {
   public downloadTraining(fileName: string): Observable<any> {
     let url = this.API_URL + `/customers/download/pdf/${fileName}`;
     return this.http.get(url, { responseType: 'blob' });
+  }
+
+
+  public createPost(image: File, post: Blog): Observable<Blog> {
+    let url = this.API_URL + `/blog/createPost`;
+    const formData = new FormData();
+    formData.append('title', post.title);
+    formData.append('description', post.description);
+    formData.append('photo', image, image.name);
+
+    return this.http.post<Blog>(url, formData).pipe(
+      map((data: Blog) => {
+        return data
+      })
+    );
   }
 
 }
