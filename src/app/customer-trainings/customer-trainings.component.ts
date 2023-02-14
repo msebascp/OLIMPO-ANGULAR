@@ -2,22 +2,29 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatabaseService } from '../database/database.service';
 import { Trainings } from '../interfaces/trainings';
+import {AuthPassportService} from "../database/auth-passport.service";
 
 @Component({
   selector: 'app-customer-trainings',
   templateUrl: './customer-trainings.component.html',
   styleUrls: ['./customer-trainings.component.scss']
 })
-export class CustomerTrainingsComponent { 
-
+export class CustomerTrainingsComponent {
+  isLogin: boolean = false;
   public trainings: Trainings[] = [];
-  
+
   constructor (
     private route: ActivatedRoute,
     private databaseService: DatabaseService,
+    private auth: AuthPassportService
   ) { }
 
   ngOnInit(): void {
+    this.auth.checkLogin().then((isLogin) => {
+      if (isLogin) {
+        this.isLogin = true;
+      }
+    });
     this.getAllTrainingsByCustomer()
   }
 

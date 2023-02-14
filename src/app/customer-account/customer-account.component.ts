@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./customer-account.component.scss']
 })
 export class CustomerAccountComponent {
+  isLogin: boolean = false;
 
   constructor(
     private auth: AuthPassportService,
@@ -15,6 +16,10 @@ export class CustomerAccountComponent {
   ) {
   }
   ngOnInit(){
-    this.auth.checkLogin();
+    this.auth.checkLogin().then((isLogin) => {
+      if (isLogin) {
+        this.isLogin = true;
+      }
+    });
   }
 }
