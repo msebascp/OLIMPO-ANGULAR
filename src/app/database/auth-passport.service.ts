@@ -121,6 +121,7 @@ export class AuthPassportService {
     this.http.get<ResponseToken>(`${this.url}/logout`, this.options)
       .subscribe(data => {
         console.log(data);
+        this.sendVariable(false, false);
         this.router.navigate(['/home']);
       })
   }
@@ -129,6 +130,7 @@ export class AuthPassportService {
     this.http.get<ResponseToken>(`${this.url}/trainer/logout`, this.options)
       .subscribe(data => {
         console.log(data);
+        this.sendVariable(false, false);
         this.router.navigate(['/home']);
       })
   }
