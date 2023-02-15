@@ -40,6 +40,7 @@ export class LoginTrainerComponent {
         if (data.success) {
           this.token = data.data.token;
           localStorage.setItem('access_token', this.token);
+          this.auth.sendVariable(data.data.isLogin, true);
           this.router.navigate(['/admin/account']);
         }
         else {
