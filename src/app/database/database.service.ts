@@ -212,6 +212,52 @@ export class DatabaseService {
     )
   }
 
+  public getPostById(id: number): Observable<Blog> {
+    let url = this.API_URL + `/blog`;
+    if (id !== undefined) {
+      url += `/${id}`
+    }
+    return this.http.get<DataBlogs>(url).pipe(
+      map((data: DataBlogs) => {
+        return data.data[0];
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
+  }
+
+  public updatePost(id: number, post: Blog, image: File): Observable<Blog> {
+    const formData = new FormData();
+    formData.append('title', post.title);
+    formData.append('description', post.description);
+    if (image === undefined) {
+      formData.append('photo', post.photo)
+    } else {
+      formData.append('photo', image, image.name);
+
+    }
+  
+    let url = this.API_URL + `/blog`;
+    if (id !== undefined) {
+      url += `/${id}`;
+    }
+  
+    return this.http.post<Blog>(url, formData).pipe(
+      map((data: Blog) => {
+        return data;
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
+  }
+  
+  
+  
+
   public deletePost(id: number): Observable<Blog> {
     let url = this.API_URL + `/blog`;
     if (id !== undefined) {
