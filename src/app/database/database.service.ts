@@ -10,6 +10,7 @@ import { DataTrainers } from '../interfaces/dataTrainers';
 import { Trainings } from '../interfaces/trainings';
 import { DataTrainings } from '../interfaces/dataTrainings';
 import { Blog } from '../interfaces/blog';
+import { DataBlogs } from '../interfaces/dataBlogs';
 
 
 @Injectable({
@@ -148,7 +149,11 @@ export class DatabaseService {
     return this.http.post<Trainings>(url, formData).pipe(
       map((data: Trainings) => {
         return data
-      })
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
     );
   }
 
@@ -160,7 +165,11 @@ export class DatabaseService {
     return this.http.get<DataTrainings>(url).pipe(
       map((data: DataTrainings) => {
         return data.data
-      })
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
     )
   }
   
@@ -181,6 +190,37 @@ export class DatabaseService {
     return this.http.post<Blog>(url, formData).pipe(
       map((data: Blog) => {
         return data
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
+  }
+
+  public getAllPosts(): Observable<Blog[]> {
+    let url = this.API_URL + '/blog';
+    return this.http.get<DataBlogs>(url).pipe(
+      map((data: DataBlogs) => {
+        
+        return data.data
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    )
+  }
+
+  public deletePost(id: number): Observable<Blog> {
+    let url = this.API_URL + `/blog`;
+    if (id !== undefined) {
+      url += `/deletePost/${id}`
+    }
+    return this.http.delete<Blog>(url).pipe(
+      catchError(e => {
+        console.error(e);
+        return [];
       })
     );
   }

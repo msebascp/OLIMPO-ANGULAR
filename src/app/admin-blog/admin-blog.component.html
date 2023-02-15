@@ -30,5 +30,46 @@
             </span>
         </button>
     </form>
-</div>
 
+    <div class="relative overflow-x-auto rounded sm:rounded-lg m-5">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400  ">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Foto
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Título
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Descripción
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Edit</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let post of posts" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <div class="flex-shrink-0">
+                            <img class="w-12 h-12 rounded-full" [src]="'http://localhost:8000' + post.photo">
+                        </div>
+                    </td>
+                    <td  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ post.title }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ post.description }}
+                    </td>
+                    <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
+                        <button><i (click)="deletePost(post.id)"
+                                class="fa fa-trash px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                                class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 -translate-y-12">Borrar Post</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
