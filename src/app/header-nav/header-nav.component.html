@@ -58,19 +58,53 @@
           </li>
         </ul>
       </div>
-      <div class="flex space-x-8 items-center text-2xl text-white">
+      <div class="flex space-x-8 items-center text-2xl text-white left-0 flex-shrink-0 w-max">
+        <div class="relative" *ngIf="infoAuth.isLogin && !infoAuth.isTrainer">
+          <button
+            class="lg:mr-5 items-center hover:text-red-800 flex"
+            (blur)="hide()"
+            (focus)="showOptions = !showOptions"
+          >
+            <i class="fa fa-user"></i>
+          </button>
+          <ul [ngStyle]="{'display': showOptions ? 'block' : 'none'}" class="absolute z-50 right-0 p-2 rounded-md bg-gray-600">
+            <li class="block w-full">
+              <button routerLink="/customer/account" class="w-full hover:bg-red-800 rounded-md p-2">
+                Mi cuenta
+              </button>
+            </li>
+            <li class="block w-max">
+              <button (click)="logout()" class="hover:bg-red-800 rounded-md p-2">
+                Cerrar sesión
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="relative" *ngIf="infoAuth.isLogin && infoAuth.isTrainer">
+          <button
+            class="lg:mr-5 items-center hover:text-red-800 flex"
+            (blur)="hide()"
+            (click)="showOptions = !showOptions"
+          >
+            <i class="fa fa-user"></i>
+          </button>
+          <ul [ngStyle]="{'display': showOptions ? 'block' : 'none'}" class="absolute z-50 right-0 p-2 rounded-md bg-gray-600">
+            <li class="block w-full hover:bg-red-800 rounded-md p-2"
+            routerLink="/admin/account">
+              Mi cuenta</li>
+            <li class="block w-max">
+              <button (click)="logout()" class="hover:bg-red-800 rounded-md p-2">
+                Cerrar sesión
+              </button>
+            </li>
+          </ul>
+        </div>
         <a routerLink="/login" *ngIf="router.url === '/login' && !infoAuth.isLogin" class="lg:mr-5 items-center text-red-800 flex">
           <i class="fa fa-user"></i>
         </a>
         <a routerLink="/login" *ngIf="router.url !== '/login' && !infoAuth.isLogin" class="lg:mr-5 items-center hover:text-red-800 flex">
           <i class="fa fa-user"></i>
         </a>
-        <button (click)="logout()" *ngIf="infoAuth.isLogin && !infoAuth.isTrainer" class="lg:mr-5 items-center hover:text-blue-800 flex">
-          <i class="fa fa-user"></i>
-        </button>
-        <button (click)="logout()" *ngIf="infoAuth.isLogin && infoAuth.isTrainer" class="lg:mr-5 items-center hover:text-blue-800 flex">
-          <i class="fa fa-user"></i>
-        </button>
         <a data-collapse-toggle="navbar-default" type="button"
            class="inline-flex items-center p-2 text-sm text-white rounded-lg md:hidden focus:outline-none hover:bg-gray-900"
            aria-controls="navbar-default" aria-expanded="false"><i class="fa fa-bars text-4xl"></i>

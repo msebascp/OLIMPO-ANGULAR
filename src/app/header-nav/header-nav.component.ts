@@ -9,6 +9,7 @@ import {AuthPassportService} from "../database/auth-passport.service";
 })
 export class HeaderNavComponent {
   infoAuth!: { isLogin:boolean, isTrainer:boolean };
+  showOptions: boolean = false;
 
   constructor(
     public router: Router,
@@ -29,5 +30,11 @@ export class HeaderNavComponent {
     } else if (this.infoAuth.isLogin && this.infoAuth.isTrainer) {
       this.auth.logoutTrainer();
     }
+  }
+
+  hide() {
+    setTimeout(() => {
+      this.showOptions = false;
+    }, 150);
   }
 }
