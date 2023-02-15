@@ -15,6 +15,7 @@ import { AdminEditCustomersComponent } from './admin-edit-customers/admin-edit-c
 import {CustomerAccountComponent} from "./customer-account/customer-account.component";
 import {LoginTrainerComponent} from "./login-trainer/login-trainer.component";
 import { CustomerTrainingsComponent } from './customer-trainings/customer-trainings.component';
+import { AdminEditPostComponent } from './admin-edit-post/admin-edit-post.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -34,6 +35,8 @@ const routes: Routes = [
   {path: 'admin/editBlog', component: AdminBlogComponent},
   {path: 'admin/aboutSettings', component: AdminAboutComponent},
   {path: 'admin/editCustomer/:id', component: AdminEditCustomersComponent},
+  {path: 'admin/editPost/:id', component: AdminEditPostComponent},
+
 
   {path: 'customer/account', component: CustomerAccountComponent},
   {path: '**', redirectTo: 'home', pathMatch:'full'},

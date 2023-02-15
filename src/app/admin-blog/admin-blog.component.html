@@ -1,8 +1,8 @@
 <loading *ngIf="!isLogin"></loading>
 <div *ngIf="isLogin" class="w-full h-full">
     <navbar-admin></navbar-admin>
-    <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="bg-gray-800 m-5 rounded-lg p-5">
-        <h2 class="text-white text-center text-2xl font-bold">Crear Nuevo Post</h2>
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="bg-gray-600 m-5 rounded-lg p-5">
+        <h2 class="text-white text-center text-3xl font-bold">Crear Nuevo Post</h2>
         <div class="mb-6">
             <label for="title" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Título</label>
             <input type="text" id="title"
@@ -31,9 +31,10 @@
         </button>
     </form>
 
-    <div class="relative overflow-x-auto rounded sm:rounded-lg m-5">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400  ">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div class="relative overflow-x-auto rounded sm:rounded-lg m-5 bg-gray-500">
+        <h2 class="text-center text-3xl text-white font-bold p-4">Posts</h2>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-600 dark:text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         Foto
@@ -50,22 +51,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let post of posts" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr *ngFor="let post of posts" class="bg-white border-b dark:bg-gray-500 dark:border-gray-600">
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div class="flex-shrink-0">
-                            <img class="w-12 h-12 rounded-full" [src]="'http://localhost:8000' + post.photo">
+                            <img class="w-24 h-20 sm:w-24 sm:h-24 rounded-xl sm:rounded-full"
+                                [src]="'http://localhost:8000' + post.photo">
                         </div>
                     </td>
-                    <td  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <td class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white">
                         {{ post.title }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-white">
                         {{ post.description }}
                     </td>
                     <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
-                        <button><i (click)="deletePost(post.id)"
+                        <button class="mt-8"><i routerLink="/admin/editPost/{{ post.id }}"
+                                class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                                class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 md:-translate-x-24 -translate-y-9">Editar
+                                Cliente</span>
+                        </button>
+                        <button class="mt-8"><i (click)="deletePost(post.id)"
                                 class="fa fa-trash px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
-                                class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 -translate-y-12">Borrar Post</span>
+                                class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 -translate-y-12">Borrar
+                                Post</span>
                         </button>
                     </td>
                 </tr>
