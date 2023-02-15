@@ -16,7 +16,8 @@ export class AdminBlogComponent {
     title: new FormControl(''),
     description: new FormControl('')
   })
-  public newPost: Blog = {title: '', description: '', photo: ''};
+  public newPost: Blog = {id: 0, title: '', description: '', photo: '' };
+  public posts: Blog[] = []
   public image!: File;
 
   isLogin: boolean = false;
@@ -30,6 +31,7 @@ export class AdminBlogComponent {
     this.auth.checkLoginTrainer().then((isLogin) => {
       if (isLogin) {
         this.isLogin = true;
+        this.getAllPosts();
       }
     });
   }
@@ -39,7 +41,7 @@ export class AdminBlogComponent {
     console.log(this.image)
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     Swal.fire({
       title: "<h5 style='color:white'>" + '¿Seguro que quieres subir el Post?' + "</h5>",
       icon: 'warning',
@@ -58,16 +60,51 @@ export class AdminBlogComponent {
         this.newPost.description = description;
 
         this.databaseService.createPost(this.image, this.newPost)
-          .subscribe( _ => {
+          .subscribe(_ => {
             Swal.fire({
-              title: "<h5 style='color:white'>" + 'Modificado' + "</h5>",
-              text: 'El cliente ha sido modificado',
+              title: "<h5 style='color:white'>" + 'Post Creado' + "</h5>",
+              text: 'El Post ha sido creado',
               icon: 'success',
               background: '#1F2937'
             })
           })
+        this.getAllPosts();
       }
     });
+  }
+
+  public getAllPosts(): void {
+    this.databaseService.getAllPosts().subscribe(posts => {
+      this.posts = posts;
+    })
+  }
+
+  public deletePost(id: number): void {
+    Swal.fire({
+      title: "<h5 style='color:white'>" + '¿Quieres eliminar el post?' + "</h5>",
+      text: 'No podrás revertirlo',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Borrar',
+      background: '#1F2937'
+    }).then((result:any) => {
+      if (result.isConfirmed) {
+        // Recogemos el id que tiene el boton
+        this.databaseService.deletePost(id).subscribe( _ => {
+          Swal.fire({
+            title: "<h5 style='color:white'>" + 'Borrado' + "</h5>",
+            text: 'El Post ha sido borrado',
+            icon: 'success',
+            background: '#1F2937'
+          })
+          this.posts = this.posts.filter(post => post.id !== id);
+          this.getAllPosts();
+        });
+      }
+    })
   }
 
 }

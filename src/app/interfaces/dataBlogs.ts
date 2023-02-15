@@ -1,6 +1,6 @@
 import { Blog } from "./blog";
 
-export interface DataCustomers {
+export interface DataBlogs {
     data: Blog[];
     message: string;
     success: boolean;
