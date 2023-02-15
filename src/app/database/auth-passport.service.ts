@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ResponseToken} from "../interfaces/response-token";
-import {Observable, catchError, of, map} from "rxjs";
+import {Observable, catchError, of, map, Subject, BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
+import {data} from "autoprefixer";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthPassportService {
+  private infoAuth = new BehaviorSubject<{ isLogin:boolean, isTrainer:boolean }>({isLogin: false, isTrainer: false});
   private url: string = 'http://localhost:8000/api';
   public options = {
     headers: new HttpHeaders({
@@ -16,6 +18,7 @@ export class AuthPassportService {
       'Authorization': `Bearer ${localStorage.getItem('access_token')}`
     })
   };
+
   constructor(
     private http: HttpClient,
     private router: Router
@@ -70,6 +73,7 @@ export class AuthPassportService {
               if (this.router.url == '/login' || this.router.url == '/admin/login') {
                 this.router.navigate(['/customer/account']);
               }
+              this.sendVariable(data.data.isLogin, data.data.isTrainer);
               resolve(true);
             } else {
               if (this.router.url != '/login' && this.router.url != '/admin/login') {
@@ -98,6 +102,7 @@ export class AuthPassportService {
               if (this.router.url == '/admin/login' || this.router.url == '/login') {
                 this.router.navigate(['/admin/account']);
               }
+              this.sendVariable(data.data.isLogin, data.data.isTrainer);
               resolve(true);
             } else {
               if (this.router.url != '/admin/login' && this.router.url != '/login') {
@@ -109,17 +114,30 @@ export class AuthPassportService {
         )
     });
   }
-/**
-  obtainInfo():{isLogin:boolean, isTrainer:boolean} {
-    return {
-      "isLogin": this.isLogin,
-      "isTrainer": this.isTrainer
-    }
+
+  logout(): void {
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    console.log('El logout de clientes se ejecuta');
+    this.http.get<ResponseToken>(`${this.url}/logout`, this.options)
+      .subscribe(data => {
+        console.log(data);
+        this.router.navigate(['/home']);
+      })
   }
 
-  setInfo(isLogin:boolean,  isTrainer:boolean):void {
-    this.isLogin = isLogin;
-    this.isTrainer = isTrainer;
+  logoutTrainer():void {
+    this.http.get<ResponseToken>(`${this.url}/trainer/logout`, this.options)
+      .subscribe(data => {
+        console.log(data);
+        this.router.navigate(['/home']);
+      })
   }
- */
+
+  sendVariable(isLogin: boolean, isTrainer:boolean) {
+    this.infoAuth.next({isLogin, isTrainer});
+  }
+
+  getVariable(): Observable<{ isLogin:boolean, isTrainer:boolean }> {
+    return this.infoAuth.asObservable();
+  }
 }

@@ -59,12 +59,18 @@
         </ul>
       </div>
       <div class="flex space-x-8 items-center text-2xl text-white">
-        <a routerLink="/login" *ngIf="router.url === '/login'" class="lg:mr-5 items-center text-red-800 flex">
+        <a routerLink="/login" *ngIf="router.url === '/login' && !infoAuth.isLogin" class="lg:mr-5 items-center text-red-800 flex">
           <i class="fa fa-user"></i>
         </a>
-        <a routerLink="/login" *ngIf="router.url !== '/login'" class="lg:mr-5 items-center hover:text-red-800 flex">
+        <a routerLink="/login" *ngIf="router.url !== '/login' && !infoAuth.isLogin" class="lg:mr-5 items-center hover:text-red-800 flex">
           <i class="fa fa-user"></i>
         </a>
+        <button (click)="logout()" *ngIf="infoAuth.isLogin && !infoAuth.isTrainer" class="lg:mr-5 items-center hover:text-blue-800 flex">
+          <i class="fa fa-user"></i>
+        </button>
+        <button (click)="logout()" *ngIf="infoAuth.isLogin && infoAuth.isTrainer" class="lg:mr-5 items-center hover:text-blue-800 flex">
+          <i class="fa fa-user"></i>
+        </button>
         <a data-collapse-toggle="navbar-default" type="button"
            class="inline-flex items-center p-2 text-sm text-white rounded-lg md:hidden focus:outline-none hover:bg-gray-900"
            aria-controls="navbar-default" aria-expanded="false"><i class="fa fa-bars text-4xl"></i>

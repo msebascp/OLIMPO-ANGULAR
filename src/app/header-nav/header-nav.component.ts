@@ -8,11 +8,26 @@ import {AuthPassportService} from "../database/auth-passport.service";
   styleUrls: ['./header-nav.component.scss']
 })
 export class HeaderNavComponent {
+  infoAuth!: { isLogin:boolean, isTrainer:boolean };
+
   constructor(
     public router: Router,
     public auth: AuthPassportService
   ) { }
 
   ngOnInit() {
+    console.log("el ngoninit del nav se ejecuta")
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.infoAuth = infoAuth;
+      console.log("la variable es " + infoAuth.isLogin + " y " + infoAuth.isTrainer);
+    });
+  }
+
+  logout() {
+    if (this.infoAuth.isLogin && !this.infoAuth.isTrainer) {
+      this.auth.logout();
+    } else if (this.infoAuth.isLogin && this.infoAuth.isTrainer) {
+      this.auth.logoutTrainer();
+    }
   }
 }
