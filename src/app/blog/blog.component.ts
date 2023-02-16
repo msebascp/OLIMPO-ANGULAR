@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DatabaseService } from '../database/database.service';
+import { Blog } from '../interfaces/blog';
 
 @Component({
   selector: 'app-blog',
@@ -7,4 +9,20 @@ import { Component } from '@angular/core';
 })
 export class BlogComponent {
 
+  public posts: Blog[] = []
+  
+  constructor (
+    private databaseService: DatabaseService,
+  ) { }
+
+  ngOnInit(): void {
+    this.getAllPosts()
+  }
+
+
+  public getAllPosts(): void {
+    this.databaseService.getAllPosts().subscribe(posts => {
+      this.posts = posts;
+    })
+  }
 }

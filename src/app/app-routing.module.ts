@@ -16,12 +16,15 @@ import {CustomerAccountComponent} from "./customer-account/customer-account.comp
 import {LoginTrainerComponent} from "./login-trainer/login-trainer.component";
 import { CustomerTrainingsComponent } from './customer-trainings/customer-trainings.component';
 import { AdminEditPostComponent } from './admin-edit-post/admin-edit-post.component';
+import { BlogDetailsComponent } from './blog-details/blog-details.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'aboutUs', component: AboutUsComponent},
   {path: 'information', component: InformationComponent},
   {path: 'blog', component: BlogComponent},
+  {path: 'blog/details/:id', component: BlogDetailsComponent},
+
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},

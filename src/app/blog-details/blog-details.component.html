@@ -1,0 +1,25 @@
+<button type="button" (click)="goBack()"
+    class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-white  focus:outline-none focus:ring-pink-200 ">
+    <span
+        class="relative px-5 py-2.5 transition-all ease-in duration-75  bg-gray-800 rounded-md group-hover:bg-opacity-0">
+        Volver
+    </span>
+</button>
+<div class="mb-4 md:mb-0 w-full mx-auto relative">
+    <div class="px-4 lg:px-0">
+        <h2 class="text-4xl text-white text-center font-semibold  leading-tight">
+            {{selectedPost.title}}
+        </h2>
+    </div>
+    <div class="m-10">
+        <img [src]="'http://localhost:8000' + selectedPost.photo"
+        class="w-full object-cover rounded h-96 shadow" />
+    </div>
+
+</div>
+
+<div class="m-10 items-center text-center">
+    <div class="px-4 lg:px-0 mt-12  text-lg leading-relaxed w-full text-white">
+        <p class="pb-6 text-center">{{selectedPost.description}}</p>
+    </div>
+</div>

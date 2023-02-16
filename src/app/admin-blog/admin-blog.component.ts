@@ -38,7 +38,6 @@ export class AdminBlogComponent {
 
   public onFileChange(event: any) {
     this.image = event.target.files[0];
-    console.log(this.image)
   }
 
   public onSubmit(): void {
@@ -67,8 +66,9 @@ export class AdminBlogComponent {
               icon: 'success',
               background: '#1F2937'
             })
+            this.getAllPosts();
           })
-        this.getAllPosts();
+
       }
     });
   }
