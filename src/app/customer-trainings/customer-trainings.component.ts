@@ -28,7 +28,7 @@ export class CustomerTrainingsComponent {
     this.getAllTrainingsByCustomer()
   }
 
-  public getAllTrainingsByCustomer() {
+  /*public getAllTrainingsByCustomer() {
     const idString = this.route.snapshot.paramMap.get('id');
     if (idString) {
       const id:number = +idString;
@@ -36,6 +36,12 @@ export class CustomerTrainingsComponent {
         this.trainings = trainings;
       });
     }
+  }*/
+
+  public getAllTrainingsByCustomer() {
+      this.auth.getAllTrainingsByCustomer().subscribe(trainings => {
+        this.trainings = trainings;
+      });
   }
 
   public downloadPDF(filename: string) {
