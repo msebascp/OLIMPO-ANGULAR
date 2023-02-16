@@ -78,14 +78,23 @@
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <input (change)="onFileChange($event, customer.id)" class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400" type="file">
-                        <button><i (click)="saveTraining()"  class="fa fa-upload px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
-                            class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip translate-x-12 -translate-y-9">Subir Entrenamiento</span>
+                        <input (change)="onFileChange($event, customer.id)"
+                            class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
+                            type="file">
+                        <button><i (click)="saveTraining()"
+                                class="fa fa-upload px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                                class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip translate-x-12 -translate-y-9">Subir
+                                Entrenamiento</span>
                         </button>
                     </td>
                     <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
                         <button><i class="fa fa-euro px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
                                 class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip -translate-x-12 -translate-y-9">Pagar</span>
+                        </button>
+                        <button><i routerLink="/admin/editTraining/{{ customer.id }}"
+                                class="fa fa-file-pdf-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                                class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-28 md:-translate-x-32 -translate-y-9">Editar
+                                Entrnamientos</span>
                         </button>
                         <button><i routerLink="/admin/editCustomer/{{ customer.id }}"
                                 class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
