@@ -4,6 +4,8 @@ import {ResponseToken} from "../interfaces/response-token";
 import {Observable, catchError, of, map, Subject, BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 import {data} from "autoprefixer";
+import {Trainings} from "../interfaces/trainings";
+import {DataTrainings} from "../interfaces/dataTrainings";
 
 @Injectable({
   providedIn: 'root'
@@ -133,6 +135,21 @@ export class AuthPassportService {
         this.sendVariable(false, false);
         this.router.navigate(['/home']);
       })
+  }
+
+  public getAllTrainingsByCustomer(): Observable<Trainings[]> {
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    console.log('El getTrainings de clientes se ejecuta');
+    return this.http.get<DataTrainings>(`${this.url}/customer/trainings`,this.options)
+    .pipe(
+      map((data: DataTrainings) => {
+        return data.data
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    )
   }
 
   sendVariable(isLogin: boolean, isTrainer:boolean) {

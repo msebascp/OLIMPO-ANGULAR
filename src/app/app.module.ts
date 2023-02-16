@@ -24,6 +24,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { LoginTrainerComponent } from './login-trainer/login-trainer.component';
 import { CustomerTrainingsComponent } from './customer-trainings/customer-trainings.component';
 import { AdminEditPostComponent } from './admin-edit-post/admin-edit-post.component';
+import { NavbarCustomerComponent } from './navbar-customer/navbar-customer.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AdminEditPostComponent } from './admin-edit-post/admin-edit-post.compon
     LoginTrainerComponent,
     CustomerTrainingsComponent,
     AdminEditPostComponent,
+    NavbarCustomerComponent,
   ],
   imports: [
     BrowserModule,

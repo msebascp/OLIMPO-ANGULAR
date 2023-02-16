@@ -28,7 +28,8 @@ const routes: Routes = [
 
   {path: 'admin/login', component: LoginTrainerComponent},
 
-  {path: 'customer/trainings/:id', component: CustomerTrainingsComponent},
+  //{path: 'customer/trainings/:id', component: CustomerTrainingsComponent},
+  {path: 'customer/trainings', component: CustomerTrainingsComponent},
 
   {path: 'admin/account', component: AdminAccountComponent},
   {path: 'admin/users', component: AdminUsersComponent},
