@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {ResponseToken} from "../interfaces/response-token";
+import {ResponseToken} from "../interfaces/responseToken";
 import {Observable, catchError, of, map, Subject, BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
-import {data} from "autoprefixer";
 import {Trainings} from "../interfaces/trainings";
 import {DataTrainings} from "../interfaces/dataTrainings";
+import {RegisterData} from "../interfaces/registerData";
+import Swal from "sweetalert2";
 
 @Injectable({
   providedIn: 'root'
@@ -137,7 +138,7 @@ export class AuthPassportService {
       })
   }
 
-  public getAllTrainingsByCustomer(): Observable<Trainings[]> {
+  getAllTrainingsByCustomer(): Observable<Trainings[]> {
     this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
     console.log('El getTrainings de clientes se ejecuta');
     return this.http.get<DataTrainings>(`${this.url}/customer/trainings`,this.options)
@@ -158,5 +159,32 @@ export class AuthPassportService {
 
   getVariable(): Observable<{ isLogin:boolean, isTrainer:boolean }> {
     return this.infoAuth.asObservable();
+  }
+
+  register(registerData: RegisterData): void {
+    console.log('El registro del cliente se ejecuta');
+    console.log(registerData);
+    this.http.post<ResponseToken>(`${this.url}/register`, registerData, this.options)
+      .pipe(
+        catchError((error) => {
+          let errorMessages = "";
+          for (let key in error.error.errors) {
+            errorMessages += error.error.errors[key].join(", ") + ', ';
+          }
+          if (!error.success) {
+            Swal.fire({
+              title: "<h5 style='color:white'>" + 'ERROR' + "</h5>",
+              text: errorMessages,
+              icon: 'error',
+              background: '#1F2937'
+            })
+          }
+          return of(error.error as ResponseToken);
+        })
+      )
+      .subscribe(data => {
+        console.log(data)
+      })
+
   }
 }
