@@ -11,6 +11,7 @@ export interface Customer {
     lastPayment: Date;
     nextPayment: Date;
     typeTraining: string;
+    photo: string;
     trainer: Trainer;
     payment: Payments[]
 }

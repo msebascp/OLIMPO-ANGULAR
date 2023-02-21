@@ -7,5 +7,6 @@ export interface Trainer {
     email: string;
     phone: string;
     specialty: string;
+    photo: string;
     customer: Customer[]
 }
