@@ -10,6 +10,7 @@ export interface Customer {
     dateInscription: string;
     nextPayment: Date;
     typeTraining: string;
+    photo: string;
     trainer: Trainer;
     payment: Payments[]
 }

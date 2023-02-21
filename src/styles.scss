@@ -1,9 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');
 html,body {
-    font-family: 'Rufina';
+    font-family: 'Gideon Roman', cursive;
     height: 100%;
     width: 100%;
     min-height: 100vh;
