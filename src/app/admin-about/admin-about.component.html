@@ -11,12 +11,15 @@
             <input class="sr-only peer" type="radio" name="carousel" id="carousel-1" checked />
             <div
                class="w-96 absolute flex-row justify-center items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent rounded-lg shadow-lg transition-all duration-300 opacity-0 peer-checked:opacity-100 peer-checked:z-10 z-0">
-               <img class="m-24 w-44 h-44 items-center"
+               <img class="m-24 rounded-t-lg w-44 h-44 items-center mt-56"
                   src="../../assets/instagram-logo-png-transparent-background-1024x1024-1.png" alt="" />
-               <div class="py-4 px-8">
+               <div class="py-4 px-8 text-center">
                   <h1 class="hover:cursor-pointer mt-2 text-white font-bold text-2xl tracking-tight">INSTAGRAM
                   </h1>
-                  <p class="hover:cursor-pointer py-3 text-white leading-6">instagram.com/olimpogymorihuela/
+                     <input class="w-80 pl-5 pr-5" type="text" [(ngModel)]="instagram">
+                     <button><i routerLink=""
+                        class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i></button>
+                     
                </div>
                <!-- controls -->
                <div class="absolute top-1/2 w-full flex justify-between z-20">
@@ -45,13 +48,14 @@
             <!-- content #2 -->
             <div
                class="w-96 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent rounded-lg shadow-lg transition-all duration-300 opacity-0 peer-checked:opacity-100 peer-checked:z-10 z-0">
-               <img class="m-24 rounded-t-lg w-44 h-44 items-center" src="../../assets/Logo_de_Facebook.png" alt="" />
-               <div class="py-4 px-8">
-                  <h1 class="hover:cursor-pointer mt-2 text-white font-bold text-2xl tracking-tight">
-                     Facebook.
+               <img class="m-24 rounded-t-lg w-44 h-44 items-center mt-56" src="../../assets/Logo_de_Facebook.png" alt="" />
+               <div class="py-4 px-8 text-center pt-5">
+                  <h1 class="hover:cursor-pointer mt-2 text-white font-bold text-2xl  tracking-tight">
+                     FACEBOOK
                   </h1>
-                  <p class="hover:cursor-pointer py-3 text-white leading-6">facebook.com/olimpogymfc
-                  </p>
+                  <input class="w-80 pl-5 pr-5" type="text" [(ngModel)]="facebook">
+                     <button><i routerLink=""
+                        class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i></button>
                </div>
                <!-- controls -->
                <div class="absolute top-1/2 w-full flex justify-between z-20">
@@ -76,9 +80,8 @@
          </div>
       </div>
    </div>
-   <div class="w-full border-b-4 border-white">
-      <h2 class="md:text-lg lg:text-xl text-sm md:font-normal mt-10 ml-5 md:border-0 text-red-600">GESTIÓN DE REDES
-         SOCIALES</h2>
+   <div class="w-full border-b-4 border-white mt-44">
+      <h2 class="md:text-lg lg:text-xl mt-20 md:font-normal text-3xl ml-5 md:border-0 text-red-600">HORARIO DEL GIMNASIO</h2>
    </div>
    <!--
     <div class="flex flex-row justify-between items-center align-middle gap-4 text-white text-6xl">
