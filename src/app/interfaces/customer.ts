@@ -6,10 +6,10 @@ export interface Customer {
     name: string;
     surname: string;
     email: string;
-    phone: string;
-    api_token: string;
     trainer_id: number;
     dateInscription: string;
+    lastPayment: Date;
+    nextPayment: Date;
     typeTraining: string;
     trainer: Trainer;
     payment: Payments[]

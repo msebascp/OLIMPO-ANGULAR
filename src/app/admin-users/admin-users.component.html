@@ -36,7 +36,7 @@
                         Fecha del último pago
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Pagado
+                        Fecha del siguiente pago
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Subir Entrenamiento
@@ -73,10 +73,7 @@
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <div *ngFor="let payment of customer.payment ? customer.payment : []">
-                            <p *ngIf="payment === undefined">No hay información de pago</p>
-                            <p *ngIf="payment !== undefined">{{ payment.paid ? 'Pagado' : 'No Pagado' }}</p>
-                        </div>
+                        {{ customer.nextPayment }}
                     </td>
                     <td class="px-6 py-4">
                         <input (change)="onFileChange($event, customer.id)"

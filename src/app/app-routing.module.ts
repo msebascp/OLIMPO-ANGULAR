@@ -18,6 +18,7 @@ import { CustomerTrainingsComponent } from './customer-trainings/customer-traini
 import { AdminEditPostComponent } from './admin-edit-post/admin-edit-post.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { AdminEditTrainingsComponent } from './admin-edit-trainings/admin-edit-trainings.component';
+import { CustomerTrainerComponent } from './customer-trainer/customer-trainer.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
 
   //{path: 'customer/trainings/:id', component: CustomerTrainingsComponent},
   {path: 'customer/trainings', component: CustomerTrainingsComponent},
+  {path: 'customer/trainer', component: CustomerTrainerComponent},
   {path: 'customer/account', component: CustomerAccountComponent},
 
   {path: 'admin/account', component: AdminAccountComponent},

@@ -7,6 +7,8 @@ import {Trainings} from "../interfaces/trainings";
 import {DataTrainings} from "../interfaces/dataTrainings";
 import {RegisterData} from "../interfaces/registerData";
 import Swal from "sweetalert2";
+import { DataTrainer } from '../interfaces/dataTrainer';
+import { Trainer } from '../interfaces/trainer';
 
 @Injectable({
   providedIn: 'root'
@@ -136,6 +138,21 @@ export class AuthPassportService {
         this.sendVariable(false, false);
         this.router.navigate(['/home']);
       })
+  }
+
+  getTrainerByCustomer(): Observable<Trainer> {
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    console.log('El getTrainer de clientes se ejecuta');
+    return this.http.get<DataTrainer>(`${this.url}/customer/trainer`,this.options)
+    .pipe(
+      map((data: DataTrainer) => {
+        return data.data
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    )
   }
 
   getAllTrainingsByCustomer(): Observable<Trainings[]> {
