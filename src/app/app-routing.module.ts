@@ -25,15 +25,12 @@ const routes: Routes = [
   {path: 'information', component: InformationComponent},
   {path: 'blog', component: BlogComponent},
   {path: 'blog/details/:id', component: BlogDetailsComponent},
-
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-
-  {path: 'admin/login', component: LoginTrainerComponent},
 
   //{path: 'customer/trainings/:id', component: CustomerTrainingsComponent},
   {path: 'customer/trainings', component: CustomerTrainingsComponent},
+  {path: 'customer/account', component: CustomerAccountComponent},
 
   {path: 'admin/account', component: AdminAccountComponent},
   {path: 'admin/users', component: AdminUsersComponent},
@@ -42,9 +39,9 @@ const routes: Routes = [
   {path: 'admin/editCustomer/:id', component: AdminEditCustomersComponent},
   {path: 'admin/editTraining/:id', component: AdminEditTrainingsComponent},
   {path: 'admin/editPost/:id', component: AdminEditPostComponent},
+  {path: 'admin/login', component: LoginTrainerComponent},
+  {path: 'admin/register', component: RegisterComponent},
 
-
-  {path: 'customer/account', component: CustomerAccountComponent},
   {path: '**', redirectTo: 'home', pathMatch:'full'},
 ];
 

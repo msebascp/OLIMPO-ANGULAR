@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ResponseToken} from "../interfaces/response-token";
+import {ResponseToken} from "../interfaces/responseToken";
 import {AuthPassportService} from "../database/auth-passport.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
