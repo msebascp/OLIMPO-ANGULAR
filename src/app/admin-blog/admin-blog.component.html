@@ -52,9 +52,9 @@
             </thead>
             <tbody>
                 <tr *ngFor="let post of posts" class="bg-white border-b dark:bg-gray-500 dark:border-gray-600">
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white w-52">
                         <div class="flex-shrink-0">
-                            <img class="w-24 h-20 sm:w-24 sm:h-24 rounded-xl sm:rounded-full"
+                            <img class="w-full h-20 sm:w-24 sm:h-24 rounded"
                                 [src]="'http://localhost:8000' + post.photo">
                         </div>
                     </td>

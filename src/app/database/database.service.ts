@@ -157,6 +157,19 @@ export class DatabaseService {
     );
   }
 
+  public deleteTraining(id: number): Observable<Trainings> {
+    let url = this.API_URL + '/trainings';
+    if (id !== undefined) {
+      url += `/${id}`
+    }
+    return this.http.delete<Trainings>(url).pipe(
+      catchError(e => {
+        console.error(e);
+        return [];
+      })
+    )
+  }
+
   public getAllTrainingsByCustomer(id: number): Observable<Trainings[]> {
     let url = this.API_URL + `/customers`;
     if (id !== undefined) {

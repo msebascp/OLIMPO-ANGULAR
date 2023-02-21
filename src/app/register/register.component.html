@@ -1,1 +1,98 @@
-<p>register works!</p>
+<loading *ngIf="!isLogin"></loading>
+<div *ngIf="isLogin" class="h-[600px] flex justify-center">
+  <form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="registerForm" id="formulario"
+    class="text-lg w-11/12 mt-5 bg-neutral-800/70 rounded-md p-4 h-full text-white flex flex-col justify-around
+    sm:w-9/12 sm:px-10 md:w-8/12 md:px-16 lg:w-6/12 xl:w-5/12">
+    <h3 class="text-3xl font-bold text-center">
+      Registrar nuevo cliente
+    </h3>
+    <div>
+      <label for="name">*Nombre</label>
+      <input
+        id="name"
+        formControlName="name"
+        type="text" name="name"
+        class="mt-1 px-2 py-1 block w-full text-black rounded-sm focus-visible:outline-red-800">
+      <h3 *ngIf="form['name'].touched && form['name'].hasError('required')"
+          class="text-red-600 mt-1">
+        El nombre es obligatorio
+      </h3>
+      <h3 *ngIf="form['name'].touched && form['name'].hasError('pattern')"
+          class="text-red-600 mt-1">
+        Uso de caracteres inválidos
+      </h3>
+    </div>
+    <div>
+      <label for="surname">*Apellidos</label>
+      <input
+        id="surname"
+        formControlName="surname"
+        type="text" name="surname"
+        class="mt-1 px-2 py-1 block w-full text-black rounded-sm focus-visible:outline-red-800">
+      <h3 *ngIf="form['surname'].touched && form['surname'].hasError('required')"
+          class="text-red-600 mt-1">
+        Los apellidos son obligatorios
+      </h3>
+      <h3 *ngIf="form['surname'].touched && form['surname'].hasError('pattern')"
+          class="text-red-600 mt-1">
+        Uso de caracteres inválidos
+      </h3>
+    </div>
+    <div>
+      <label for="email">*Correo electrónico</label>
+      <input
+        id="email"
+        formControlName="email"
+        type="text" name="email"
+        class="mt-1 px-2 py-1 block w-full text-black rounded-sm focus-visible:outline-red-800">
+      <h3 *ngIf="form['email'].touched && form['email'].hasError('required')"
+          class="text-red-600 mt-1">
+        El correo electrónico es obligatorio
+      </h3>
+      <h3 *ngIf="form['email'].touched && form['email'].hasError('email')"
+          class="text-red-600 mt-1">
+        El correo está mal escrito
+      </h3>
+    </div>
+    <div>
+      <label for="typeTraining">Tipo de entrenamiento</label>
+      <input
+        id="typeTraining"
+        formControlName="typeTraining"
+        type="text" name="typeTraining"
+        class="mt-1 px-2 py-1 block w-full text-black rounded-sm focus-visible:outline-red-800">
+      <h3 *ngIf="form['typeTraining'].touched && form['typeTraining'].hasError('pattern')"
+          class="text-red-600 mt-1">
+        Uso de caracteres inválidos
+      </h3>
+    </div>
+    <div>
+      <label for="trainer">Entrenador</label>
+      <select
+        type="number"
+        formControlName="trainer"
+        class="mt-1 px-2 py-1 block w-full text-black rounded-sm focus-visible:outline-red-800"
+        name="trainer" id="trainer">
+        <option selected value="">Selecciona un Entrenador</option>
+        <option *ngFor="let trainer of trainers" [value]="trainer.id" >{{ trainer.name }}</option>
+      </select>
+    </div>
+    <h3 *ngIf="showInvalidSubmit"
+        class="text-red-600 mt-1">
+      Rellena correctamente el formulario (*)
+    </h3>
+    <div class="mt-5">
+      <button type="submit"
+              (blur)="showInvalidSubmit = false"
+              class="p-2 rounded-lg bg-red-800/50 hover:bg-red-800">
+        Confirmar
+      </button>
+      <button type="button" (click)="onReset()"
+              class="ml-4 p-2 rounded-lg bg-red-800/50 hover:bg-red-800">
+        Borrar
+      </button>
+    </div>
+  </form>
+</div>

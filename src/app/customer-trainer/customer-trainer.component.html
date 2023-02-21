@@ -1,0 +1,12 @@
+<loading *ngIf="!isLogin"></loading>
+<navbar-customer *ngIf="isLogin"></navbar-customer>
+<div *ngIf="isLogin" class="w-full h-full">
+    <div class="flex flex-col justify-center items-center bg-gray-600 rounded-lg py-6  m-20">
+        <h2 class="text-red-800 uppercase text-4xl font-bold p-10">Mi Entrenador</h2>
+        <img src="">
+        <h2 class="text-white text-4xl">{{trainer?.name}}</h2>
+        <p>{{trainer?.surname}}</p>
+        <p>{{trainer?.email}}</p>
+        <p>{{trainer?.specialty}}</p>
+    </div>
+</div>

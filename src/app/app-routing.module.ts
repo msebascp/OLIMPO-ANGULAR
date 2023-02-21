@@ -17,6 +17,8 @@ import {LoginTrainerComponent} from "./login-trainer/login-trainer.component";
 import { CustomerTrainingsComponent } from './customer-trainings/customer-trainings.component';
 import { AdminEditPostComponent } from './admin-edit-post/admin-edit-post.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
+import { AdminEditTrainingsComponent } from './admin-edit-trainings/admin-edit-trainings.component';
+import { CustomerTrainerComponent } from './customer-trainer/customer-trainer.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -24,25 +26,24 @@ const routes: Routes = [
   {path: 'information', component: InformationComponent},
   {path: 'blog', component: BlogComponent},
   {path: 'blog/details/:id', component: BlogDetailsComponent},
-
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-
-  {path: 'admin/login', component: LoginTrainerComponent},
 
   //{path: 'customer/trainings/:id', component: CustomerTrainingsComponent},
   {path: 'customer/trainings', component: CustomerTrainingsComponent},
+  {path: 'customer/trainer', component: CustomerTrainerComponent},
+  {path: 'customer/account', component: CustomerAccountComponent},
 
   {path: 'admin/account', component: AdminAccountComponent},
   {path: 'admin/users', component: AdminUsersComponent},
   {path: 'admin/editBlog', component: AdminBlogComponent},
   {path: 'admin/aboutSettings', component: AdminAboutComponent},
   {path: 'admin/editCustomer/:id', component: AdminEditCustomersComponent},
+  {path: 'admin/editTraining/:id', component: AdminEditTrainingsComponent},
   {path: 'admin/editPost/:id', component: AdminEditPostComponent},
+  {path: 'admin/login', component: LoginTrainerComponent},
+  {path: 'admin/register', component: RegisterComponent},
 
-
-  {path: 'customer/account', component: CustomerAccountComponent},
   {path: '**', redirectTo: 'home', pathMatch:'full'},
 ];
 
