@@ -8,7 +8,6 @@ export interface Customer {
     email: string;
     trainer_id: number;
     dateInscription: string;
-    lastPayment: Date;
     nextPayment: Date;
     typeTraining: string;
     trainer: Trainer;

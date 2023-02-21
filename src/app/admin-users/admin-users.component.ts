@@ -16,7 +16,12 @@ export class AdminUsersComponent {
   public customers: Customer[] = [];
   public pdfFile!: File;
   public training: Trainings = {id: 0, name : 'Entrenamiento prueba', pdfTraining: '', id_customer: 1}
+
   isLogin: boolean = false;
+  showFilterOptions:boolean = false
+  paid:boolean = false
+  noPaid:boolean = false
+  today!:Date;
 
   constructor(
     private databaseService: DatabaseService,
@@ -24,6 +29,8 @@ export class AdminUsersComponent {
   ) { }
 
   ngOnInit(): void {
+    this.today = new Date();
+    console.log(this.today.getTime())
     this.auth.checkLoginTrainer().then((isLogin) => {
       if (isLogin) {
         this.isLogin = true;
@@ -35,6 +42,7 @@ export class AdminUsersComponent {
 
   public getClientes(): void {
     this.databaseService.getAllCustomers().subscribe(customers => {
+      this.customers = []
       //this.customers = customers;
       customers.forEach(customer => {
         if (customer.trainer_id !== null) {
@@ -110,7 +118,6 @@ export class AdminUsersComponent {
 
   }
 
-
   public search(value: string): void {
     //this.heroesFound$ = this.heroService.searchHeroes(value);
     this.searchTerm.next(value);
@@ -129,7 +136,7 @@ export class AdminUsersComponent {
       background: '#1F2937'
     }).then((result:any) => {
       if (result.isConfirmed) {
-        // Recogemos el id que tiene el boton
+        // Recogemos el 'id' que tiene el boton
         this.databaseService.deleteCustomer(id).subscribe( _ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Borrado' + "</h5>",
@@ -143,7 +150,6 @@ export class AdminUsersComponent {
       }
     })
   }
-
 
   public onFileChange(event: any, customer_id: number) {
     this.pdfFile = event.target.files[0];
@@ -161,10 +167,9 @@ export class AdminUsersComponent {
     this.training.id_customer = customer_id
   }
 
-
   public saveTraining() {
     this.databaseService.savePdf( this.pdfFile, this.training)
-      .subscribe(data => {
+      .subscribe(_ => {
         Swal.fire({
           title: "<h5 style='color:white'>" + 'Subido' + "</h5>",
           text: 'Entrenamiento guardado correctamente',
@@ -172,5 +177,29 @@ export class AdminUsersComponent {
           background: '#1F2937'
         })
       })
+  }
+
+  filterPaidCustomers() {
+    this.paid = !this.paid
+    if(this.paid) {
+      this.customers = this.customers.filter( customer => {
+        customer.nextPayment = new Date(customer.nextPayment)
+        return customer.nextPayment.getTime() > this.today.getTime()
+      })
+    } else {
+      this.getClientes()
+    }
+  }
+
+  filterNoPaidCustomers() {
+    this.noPaid = !this.noPaid
+    if(this.noPaid) {
+      this.customers = this.customers.filter( customer => {
+        customer.nextPayment = new Date(customer.nextPayment)
+        return customer.nextPayment.getTime() <= this.today.getTime()
+      })
+    } else {
+      this.getClientes()
+    }
   }
 }
