@@ -28,6 +28,7 @@ import { NavbarCustomerComponent } from './navbar-customer/navbar-customer.compo
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { AdminEditTrainingsComponent } from './admin-edit-trainings/admin-edit-trainings.component';
 import { CustomerTrainerComponent } from './customer-trainer/customer-trainer.component';
+import { RegisterTrainerComponent } from './register-trainer/register-trainer.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { CustomerTrainerComponent } from './customer-trainer/customer-trainer.co
     BlogDetailsComponent,
     AdminEditTrainingsComponent,
     CustomerTrainerComponent,
+    RegisterTrainerComponent,
   ],
   imports: [
     BrowserModule,
