@@ -4,6 +4,7 @@ import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {Trainer} from "../interfaces/trainer";
 import {DatabaseService} from "../database/database.service";
 import {RegisterData} from "../interfaces/registerData";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-register',
@@ -55,6 +56,12 @@ export class RegisterComponent {
       trainer_id: this.registerForm.get('trainer')?.value ? parseInt(this.registerForm.get('trainer')?.value) : null,
     }
     this.auth.register(registerData)
+    Swal.fire({
+      title: "<h5 style='color:white'>" + 'Cliente registrado correctamente' + "</h5>",
+      icon: 'success',
+      background: '#1F2937'
+    })
+    this.onReset()
   }
 
   get form() {
@@ -75,5 +82,7 @@ export class RegisterComponent {
     this.registerForm.get('surname')?.reset()
     this.registerForm.get('phone')?.reset()
     this.registerForm.get('email')?.reset()
+    this.registerForm.get('typeTraining')?.setValue('Ninguno')
+    this.registerForm.get('trainer')?.setValue('')
   }
 }
