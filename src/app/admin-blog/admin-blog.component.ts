@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthPassportService } from "../database/auth-passport.service";
 import { Router } from "@angular/router";
 import { DatabaseService } from '../database/database.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Blog } from '../interfaces/blog';
 
@@ -12,10 +12,8 @@ import { Blog } from '../interfaces/blog';
   styleUrls: ['./admin-blog.component.scss']
 })
 export class AdminBlogComponent {
-  postForm = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl('')
-  })
+  postForm!: FormGroup
+  showInvalidSubmit: boolean = false
   public newPost: Blog = {id: 0, title: '', description: '', photo: '' };
   public posts: Blog[] = []
   public image!: File;
@@ -25,6 +23,7 @@ export class AdminBlogComponent {
     private auth: AuthPassportService,
     private router: Router,
     private databaseService: DatabaseService,
+    private formBuilder: FormBuilder
   ) {
   }
   ngOnInit() {
@@ -34,6 +33,16 @@ export class AdminBlogComponent {
         this.getAllPosts();
       }
     });
+    this.postForm = this.formBuilder.group(
+      {
+        title: ["", [Validators.required]],
+        description: ["", [Validators.required]],
+      }
+    )
+  }
+
+  get form() {
+    return this.postForm.controls
   }
 
   public onFileChange(event: any) {
@@ -41,6 +50,10 @@ export class AdminBlogComponent {
   }
 
   public onSubmit(): void {
+    if (this.postForm.invalid) {
+      this.showInvalidSubmit = true
+      return;
+    }
     Swal.fire({
       title: "<h5 style='color:white'>" + '¿Seguro que quieres subir el Post?' + "</h5>",
       icon: 'warning',
@@ -52,6 +65,13 @@ export class AdminBlogComponent {
       background: '#1F2937'
     }).then((result: any) => {
       if (result.isConfirmed) {
+        if (this.image === undefined) {
+          Swal.fire({
+            title: "<h5 style='color:white'>" + 'Se debe subir una foto' + "</h5>",
+            icon: 'warning',
+            background: '#1F2937'
+          })
+        }
         const title = this.postForm.get('title')?.value || '';
         const description = this.postForm.get('description')?.value || '';
 
@@ -67,10 +87,16 @@ export class AdminBlogComponent {
               background: '#1F2937'
             })
             this.getAllPosts();
+            this.onReset();
           })
 
       }
     });
+  }
+
+  public onReset() {
+    this.postForm.get('title')?.reset()
+    this.postForm.get('description')?.reset()
   }
 
   public getAllPosts(): void {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthPassportService } from '../database/auth-passport.service';
@@ -18,17 +18,16 @@ export class AdminEditPostComponent {
   public image!: File;
   public updatedPost: Blog = {id: 0, title: '', description: '', photo: '' };
 
-  postForm = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl(''),
-  })
+  postForm!: FormGroup
+  showInvalidSubmit: boolean = false
 
   constructor (
     private route: ActivatedRoute,
     private databaseService: DatabaseService,
     private location: Location,
     private auth: AuthPassportService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
 
@@ -36,9 +35,15 @@ export class AdminEditPostComponent {
     this.auth.checkLoginTrainer().then((isLogin: any) => {
       if (isLogin) {
         this.isLogin = true;
+        this.getPostById();
       }
     });
-    this.getPostById()
+    this.postForm = this.formBuilder.group(
+      {
+        title: ["", [Validators.required]],
+        description: ["", [Validators.required]],
+      }
+    )
   }
 
   public getPostById(): void {
@@ -61,6 +66,10 @@ export class AdminEditPostComponent {
 
 
   public onSubmit(): void {
+    if (this.postForm.invalid) {
+      this.showInvalidSubmit = true
+      return;
+    }
     Swal.fire({
       title: "<h5 style='color:white'>" + '¿Seguro que quieres modificar el post?' + "</h5>",
       icon: 'warning',
@@ -101,6 +110,10 @@ export class AdminEditPostComponent {
       }
       }
     })
+  }
+
+  get form() {
+    return this.postForm.controls
   }
 
   public goBack(): void {
