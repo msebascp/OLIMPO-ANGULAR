@@ -204,4 +204,19 @@ export class AuthPassportService {
       })
 
   }
+
+  dataTrainer(): Observable<Trainer> {
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    console.log('El getTrainings de clientes se ejecuta');
+    return this.http.get<DataTrainer>(`${this.url}/trainer/me`,this.options)
+    .pipe(
+      map((data: DataTrainer) => {
+        return data.data
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    )
+  }
 }
