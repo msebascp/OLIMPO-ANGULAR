@@ -31,10 +31,10 @@ export class RegisterComponent {
     });
     this.registerForm = this.formBuilder.group(
       {
-        name: ["", [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
-        surname: ["", [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
+        name: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
+        surname: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
         email: ["", [Validators.required, Validators.email]],
-        typeTraining: ["Ninguno", Validators.pattern(/^[a-zA-Z ]+$/)],
+        typeTraining: ["Ninguno", Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)],
         trainer: [""],
       }
     )
