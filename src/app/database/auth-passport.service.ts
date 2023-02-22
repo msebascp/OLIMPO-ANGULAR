@@ -9,6 +9,8 @@ import {RegisterData} from "../interfaces/registerData";
 import Swal from "sweetalert2";
 import { DataTrainer } from '../interfaces/dataTrainer';
 import { Trainer } from '../interfaces/trainer';
+import {RegisterTrainerData} from "../interfaces/registerTrainerData";
+import {RegisterTrainerComponent} from "../register-trainer/register-trainer.component";
 
 @Injectable({
   providedIn: 'root'
@@ -178,31 +180,16 @@ export class AuthPassportService {
     return this.infoAuth.asObservable();
   }
 
-  register(registerData: RegisterData): void {
+  register(registerData: RegisterData): Observable<ResponseToken> {
     console.log('El registro del cliente se ejecuta');
     console.log(registerData);
-    this.http.post<ResponseToken>(`${this.url}/register`, registerData, this.options)
-      .pipe(
-        catchError((error) => {
-          let errorMessages = "";
-          for (let key in error.error.errors) {
-            errorMessages += error.error.errors[key].join(", ") + ', ';
-          }
-          if (!error.success) {
-            Swal.fire({
-              title: "<h5 style='color:white'>" + 'ERROR' + "</h5>",
-              text: errorMessages,
-              icon: 'error',
-              background: '#1F2937'
-            })
-          }
-          return of(error.error as ResponseToken);
-        })
-      )
-      .subscribe(data => {
-        console.log(data)
-      })
+    return this.http.post<ResponseToken>(`${this.url}/register`, registerData, this.options)
+  }
 
+  registerTrainer(registerData: RegisterTrainerData): Observable<ResponseToken> {
+    console.log('El registro del cliente se ejecuta');
+    console.log(registerData);
+    return this.http.post<ResponseToken>(`${this.url}/trainer/register`, registerData, this.options)
   }
 
   pay(id:number):void {

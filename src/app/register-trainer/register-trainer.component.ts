@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
-import {AuthPassportService} from "../database/auth-passport.service";
-import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+import {Component} from '@angular/core';
 import {Trainer} from "../interfaces/trainer";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthPassportService} from "../database/auth-passport.service";
 import {DatabaseService} from "../database/database.service";
 import {RegisterData} from "../interfaces/registerData";
 import Swal from "sweetalert2";
+import {RegisterTrainerData} from "../interfaces/registerTrainerData";
+import {data} from "autoprefixer";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-register-trainer',
+  templateUrl: './register-trainer.component.html',
+  styleUrls: ['./register-trainer.component.scss']
 })
-export class RegisterComponent {
+export class RegisterTrainerComponent {
   isLogin: boolean = false
   trainers: Trainer[] = []
   registerForm!: FormGroup
@@ -23,11 +25,11 @@ export class RegisterComponent {
     private formBuilder: FormBuilder
   ) {
   }
-  ngOnInit(){
+
+  ngOnInit() {
     this.auth.checkLoginTrainer().then((isLogin) => {
       if (isLogin) {
         this.isLogin = true;
-        this.getAllTrainers();
       }
     });
     this.registerForm = this.formBuilder.group(
@@ -35,32 +37,24 @@ export class RegisterComponent {
         name: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
         surname: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
         email: ["", [Validators.required, Validators.email]],
-        typeTraining: ["Ninguno", Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)],
-        trainer: [""],
+        specialty: ["Ninguno", Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)],
       }
     )
   }
 
-  getAllTrainers(): void {
-    this.databaseService.getAllTrainers().subscribe(trainers => {
-      this.trainers = trainers;
-    })
-  }
-
   register() {
-    let registerData: RegisterData = {
+    let registerData: RegisterTrainerData = {
       name: this.registerForm.get('name')?.value,
       surname: this.registerForm.get('surname')?.value,
       email: this.registerForm.get('email')?.value,
-      typeTraining: this.registerForm.get('typeTraining')?.value ? this.registerForm.get('typeTraining')?.value : null,
-      trainer_id: this.registerForm.get('trainer')?.value ? parseInt(this.registerForm.get('trainer')?.value) : null,
+      specialty: this.registerForm.get('typeTraining')?.value ? this.registerForm.get('typeTraining')?.value : null,
     }
-    this.auth.register(registerData)
+    this.auth.registerTrainer(registerData)
       .subscribe(
         data => {
           if (data.success) {
             Swal.fire({
-              title: "<h5 style='color:white'>" + 'Cliente registrado correctamente' + "</h5>",
+              title: "<h5 style='color:white'>" + 'Entrenador registrado correctamente' + "</h5>",
               icon: 'success',
               background: '#1F2937'
             })
@@ -85,7 +79,7 @@ export class RegisterComponent {
     return this.registerForm.controls
   }
 
-  onSubmit():void {
+  onSubmit(): void {
     if (this.registerForm.invalid) {
       this.showInvalidSubmit = true
       return;

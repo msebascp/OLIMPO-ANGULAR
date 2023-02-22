@@ -19,6 +19,7 @@ import { AdminEditPostComponent } from './admin-edit-post/admin-edit-post.compon
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { AdminEditTrainingsComponent } from './admin-edit-trainings/admin-edit-trainings.component';
 import { CustomerTrainerComponent } from './customer-trainer/customer-trainer.component';
+import {RegisterTrainerComponent} from "./register-trainer/register-trainer.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path: 'admin/editPost/:id', component: AdminEditPostComponent},
   {path: 'admin/login', component: LoginTrainerComponent},
   {path: 'admin/register', component: RegisterComponent},
+  {path: 'admin/registerTrainer', component: RegisterTrainerComponent},
 
   {path: '**', redirectTo: 'home', pathMatch:'full'},
 ];
