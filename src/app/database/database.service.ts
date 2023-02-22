@@ -6,7 +6,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { Customer } from '../interfaces/customer';
 import { Trainer } from '../interfaces/trainer';
 import { DataCustomers } from '../interfaces/dataCustomers';
-import { DataTrainers } from '../interfaces/dataTrainers';
+import { DataTrainers } from '../interfaces/DataTrainers';
 import { Trainings } from '../interfaces/trainings';
 import { DataTrainings } from '../interfaces/dataTrainings';
 import { Blog } from '../interfaces/blog';

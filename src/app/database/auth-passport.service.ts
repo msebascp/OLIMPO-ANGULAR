@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ResponseToken} from "../interfaces/responseToken";
-import {Observable, catchError, of, map, BehaviorSubject} from "rxjs";
+import {Observable, catchError, of, map, Subject, BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 import {Trainings} from "../interfaces/trainings";
 import {DataTrainings} from "../interfaces/dataTrainings";
@@ -210,5 +210,20 @@ export class AuthPassportService {
       .subscribe(data => {
         console.log(data);
       })
+  }
+
+  dataTrainer(): Observable<Trainer> {
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    console.log('El getTrainings de clientes se ejecuta');
+    return this.http.get<DataTrainer>(`${this.url}/trainer/me`,this.options)
+    .pipe(
+      map((data: DataTrainer) => {
+        return data.data
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    )
   }
 }
