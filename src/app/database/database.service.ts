@@ -6,7 +6,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { Customer } from '../interfaces/customer';
 import { Trainer } from '../interfaces/trainer';
 import { DataCustomers } from '../interfaces/dataCustomers';
-import { DataTrainers } from '../interfaces/DataTrainers';
+import { DataTrainers } from '../interfaces/dataTrainers';
 import { Trainings } from '../interfaces/trainings';
 import { DataTrainings } from '../interfaces/dataTrainings';
 import { Blog } from '../interfaces/blog';
@@ -112,7 +112,7 @@ export class DatabaseService {
     if (id !== undefined) {
       url += `/${id}?name=${customer.name}&typeTraining=${customer.typeTraining}&trainer_id=${customer.trainer_id}&email=${customer.email}`
     }
-    return this.http.patch<DataCustomer>(url, customer).pipe(
+    return this.http.post<DataCustomer>(url, customer).pipe(
       map((data: DataCustomer) => {
         return data.data;
       }),

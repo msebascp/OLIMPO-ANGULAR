@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { DatabaseService } from '../database/database.service';
 import { Customer } from '../interfaces/customer';
 import { Location } from "@angular/common";
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Trainer } from '../interfaces/trainer';
 import Swal from 'sweetalert2';
 import {AuthPassportService} from "../database/auth-passport.service";
@@ -19,18 +19,15 @@ export class AdminEditCustomersComponent {
   isLogin: boolean = false;
   public selectedCustomer!: Customer;
   public trainers: Trainer[] = [];
-  customerForm = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
-    trainer_id: new FormControl(''),
-    typeTraining: new FormControl(''),
-  })
+  customerForm!: FormGroup;
+  showInvalidSubmit: boolean = false
 
   constructor (
     private route: ActivatedRoute,
     private databaseService: DatabaseService,
     private location: Location,
     private auth: AuthPassportService,
+    private formBuilder: FormBuilder,
     private router: Router
   ) { }
 
@@ -38,11 +35,22 @@ export class AdminEditCustomersComponent {
     this.auth.checkLoginTrainer().then((isLogin) => {
       if (isLogin) {
         this.isLogin = true;
+        this.getCustomerById();
+        this.getAllTrainers();
       }
     });
+    this.customerForm = this.formBuilder.group(
+      {
+        name: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
+        email: ["", [Validators.required, Validators.email]],
+        trainer_id: [""],
+        typeTraining: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
+      }
+    )
+  }
 
-    this.getCustomerById();
-    this.getAllTrainers();
+  get form() {
+    return this.customerForm.controls
   }
 
   public getCustomerById(): void {
@@ -75,6 +83,10 @@ export class AdminEditCustomersComponent {
   }
 
   public onSubmit(): void {
+    if (this.customerForm.invalid) {
+      this.showInvalidSubmit = true
+      return;
+    }
     Swal.fire({
       title: "<h5 style='color:white'>" + '¿Seguro que quieres modificar el cliente?' + "</h5>",
       icon: 'warning',

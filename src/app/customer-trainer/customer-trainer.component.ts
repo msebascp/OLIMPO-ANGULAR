@@ -30,6 +30,7 @@ export class CustomerTrainerComponent {
 
   public getTrainerByCustomer() {
     this.auth.getTrainerByCustomer().subscribe(trainer => {
+      console.log(trainer)
       this.trainer = trainer;
     });
   }

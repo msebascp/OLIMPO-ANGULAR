@@ -5,7 +5,6 @@ export interface Trainer {
     name: string;
     surname: string;
     email: string;
-    phone: string;
     specialty: string;
     photo: string;
     customer: Customer[]
