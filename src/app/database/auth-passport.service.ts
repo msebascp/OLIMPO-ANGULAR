@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ResponseToken} from "../interfaces/responseToken";
-import {Observable, catchError, of, map, Subject, BehaviorSubject} from "rxjs";
+import {Observable, catchError, of, map, BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 import {Trainings} from "../interfaces/trainings";
 import {DataTrainings} from "../interfaces/dataTrainings";
@@ -203,5 +203,12 @@ export class AuthPassportService {
         console.log(data)
       })
 
+  }
+
+  pay(id:number):void {
+    this.http.get<ResponseToken>(`${this.url}/customer/${id}/pay`, this.options)
+      .subscribe(data => {
+        console.log(data);
+      })
   }
 }

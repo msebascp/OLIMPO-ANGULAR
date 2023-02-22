@@ -14,6 +14,7 @@ export class AdminUsersComponent {
   public customersFound$: Observable<Customer[]> = of([]);
   public searchTerm: Subject<string> = new Subject();
   public customers: Customer[] = [];
+  public allCustomers: Customer[] = [];
   public pdfFile!: File;
   public training: Trainings = {id: 0, name : 'Entrenamiento prueba', pdfTraining: '', id_customer: 1}
 
@@ -68,6 +69,7 @@ export class AdminUsersComponent {
           }
         })
       })
+      this.allCustomers = this.customers
     })
   }
 
@@ -181,25 +183,50 @@ export class AdminUsersComponent {
 
   filterPaidCustomers() {
     this.paid = !this.paid
+    this.noPaid = false
     if(this.paid) {
-      this.customers = this.customers.filter( customer => {
+      this.customers = this.allCustomers.filter( customer => {
         customer.nextPayment = new Date(customer.nextPayment)
         return customer.nextPayment.getTime() > this.today.getTime()
       })
     } else {
-      this.getClientes()
+      this.customers = this.allCustomers
     }
   }
 
   filterNoPaidCustomers() {
     this.noPaid = !this.noPaid
+    this.paid = false
     if(this.noPaid) {
-      this.customers = this.customers.filter( customer => {
+      this.customers = this.allCustomers.filter( customer => {
         customer.nextPayment = new Date(customer.nextPayment)
         return customer.nextPayment.getTime() <= this.today.getTime()
       })
     } else {
-      this.getClientes()
+      this.customers = this.allCustomers
     }
+  }
+
+  pay(id: number) {
+    Swal.fire({
+      title: "<h5 style='color:white'>" + '¿Seguro que quieres añadir un pago del cliente?' + "</h5>",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#FF0000',
+      confirmButtonText: 'Sí',
+      background: '#1F2937'
+    }).then((result:any) => {
+      if (result.isConfirmed) {
+        this.auth.pay(id)
+        Swal.fire({
+          title: "<h5 style='color:white'>" + 'Pago realiazado correctamente' + "</h5>",
+          icon: 'success',
+          background: '#1F2937'
+        })
+      }
+    })
+    this.getClientes()
   }
 }

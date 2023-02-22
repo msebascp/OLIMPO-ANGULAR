@@ -12,13 +12,19 @@
       </button>
       <ul class="text-white absolute right-0 z-50 bg-gray-500 p-2 rounded"
           [ngStyle]="{'display': showFilterOptions ? 'block' : 'none'}">
-        <li class="flex items-center gap-3 w-full">
-          <button (click)="filterPaidCustomers()">
+        <li class="flex items-center gap-3 w-full mb-2 hover:bg-red-600 rounded">
+          <button (click)="filterPaidCustomers()"
+                  class="p-2 rounded hover:bg-red-600 w-full"
+                  [ngStyle]="{'background-color': paid ? 'rgb(220 38 38)' : 'transparent'}"
+          >
             Pagado
           </button>
         </li>
-        <li class="flex items-center gap-3 w-max">
-          <button (click)="filterNoPaidCustomers()">
+        <li class="flex items-center gap-3 w-max hover:bg-red-600 rounded">
+          <button (click)="filterNoPaidCustomers()"
+                  class="p-2 rounded w-full"
+                  [ngStyle]="{'background-color': noPaid ? 'rgb(220 38 38)' : 'transparent'}"
+          >
             No pagado
           </button>
         </li>
@@ -82,16 +88,16 @@
             Entrenador no asignado
           </td>
           <td class="px-6 py-4">
-            {{ customer.dateInscription }}
+            {{ customer.dateInscription | date:'dd/M/yyyy'  }}
           </td>
           <td class="px-6 py-4">
             <div *ngFor="let payment of customer.payment ? customer.payment : []">
               <p *ngIf="payment === undefined">No hay fecha de último pago</p>
-              <p *ngIf="payment !== undefined">{{ payment.payment_date }}</p>
+              <p *ngIf="payment !== undefined">{{ payment.payment_date  | date:'dd/M/yyyy' }}</p>
             </div>
           </td>
           <td class="px-6 py-4">
-            {{ customer.nextPayment | date:'shortDate' }}
+            {{ customer.nextPayment | date:'dd/M/yyyy' }}
           </td>
           <td class="px-6 py-4">
             <input (change)="onFileChange($event, customer.id)"
@@ -104,13 +110,14 @@
             </button>
           </td>
           <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
-            <button><i class="fa fa-euro px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+            <button (click)="pay(customer.id)">
+              <i class="fa fa-euro px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
               class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip -translate-x-12 -translate-y-9">Pagar</span>
             </button>
             <button><i routerLink="/admin/editTraining/{{ customer.id }}"
                        class="fa fa-file-pdf-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
               class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-28 md:-translate-x-32 -translate-y-9">Editar
-                                  Entrnamientos</span>
+                                  Entrenamientos</span>
             </button>
             <button><i routerLink="/admin/editCustomer/{{ customer.id }}"
                        class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
