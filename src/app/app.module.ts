@@ -37,6 +37,10 @@ import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit
 
 @NgModule({
   declarations: [
+    AdminProductsComponent,
+    AdminEditProductComponent,
+    StoreComponent,
+    AdminEditAccountComponent,
     AppComponent,
     HeaderNavComponent,
     HomeComponent,
