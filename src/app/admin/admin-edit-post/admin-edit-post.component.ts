@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthPassportService } from '../database/auth-passport.service';
-import { DatabaseService } from '../database/database.service';
-import { Blog } from '../interfaces/blog';
+import { AuthPassportService } from '../../database/auth-passport.service';
+import { DatabaseService } from '../../database/database.service';
+import { Blog } from '../../interfaces/blog';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -88,16 +88,16 @@ export class AdminEditPostComponent {
             background: '#1F2937'
           })
         } else {
-        
+
         const title = this.postForm.get('title')?.value || '';
         const description = this.postForm.get('description')?.value || '';
 
 
           this.updatedPost.title = title;
-        
+
           this.updatedPost.description = description;
           this.updatedPost.photo = this.selectedPost.photo
-        
+
         this.databaseService.updatePost(this.selectedPost.id, this.updatedPost, this.image).subscribe( _ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Modificado' + "</h5>",

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { DatabaseService } from '../database/database.service';
-import { Customer } from '../interfaces/customer';
+import { DatabaseService } from '../../database/database.service';
+import { Customer } from '../../interfaces/customer';
 import { Location } from "@angular/common";
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Trainer } from '../interfaces/trainer';
+import { Trainer } from '../../interfaces/trainer';
 import Swal from 'sweetalert2';
-import {AuthPassportService} from "../database/auth-passport.service";
+import {AuthPassportService} from "../../database/auth-passport.service";
 
 
 

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AuthPassportService } from "../database/auth-passport.service";
+import { AuthPassportService } from "../../database/auth-passport.service";
 import { Router } from "@angular/router";
-import { DatabaseService } from '../database/database.service';
+import { DatabaseService } from '../../database/database.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { Blog } from '../interfaces/blog';
+import { Blog } from '../../interfaces/blog';
 
 @Component({
   selector: 'app-admin-blog',

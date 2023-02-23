@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import {AuthPassportService} from "../database/auth-passport.service";
+import {AuthPassportService} from "../../database/auth-passport.service";
 import {Router} from "@angular/router";
-import { MediaService } from '../database/media.service';
+import { MediaService } from '../../database/media.service';
 
 @Component({
   selector: 'app-admin-about',
@@ -18,7 +18,7 @@ export class AdminAboutComponent {
     private router: Router,
     private mediaService: MediaService) {
     }
- 
+
   ngOnInit(){
     this.auth.checkLoginTrainer().then((isLogin) => {
       if (isLogin) {

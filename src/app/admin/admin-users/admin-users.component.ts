@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Customer } from '../interfaces/customer';
-import { DatabaseService } from '../database/database.service';
+import { Customer } from '../../interfaces/customer';
+import { DatabaseService } from '../../database/database.service';
 import { debounceTime, distinctUntilChanged,  Observable, of, Subject, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
-import { Trainings } from '../interfaces/trainings';
-import {AuthPassportService} from "../database/auth-passport.service";
+import { Trainings } from '../../interfaces/trainings';
+import {AuthPassportService} from "../../database/auth-passport.service";
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthPassportService } from '../database/auth-passport.service';
+import { AuthPassportService } from '../../database/auth-passport.service';
 import { debounceTime, distinctUntilChanged,  Observable, of, Subject, switchMap } from 'rxjs';
-import { DatabaseService } from '../database/database.service';
-import { Trainings } from '../interfaces/trainings';
+import { DatabaseService } from '../../database/database.service';
+import { Trainings } from '../../interfaces/trainings';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 export class AdminEditTrainingsComponent {
   isLogin: boolean = false;
   public trainings: Trainings[] = [];
-  
+
   constructor (
     private route: ActivatedRoute,
     private databaseService: DatabaseService,

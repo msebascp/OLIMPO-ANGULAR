@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {AuthPassportService} from "../database/auth-passport.service";
+import {AuthPassportService} from "../../database/auth-passport.service";
 import {Router} from "@angular/router";
-import { Trainer } from '../interfaces/trainer';
+import { Trainer } from '../../interfaces/trainer';
 
 @Component({
   selector: 'app-admin-account',
