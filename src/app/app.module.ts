@@ -33,6 +33,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminEditProductComponent } from './admin/admin-edit-product/admin-edit-product.component';
 import { StoreComponent } from './general/store/store.component';
 import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit-account.component';
+import { ProductDetailComponent } from './general/product-detail/product-detail.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit
     AdminEditTrainingsComponent,
     CustomerTrainerComponent,
     RegisterTrainerComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

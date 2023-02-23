@@ -11,6 +11,8 @@ import { Trainings } from '../interfaces/trainings';
 import { DataTrainings } from '../interfaces/dataTrainings';
 import { Blog } from '../interfaces/blog';
 import { DataBlogs } from '../interfaces/dataBlogs';
+import {Product} from "../interfaces/product";
+import {ProductsGetAll} from "../interfaces/productsGetAll";
 
 
 @Injectable({
@@ -144,7 +146,7 @@ export class DatabaseService {
     formData.append('pdfTraining', pdf, pdf.name);
     formData.append('name', training.name);
     formData.append('id_customer', training.id_customer.toString());
-  
+
     let url = this.API_URL + '/savePdf';
     return this.http.post<Trainings>(url, formData).pipe(
       map((data: Trainings) => {
@@ -185,13 +187,11 @@ export class DatabaseService {
       }),
     )
   }
-  
 
   public downloadTraining(fileName: string): Observable<any> {
     let url = this.API_URL + `/customers/download/pdf/${fileName}`;
     return this.http.get(url, { responseType: 'blob' });
   }
-
 
   public createPost(image: File, post: Blog): Observable<Blog> {
     let url = this.API_URL + `/blog/createPost`;
@@ -211,11 +211,42 @@ export class DatabaseService {
     );
   }
 
+  public createProduct(image: File, product: Product): Observable<Product> {
+    let url = this.API_URL + `/createProduct`;
+    let formData = new FormData();
+    formData.append('name', product.name);
+    formData.append('description', product.description);
+    formData.append('photo', image, image.name);
+
+    return this.http.post<Product>(url, formData).pipe(
+      map((data: Product) => {
+        return data
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
+  }
+
   public getAllPosts(): Observable<Blog[]> {
     let url = this.API_URL + '/blog';
     return this.http.get<DataBlogs>(url).pipe(
       map((data: DataBlogs) => {
-        
+
+        return data.data
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    )
+  }
+
+  public getAllProducts(): Observable<Product[]> {
+    let url = this.API_URL + '/products';
+    return this.http.get<ProductsGetAll>(url).pipe(
+      map((data: ProductsGetAll) => {
         return data.data
       }),
       catchError(e => {
@@ -241,6 +272,22 @@ export class DatabaseService {
     );
   }
 
+  public getProductById(id: number): Observable<Product> {
+    let url = this.API_URL + `/product`;
+    if (id !== undefined) {
+      url += `/${id}`
+    }
+    return this.http.get<ProductsGetAll>(url).pipe(
+      map((data: ProductsGetAll) => {
+        return data.data[0];
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
+  }
+
   public updatePost(id: number, post: Blog, image: File): Observable<Blog> {
     const formData = new FormData();
     formData.append('title', post.title);
@@ -251,12 +298,12 @@ export class DatabaseService {
       formData.append('photo', image, image.name);
 
     }
-  
+
     let url = this.API_URL + `/blog`;
     if (id !== undefined) {
       url += `/${id}`;
     }
-  
+
     return this.http.post<Blog>(url, formData).pipe(
       map((data: Blog) => {
         return data;
@@ -267,9 +314,6 @@ export class DatabaseService {
       }),
     );
   }
-  
-  
-  
 
   public deletePost(id: number): Observable<Blog> {
     let url = this.API_URL + `/blog`;
@@ -277,6 +321,19 @@ export class DatabaseService {
       url += `/deletePost/${id}`
     }
     return this.http.delete<Blog>(url).pipe(
+      catchError(e => {
+        console.error(e);
+        return [];
+      })
+    );
+  }
+
+  public deleteProduct(id: number): Observable<Product> {
+    let url = this.API_URL;
+    if (id !== undefined) {
+      url += `/deleteProduct/${id}`
+    }
+    return this.http.delete<Product>(url).pipe(
       catchError(e => {
         console.error(e);
         return [];

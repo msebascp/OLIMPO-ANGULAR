@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthPassportService } from "../../database/auth-passport.service";
 import { Router } from "@angular/router";
 import { DatabaseService } from '../../database/database.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Blog } from '../../interfaces/blog';
 
