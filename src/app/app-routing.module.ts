@@ -20,6 +20,9 @@ import { BlogDetailsComponent } from './general/blog-details/blog-details.compon
 import { AdminEditTrainingsComponent } from './admin/admin-edit-trainings/admin-edit-trainings.component';
 import { CustomerTrainerComponent } from './customer/customer-trainer/customer-trainer.component';
 import {RegisterTrainerComponent} from "./login-register/register-trainer/register-trainer.component";
+import {AdminProductsComponent} from "./admin/admin-products/admin-products.component";
+import {AdminEditProductComponent} from "./admin/admin-edit-product/admin-edit-product.component";
+import {StoreComponent} from "./general/store/store.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -35,6 +38,7 @@ const routes: Routes = [
   {path: 'customer/trainer', component: CustomerTrainerComponent},
   {path: 'customer/account', component: CustomerAccountComponent},
 
+  //Admin
   {path: 'admin/account', component: AdminAccountComponent},
   {path: 'admin/users', component: AdminUsersComponent},
   {path: 'admin/editBlog', component: AdminBlogComponent},
@@ -45,6 +49,11 @@ const routes: Routes = [
   {path: 'admin/login', component: LoginTrainerComponent},
   {path: 'admin/register', component: RegisterComponent},
   {path: 'admin/registerTrainer', component: RegisterTrainerComponent},
+
+  //Products
+  {path: 'admin/products', component: AdminProductsComponent},
+  {path: 'admin/products', component: AdminEditProductComponent},
+  {path: 'store', component: StoreComponent},
 
   {path: '**', redirectTo: 'home', pathMatch:'full'},
 ];
