@@ -1,24 +1,25 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ResponseToken} from "../interfaces/responseToken";
-import {Observable, catchError, of, map, Subject, BehaviorSubject} from "rxjs";
+import {Observable, catchError, of, map, BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 import {Trainings} from "../interfaces/trainings";
 import {DataTrainings} from "../interfaces/dataTrainings";
 import {RegisterData} from "../interfaces/registerData";
-import Swal from "sweetalert2";
 import { DataTrainer } from '../interfaces/dataTrainer';
 import { Trainer } from '../interfaces/trainer';
 import {RegisterTrainerData} from "../interfaces/registerTrainerData";
-import {RegisterTrainerComponent} from "../login-register/register-trainer/register-trainer.component";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthPassportService {
+  /**InfoAuth contiene la información sobre si el usuario está logueado o no, y si es un entrenador o no
+   * Se ha usado BehaviorSubject por lo mismo que usamos Subject con el plus de que podemos darle
+   * un valor por defecto*/
   private infoAuth = new BehaviorSubject<{ isLogin:boolean, isTrainer:boolean }>({isLogin: false, isTrainer: false});
   private url: string = 'http://localhost:8000/api';
-  public options = {
+  private options = {
     headers: new HttpHeaders({
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -33,7 +34,7 @@ export class AuthPassportService {
   }
 
   login(email: string, password: string): Observable<ResponseToken> {
-    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    this.loadToken()
     console.log('El login de clientes se ejecuta');
     return this.http.post<ResponseToken>(`${this.url}/login`, {
       grant_type: 'password',
@@ -49,7 +50,7 @@ export class AuthPassportService {
   }
 
   loginTrainer(email: string, password: string): Observable<ResponseToken> {
-    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    this.loadToken()
     console.log('El login de admins se ejecuta');
     return this.http.post<ResponseToken>(`${this.url}/trainer/login`, {
       grant_type: 'password',
@@ -65,8 +66,8 @@ export class AuthPassportService {
   }
 
   checkLogin(): Promise<boolean> {
-    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
-    console.log('check login cliente');
+    this.loadToken()
+    console.log('Se ejecuta el check login de cliente');
     return new Promise((resolve, reject) => {
       this.http.get<ResponseToken>(`${this.url}/isLogin`, this.options)
         .pipe(catchError(error => {
@@ -75,7 +76,11 @@ export class AuthPassportService {
         }))
         .subscribe(
           data => {
-            console.log(data);
+            console.log('Esta es la response del check login de cliente: ' + data);
+            /** Si el cliente está logueado:
+             * 1: Si accede a una ruta accesible para clientes sigue su curso
+             * 2: Si está en un login, se redirige al perfil del cliente
+             * Si no está logueado e intenta acceder a una ruta de clientes se le redirige al login*/
             if (data.data.isLogin) {
               if (this.router.url == '/login' || this.router.url == '/admin/login') {
                 this.router.navigate(['/customer/account']);
@@ -94,8 +99,8 @@ export class AuthPassportService {
   }
 
   checkLoginTrainer(): Promise<boolean> {
-    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
-    console.log('check login admin');
+    this.loadToken()
+    console.log('Se ejecuta el check login de admin')
     return new Promise((resolve, reject) => {
       this.http.get<ResponseToken>(`${this.url}/trainer/isLogin`, this.options)
         .pipe(catchError(error => {
@@ -104,7 +109,11 @@ export class AuthPassportService {
         }))
         .subscribe(
           data => {
-            console.log(data);
+            console.log('Esta es la response del check login de entrenador: ' + data);
+            /** Si el entrenador está logueado:
+             * 1: Si accede a una ruta accesible para entrenadores sigue su curso
+             * 2: Si está en un login, se redirige al perfil del entrenador
+             * Si no está logueado e intenta acceder a una ruta de entrenador se le redirige al login*/
             if (data.data.isLogin) {
               if (this.router.url == '/admin/login' || this.router.url == '/login') {
                 this.router.navigate(['/admin/account']);
@@ -123,7 +132,7 @@ export class AuthPassportService {
   }
 
   logout(): void {
-    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    this.loadToken()
     console.log('El logout de clientes se ejecuta');
     this.http.get<ResponseToken>(`${this.url}/logout`, this.options)
       .subscribe(data => {
@@ -143,8 +152,8 @@ export class AuthPassportService {
   }
 
   getTrainerByCustomer(): Observable<Trainer> {
-    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
-    console.log('El getTrainer de clientes se ejecuta');
+    this.loadToken()
+    console.log('El get Trainer by customer se ejecuta');
     return this.http.get<DataTrainer>(`${this.url}/customer/trainer`,this.options)
     .pipe(
       map((data: DataTrainer) => {
@@ -158,8 +167,8 @@ export class AuthPassportService {
   }
 
   getAllTrainingsByCustomer(): Observable<Trainings[]> {
-    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
-    console.log('El getTrainings de clientes se ejecuta');
+    this.loadToken()
+    console.log('El get all trainers se ejecuta');
     return this.http.get<DataTrainings>(`${this.url}/customer/trainings`,this.options)
     .pipe(
       map((data: DataTrainings) => {
@@ -212,5 +221,9 @@ export class AuthPassportService {
         return [];
       }),
     )
+  }
+
+  loadToken() {
+    this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
   }
 }
