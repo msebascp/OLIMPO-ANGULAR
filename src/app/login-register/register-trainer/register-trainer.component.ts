@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {Trainer} from "../interfaces/trainer";
+import {Trainer} from "../../interfaces/trainer";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthPassportService} from "../database/auth-passport.service";
-import {DatabaseService} from "../database/database.service";
-import {RegisterData} from "../interfaces/registerData";
+import {AuthPassportService} from "../../database/auth-passport.service";
+import {DatabaseService} from "../../database/database.service";
+import {RegisterData} from "../../interfaces/registerData";
 import Swal from "sweetalert2";
-import {RegisterTrainerData} from "../interfaces/registerTrainerData";
+import {RegisterTrainerData} from "../../interfaces/registerTrainerData";
 import {data} from "autoprefixer";
 
 @Component({

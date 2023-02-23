@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import { DataTrainer } from '../interfaces/dataTrainer';
 import { Trainer } from '../interfaces/trainer';
 import {RegisterTrainerData} from "../interfaces/registerTrainerData";
-import {RegisterTrainerComponent} from "../register-trainer/register-trainer.component";
+import {RegisterTrainerComponent} from "../login-register/register-trainer/register-trainer.component";
 
 @Injectable({
   providedIn: 'root'

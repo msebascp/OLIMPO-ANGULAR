@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {AuthPassportService} from "../database/auth-passport.service";
+import {AuthPassportService} from "../../database/auth-passport.service";
 
 @Component({
   selector: 'header-nav',

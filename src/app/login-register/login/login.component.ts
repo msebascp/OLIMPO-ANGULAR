@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {AuthPassportService} from "../database/auth-passport.service";
+import {AuthPassportService} from "../../database/auth-passport.service";
 import {Router } from "@angular/router";
 import Swal from "sweetalert2";
-import {ResponseToken} from "../interfaces/responseToken";
+import {ResponseToken} from "../../interfaces/responseToken";
 
 
 @Component({

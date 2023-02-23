@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {AuthPassportService} from "../database/auth-passport.service";
+import {AuthPassportService} from "../../database/auth-passport.service";
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
-import {Trainer} from "../interfaces/trainer";
-import {DatabaseService} from "../database/database.service";
-import {RegisterData} from "../interfaces/registerData";
+import {Trainer} from "../../interfaces/trainer";
+import {DatabaseService} from "../../database/database.service";
+import {RegisterData} from "../../interfaces/registerData";
 import Swal from "sweetalert2";
 
 @Component({

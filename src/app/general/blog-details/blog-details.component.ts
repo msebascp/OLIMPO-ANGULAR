@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DatabaseService } from '../database/database.service';
+import { DatabaseService } from '../../database/database.service';
 import { Location } from "@angular/common";
-import { Blog } from '../interfaces/blog';
+import { Blog } from '../../interfaces/blog';
 
 @Component({
   selector: 'app-blog-details',

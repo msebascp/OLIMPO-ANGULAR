@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DatabaseService } from '../database/database.service';
-import { Blog } from '../interfaces/blog';
+import { DatabaseService } from '../../database/database.service';
+import { Blog } from '../../interfaces/blog';
 
 @Component({
   selector: 'app-blog',
@@ -10,7 +10,7 @@ import { Blog } from '../interfaces/blog';
 export class BlogComponent {
 
   public posts: Blog[] = []
-  
+
   constructor (
     private databaseService: DatabaseService,
   ) { }
