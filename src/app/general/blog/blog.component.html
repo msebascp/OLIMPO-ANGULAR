@@ -10,13 +10,12 @@
     <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 w-full px-5 md:px-14 gap-5">
         <li *ngFor="let post of posts">
             <a routerLink="/blog/details/{{ post.id }}">
-                <div class="bg-gray-600 hover:ease-in duration-300 hover:scale-105 hover:contrast-125  bg-no-repeat w-full bg-center bg-cover h-80 md:h-96 mb-7 rounded">
-                    <p class="font-extrabold text-lg md:text-xl lg:text-2xl text-white  rounded-t w-full py-6 text-center mt-6">{{ post.title }}</p>
-                    <div class="m-6 h-40 md:h-44 lg:h-52">
-                        <img class="w-full h-full  rounded shadow" [src]="'http://localhost:8000' + post.photo">
+                    <div class=" w-full bg-center h-52 md:h-72 mb-24 rounded hover:ease-in duration-300 hover:scale-105 bg-gray-100">
+                        <p class="font-extrabold text-2xl text-black border-white border-t-4 border-r-4 border-l-4 p-3 text-center rounded-t ">{{ post.title }}</p>
+                        <div  class="  hover:contrast-125 flex justify-center items-center bg-no-repeat w-full bg-center bg-cover h-full  rounded" style="background-image: url('http://localhost:8000{{post.photo}}');">
+                        </div>
+                        <p routerLink="/blog/details/{{post.id}}" class="bg-gray-100 align-bottom w-full h-10 items-end rounded-b border-r-4 border-l-4 text-black border-white p-3 border-b-4 font-semibold">Ver más...</p>
                     </div>
-                    <div class="align-bottom w-full h-10 items-end rounded-b text-white p-3"><a routerLink="/blog/details/{{post.id}}">Ver más...</a></div>
-                </div>
             </a>
         </li>
     </ul>
