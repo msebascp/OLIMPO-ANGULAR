@@ -20,6 +20,7 @@ export class AdminEditPostComponent {
 
   postForm!: FormGroup
   showInvalidSubmit: boolean = false
+  public selectedImage: string = ''
 
   constructor (
     private route: ActivatedRoute,
@@ -61,7 +62,14 @@ export class AdminEditPostComponent {
   }
 
   public onFileChange(event: any): void {
-    this.image = event.target.files[0];
+    if (event.target.files && event.target.files.length) {
+      this.image = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(this.image);
+      reader.onload = () => {
+        this.selectedImage = reader.result as string;
+      };
+  }
   }
 
 

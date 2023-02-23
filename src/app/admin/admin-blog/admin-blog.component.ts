@@ -17,6 +17,7 @@ export class AdminBlogComponent {
   public newPost: Blog = {id: 0, title: '', description: '', photo: '' };
   public posts: Blog[] = []
   public image!: File;
+  public selectedImage: string = '';
 
   isLogin: boolean = false;
   constructor(
@@ -46,7 +47,14 @@ export class AdminBlogComponent {
   }
 
   public onFileChange(event: any) {
-    this.image = event.target.files[0];
+    if (event.target.files && event.target.files.length) {
+      this.image = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(this.image);
+      reader.onload = () => {
+        this.selectedImage = reader.result as string;
+      };
+  }
   }
 
   public onSubmit(): void {

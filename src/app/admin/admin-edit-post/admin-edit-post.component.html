@@ -28,7 +28,8 @@
                 id="photo" type="file">
         </div>
         <label for="photo" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Imagen</label>
-        <img class="h-96 md:h-[600px] rounded-xl" id="photo" [src]="'http://localhost:8000' + selectedPost.photo">
+        <img *ngIf="selectedImage === ''" class="h-96 md:h-[600px] rounded-xl" [src]="'http://localhost:8000' + selectedPost.photo">
+        <img *ngIf="selectedImage" [src]="selectedImage" class="h-96 md:h-[600px] rounded-xl" >
     </div>
     <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1">
         Rellena correctamente el formulario (*)

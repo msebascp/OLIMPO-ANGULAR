@@ -5,21 +5,17 @@
         Volver
     </span>
 </button>
-<div class="mb-4 md:mb-0 w-full mx-auto relative">
-    <div class="px-4 lg:px-0">
-        <h2 class="text-4xl text-white text-center font-semibold  leading-tight">
+<div class="mb-4 md:mb-0 w-full relative">
+    <div class="w-full px-4 lg:px-0">
+        <h2 class="text-4xl text-white text-center font-semibold  leading-tight mb-5">
             {{selectedPost.title}}
         </h2>
     </div>
-    <div class="m-10">
+    <div class="w-full  flex flex-col xl:flex-row justify-between items-center align-middle">
         <img [src]="'http://localhost:8000' + selectedPost.photo"
-        class="w-full object-cover rounded h-96 shadow" />
-    </div>
-
-</div>
-
-<div class="m-10 items-center text-center">
-    <div class="px-4 lg:px-0 mt-12  text-lg leading-relaxed w-full text-white">
-        <p class="pb-6 text-center">{{selectedPost.description}}</p>
+        class=" h-96 md:h-[460px] rounded-lg shadow m-7" />
+        <div class="px-4 lg:px-0 mt-12 m-5 text-lg leading-relaxed  text-white">
+            <p class="pb-6 text-center">{{selectedPost.description}}</p>
+        </div>
     </div>
 </div>
