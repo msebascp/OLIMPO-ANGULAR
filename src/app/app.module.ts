@@ -19,15 +19,15 @@ import { AdminAboutComponent } from './admin/admin-about/admin-about.component';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 import {AdminEditCustomersComponent} from "./admin/admin-edit-customers/admin-edit-customers.component";
-import { CustomerAccountComponent } from './customer-account/customer-account.component';
+import { CustomerAccountComponent } from './customer/customer-account/customer-account.component';
 import { LoadingComponent } from './loading/loading.component';
 import { LoginTrainerComponent } from './login-trainer/login-trainer.component';
-import { CustomerTrainingsComponent } from './customer-trainings/customer-trainings.component';
+import { CustomerTrainingsComponent } from './customer/customer-trainings/customer-trainings.component';
 import { AdminEditPostComponent } from './admin/admin-edit-post/admin-edit-post.component';
 import { NavbarCustomerComponent } from './navbar-customer/navbar-customer.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { AdminEditTrainingsComponent } from './admin/admin-edit-trainings/admin-edit-trainings.component';
-import { CustomerTrainerComponent } from './customer-trainer/customer-trainer.component';
+import { CustomerTrainerComponent } from './customer/customer-trainer/customer-trainer.component';
 import { RegisterTrainerComponent } from './register-trainer/register-trainer.component';
 
 @NgModule({

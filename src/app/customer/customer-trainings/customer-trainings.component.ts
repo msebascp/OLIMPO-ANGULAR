@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DatabaseService } from '../database/database.service';
-import { Trainings } from '../interfaces/trainings';
-import {AuthPassportService} from "../database/auth-passport.service";
+import { DatabaseService } from '../../database/database.service';
+import { Trainings } from '../../interfaces/trainings';
+import {AuthPassportService} from "../../database/auth-passport.service";
 
 @Component({
   selector: 'app-customer-trainings',

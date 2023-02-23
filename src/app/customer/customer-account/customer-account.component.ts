@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthPassportService} from "../database/auth-passport.service";
+import {AuthPassportService} from "../../database/auth-passport.service";
 import {Router} from "@angular/router";
 
 @Component({

@@ -12,13 +12,13 @@ import { AdminAccountComponent } from './admin/admin-account/admin-account.compo
 import { AdminBlogComponent } from './admin/admin-blog/admin-blog.component';
 import { AdminAboutComponent } from './admin/admin-about/admin-about.component';
 import { AdminEditCustomersComponent } from './admin/admin-edit-customers/admin-edit-customers.component';
-import {CustomerAccountComponent} from "./customer-account/customer-account.component";
+import {CustomerAccountComponent} from "./customer/customer-account/customer-account.component";
 import {LoginTrainerComponent} from "./login-trainer/login-trainer.component";
-import { CustomerTrainingsComponent } from './customer-trainings/customer-trainings.component';
+import { CustomerTrainingsComponent } from './customer/customer-trainings/customer-trainings.component';
 import { AdminEditPostComponent } from './admin/admin-edit-post/admin-edit-post.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { AdminEditTrainingsComponent } from './admin/admin-edit-trainings/admin-edit-trainings.component';
-import { CustomerTrainerComponent } from './customer-trainer/customer-trainer.component';
+import { CustomerTrainerComponent } from './customer/customer-trainer/customer-trainer.component';
 import {RegisterTrainerComponent} from "./register-trainer/register-trainer.component";
 
 const routes: Routes = [
