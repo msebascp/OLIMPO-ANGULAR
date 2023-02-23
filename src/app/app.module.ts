@@ -29,6 +29,7 @@ import { BlogDetailsComponent } from './general/blog-details/blog-details.compon
 import { AdminEditTrainingsComponent } from './admin/admin-edit-trainings/admin-edit-trainings.component';
 import { CustomerTrainerComponent } from './customer/customer-trainer/customer-trainer.component';
 import { RegisterTrainerComponent } from './login-register/register-trainer/register-trainer.component';
+import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit-account.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { RegisterTrainerComponent } from './login-register/register-trainer/regi
     AdminEditTrainingsComponent,
     CustomerTrainerComponent,
     RegisterTrainerComponent,
+    AdminEditAccountComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { Customer } from '../interfaces/customer';
 import { Trainer } from '../interfaces/trainer';
 import { DataCustomers } from '../interfaces/dataCustomers';
-import { DataTrainers } from '../interfaces/dataTrainers';
+import { DataTrainers } from '../interfaces/DataTrainers';
 import { Trainings } from '../interfaces/trainings';
 import { DataTrainings } from '../interfaces/dataTrainings';
 import { Blog } from '../interfaces/blog';
@@ -281,6 +281,27 @@ export class DatabaseService {
         console.error(e);
         return [];
       })
+    );
+  }
+
+  public updatedTrainer( trainer: Trainer): Observable<Trainer> {
+    let url = this.API_URL + `/trainer`;
+
+    const formData = new FormData();
+    formData.append('name', trainer.name);
+    formData.append('surname', trainer.surname);
+    formData.append('email', trainer.email);
+    formData.append('specialty', trainer.specialty);
+
+
+    return this.http.post<DataTrainer>(url, formData).pipe(
+      map((data: DataTrainer) => {
+        return data.data;
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
     );
   }
 
