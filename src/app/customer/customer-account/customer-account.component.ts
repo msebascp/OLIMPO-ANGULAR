@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AuthPassportService} from "../../database/auth-passport.service";
 import {Router} from "@angular/router";
+import { Customer } from 'src/app/interfaces/customer';
 
 @Component({
   selector: 'app-customer-account',
@@ -9,6 +10,7 @@ import {Router} from "@angular/router";
 })
 export class CustomerAccountComponent {
   isLogin: boolean = false;
+  customer: Customer | undefined;
 
   constructor(
     private auth: AuthPassportService,
@@ -19,7 +21,13 @@ export class CustomerAccountComponent {
     this.auth.checkLogin().then((isLogin) => {
       if (isLogin) {
         this.isLogin = true;
+        this.dataCustomer();
       }
     });
   }
+  public dataCustomer() {
+    this.auth.dataCustomer().subscribe(customer => {
+      this.customer = customer;
+    });
+}
 }

@@ -34,6 +34,7 @@ import { AdminEditProductComponent } from './admin/admin-edit-product/admin-edit
 import { StoreComponent } from './general/store/store.component';
 import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit-account.component';
 import { ProductDetailComponent } from './general/product-detail/product-detail.component';
+import { CustomerEditAccountComponent } from './customer/customer-edit-account/customer-edit-account.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { ProductDetailComponent } from './general/product-detail/product-detail.
     CustomerTrainerComponent,
     RegisterTrainerComponent,
     ProductDetailComponent,
+    CustomerEditAccountComponent,
   ],
   imports: [
     BrowserModule,

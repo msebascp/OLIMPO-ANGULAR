@@ -17,7 +17,7 @@
         placeholder="Escribe la descripción aquí..." [(ngModel)]="selectedPost.description" formControlName="description"></textarea>
         <h3 *ngIf="form['description'].touched && form['description'].hasError('required')"
         class="text-red-600 mt-1">
-            La descripción es obligatorio
+            La descripción es obligatoria
         </h3>
     </div>
     <div class="mb-6 flex flex-col items-center align-middle">
