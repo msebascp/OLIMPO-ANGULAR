@@ -59,6 +59,7 @@ export class ProductService {
     let formData = new FormData();
     formData.append('name', product.name);
     formData.append('description', product.description);
+    formData.append('price', product.price);
     formData.append('photo', image, image.name);
 
     return this.http.post<Product>(url, formData).pipe(

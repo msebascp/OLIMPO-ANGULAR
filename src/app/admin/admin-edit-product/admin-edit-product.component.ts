@@ -18,7 +18,7 @@ export class AdminEditProductComponent {
   isLogin: boolean = false;
   public selectedProduct!: Product;
   public image!: File;
-  public updatedProduct: Product = {id: 0, name: '', description: '', photo: ''};
+  public updatedProduct: Product = {id: 0, name: '', price: '0', description: '', photo: ''};
 
   productForm!: FormGroup
   showInvalidSubmit: boolean = false
@@ -36,6 +36,7 @@ export class AdminEditProductComponent {
       {
         name: ["", [Validators.required]],
         description: ["", [Validators.required]],
+        price: ["", [Validators.required]],
       }
     )
   }
@@ -102,9 +103,11 @@ export class AdminEditProductComponent {
 
           let name = this.productForm.get('name')?.value || '';
           let description = this.productForm.get('description')?.value || '';
+          let price = this.productForm.get('price')?.value || '';
 
           this.updatedProduct.name = name;
           this.updatedProduct.description = description;
+          this.updatedProduct.price = price;
           this.updatedProduct.photo = this.selectedProduct.photo
 
           this.productService.updatePost(this.selectedProduct.id, this.updatedProduct, this.image).subscribe(_ => {

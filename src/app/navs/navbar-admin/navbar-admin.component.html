@@ -12,5 +12,12 @@
             <li class="uppercase "><a routerLink="/admin/aboutSettings" *ngIf="router.url === '/admin/aboutSettings'" class="text-black md:mx-5 text-center">Sobre el Gimnasio</a></li>
             <li class="uppercase "><a routerLink="/admin/aboutSettings" *ngIf="router.url !== '/admin/aboutSettings'" class="hover:text-black md:mx-5 text-center">Sobre el Gimnasio</a></li>
         </div>
+      <li>
+        <a routerLink="/admin/products"
+           class="hover:text-black flex md:mx-5"
+           [ngClass]="{'text-white underline' : router.url == '/admin/products'}">
+          PRODUCTOS
+        </a>
+      </li>
     </ul>
 </nav>

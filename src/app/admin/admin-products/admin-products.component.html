@@ -24,6 +24,15 @@
       </h3>
     </div>
     <div class="mb-6">
+      <label for="price" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Precio</label>
+      <input type="text" id="price"
+             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+             formControlName="price">
+      <h3 *ngIf="form['price'].touched && form['price'].hasError('required')" class="text-red-600 mt-1">
+        El precio es obligatorio
+      </h3>
+    </div>
+    <div class="mb-6">
       <label class="block mb-2 text-xl font-medium text-gray-900 dark:text-white" for="photo">Subir Foto</label>
       <input (change)="onFileChange($event)"
              class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"

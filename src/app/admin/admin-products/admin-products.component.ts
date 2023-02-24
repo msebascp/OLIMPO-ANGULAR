@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Blog} from "../../interfaces/blog";
 import {AuthPassportService} from "../../database/auth-passport.service";
 import {Router} from "@angular/router";
-import {DatabaseService} from "../../database/database.service";
 import Swal from "sweetalert2";
 import {Product} from "../../interfaces/product";
 import {ProductService} from "../../database/product.service";
@@ -16,7 +14,7 @@ import {ProductService} from "../../database/product.service";
 export class AdminProductsComponent {
   productForm!: FormGroup
   showInvalidSubmit: boolean = false
-  public newProduct: Product = {id: 0, name: '', description: '', photo: '' };
+  public newProduct: Product = {id: 0, name: '', description: '', price: '0', photo: '' };
   public products: Product[] = []
   public image!: File;
   public selectedImage: string = ''
@@ -40,6 +38,7 @@ export class AdminProductsComponent {
       {
         name: ["", [Validators.required]],
         description: ["", [Validators.required]],
+        price: ["", [Validators.required]],
       }
     )
   }
@@ -84,9 +83,11 @@ export class AdminProductsComponent {
         }
         let name = this.productForm.get('name')?.value || '';
         let description = this.productForm.get('description')?.value || '';
+        let price = this.productForm.get('price')?.value || '';
 
         this.newProduct.name = name;
         this.newProduct.description = description;
+        this.newProduct.price = price
 
         this.productService.createProduct(this.image, this.newProduct)
           .subscribe(_ => {

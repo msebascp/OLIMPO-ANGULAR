@@ -26,6 +26,13 @@
           <li><a routerLink="/blog" *ngIf="router.url !== '/blog'" class="hover:text-red-800 flex md:mx-5">NUESTRO
               BLOG</a></li>
           <li>
+            <a routerLink="/store"
+               class="hover:text-red-800 flex md:mx-5"
+               [ngClass]="{'text-red-800' : router.url == '/store'}">
+              TIENDA
+            </a>
+          </li>
+          <li>
             <div id="dropdown" class="z-10 hidden divide-y  rounded shadow w-44">
               <ul
                 class="flex flex-col md:flex md:flex-row items-center align-middle px-4 mx-auto font-semibold sm:text-sm font-heading  text-white">
@@ -46,11 +53,19 @@
                     BLOG</a></li>
                 <li><a routerLink="/blog" *ngIf="router.url !== '/blog'" class="hover:text-red-800 flex md:mx-5">NUESTRO
                     BLOG</a></li>
+                <li>
+                  <a routerLink="/store"
+                     class="hover:text-red-800 flex md:mx-5"
+                     [ngClass]="{'text-red-800' : router.url == '/store'}">
+                    TIENDA
+                  </a>
+                </li>
               </ul>
             </div>
           </li>
         </ul>
       </div>
+      <!--Botón logo usuario que te lleva al login o que muestra opciones de mi cuenta y cerrar sesión-->
       <div class="flex space-x-8 items-center text-2xl text-white left-0 flex-shrink-0 w-max">
         <div class="relative" *ngIf="infoAuth.isLogin && !infoAuth.isTrainer">
           <button class="lg:mr-5 items-center hover:text-red-800 flex" (blur)="hide()"
