@@ -23,14 +23,13 @@ export class CustomerTrainerComponent {
     this.auth.checkLogin().then((isLogin) => {
       if (isLogin) {
         this.isLogin = true;
+        this.getTrainerByCustomer()
       }
     });
-    this.getTrainerByCustomer()
   }
 
   public getTrainerByCustomer() {
     this.auth.getTrainerByCustomer().subscribe(trainer => {
-      console.log(trainer)
       this.trainer = trainer;
     });
   }
