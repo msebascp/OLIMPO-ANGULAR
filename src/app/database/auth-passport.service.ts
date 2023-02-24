@@ -223,6 +223,33 @@ export class AuthPassportService {
     )
   }
 
+  
+  public updatedTrainer( trainer: Trainer): Observable<Trainer> {
+    this.loadToken()
+    let url = this.url + `/trainer/editAccount`;
+
+
+    const formData: Trainer = {
+      id: trainer.id,
+      name: trainer.name,
+      surname: trainer.surname,
+      email: trainer.email,
+      specialty: trainer.specialty,
+      customer: trainer.customer,
+      photo: trainer.photo
+    };
+
+    return this.http.post<Trainer>(url, formData, this.options).pipe(
+      map((data: Trainer) => {
+        return data;
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
+  }
+
   loadToken() {
     this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
   }
