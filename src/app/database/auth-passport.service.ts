@@ -224,6 +224,6 @@ export class AuthPassportService {
   }
 
   loadToken() {
-    this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
   }
 }

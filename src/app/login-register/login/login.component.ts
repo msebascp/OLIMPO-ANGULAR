@@ -3,6 +3,7 @@ import {AuthPassportService} from "../../database/auth-passport.service";
 import {Router } from "@angular/router";
 import Swal from "sweetalert2";
 import {ResponseToken} from "../../interfaces/responseToken";
+import {FormGroup, Validators, FormBuilder} from "@angular/forms";
 
 
 @Component({
@@ -13,16 +14,23 @@ import {ResponseToken} from "../../interfaces/responseToken";
 export class LoginComponent {
   @Output() variableEnviada = new EventEmitter<boolean>();
 
-  email: string = '';
-  password: string = '';
-  token: string = '';
-  response!: ResponseToken;
   isLogin: boolean = true;
+  showInvalidSubmit: boolean = false
+  token: string = '';
+  loginForm!: FormGroup
+  response!: ResponseToken;
 
   constructor(
     private auth: AuthPassportService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {
+    this.loginForm = this.formBuilder.group(
+      {
+        email: ["", [Validators.required, Validators.email]],
+        password: ["", [Validators.required]]
+      }
+    )
   }
 
   ngOnInit(){
@@ -43,8 +51,18 @@ export class LoginComponent {
     });
   }
 
+  get form() {
+    return this.loginForm.controls
+  }
+
   login() {
-    this.auth.login(this.email, this.password).subscribe(
+    if (this.loginForm.invalid) {
+      this.showInvalidSubmit = true
+      return;
+    }
+    let email = this.loginForm.get('email')?.value
+    let password = this.loginForm.get('password')?.value
+    this.auth.login(email, password).subscribe(
       data  => {
         console.log(data);
         if (data.success) {
@@ -59,6 +77,4 @@ export class LoginComponent {
       }
     );
   }
-
-
 }
