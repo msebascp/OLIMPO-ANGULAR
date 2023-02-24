@@ -14,11 +14,11 @@ import {FormGroup, Validators, FormBuilder} from "@angular/forms";
 export class LoginComponent {
   @Output() variableEnviada = new EventEmitter<boolean>();
 
-  isLogin: boolean = true;
+  isLogin: boolean = true
   showInvalidSubmit: boolean = false
-  token: string = '';
+  token: string = ''
   loginForm!: FormGroup
-  response!: ResponseToken;
+  response!: ResponseToken
 
   constructor(
     private auth: AuthPassportService,

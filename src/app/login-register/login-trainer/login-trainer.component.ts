@@ -3,6 +3,7 @@ import {ResponseToken} from "../../interfaces/responseToken";
 import {AuthPassportService} from "../../database/auth-passport.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login-trainer',
@@ -10,15 +11,24 @@ import Swal from "sweetalert2";
   styleUrls: ['./login-trainer.component.scss']
 })
 export class LoginTrainerComponent {
-  email: string = '';
-  password: string = '';
-  token: string = '';
-  response!: ResponseToken;
-  isLogin:boolean = true;
+
+  token: string = ''
+  isLogin:boolean = true
+  showInvalidSubmit: boolean = false
+  response!: ResponseToken
+  loginTrainerForm!: FormGroup
+
   constructor(
     private auth: AuthPassportService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {
+    this.loginTrainerForm = this.formBuilder.group(
+      {
+        email: ["", [Validators.required, Validators.email]],
+        password: ["", [Validators.required]]
+      }
+    )
   }
 
   ngOnInit(){
@@ -33,8 +43,18 @@ export class LoginTrainerComponent {
     });
   }
 
+  get form() {
+    return this.loginTrainerForm.controls
+  }
+
   login() {
-    this.auth.loginTrainer(this.email, this.password).subscribe(
+    if (this.loginTrainerForm.invalid) {
+      this.showInvalidSubmit = true
+      return;
+    }
+    let email = this.loginTrainerForm.get('email')?.value
+    let password = this.loginTrainerForm.get('password')?.value
+    this.auth.loginTrainer(email, password).subscribe(
       data  => {
         console.log(data);
         if (data.success) {
