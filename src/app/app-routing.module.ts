@@ -24,6 +24,7 @@ import {AdminProductsComponent} from "./admin/admin-products/admin-products.comp
 import {AdminEditProductComponent} from "./admin/admin-edit-product/admin-edit-product.component";
 import {StoreComponent} from "./general/store/store.component";
 import {ProductDetailComponent} from "./general/product-detail/product-detail.component";
+import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit-account.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -41,6 +42,7 @@ const routes: Routes = [
 
   //Admin
   {path: 'admin/account', component: AdminAccountComponent},
+  {path: 'admin/editAccount', component: AdminEditAccountComponent},
   {path: 'admin/users', component: AdminUsersComponent},
   {path: 'admin/editBlog', component: AdminBlogComponent},
   {path: 'admin/aboutSettings', component: AdminAboutComponent},

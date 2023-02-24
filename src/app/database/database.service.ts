@@ -281,26 +281,6 @@ export class DatabaseService {
     );
   }
 
-  public updatedTrainer( trainer: Trainer): Observable<Trainer> {
-    let url = this.API_URL + `/trainer`;
-
-    const formData = new FormData();
-    formData.append('name', trainer.name);
-    formData.append('surname', trainer.surname);
-    formData.append('email', trainer.email);
-    formData.append('specialty', trainer.specialty);
-
-
-    return this.http.post<DataTrainer>(url, formData).pipe(
-      map((data: DataTrainer) => {
-        return data.data;
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
-    );
-  }
 
 }
 

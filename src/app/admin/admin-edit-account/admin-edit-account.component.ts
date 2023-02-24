@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { DatabaseService } from '../../database/database.service';
 import { Location } from "@angular/common";
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Trainer } from '../../interfaces/trainer';
 import Swal from 'sweetalert2';
 import { AuthPassportService } from 'src/app/database/auth-passport.service';
@@ -23,13 +23,12 @@ export class AdminEditAccountComponent {
 
   trainerForm!: FormGroup
   showInvalidSubmit: boolean = false
-  formBuilder: any;
 
   constructor(
     private route: ActivatedRoute,
-    private databaseService: DatabaseService,
     private location: Location,
     private auth: AuthPassportService,
+    private formBuilder: FormBuilder,
     private router: Router
   ) { }
 
@@ -58,7 +57,6 @@ export class AdminEditAccountComponent {
   public getTrainer(): void {
     this.auth.dataTrainer().subscribe(trainer => {
       this.selectedTrainer = trainer
-      console.log(this.selectedTrainer)
     })
   }
 
@@ -91,7 +89,7 @@ export class AdminEditAccountComponent {
           email,
           specialty,
         };
-        this.databaseService.updatedTrainer(this.editTrainer).subscribe(_ => {
+        this.auth.updatedTrainer(this.editTrainer).subscribe(_ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Modificado' + "</h5>",
             text: 'Tu cuenta ha sido modificada',
