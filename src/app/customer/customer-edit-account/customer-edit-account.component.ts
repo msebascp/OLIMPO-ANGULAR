@@ -1,27 +1,23 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { DatabaseService } from '../../database/database.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from "@angular/common";
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Trainer } from '../../interfaces/trainer';
-import Swal from 'sweetalert2';
 import { AuthPassportService } from 'src/app/database/auth-passport.service';
-
-
-
-
+import { Customer } from 'src/app/interfaces/customer';
+import { Trainer } from 'src/app/interfaces/trainer';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'admin-edit-account',
-  templateUrl: './admin-edit-account.component.html',
-  styleUrls: ['./admin-edit-account.component.scss']
+  selector: 'app-customer-edit-account',
+  templateUrl: './customer-edit-account.component.html',
+  styleUrls: ['./customer-edit-account.component.scss']
 })
-export class AdminEditAccountComponent {
+export class CustomerEditAccountComponent {
   isLogin: boolean = false;
-  public editTrainer: Trainer = { id: 0, name: '', surname: '', email: '', specialty: '', photo: '', customer: [] };
-  public selectedTrainer !: Trainer
+  public selectedCustomer!: Customer;
+  public trainers: Trainer[] = [];
 
-  trainerForm!: FormGroup
+  customerForm!: FormGroup;
   showInvalidSubmit: boolean = false
 
   constructor(
@@ -33,30 +29,29 @@ export class AdminEditAccountComponent {
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLoginTrainer().then((isLogin) => {
+    this.auth.checkLogin().then((isLogin) => {
       if (isLogin) {
         this.isLogin = true;
-        this.getTrainer()
+        this.getCustomer()
       }
     });
-    this.trainerForm = this.formBuilder.group(
+    this.customerForm = this.formBuilder.group(
       {
         name: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
         surname: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
         email: ["", [Validators.required, Validators.email]],
-        specialty: ["Ninguno", Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)],
       }
     )
 
   }
 
   get form() {
-    return this.trainerForm.controls
+    return this.customerForm.controls
   }
 
-  public getTrainer(): void {
-    this.auth.dataTrainer().subscribe(trainer => {
-      this.selectedTrainer = trainer
+  public getCustomer(): void {
+    this.auth.dataCustomer().subscribe(customer => {
+      this.selectedCustomer = customer
     })
   }
 
@@ -77,21 +72,19 @@ export class AdminEditAccountComponent {
     }).then((result: any) => {
 
       if (result.isConfirmed) {
-        const name = this.trainerForm.get('name')?.value || '';
-        const surname = this.trainerForm.get('surname')?.value || '';
-        const email = this.trainerForm.get('email')?.value || '';
-        const specialty = this.trainerForm.get('specialty')?.value || '';
+        const name = this.customerForm.get('name')?.value || '';
+        const email = this.customerForm.get('email')?.value || '';
+        const surname = this.customerForm.get('surname')?.value || '';
 
-        this.editTrainer = {
-          ...this.selectedTrainer,
+        const updatedCustomer: Customer = {
+          ...this.selectedCustomer,
           name,
           surname,
           email,
-          specialty,
         };
-        this.auth.updatedTrainer(this.editTrainer).subscribe(_ => {
+        this.auth.updatedCustomer(updatedCustomer).subscribe(_ => {
           Swal.fire({
-            title: "<h5 style='color:white'>" + 'Modificado' + "</h5>",
+            title: "<h5 style='color:white'>" + 'Modificada' + "</h5>",
             text: 'Tu cuenta ha sido modificada',
             icon: 'success',
             background: '#1F2937'
@@ -102,5 +95,4 @@ export class AdminEditAccountComponent {
       }
     })
   }
-
 }

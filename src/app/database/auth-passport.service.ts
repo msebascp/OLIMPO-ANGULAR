@@ -9,6 +9,9 @@ import {RegisterData} from "../interfaces/registerData";
 import { DataTrainer } from '../interfaces/dataTrainer';
 import { Trainer } from '../interfaces/trainer';
 import {RegisterTrainerData} from "../interfaces/registerTrainerData";
+import { Customer } from '../interfaces/customer';
+import { DataCustomer } from '../interfaces/dataCustomer';
+import { DataCustomers } from '../interfaces/dataCustomers';
 
 @Injectable({
   providedIn: 'root'
@@ -210,7 +213,6 @@ export class AuthPassportService {
 
   dataTrainer(): Observable<Trainer> {
     this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
-    console.log('El getTrainings de clientes se ejecuta');
     return this.http.get<DataTrainer>(`${this.url}/trainer/me`,this.options)
     .pipe(
       map((data: DataTrainer) => {
@@ -250,7 +252,52 @@ export class AuthPassportService {
     );
   }
 
+  public updatedCustomer( customer: Customer): Observable<Customer> {
+    this.loadToken()
+    let url = this.url + `/customer/editAccount`;
+
+
+    const formData: Customer = {
+      id: customer.id,
+      name: customer.name,
+      surname: customer.surname,
+      email: customer.email,
+      typeTraining: customer.typeTraining,
+      trainer: customer.trainer,
+      photo: customer.photo,
+      trainer_id: customer.trainer_id,
+      dateInscription: customer.dateInscription,
+      payment: customer.payment,
+      nextPayment: customer.nextPayment
+    };
+
+    return this.http.post<Customer>(url, formData, this.options).pipe(
+      map((data: Customer) => {
+        return data;
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
+  }
+
   loadToken() {
     this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+  }
+
+  dataCustomer(): Observable<Customer> {
+    this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    return this.http.get<DataCustomers>(`${this.url}/customer/me`,this.options)
+    .pipe(
+      map((data: DataCustomers) => {
+        return data.data[0]
+
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    )
   }
 }

@@ -1,6 +1,7 @@
 <loading *ngIf="!isLogin"></loading>
+<navbar-admin *ngIf="isLogin"></navbar-admin>
 <div *ngIf="isLogin" class="w-full h-full">
-    <navbar-admin></navbar-admin>
+
     
     <div class="bg-transparent antialiased">
         <div class="container mb-2 mt-24">
