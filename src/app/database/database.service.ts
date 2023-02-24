@@ -211,42 +211,11 @@ export class DatabaseService {
     );
   }
 
-  public createProduct(image: File, product: Product): Observable<Product> {
-    let url = this.API_URL + `/createProduct`;
-    let formData = new FormData();
-    formData.append('name', product.name);
-    formData.append('description', product.description);
-    formData.append('photo', image, image.name);
-
-    return this.http.post<Product>(url, formData).pipe(
-      map((data: Product) => {
-        return data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
-    );
-  }
-
   public getAllPosts(): Observable<Blog[]> {
     let url = this.API_URL + '/blog';
     return this.http.get<DataBlogs>(url).pipe(
       map((data: DataBlogs) => {
 
-        return data.data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
-    )
-  }
-
-  public getAllProducts(): Observable<Product[]> {
-    let url = this.API_URL + '/products';
-    return this.http.get<ProductsGetAll>(url).pipe(
-      map((data: ProductsGetAll) => {
         return data.data
       }),
       catchError(e => {
@@ -263,22 +232,6 @@ export class DatabaseService {
     }
     return this.http.get<DataBlogs>(url).pipe(
       map((data: DataBlogs) => {
-        return data.data[0];
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
-    );
-  }
-
-  public getProductById(id: number): Observable<Product> {
-    let url = this.API_URL + `/product`;
-    if (id !== undefined) {
-      url += `/${id}`
-    }
-    return this.http.get<ProductsGetAll>(url).pipe(
-      map((data: ProductsGetAll) => {
         return data.data[0];
       }),
       catchError(e => {
@@ -321,19 +274,6 @@ export class DatabaseService {
       url += `/deletePost/${id}`
     }
     return this.http.delete<Blog>(url).pipe(
-      catchError(e => {
-        console.error(e);
-        return [];
-      })
-    );
-  }
-
-  public deleteProduct(id: number): Observable<Product> {
-    let url = this.API_URL;
-    if (id !== undefined) {
-      url += `/deleteProduct/${id}`
-    }
-    return this.http.delete<Product>(url).pipe(
       catchError(e => {
         console.error(e);
         return [];

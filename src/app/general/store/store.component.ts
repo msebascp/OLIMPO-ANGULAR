@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Blog} from "../../interfaces/blog";
 import {DatabaseService} from "../../database/database.service";
 import {Product} from "../../interfaces/product";
+import {ProductService} from "../../database/product.service";
 
 @Component({
   selector: 'app-store',
@@ -12,7 +13,7 @@ export class StoreComponent {
   public products: Product[] = []
 
   constructor (
-    private databaseService: DatabaseService,
+    private productService: ProductService,
   ) { }
 
   ngOnInit(): void {
@@ -21,7 +22,7 @@ export class StoreComponent {
 
 
   public getAllProducts(): void {
-    this.databaseService.getAllProducts().subscribe(products => {
+    this.productService.getAllProducts().subscribe(products => {
       this.products = products;
     })
   }

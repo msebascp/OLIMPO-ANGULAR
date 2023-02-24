@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {DatabaseService} from "../../database/database.service";
 import {Product} from "../../interfaces/product";
+import {ProductService} from "../../database/product.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -15,7 +16,7 @@ export class ProductDetailComponent {
   constructor (
     private route: ActivatedRoute,
     private location: Location,
-    private databaseService: DatabaseService,
+    private productService: ProductService,
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +28,7 @@ export class ProductDetailComponent {
     if (idString) {
       const id:number = +idString;
 
-      this.databaseService.getProductById(id).subscribe(product => {
+      this.productService.getProductById(id).subscribe(product => {
         this.selectedProduct = product;
       });
     } else {

@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {DatabaseService} from "../../database/database.service";
 import Swal from "sweetalert2";
 import {Product} from "../../interfaces/product";
+import {ProductService} from "../../database/product.service";
 
 @Component({
   selector: 'app-admin-products',
@@ -24,7 +25,7 @@ export class AdminProductsComponent {
   constructor(
     private auth: AuthPassportService,
     private router: Router,
-    private databaseService: DatabaseService,
+    private productService: ProductService,
     private formBuilder: FormBuilder
   ) {
   }
@@ -87,7 +88,7 @@ export class AdminProductsComponent {
         this.newProduct.name = name;
         this.newProduct.description = description;
 
-        this.databaseService.createProduct(this.image, this.newProduct)
+        this.productService.createProduct(this.image, this.newProduct)
           .subscribe(_ => {
             Swal.fire({
               title: "<h5 style='color:white'>" + 'Producto creado' + "</h5>",
@@ -109,7 +110,7 @@ export class AdminProductsComponent {
   }
 
   public getAllProducts(): void {
-    this.databaseService.getAllProducts().subscribe(products => {
+    this.productService.getAllProducts().subscribe(products => {
       this.products = products;
     })
   }
@@ -128,7 +129,7 @@ export class AdminProductsComponent {
     }).then((result:any) => {
       if (result.isConfirmed) {
         // Recogemos el id que tiene el boton
-        this.databaseService.deleteProduct(id).subscribe( _ => {
+        this.productService.deleteProduct(id).subscribe( _ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Borrado' + "</h5>",
             text: 'El producto ha sido borrado',
