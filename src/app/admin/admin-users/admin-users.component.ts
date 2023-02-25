@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged,  Observable, of, Subject, switchMap
 import Swal from 'sweetalert2';
 import { Trainings } from '../../interfaces/trainings';
 import {AuthPassportService} from "../../database/auth-passport.service";
+
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
@@ -16,6 +17,7 @@ export class AdminUsersComponent {
   public customers: Customer[] = [];
   public allCustomers: Customer[] = [];
   public pdfFile!: File;
+  public newDatePayment!: string;
   public training: Trainings = {id: 0, name : 'Entrenamiento prueba', pdfTraining: '', id_customer: 1}
 
   isLogin: boolean = false;
@@ -252,7 +254,17 @@ export class AdminUsersComponent {
         background: '#1F2937'
       }).then((result) => {
         if (result.isConfirmed) {
-
+          this.databaseService.updatePayment(id,  this.newDatePayment).subscribe(
+            data  => {
+              console.log(data)
+              if (data.success) {
+                this.getClientes()
+              }
+            },
+            error => {
+              console.log(error)
+            },
+          )
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Fecha cambiada correctamente' + "</h5>",
             icon: 'success',

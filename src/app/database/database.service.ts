@@ -1,7 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DataCustomer } from '../interfaces/dataCustomer';
-import { DataTrainer } from '../interfaces/dataTrainer';
 import { catchError, map, Observable, of } from 'rxjs';
 import { Customer } from '../interfaces/customer';
 import { Trainer } from '../interfaces/trainer';
@@ -11,8 +10,7 @@ import { Trainings } from '../interfaces/trainings';
 import { DataTrainings } from '../interfaces/dataTrainings';
 import { Blog } from '../interfaces/blog';
 import { DataBlogs } from '../interfaces/dataBlogs';
-import {Product} from "../interfaces/product";
-import {ProductsGetAll} from "../interfaces/productsGetAll";
+import {BasicResponse} from "../interfaces/BasicResponse";
 
 
 @Injectable({
@@ -281,6 +279,12 @@ export class DatabaseService {
     );
   }
 
-
+  public updatePayment(id: number, date: string): Observable<BasicResponse> {
+    let headers = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    })
+    return this.http.post<BasicResponse>(this.API_URL + `/payments/${id}/update`, {'date': date}, { headers: headers })
+  }
 }
 
