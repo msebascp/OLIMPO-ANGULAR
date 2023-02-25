@@ -1,16 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { DataCustomer } from '../interfaces/dataCustomer';
-import { DataTrainer } from '../interfaces/dataTrainer';
-import { catchError, map, Observable, of } from 'rxjs';
-import { Customer } from '../interfaces/customer';
-import { Trainer } from '../interfaces/trainer';
-import { DataCustomers } from '../interfaces/dataCustomers';
-import { DataTrainers } from '../interfaces/DataTrainers';
-import { Trainings } from '../interfaces/trainings';
-import { DataTrainings } from '../interfaces/dataTrainings';
-import { Blog } from '../interfaces/blog';
-import { DataBlogs } from '../interfaces/dataBlogs';
+import { HttpClient } from '@angular/common/http';
+import { catchError, map, Observable } from 'rxjs';
 import {Product} from "../interfaces/product";
 import {ProductsGetAll} from "../interfaces/productsGetAll";
 
@@ -88,8 +78,9 @@ export class ProductService {
 
   public updatePost(id: number, product: Product, image: File): Observable<Product> {
     const formData = new FormData();
-    formData.append('title', product.name);
-    formData.append('description', product.description);
+    formData.append('name', product.name)
+    formData.append('description', product.description)
+    formData.append('price', product.price)
     if (image === undefined) {
       formData.append('photo', product.photo)
     } else {

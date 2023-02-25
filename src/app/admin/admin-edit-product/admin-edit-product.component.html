@@ -54,10 +54,10 @@
            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">
       Imagen
     </label>
-    <img *ngIf="selectedImage === ''"
+    <img *ngIf="selectedImage === ''" alt=""
          class="h-96 md:h-[600px] rounded-xl"
          [src]="'http://localhost:8000' + selectedProduct.photo">
-    <img *ngIf="selectedImage" [src]="selectedImage" class="h-96 md:h-[600px] rounded-xl">
+    <img *ngIf="selectedImage" [src]="selectedImage" class="h-96 md:h-[600px] rounded-xl" alt="">
   </div>
   <h3 *ngIf="showInvalidSubmit"
       class="text-red-600 mt-1">
@@ -74,7 +74,7 @@
           (blur)="showInvalidSubmit = false"
           class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
         <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0">
-            Editar Product
+            Editar Producto
         </span>
   </button>
 </form>

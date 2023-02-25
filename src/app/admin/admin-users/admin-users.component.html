@@ -113,7 +113,7 @@
                 </button>
               </div>
               <div id="boxEditPayment" style="display: none">
-                <input type="date" name="lastPaymenteDate" [(ngModel)]="newDatePayment">
+                <input type="date" name="lastPaymentDate" [(ngModel)]="newDatePayment" value="{{ payment.payment_date  | date:'dd/MM/yyyy' }}">
                 <button (click)="confirmEdit(payment.id, $event, true)">
                   <i class="fa fa-check px-2 text-xl">
                   </i>
