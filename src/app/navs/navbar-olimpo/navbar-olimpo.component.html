@@ -13,16 +13,26 @@
     </li>
     <!--Icono usuario, funcionalidad de login-->
     <li class="relative pr-3 md:order-3">
-      <button (click)="showOptions = !showOptions" (blur)="hide()">
+      <!--Botón sin loguear-->
+      <button routerLink="/login" class="hover:text-red-700"
+              [ngClass]="{'text-red-700' : router.url == '/login'}"
+              *ngIf="!infoAuth.isLogin">
+        <i class="fa fa-user text-3xl"></i>
+      </button>
+      <!--Botón logueado-->
+      <button (click)="showOptions = !showOptions" (blur)="hide()"
+              *ngIf="infoAuth.isLogin">
         <i class="fa fa-user text-3xl"></i>
       </button>
       <ul [ngStyle]="{'display': showOptions ? 'block' : 'none'}"
-          class="absolute z-50 right-0 p-2 rounded-md bg-gray-600">
-        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer" routerLink="/admin/account">
+          class="absolute z-50 right-0 p-2 rounded-md bg-gray-600"
+          *ngIf="infoAuth.isLogin">
+        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+            [routerLink]="infoAuth.isTrainer ? '/admin/account' : '/customer/account'">
           Mi cuenta
         </li>
         <li class="block w-max">
-          <button class="hover:bg-red-800 rounded-md p-2">
+          <button class="hover:bg-red-800 rounded-md p-2" (click)="logout()">
             Cerrar sesión
           </button>
         </li>

@@ -10,7 +10,6 @@ import { DataTrainer } from '../interfaces/dataTrainer';
 import { Trainer } from '../interfaces/trainer';
 import {RegisterTrainerData} from "../interfaces/registerTrainerData";
 import { Customer } from '../interfaces/customer';
-import { DataCustomer } from '../interfaces/dataCustomer';
 import { DataCustomers } from '../interfaces/dataCustomers';
 
 @Injectable({
@@ -79,7 +78,7 @@ export class AuthPassportService {
         }))
         .subscribe(
           data => {
-            console.log('Esta es la response del check login de cliente: ' + data);
+            console.log(data);
             /** Si el cliente está logueado:
              * 1: Si accede a una ruta accesible para clientes sigue su curso
              * 2: Si está en un login, se redirige al perfil del cliente
@@ -112,7 +111,7 @@ export class AuthPassportService {
         }))
         .subscribe(
           data => {
-            console.log('Esta es la response del check login de entrenador: ' + data);
+            console.log(data);
             /** Si el entrenador está logueado:
              * 1: Si accede a una ruta accesible para entrenadores sigue su curso
              * 2: Si está en un login, se redirige al perfil del entrenador
@@ -225,7 +224,7 @@ export class AuthPassportService {
     )
   }
 
-  
+
   public updatedTrainer( trainer: Trainer): Observable<Trainer> {
     this.loadToken()
     let url = this.url + `/trainer/editAccount`;
