@@ -35,6 +35,7 @@ import { StoreComponent } from './general/store/store.component';
 import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit-account.component';
 import { ProductDetailComponent } from './general/product-detail/product-detail.component';
 import { CustomerEditAccountComponent } from './customer/customer-edit-account/customer-edit-account.component';
+import { NavbarOlimpoComponent } from './navs/navbar-olimpo/navbar-olimpo.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { CustomerEditAccountComponent } from './customer/customer-edit-account/c
     RegisterTrainerComponent,
     ProductDetailComponent,
     CustomerEditAccountComponent,
+    NavbarOlimpoComponent,
   ],
   imports: [
     BrowserModule,
