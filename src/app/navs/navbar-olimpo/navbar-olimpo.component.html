@@ -42,7 +42,7 @@
     <li class="w-full
         md:block"
         [ngClass]="{'hidden' : !showDropdown}">
-      <ul class="flex flex-col gap-3 w-full absolute bg-black p-3
+      <ul class="flex flex-col gap-3 w-full absolute bg-black p-3 z-50
           md:flex-row md:justify-evenly md:mt-0 md:static
           lg:justify-start lg:gap-16 lg:pl-12">
         <li [ngClass]="{'text-red-700' : router.url == '/home'}" routerLink="/home"
