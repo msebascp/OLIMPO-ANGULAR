@@ -224,7 +224,6 @@ export class AuthPassportService {
     )
   }
 
-
   public updatedTrainer( trainer: Trainer): Observable<Trainer> {
     this.loadToken()
     let url = this.url + `/trainer/editAccount`;

@@ -3,10 +3,8 @@ import {Trainer} from "../../interfaces/trainer";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthPassportService} from "../../database/auth-passport.service";
 import {DatabaseService} from "../../database/database.service";
-import {RegisterData} from "../../interfaces/registerData";
 import Swal from "sweetalert2";
 import {RegisterTrainerData} from "../../interfaces/registerTrainerData";
-import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-register-trainer',
@@ -50,8 +48,8 @@ export class RegisterTrainerComponent {
       specialty: this.registerForm.get('typeTraining')?.value ? this.registerForm.get('typeTraining')?.value : null,
     }
     this.auth.registerTrainer(registerData)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           if (data.success) {
             Swal.fire({
               title: "<h5 style='color:white'>" + 'Entrenador registrado correctamente' + "</h5>",
@@ -60,7 +58,8 @@ export class RegisterTrainerComponent {
             })
             this.onReset()
           }
-        }, error => {
+        },
+        error: error => {
           console.log(error.error.errors)
           let errorMessages = "";
           for (let key in error.error.errors) {
@@ -72,7 +71,7 @@ export class RegisterTrainerComponent {
             background: '#1F2937'
           })
         }
-      )
+      })
   }
 
   get form() {
@@ -91,9 +90,7 @@ export class RegisterTrainerComponent {
   onReset() {
     this.registerForm.get('name')?.reset()
     this.registerForm.get('surname')?.reset()
-    this.registerForm.get('phone')?.reset()
     this.registerForm.get('email')?.reset()
-    this.registerForm.get('typeTraining')?.setValue('Ninguno')
-    this.registerForm.get('trainer')?.setValue('')
+    this.registerForm.get('specialty')?.reset()
   }
 }

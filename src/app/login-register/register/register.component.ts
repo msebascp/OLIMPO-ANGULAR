@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthPassportService} from "../../database/auth-passport.service";
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {Trainer} from "../../interfaces/trainer";
@@ -23,7 +23,8 @@ export class RegisterComponent {
     private formBuilder: FormBuilder
   ) {
   }
-  ngOnInit(){
+
+  ngOnInit() {
     this.auth.checkLoginTrainer().then((isLogin) => {
       if (isLogin) {
         this.isLogin = true;
@@ -56,8 +57,8 @@ export class RegisterComponent {
       trainer_id: this.registerForm.get('trainer')?.value ? parseInt(this.registerForm.get('trainer')?.value) : null,
     }
     this.auth.register(registerData)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           if (data.success) {
             Swal.fire({
               title: "<h5 style='color:white'>" + 'Cliente registrado correctamente' + "</h5>",
@@ -66,7 +67,8 @@ export class RegisterComponent {
             })
             this.onReset()
           }
-        }, error => {
+        },
+        error: error => {
           console.log(error.error.errors)
           let errorMessages = "";
           for (let key in error.error.errors) {
@@ -78,26 +80,24 @@ export class RegisterComponent {
             background: '#1F2937'
           })
         }
-      )
+      })
   }
 
   get form() {
     return this.registerForm.controls
   }
 
-  onSubmit():void {
+  onSubmit(): void {
     if (this.registerForm.invalid) {
       this.showInvalidSubmit = true
       return;
     }
-    console.log(JSON.stringify(this.registerForm.value, null, 5))
     this.register()
   }
 
   onReset() {
     this.registerForm.get('name')?.reset()
     this.registerForm.get('surname')?.reset()
-    this.registerForm.get('phone')?.reset()
     this.registerForm.get('email')?.reset()
     this.registerForm.get('typeTraining')?.setValue('Ninguno')
     this.registerForm.get('trainer')?.setValue('')
