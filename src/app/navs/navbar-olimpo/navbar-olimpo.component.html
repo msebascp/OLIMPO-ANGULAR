@@ -1,18 +1,18 @@
-<nav class="text-white bg-black p-3 text-lg lg:text-xl">
+<nav class="text-white bg-black py-3 text-lg lg:text-xl">
   <ul class="flex flex-wrap justify-between items-center relative
-  md:flex-nowrap">
+  md:flex-nowrap md:px-6">
     <!--Icono menú dropdown-->
-    <li class="md:hidden">
+    <li class="relative pl-3 md:hidden">
       <button (click)="showDropdown = !showDropdown" (blur)="hideDrop()">
         <i class="fa fa-bars text-4xl"></i>
       </button>
     </li>
     <!--Logo Olimpo-->
-    <li>
-      <img class="h-16 sm:h-20 lg:h-24" src="../../../assets/LOGO.png">
+    <li class="relative md:block">
+      <img class="h-16 sm:h-20 lg:h-24" src="../../../assets/LOGO.png" alt="">
     </li>
-    <!--Icono usuario, funcinalidad de login-->
-    <li class="md:order-3 relative">
+    <!--Icono usuario, funcionalidad de login-->
+    <li class="relative pr-3 md:order-3">
       <button (click)="showOptions = !showOptions" (blur)="hide()">
         <i class="fa fa-user text-3xl"></i>
       </button>
@@ -30,18 +30,18 @@
     </li>
     <!--lista de enlaces-->
     <li class="w-full
-    md:block md:w-full"
+        md:block"
         [ngClass]="{'hidden' : !showDropdown}">
-      <ul class="flex flex-col gap-3 mt-2 w-full
-      md:flex-row md:justify-evenly
-      lg:justify-start lg:gap-16 lg:ml-16 lg:mr-8">
+      <ul class="flex flex-col gap-3 w-full absolute bg-black p-3
+          md:flex-row md:justify-evenly md:mt-0 md:static
+          lg:justify-start lg:gap-16 lg:pl-12">
         <li [ngClass]="{'text-red-700' : router.url == '/home'}" routerLink="/home"
             class="cursor-pointer hover:text-red-700">
           INICIO
         </li>
         <li [ngClass]="{'text-red-700' : router.url == '/aboutUs'}" routerLink="/aboutUs"
             class="cursor-pointer hover:text-red-700">
-          SOBRE &nbsp;&nbsp;NOSOTROS
+          SOBRE&nbsp;&nbsp;NOSOTROS
         </li>
         <li [ngClass]="{'text-red-700' : router.url == '/information'}" routerLink="/information"
             class="cursor-pointer hover:text-red-700">
