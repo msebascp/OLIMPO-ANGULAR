@@ -98,9 +98,31 @@
             {{ customer.dateInscription | date:'dd/M/yyyy'  }}
           </td>
           <td class="px-6 py-4">
-            <div *ngFor="let payment of customer.payment ? customer.payment : []">
-              <p *ngIf="payment === undefined">No hay fecha de último pago</p>
-              <p *ngIf="payment !== undefined">{{ payment.payment_date  | date:'dd/M/yyyy' }}</p>
+            <div *ngFor="let payment of customer.payment ? customer.payment : []"
+                 class="flex">
+              <div id="boxInfoPayment" class="flex">
+                <p *ngIf="payment === undefined">
+                  No hay fecha de último pago
+                </p>
+                <p *ngIf="payment !== undefined">
+                  {{ payment.payment_date  | date:'dd/M/yyyy' }}
+                </p>
+                <button (click)="paymentEdit(payment.id, $event)">
+                  <i class="fa fa-pencil-square-o px-2 text-xl">
+                  </i>
+                </button>
+              </div>
+              <div id="boxEditPayment" style="display: none">
+                <input type="date" name="lastPaymenteDate" id="inputEditDate">
+                <button (click)="confirmEdit(payment.id, $event, true)">
+                  <i class="fa fa-check px-2 text-xl">
+                  </i>
+                </button>
+                <button (click)="confirmEdit(payment.id, $event, false)">
+                  <i class="fa fa-close px-2 text-xl">
+                  </i>
+                </button>
+              </div>
             </div>
           </td>
           <td class="px-6 py-4">

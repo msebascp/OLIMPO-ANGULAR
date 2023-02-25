@@ -153,7 +153,7 @@ export class AdminUsersComponent {
     })
   }
 
-  public onFileChange(event: any, customer_id: number) {
+  onFileChange(event: any, customer_id: number) {
     this.pdfFile = event.target.files[0];
 
     if (this.pdfFile.type !== 'application/pdf') {
@@ -169,7 +169,7 @@ export class AdminUsersComponent {
     this.training.id_customer = customer_id
   }
 
-  public saveTraining() {
+  saveTraining() {
     this.databaseService.savePdf( this.pdfFile, this.training)
       .subscribe(_ => {
         Swal.fire({
@@ -228,5 +228,44 @@ export class AdminUsersComponent {
       }
     })
     this.getClientes()
+  }
+
+  paymentEdit(id:number, event: Event) {
+    let button = event.target as HTMLElement
+    let box = button!.parentElement!.parentElement!.parentElement as HTMLElement
+    let boxInfo = box.firstChild as HTMLElement
+    boxInfo.style.display = 'none'
+    let boxEdit = box.lastChild as HTMLElement
+    boxEdit.style.display = 'flex'
+  }
+
+  confirmEdit(id:number, event: Event, confirm: boolean) {
+    if (confirm){
+      Swal.fire({
+        title: "<h5 style='color:white'>" + 'Confirmar cambios' + "</h5>",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#FF0000',
+        confirmButtonText: 'Sí',
+        background: '#1F2937'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          Swal.fire({
+            title: "<h5 style='color:white'>" + 'Fecha cambiada correctamente' + "</h5>",
+            icon: 'success',
+            background: '#1F2937'
+          })
+        }
+      })
+    }
+    let button = event.target as HTMLElement
+    let box = button!.parentElement!.parentElement!.parentElement as HTMLElement
+    let boxInfo = box.firstChild as HTMLElement
+    boxInfo.style.display = 'flex'
+    let boxEdit = box.lastChild as HTMLElement
+    boxEdit.style.display = 'none'
   }
 }
