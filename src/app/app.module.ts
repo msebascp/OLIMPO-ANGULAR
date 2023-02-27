@@ -36,6 +36,8 @@ import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit
 import { ProductDetailComponent } from './general/product-detail/product-detail.component';
 import { CustomerEditAccountComponent } from './customer/customer-edit-account/customer-edit-account.component';
 import { NavbarOlimpoComponent } from './navs/navbar-olimpo/navbar-olimpo.component';
+import { AdminEditImcComponent } from './admin/admin-edit-imc/admin-edit-imc.component';
+import { AdminAllPaymentsComponent } from './admin/admin-all-payments/admin-all-payments.component';
 
 
 @NgModule({
@@ -72,6 +74,8 @@ import { NavbarOlimpoComponent } from './navs/navbar-olimpo/navbar-olimpo.compon
     ProductDetailComponent,
     CustomerEditAccountComponent,
     NavbarOlimpoComponent,
+    AdminEditImcComponent,
+    AdminAllPaymentsComponent,
   ],
   imports: [
     BrowserModule,

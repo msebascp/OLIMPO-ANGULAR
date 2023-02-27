@@ -1,0 +1,41 @@
+<loading *ngIf="!isLogin"></loading>
+<navbar-admin *ngIf="isLogin"></navbar-admin>
+
+<div *ngIf="isLogin" class="flex flex-col justify-center">
+    <div class="flex flex-row justify-center items-center align-middle my-5">
+        <h1 class="relative bg-white shadow-xl rounded-3xl p-4">Cliente: <span class="underline mx-2">{{ selectedCustomer?.name}} {{selectedCustomer?.surname}}</span></h1>
+    </div>
+    <div class=" flex justify-center rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 m-5 rounded-lg">
+            <thead class="text-xs text-gray-700 uppercase dark:text-gray-400 rounded-lg">
+                <tr>
+                    <th scope="col" class="px-6 py-3 bg-gray-500 text-black">
+                        Fecha de Pago
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-500 text-black">
+                        Tipo de Pago
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let payment of payments" class="border-b border-gray-200 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                        {{ payment.payment_date }}
+                    </th>
+                    <td class="px-6 py-4 bg-gray-300 text-black">
+                        {{ payment.payment_type }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="flex justify-center items-center align-middle">
+        <button type="button" (click)="goBack()"
+        class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-white  focus:outline-none focus:ring-pink-200 ">
+            <span
+            class="relative px-5 py-2.5 transition-all ease-in duration-75  bg-gray-800 rounded-md group-hover:bg-opacity-0">
+            Volver
+            </span>
+        </button>
+    </div>
+</div>

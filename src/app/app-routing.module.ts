@@ -26,6 +26,8 @@ import {StoreComponent} from "./general/store/store.component";
 import {ProductDetailComponent} from "./general/product-detail/product-detail.component";
 import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit-account.component';
 import { CustomerEditAccountComponent } from './customer/customer-edit-account/customer-edit-account.component';
+import { AdminEditImcComponent } from './admin/admin-edit-imc/admin-edit-imc.component';
+import { AdminAllPaymentsComponent } from './admin/admin-all-payments/admin-all-payments.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -55,6 +57,10 @@ const routes: Routes = [
   {path: 'admin/login', component: LoginTrainerComponent},
   {path: 'admin/register', component: RegisterComponent},
   {path: 'admin/registerTrainer', component: RegisterTrainerComponent},
+  {path: 'admin/editImc/:id', component: AdminEditImcComponent},
+  {path: 'admin/allPayments/:id', component: AdminAllPaymentsComponent},
+
+
 
   //Productos
   {path: 'admin/products', component: AdminProductsComponent},
