@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from "@angular/common";
@@ -15,10 +15,13 @@ import Swal from 'sweetalert2';
 export class CustomerEditAccountComponent {
   isLogin: boolean = false;
   public selectedCustomer!: Customer;
-  public trainers: Trainer[] = [];
 
   customerForm!: FormGroup;
-  showInvalidSubmit: boolean = false
+  showInvalidSubmit: boolean = false;
+  @ViewChild('fileInput')
+  fileInput!: ElementRef;
+  public image!: File;
+  public selectedImage: string = ''
 
   constructor(
     private route: ActivatedRoute,
@@ -59,7 +62,26 @@ export class CustomerEditAccountComponent {
     this.location.back();
   }
 
+  public changeImg(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  public onFileSelected(event: any): void {
+    if (event.target.files && event.target.files.length) {
+      this.image = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(this.image);
+      reader.onload = () => {
+        this.selectedImage = reader.result as string;
+      };
+    }
+  }
+
   public onSubmit(): void {
+    if (this.customerForm.invalid) {
+      this.showInvalidSubmit = true
+      return;
+    }
     Swal.fire({
       title: "<h5 style='color:white'>" + '¿Seguro que quieres modificar tu cuenta?' + "</h5>",
       icon: 'warning',
@@ -82,7 +104,8 @@ export class CustomerEditAccountComponent {
           surname,
           email,
         };
-        this.auth.updatedCustomer(updatedCustomer).subscribe(_ => {
+        updatedCustomer.photo = this.selectedCustomer.photo
+        this.auth.updatedCustomer(updatedCustomer, this.image).subscribe(_ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Modificada' + "</h5>",
             text: 'Tu cuenta ha sido modificada',

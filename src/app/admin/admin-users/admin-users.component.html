@@ -3,28 +3,24 @@
 <div *ngIf="isLogin" class="flex flex-row w-full justify-center items-center align-middle gap-9 sm:gap-32 my-9">
   <div class="flex ml-5 sm:ml-0 w-72 md:w-96">
     <input placeholder="Buscar por nombre" #inputSearch (input)="search(inputSearch.value)" type="text"
-           id="input-search"
-           class="border text-sm rounded-l block w-full p-2.5 bg-gray-500 border-gray-600 placeholder-gray-400 text-white ">
+      id="input-search"
+      class="border text-sm rounded-l block w-full p-2.5 bg-gray-500 border-gray-600 placeholder-gray-400 text-white ">
     <div class="relative">
       <button class="text-white bg-gray-500 border border-gray-600 rounded-r px-2 h-full"
-              (click)="showFilterOptions = !showFilterOptions">
+        (click)="showFilterOptions = !showFilterOptions">
         Filtrar
       </button>
       <ul class="text-white absolute right-0 z-50 bg-gray-500 p-2 rounded"
-          [ngStyle]="{'display': showFilterOptions ? 'block' : 'none'}">
+        [ngStyle]="{'display': showFilterOptions ? 'block' : 'none'}">
         <li class="flex items-center gap-3 w-full mb-2 hover:bg-red-600 rounded">
-          <button (click)="filterPaidCustomers()"
-                  class="p-2 rounded hover:bg-red-600 w-full"
-                  [ngStyle]="{'background-color': paid ? 'rgb(220 38 38)' : 'transparent'}"
-          >
+          <button (click)="filterPaidCustomers()" class="p-2 rounded hover:bg-red-600 w-full"
+            [ngStyle]="{'background-color': paid ? 'rgb(220 38 38)' : 'transparent'}">
             Pagado
           </button>
         </li>
         <li class="flex items-center gap-3 w-max hover:bg-red-600 rounded">
-          <button (click)="filterNoPaidCustomers()"
-                  class="p-2 rounded w-full"
-                  [ngStyle]="{'background-color': noPaid ? 'rgb(220 38 38)' : 'transparent'}"
-          >
+          <button (click)="filterNoPaidCustomers()" class="p-2 rounded w-full"
+            [ngStyle]="{'background-color': noPaid ? 'rgb(220 38 38)' : 'transparent'}">
             No pagado
           </button>
         </li>
@@ -32,14 +28,14 @@
     </div>
   </div>
   <button routerLink="/admin/register"
-          class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
+    class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
     <span
       class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0 text-lg">
       <i class="fa fa-plus"></i> Cliente
     </span>
   </button>
   <button routerLink="/admin/registerTrainer"
-          class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
+    class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
     <span
       class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0 text-lg">
       <i class="fa fa-plus"></i> Entrenador
@@ -50,35 +46,35 @@
   <div class="relative overflow-x-auto shadow-md rounded sm:rounded-lg m-5">
     <table class="w-full text-sm text-left text-gray-300">
       <thead class="text-xs uppercase  bg-gray-800 text-gray-300">
-      <tr class="text-sm md:text-lg">
-        <th scope="col" class="px-6 py-3">
-          Nombre
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Entrenamiento
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Entrenador
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Fecha Inscripción
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Fecha del último pago
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Fecha del siguiente pago
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Subir Entrenamiento
-        </th>
-        <th scope="col" class="px-6 py-3">
-          <span class="sr-only">Edit</span>
-        </th>
-      </tr>
+        <tr class="text-sm md:text-lg">
+          <th scope="col" class="px-6 py-3">
+            Nombre
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Entrenamiento
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Entrenador
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Fecha Inscripción
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Fecha del último pago
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Fecha del siguiente pago
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Subir Entrenamiento
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <span class="sr-only">Edit</span>
+          </th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let customer of customers" class=" border-b bg-gray-600 border-gray-600 text-sm md:text-lg">
+        <tr *ngFor="let customer of customers" class=" border-b bg-gray-600 border-gray-600 text-sm md:text-lg">
           <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
             {{ customer.name }}
           </th>
@@ -95,17 +91,16 @@
             Entrenador no asignado
           </td>
           <td class="px-6 py-4">
-            {{ customer.dateInscription | date:'dd/MM/yyyy'  }}
+            {{ customer.dateInscription | date:'dd/MM/yyyy' }}
           </td>
           <td class="px-6 py-4">
-            <div *ngFor="let payment of customer.payment ? customer.payment : []"
-                 class="flex">
+            <div *ngFor="let payment of customer.payment ? customer.payment : []" class="flex">
               <div id="boxInfoPayment" class="flex">
                 <p *ngIf="payment === undefined">
                   No hay fecha de último pago
                 </p>
                 <p *ngIf="payment !== undefined">
-                  {{ payment.payment_date  | date:'dd/MM/yyyy' }}
+                  {{ payment.payment_date | date:'dd/MM/yyyy' }}
                 </p>
                 <button (click)="paymentEdit(payment.id, $event)">
                   <i class="fa fa-pencil-square-o px-2 text-xl">
@@ -113,7 +108,8 @@
                 </button>
               </div>
               <div id="boxEditPayment" style="display: none">
-                <input type="date" name="lastPaymentDate" [(ngModel)]="newDatePayment" value="{{ payment.payment_date  | date:'dd/MM/yyyy' }}">
+                <input type="date" name="lastPaymentDate" [(ngModel)]="newDatePayment"
+                  value="{{ payment.payment_date  | date:'dd/MM/yyyy' }}">
                 <button (click)="confirmEdit(payment.id, $event, true)">
                   <i class="fa fa-check px-2 text-xl">
                   </i>
@@ -130,36 +126,36 @@
           </td>
           <td class="px-6 py-4">
             <input (change)="onFileChange($event, customer.id)"
-                   class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
-                   type="file">
+              class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
+              type="file">
             <button><i (click)="saveTraining()"
-                       class="fa fa-upload px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
-              class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip translate-x-12 -translate-y-9">Subir
-                                  Entrenamiento</span>
+                class="fa fa-upload px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip translate-x-12 -translate-y-9">Subir
+                Entrenamiento</span>
             </button>
           </td>
           <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
             <button (click)="pay(customer.id)">
               <i class="fa fa-euro px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
-              class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip -translate-x-12 -translate-y-9">Pagar</span>
+                class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip -translate-x-12 -translate-y-9">Pagar</span>
             </button>
             <button><i routerLink="/admin/editTraining/{{ customer.id }}"
-                       class="fa fa-file-pdf-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
-              class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-28 md:-translate-x-32 -translate-y-9">Editar
-                                  Entrenamientos</span>
+                class="fa fa-file-pdf-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-28 md:-translate-x-32 -translate-y-9">Editar
+                Entrenamientos</span>
             </button>
             <button><i routerLink="/admin/editCustomer/{{ customer.id }}"
-                       class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
-              class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 md:-translate-x-24 -translate-y-9">Editar
-                                  Cliente</span>
+                class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 md:-translate-x-24 -translate-y-9">Editar
+                Cliente</span>
             </button>
             <button><i (click)="deleteCustomer(customer.id)"
-                       class="fa fa-trash px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
-              class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 -translate-y-12">Borrar
-                                  Cliente</span>
+                class="fa fa-trash px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 -translate-y-12">Borrar
+                Cliente</span>
             </button>
           </td>
-      </tr>
+        </tr>
       </tbody>
     </table>
   </div>

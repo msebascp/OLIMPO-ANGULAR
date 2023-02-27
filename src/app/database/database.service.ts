@@ -247,7 +247,6 @@ export class DatabaseService {
       formData.append('photo', post.photo)
     } else {
       formData.append('photo', image, image.name);
-
     }
 
     let url = this.API_URL + `/blog`;

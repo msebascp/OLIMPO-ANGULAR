@@ -30,6 +30,13 @@ export class AuthPassportService {
     })
   };
 
+  private options2 = {
+    headers: new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+    })
+  };
+
+
   constructor(
     private http: HttpClient,
     private router: Router
@@ -225,22 +232,22 @@ export class AuthPassportService {
       )
   }
 
-  public updatedTrainer(trainer: Trainer): Observable<Trainer> {
+  public updatedTrainer( trainer: Trainer, image: File): Observable<Trainer> {
     this.loadToken()
     let url = this.url + `/trainer/editAccount`;
+    const formData: FormData = new FormData();
+    formData.append('name', trainer.name);
+    formData.append('surname', trainer.surname);
+    formData.append('email', trainer.email);
+    formData.append('specialty', trainer.specialty);
 
+    if (image === undefined) {
+      formData.append('photo', trainer.photo)
+    } else {
+      formData.append('photo', image, image.name);
+    }
 
-    const formData: Trainer = {
-      id: trainer.id,
-      name: trainer.name,
-      surname: trainer.surname,
-      email: trainer.email,
-      specialty: trainer.specialty,
-      customer: trainer.customer,
-      photo: trainer.photo
-    };
-
-    return this.http.post<Trainer>(url, formData, this.options).pipe(
+    return this.http.post<Trainer>(url, formData, this.options2).pipe(
       map((data: Trainer) => {
         return data;
       }),
@@ -251,26 +258,23 @@ export class AuthPassportService {
     );
   }
 
-  public updatedCustomer(customer: Customer): Observable<Customer> {
+  public updatedCustomer( customer: Customer, image: File): Observable<Customer> {
     this.loadToken()
     let url = this.url + `/customer/editAccount`;
 
 
-    const formData: Customer = {
-      id: customer.id,
-      name: customer.name,
-      surname: customer.surname,
-      email: customer.email,
-      typeTraining: customer.typeTraining,
-      trainer: customer.trainer,
-      photo: customer.photo,
-      trainer_id: customer.trainer_id,
-      dateInscription: customer.dateInscription,
-      payment: customer.payment,
-      nextPayment: customer.nextPayment
-    };
+    const formData: FormData = new FormData();
+    formData.append('name', customer.name);
+    formData.append('surname', customer.surname);
+    formData.append('email', customer.email);
 
-    return this.http.post<Customer>(url, formData, this.options).pipe(
+    if (image === undefined) {
+      formData.append('photo', customer.photo)
+    } else {
+      formData.append('photo', image, image.name);
+    }
+
+    return this.http.post<Customer>(url, formData, this.options2).pipe(
       map((data: Customer) => {
         return data;
       }),

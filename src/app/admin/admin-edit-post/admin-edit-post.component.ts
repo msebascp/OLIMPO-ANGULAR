@@ -54,7 +54,6 @@ export class AdminEditPostComponent {
 
       this.databaseService.getPostById(id).subscribe(post => {
         this.selectedPost = post;
-        console.log(post)
       });
     } else {
       console.error("No se ha encontrado el parámetro 'id' en la ruta");
