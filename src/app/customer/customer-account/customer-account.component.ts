@@ -11,8 +11,7 @@ import { Customer } from 'src/app/interfaces/customer';
 export class CustomerAccountComponent {
   isLogin: boolean = false;
   customer: Customer | undefined;
-  infoAuth!: { isLogin:boolean, isCustomer:boolean };
-
+  infoAuth!: { isLogin:boolean, isTrainer:boolean};
   constructor(
     private auth: AuthPassportService,
     private router: Router
@@ -21,6 +20,7 @@ export class CustomerAccountComponent {
   ngOnInit(){
     this.auth.getVariable().subscribe(infoAuth => {
       this.isLogin = infoAuth.isLogin
+      this.infoAuth = infoAuth
     })
     this.dataCustomer();
   }
@@ -31,9 +31,8 @@ export class CustomerAccountComponent {
 }
 
 public endPoint() {
-  if (this.infoAuth.isLogin && this.infoAuth.isCustomer) {
+  if (this.infoAuth.isLogin && !this.infoAuth.isTrainer) {
     this.auth.endPointCustomer();
-    console.log('holaa');
   } 
 
 }
