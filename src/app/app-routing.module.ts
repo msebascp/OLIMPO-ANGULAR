@@ -26,6 +26,8 @@ import {StoreComponent} from "./general/store/store.component";
 import {ProductDetailComponent} from "./general/product-detail/product-detail.component";
 import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit-account.component';
 import { CustomerEditAccountComponent } from './customer/customer-edit-account/customer-edit-account.component';
+import { AdminEditImcComponent } from './admin/admin-edit-imc/admin-edit-imc.component';
+import { AdminAllPaymentsComponent } from './admin/admin-all-payments/admin-all-payments.component';
 import {CheckCustomerGuard} from "./guards/check-customer.guard";
 import {CheckTrainerGuard} from "./guards/check-trainer.guard";
 import {CheckLoginGuard} from "./guards/check-login.guard";
@@ -58,6 +60,8 @@ const routes: Routes = [
   {path: 'admin/login', component: LoginTrainerComponent, canActivate:[CheckLoginGuard]},
   {path: 'admin/register', component: RegisterComponent, canActivate:[CheckTrainerGuard]},
   {path: 'admin/registerTrainer', component: RegisterTrainerComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/editImc/:id', component: AdminEditImcComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/allPayments/:id', component: AdminAllPaymentsComponent, canActivate:[CheckTrainerGuard]},
 
   //Productos
   {path: 'admin/products', component: AdminProductsComponent, canActivate:[CheckTrainerGuard]},
