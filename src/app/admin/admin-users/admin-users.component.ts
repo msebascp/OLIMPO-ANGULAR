@@ -225,9 +225,9 @@ export class AdminUsersComponent {
           icon: 'success',
           background: '#1F2937'
         })
+        this.getClientes()
       }
     })
-    this.getClientes()
   }
 
   paymentEdit(id:number, event: Event) {
