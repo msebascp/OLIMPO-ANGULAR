@@ -1,5 +1,4 @@
 <loading *ngIf="!isLogin"></loading>
-<navbar-admin *ngIf="isLogin"></navbar-admin>
 <form *ngIf="isLogin" [formGroup]="postForm" (ngSubmit)="onSubmit()" class="bg-gray-800 m-5 rounded-lg p-5">
     <div class="mb-6">
         <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>

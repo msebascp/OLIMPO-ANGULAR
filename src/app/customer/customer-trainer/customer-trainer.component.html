@@ -1,5 +1,4 @@
 <loading *ngIf="!isLogin"></loading>
-<navbar-customer *ngIf="isLogin"></navbar-customer>
 <div *ngIf="isLogin" class="w-full h-full">
     <div class="flex justify-center flex-col align-middle items-center m-20 rounded-lg shadow-xl bg-white transform duration-200 easy-in-out">
         <div class="flex justify-center px-5  -mt-12">
@@ -10,13 +9,13 @@
                 <h2 class="text-gray-800 text-3xl font-bold">{{trainer?.name}}</h2>
                 <a class="text-gray-500 mt-2 hover:text-blue-500 cursor-pointer" href="mailto:{{trainer?.email}}">{{trainer?.email}}</a>
                 <p class="mt-2 text-gray-700 text-sm md:text-lg">
-                    ¡Hola! Mi nombre es {{ trainer?.name }} {{ trainer?.surname }}, soy un entrenador altamente calificado y 
-                    con años de experiencia en el mundo del fitness. Ofrezco servicios 
-                    personalizados para ayudarte a alcanzar tus metas de salud y bienestar, ya sea que quieras perder peso, ganar masa muscular, 
+                    ¡Hola! Mi nombre es {{ trainer?.name }} {{ trainer?.surname }}, soy un entrenador altamente calificado y
+                    con años de experiencia en el mundo del fitness. Ofrezco servicios
+                    personalizados para ayudarte a alcanzar tus metas de salud y bienestar, ya sea que quieras perder peso, ganar masa muscular,
                     mejorar tu rendimiento deportivo o simplemente adoptar un estilo de vida más saludable.
-                    Mi enfoque se basa en el trabajo duro, la disciplina y la constancia, pero también en la diversión y la motivación. 
+                    Mi enfoque se basa en el trabajo duro, la disciplina y la constancia, pero también en la diversión y la motivación.
                     Me aseguro de crear programas de entrenamiento efectivos y personalizados que se ajusten a tus necesidades y objetivos específicos.
-                    Si tienes alguna pregunta o si estás interesado en trabajar conmigo, no dudes en contactarme. Estoy aquí para ayudarte 
+                    Si tienes alguna pregunta o si estás interesado en trabajar conmigo, no dudes en contactarme. Estoy aquí para ayudarte
                     en cada paso del camino hacia una vida más activa y saludable.
                 </p>
             </div>
