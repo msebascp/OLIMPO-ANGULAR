@@ -6,50 +6,73 @@
             <form [formGroup]="trainerForm" (ngSubmit)="onSubmit()">
 
                 <div class="bg-white relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
-                    <div class="flex justify-center">
-                        <img src="https://avatars0.githubusercontent.com/u/35900628?v=4" alt=""
-                            class="rounded-full mx-auto absolute  -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110">
+                    <div id="foto" class="flex justify-center relative">
+                        <img *ngIf="selectedTrainer.photo !== '/storage/' && selectedImage === ''"
+                            [src]="'http://localhost:8000' + selectedTrainer.photo"
+                            (click)="changeImg()"
+                            class="cursor-pointer bg-white rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110 z-10">
+                        <img *ngIf="selectedTrainer.photo === '/storage/'" src="../../../assets/perfil.png"
+                            (click)="changeImg()"
+                            class="cursor-pointer bg-white hover:opacity-50 rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110 z-10">
+                        <img *ngIf="selectedImage" [src]="selectedImage"
+                            (click)="changeImg()"
+                            class="cursor-pointer bg-white rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110 z-10">
+                        <input type="file" #fileInput class="hidden" (change)="onFileSelected($event)">
                     </div>
                     <div class="mt-16">
-                        <div class="flex text-center justify-center">
+                        <div class="flex text-center items-center flex-col justify-center">
                             <label for="name" class="font-bold  text-3xl text-gray-900">
-                            </label>
                                 <input type="text" id="name" placeholder="Nombre"
-                                    class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
-                                    [(ngModel)]="selectedTrainer.name" formControlName="name">
+                                class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
+                                [(ngModel)]="selectedTrainer.name" formControlName="name">
+                            </label>
+                                <h3 *ngIf="form['name'].touched && form['name'].hasError('required')"
+                                class="text-red-600 mt-1">
+                                    El nombre es obligatorio
+                                </h3>
                         </div>
-                        <div class="flex text-center justify-center">
+                        <div class="flex text-center items-center flex-col justify-center">
                             <label for="surname" class="font-bold text-center text-3xl text-gray-900">
                                 <input type="text" id="surname" placeholder="Apellido"
                                     class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
                                     [(ngModel)]="selectedTrainer.surname" formControlName="surname">
                             </label>
+                            <h3 *ngIf="form['surname'].touched && form['surname'].hasError('required')"
+                            class="text-red-600 mt-1">
+                                El apellido es obligatorio
+                            </h3>
                         </div>
-                        <div class="flex text-center justify-center">
+                        <div class="flex text-center items-center flex-col justify-center">
                             <label for="email" class="font-bold text-center text-3xl text-gray-900">
                                 <input type="text" id="email" placeholder="Email"
                                     class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
                                     [(ngModel)]="selectedTrainer.email" formControlName="email">
                             </label>
+                            <h3 *ngIf="form['email'].touched && form['email'].hasError('required')"
+                            class="text-red-600 mt-1">
+                                La Email es obligatorio
+                            </h3>
                         </div>
-                        <div class="flex text-center justify-center">
+                        <div class="flex text-center items-center flex-col justify-center">
                             <label for="specialty" class="font-bold text-center text-3xl text-gray-900">
                                 <input type="text" id="specialty" placeholder="Especialidad"
                                     class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
                                     [(ngModel)]="selectedTrainer.specialty" formControlName="specialty">
                             </label>
                         </div>
+                        <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1 text-center">
+                            Rellena correctamente el formulario (*)
+                        </h3>
                         <div class="items-center text-center pt-5 pb-5">
                             <button type="submit"
                                 class="bg-red-600 hover:bg-red-700 text-white font-bold mr-3 ml-3 py-2 px-4 rounded-full">
                                 Guardar
                             </button>
-                            <button (click)="goBack()"
+                            <button (click)="goBack()" type="button"
                                 class="bg-red-600 hover:bg-red-700 text-white font-bold mr-3 ml-3 py-2 px-4 rounded-full">
                                 Volver
                             </button>
                         </div>
-
                     </div>
                 </div>
             </form>

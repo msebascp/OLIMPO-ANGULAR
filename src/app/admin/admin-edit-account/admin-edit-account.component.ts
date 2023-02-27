@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { DatabaseService } from '../../database/database.service';
 import { Location } from "@angular/common";
@@ -22,7 +22,11 @@ export class AdminEditAccountComponent {
   public selectedTrainer !: Trainer
 
   trainerForm!: FormGroup
-  showInvalidSubmit: boolean = false
+  showInvalidSubmit: boolean = false;
+  @ViewChild('fileInput')
+  fileInput!: ElementRef;
+  public image!: File;
+  public selectedImage: string = ''
 
   constructor(
     private route: ActivatedRoute,
@@ -44,7 +48,7 @@ export class AdminEditAccountComponent {
         name: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
         surname: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
         email: ["", [Validators.required, Validators.email]],
-        specialty: ["Ninguno", Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)],
+        specialty: ["Ninguna", Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)],
       }
     )
 
@@ -64,7 +68,26 @@ export class AdminEditAccountComponent {
     this.location.back();
   }
 
+  public changeImg(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  public onFileSelected(event: any): void {
+    if (event.target.files && event.target.files.length) {
+      this.image = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(this.image);
+      reader.onload = () => {
+        this.selectedImage = reader.result as string;
+      };
+    }
+  }
+
   public onSubmit(): void {
+    if (this.trainerForm.invalid) {
+      this.showInvalidSubmit = true
+      return;
+    }
     Swal.fire({
       title: "<h5 style='color:white'>" + '¿Seguro que quieres modificar tu cuenta?' + "</h5>",
       icon: 'warning',
@@ -89,7 +112,8 @@ export class AdminEditAccountComponent {
           email,
           specialty,
         };
-        this.auth.updatedTrainer(this.editTrainer).subscribe(_ => {
+        this.editTrainer.photo = this.selectedTrainer.photo
+        this.auth.updatedTrainer(this.editTrainer, this.image).subscribe(_ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Modificado' + "</h5>",
             text: 'Tu cuenta ha sido modificada',
