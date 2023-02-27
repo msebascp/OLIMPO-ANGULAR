@@ -11,6 +11,8 @@ export class MediaService {
   }
   instagram: string = 'instagram.com/olimpogymorihuela/'; // Declarar la propiedad y asignarle un valor inicial
   facebook: string = 'facebook.com/olimpogymorihuela/'; // Declarar la propiedad y asignarle un valor inicial
+  luMiVi: string = '09:00 - 12:00 / 15:00 - 21:00';
+  maJu: string = '17:00 - 21:00'
 
   mostrarValorInsta(): string {
     return this.instagram // Acceder al valor de la propiedad
@@ -24,6 +26,15 @@ export class MediaService {
     return this.facebook // Acceder al valor de la propiedad
 
   }
+
+  mostrarValorLuMiVi() : string {
+    return this.luMiVi
+  }
+
+  mostrarValormaJu() : string {
+    return this.maJu
+  }
+
 }
 
 

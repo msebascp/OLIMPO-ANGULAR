@@ -12,6 +12,8 @@ export class AdminAboutComponent {
   isLogin: boolean = false;
   @Input() instagram: string = '';
   @Input() facebook: string = '';
+  @Input() luMiVi: string = '';
+  @Input() maJu: string = '';
 
   constructor(
     private auth: AuthPassportService,
@@ -25,6 +27,9 @@ export class AdminAboutComponent {
         this.isLogin = true;
         this.instagram = this.mediaService.mostrarValorInsta();
         this.facebook = this.mediaService.mostrarValorFacebook();
+        this.luMiVi = this.mediaService.mostrarValorLuMiVi();
+        this.maJu = this.mediaService.mostrarValormaJu();
+
       }
     });
   }

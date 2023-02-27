@@ -11,6 +11,7 @@ import { Customer } from 'src/app/interfaces/customer';
 export class CustomerAccountComponent {
   isLogin: boolean = false;
   customer: Customer | undefined;
+  infoAuth!: { isLogin:boolean, isCustomer:boolean };
 
   constructor(
     private auth: AuthPassportService,
@@ -29,5 +30,13 @@ export class CustomerAccountComponent {
     this.auth.dataCustomer().subscribe(customer => {
       this.customer = customer;
     });
+}
+
+public endPoint() {
+  if (this.infoAuth.isLogin && this.infoAuth.isCustomer) {
+    this.auth.endPointCustomer();
+    console.log('holaa');
+  } 
+
 }
 }
