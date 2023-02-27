@@ -32,15 +32,9 @@ export class LoginTrainerComponent {
   }
 
   ngOnInit(){
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (!isLogin){
-        this.auth.checkLogin().then((isLogin) => {
-          if (!isLogin){
-            this.isLogin = false;
-          }
-        });
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
   }
 
   get form() {

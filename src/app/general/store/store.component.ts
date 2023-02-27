@@ -3,6 +3,8 @@ import {Blog} from "../../interfaces/blog";
 import {DatabaseService} from "../../database/database.service";
 import {Product} from "../../interfaces/product";
 import {ProductService} from "../../database/product.service";
+import {AuthPassportService} from "../../database/auth-passport.service";
+import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-store',
@@ -14,6 +16,7 @@ export class StoreComponent {
 
   constructor (
     private productService: ProductService,
+    private auth:AuthPassportService
   ) { }
 
   ngOnInit(): void {

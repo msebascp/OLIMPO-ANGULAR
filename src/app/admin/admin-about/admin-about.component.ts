@@ -22,15 +22,12 @@ export class AdminAboutComponent {
     }
 
   ngOnInit(){
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.instagram = this.mediaService.mostrarValorInsta();
-        this.facebook = this.mediaService.mostrarValorFacebook();
-        this.luMiVi = this.mediaService.mostrarValorLuMiVi();
-        this.maJu = this.mediaService.mostrarValormaJu();
-
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.instagram = this.mediaService.mostrarValorInsta();
+    this.facebook = this.mediaService.mostrarValorFacebook();
+    this.luMiVi = this.mediaService.mostrarValorLuMiVi();
+    this.maJu = this.mediaService.mostrarValormaJu();
   }
 }

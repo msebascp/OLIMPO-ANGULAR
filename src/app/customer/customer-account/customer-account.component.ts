@@ -19,12 +19,10 @@ export class CustomerAccountComponent {
   ) {
   }
   ngOnInit(){
-    this.auth.checkLogin().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.dataCustomer();
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.dataCustomer();
   }
   public dataCustomer() {
     this.auth.dataCustomer().subscribe(customer => {

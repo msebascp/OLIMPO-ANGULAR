@@ -11,6 +11,8 @@ import { DataTrainings } from '../interfaces/dataTrainings';
 import { Blog } from '../interfaces/blog';
 import { DataBlogs } from '../interfaces/dataBlogs';
 import {BasicResponse} from "../interfaces/BasicResponse";
+import { Payments } from '../interfaces/payments';
+import { DataPayments } from '../interfaces/dataPayments';
 
 
 @Injectable({
@@ -284,6 +286,18 @@ export class DatabaseService {
       'Content-Type': 'application/json',
     })
     return this.http.post<BasicResponse>(this.API_URL + `/payments/${id}/update`, {'date': date}, { headers: headers })
+  }
+
+  public getAllPaymentsById(id: number): Observable<Customer> {
+    return this.http.get<DataCustomer>(this.API_URL + `/customers/${id}/payments`).pipe(
+      map((data: DataCustomer) => {
+        return data.data
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    )
   }
 }
 

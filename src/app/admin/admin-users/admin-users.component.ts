@@ -32,15 +32,13 @@ export class AdminUsersComponent {
   ) { }
 
   ngOnInit(): void {
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
     this.today = new Date();
     console.log(this.today.getTime())
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getClientes();
-        this.searchCustomers();
-      }
-    });
+    this.getClientes()
+    this.searchCustomers()
   }
 
   public getClientes(): void {

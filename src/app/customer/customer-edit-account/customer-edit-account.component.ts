@@ -32,12 +32,10 @@ export class CustomerEditAccountComponent {
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLogin().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getCustomer()
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.getCustomer()
     this.customerForm = this.formBuilder.group(
       {
         name: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],

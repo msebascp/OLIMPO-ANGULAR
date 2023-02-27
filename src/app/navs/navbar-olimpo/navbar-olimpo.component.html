@@ -19,17 +19,59 @@
               *ngIf="!infoAuth.isLogin">
         <i class="fa fa-user text-3xl"></i>
       </button>
-      <!--Botón logueado-->
+      <!--Botón cliente logueado-->
       <button (click)="showOptions = !showOptions" (blur)="hide()"
-              *ngIf="infoAuth.isLogin">
+              *ngIf="infoAuth.isLogin && !infoAuth.isTrainer">
         <i class="fa fa-user text-3xl"></i>
       </button>
       <ul [ngStyle]="{'display': showOptions ? 'block' : 'none'}"
           class="absolute z-50 right-0 p-2 rounded-md bg-gray-600"
-          *ngIf="infoAuth.isLogin">
+          *ngIf="infoAuth.isLogin && !infoAuth.isTrainer">
         <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
-            [routerLink]="infoAuth.isTrainer ? '/admin/account' : '/customer/account'">
+            routerLink="customer/account">
           Mi cuenta
+        </li>
+        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+            routerLink="customer/trainings">
+          Mis entrenamientos
+        </li>
+        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+            routerLink="customer/trainer">
+          Mi entrenador
+        </li>
+        <li class="block w-max">
+          <button class="hover:bg-red-800 rounded-md p-2" (click)="logout()">
+            Cerrar sesión
+          </button>
+        </li>
+      </ul>
+      <!--Botón administrador logueado-->
+      <button (click)="showOptions = !showOptions" (blur)="hide()"
+              *ngIf="infoAuth.isLogin && infoAuth.isTrainer">
+        <i class="fa fa-user text-3xl"></i>
+      </button>
+      <ul [ngStyle]="{'display': showOptions ? 'block' : 'none'}"
+          class="absolute z-50 right-0 p-2 rounded-md bg-gray-600"
+          *ngIf="infoAuth.isLogin && infoAuth.isTrainer">
+        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+            routerLink="admin/account">
+          Mi cuenta
+        </li>
+        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+            routerLink="admin/users">
+          Usuarios
+        </li>
+        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+            routerLink="admin/editBlog">
+          Blog
+        </li>
+        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+            routerLink="admin/aboutSettings">
+          Sobre el gimnasio
+        </li>
+        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+            routerLink="admin/products">
+          Productos
         </li>
         <li class="block w-max">
           <button class="hover:bg-red-800 rounded-md p-2" (click)="logout()">
@@ -44,7 +86,7 @@
         [ngClass]="{'hidden' : !showDropdown}">
       <ul class="flex flex-col gap-3 w-full absolute bg-black p-3 z-50
           md:flex-row md:justify-evenly md:mt-0 md:static
-          lg:justify-start lg:gap-16 lg:pl-12">
+          lg:justify-center lg:gap-16 lg:pl-12">
         <li [ngClass]="{'text-red-700' : router.url == '/home'}" routerLink="/home"
             class="cursor-pointer hover:text-red-700">
           INICIO

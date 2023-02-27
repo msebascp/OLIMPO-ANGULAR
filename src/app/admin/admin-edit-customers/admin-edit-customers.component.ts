@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { DatabaseService } from '../../database/database.service';
 import { Customer } from '../../interfaces/customer';
 import { Location } from "@angular/common";
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Trainer } from '../../interfaces/trainer';
 import Swal from 'sweetalert2';
 import {AuthPassportService} from "../../database/auth-passport.service";
@@ -28,17 +28,14 @@ export class AdminEditCustomersComponent {
     private location: Location,
     private auth: AuthPassportService,
     private formBuilder: FormBuilder,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getCustomerById();
-        this.getAllTrainers();
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.getCustomerById();
+    this.getAllTrainers();
     this.customerForm = this.formBuilder.group(
       {
         name: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],

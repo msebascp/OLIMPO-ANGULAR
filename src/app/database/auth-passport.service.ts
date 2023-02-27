@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ResponseToken} from "../interfaces/responseToken";
-import {Observable, catchError, of, map, BehaviorSubject} from "rxjs";
+import {Observable, catchError, of, map, BehaviorSubject, forkJoin} from "rxjs";
 import {Router} from "@angular/router";
 import {Trainings} from "../interfaces/trainings";
 import {DataTrainings} from "../interfaces/dataTrainings";
 import {RegisterData} from "../interfaces/registerData";
-import { DataTrainer } from '../interfaces/dataTrainer';
-import { Trainer } from '../interfaces/trainer';
+import {DataTrainer} from '../interfaces/dataTrainer';
+import {Trainer} from '../interfaces/trainer';
 import {RegisterTrainerData} from "../interfaces/registerTrainerData";
-import { Customer } from '../interfaces/customer';
-import { DataCustomers } from '../interfaces/dataCustomers';
+import {Customer} from '../interfaces/customer';
+import {DataCustomers} from '../interfaces/dataCustomers';
+import {data} from "autoprefixer";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AuthPassportService {
   /**InfoAuth contiene la información sobre si el usuario está logueado o no, y si es un entrenador o no
    * Se ha usado BehaviorSubject por lo mismo que usamos Subject con el plus de que podemos darle
    * un valor por defecto*/
-  private infoAuth = new BehaviorSubject<{ isLogin:boolean, isTrainer:boolean }>({isLogin: false, isTrainer: false});
+  private infoAuth = new BehaviorSubject<{ isLogin: boolean, isTrainer: boolean }>({isLogin: false, isTrainer: false});
   private url: string = 'http://localhost:8000/api';
   private options = {
     headers: new HttpHeaders({
@@ -151,7 +152,7 @@ export class AuthPassportService {
       })
   }
 
-  logoutTrainer():void {
+  logoutTrainer(): void {
     this.http.get<ResponseToken>(`${this.url}/trainer/logout`, this.options)
       .subscribe(data => {
         console.log(data);
@@ -163,38 +164,38 @@ export class AuthPassportService {
   getTrainerByCustomer(): Observable<Trainer> {
     this.loadToken()
     console.log('El get Trainer by customer se ejecuta');
-    return this.http.get<DataTrainer>(`${this.url}/customer/trainer`,this.options)
-    .pipe(
-      map((data: DataTrainer) => {
-        return data.data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
-    )
+    return this.http.get<DataTrainer>(`${this.url}/customer/trainer`, this.options)
+      .pipe(
+        map((data: DataTrainer) => {
+          return data.data
+        }),
+        catchError(e => {
+          console.error(e);
+          return [];
+        }),
+      )
   }
 
   getAllTrainingsByCustomer(): Observable<Trainings[]> {
     this.loadToken()
     console.log('El get all trainers se ejecuta');
-    return this.http.get<DataTrainings>(`${this.url}/customer/trainings`,this.options)
-    .pipe(
-      map((data: DataTrainings) => {
-        return data.data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
-    )
+    return this.http.get<DataTrainings>(`${this.url}/customer/trainings`, this.options)
+      .pipe(
+        map((data: DataTrainings) => {
+          return data.data
+        }),
+        catchError(e => {
+          console.error(e);
+          return [];
+        }),
+      )
   }
 
-  sendVariable(isLogin: boolean, isTrainer:boolean) {
+  sendVariable(isLogin: boolean, isTrainer: boolean) {
     this.infoAuth.next({isLogin, isTrainer});
   }
 
-  getVariable(): Observable<{ isLogin:boolean, isTrainer:boolean }> {
+  getVariable(): Observable<{ isLogin: boolean, isTrainer: boolean }> {
     return this.infoAuth.asObservable();
   }
 
@@ -210,7 +211,7 @@ export class AuthPassportService {
     return this.http.post<ResponseToken>(`${this.url}/trainer/register`, registerData, this.options)
   }
 
-  pay(id:number):void {
+  pay(id: number): void {
     this.http.get<ResponseToken>(`${this.url}/customer/${id}/pay`, this.options)
       .subscribe(data => {
         console.log(data);
@@ -219,16 +220,16 @@ export class AuthPassportService {
 
   dataTrainer(): Observable<Trainer> {
     this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
-    return this.http.get<DataTrainer>(`${this.url}/trainer/me`,this.options)
-    .pipe(
-      map((data: DataTrainer) => {
-        return data.data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
-    )
+    return this.http.get<DataTrainer>(`${this.url}/trainer/me`, this.options)
+      .pipe(
+        map((data: DataTrainer) => {
+          return data.data
+        }),
+        catchError(e => {
+          console.error(e);
+          return [];
+        }),
+      )
   }
 
   public updatedTrainer( trainer: Trainer, image: File): Observable<Trainer> {
@@ -290,17 +291,56 @@ export class AuthPassportService {
 
   dataCustomer(): Observable<Customer> {
     this.options.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
-    return this.http.get<DataCustomers>(`${this.url}/customer/me`,this.options)
-    .pipe(
-      map((data: DataCustomers) => {
-        return data.data[0]
+    return this.http.get<DataCustomers>(`${this.url}/customer/me`, this.options)
+      .pipe(
+        map((data: DataCustomers) => {
+          return data.data[0]
 
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
-    )
+        }),
+        catchError(e => {
+          console.error(e);
+          return [];
+        }),
+      )
+  }
+
+  checkLogin2(): Observable<{ isLogin: boolean, isTrainer: boolean }> {
+    this.loadToken()
+    console.log('Se ejecuta el check login de cliente');
+    return this.http.get<ResponseToken>(`${this.url}/isLogin`, this.options)
+      .pipe(
+        map(data => {
+            return {isLogin: data.data.isLogin, isTrainer: data.data.isTrainer}
+          }
+        )
+      )
+  }
+
+  checkLoginTrainer2(): Observable<{ isLogin: boolean, isTrainer: boolean }> {
+    this.loadToken()
+    console.log('Se ejecuta el check login de cliente');
+    return this.http.get<ResponseToken>(`${this.url}/trainer/isLogin`, this.options)
+      .pipe(
+        map(data => {
+            return {isLogin: data.data.isLogin, isTrainer: data.data.isTrainer}
+          }
+        )
+      )
+  }
+
+  checkDouble(): Observable<{ isLogin: boolean, isTrainer: boolean }> {
+    return forkJoin([
+      this.checkLoginTrainer2(),
+      this.checkLogin2()
+    ]).pipe(
+      map(([data1, data2]) => {
+        if (data1.isLogin && data1.isTrainer) {
+          return { isLogin: true, isTrainer: true };
+        } else {
+          return data2;
+        }
+      })
+    );
   }
 
   endPointCustomer(): void {

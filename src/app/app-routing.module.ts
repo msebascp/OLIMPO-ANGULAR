@@ -26,6 +26,11 @@ import {StoreComponent} from "./general/store/store.component";
 import {ProductDetailComponent} from "./general/product-detail/product-detail.component";
 import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit-account.component';
 import { CustomerEditAccountComponent } from './customer/customer-edit-account/customer-edit-account.component';
+import { AdminEditImcComponent } from './admin/admin-edit-imc/admin-edit-imc.component';
+import { AdminAllPaymentsComponent } from './admin/admin-all-payments/admin-all-payments.component';
+import {CheckCustomerGuard} from "./guards/check-customer.guard";
+import {CheckTrainerGuard} from "./guards/check-trainer.guard";
+import {CheckLoginGuard} from "./guards/check-login.guard";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -34,31 +39,33 @@ const routes: Routes = [
   {path: 'blog', component: BlogComponent},
   {path: 'blog/details/:id', component: BlogDetailsComponent},
   {path: 'contactUs', component: ContactUsComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate:[CheckLoginGuard]},
 
   //{path: 'customer/trainings/:id', component: CustomerTrainingsComponent},
-  {path: 'customer/trainings', component: CustomerTrainingsComponent},
-  {path: 'customer/trainer', component: CustomerTrainerComponent},
-  {path: 'customer/account', component: CustomerAccountComponent},
-  {path: 'customer/editAccount', component: CustomerEditAccountComponent},
+  {path: 'customer/trainings', component: CustomerTrainingsComponent, canActivate:[CheckCustomerGuard]},
+  {path: 'customer/trainer', component: CustomerTrainerComponent, canActivate:[CheckCustomerGuard]},
+  {path: 'customer/account', component: CustomerAccountComponent, canActivate:[CheckCustomerGuard]},
+  {path: 'customer/editAccount', component: CustomerEditAccountComponent, canActivate:[CheckCustomerGuard]},
 
 
   //Admin
-  {path: 'admin/account', component: AdminAccountComponent},
-  {path: 'admin/editAccount', component: AdminEditAccountComponent},
-  {path: 'admin/users', component: AdminUsersComponent},
-  {path: 'admin/editBlog', component: AdminBlogComponent},
-  {path: 'admin/aboutSettings', component: AdminAboutComponent},
-  {path: 'admin/editCustomer/:id', component: AdminEditCustomersComponent},
-  {path: 'admin/editTraining/:id', component: AdminEditTrainingsComponent},
-  {path: 'admin/editPost/:id', component: AdminEditPostComponent},
-  {path: 'admin/login', component: LoginTrainerComponent},
-  {path: 'admin/register', component: RegisterComponent},
-  {path: 'admin/registerTrainer', component: RegisterTrainerComponent},
+  {path: 'admin/account', component: AdminAccountComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/editAccount', component: AdminEditAccountComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/users', component: AdminUsersComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/editBlog', component: AdminBlogComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/aboutSettings', component: AdminAboutComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/editCustomer/:id', component: AdminEditCustomersComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/editTraining/:id', component: AdminEditTrainingsComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/editPost/:id', component: AdminEditPostComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/login', component: LoginTrainerComponent, canActivate:[CheckLoginGuard]},
+  {path: 'admin/register', component: RegisterComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/registerTrainer', component: RegisterTrainerComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/editImc/:id', component: AdminEditImcComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/allPayments/:id', component: AdminAllPaymentsComponent, canActivate:[CheckTrainerGuard]},
 
   //Productos
-  {path: 'admin/products', component: AdminProductsComponent},
-  {path: 'admin/editProduct/:id', component: AdminEditProductComponent},
+  {path: 'admin/products', component: AdminProductsComponent, canActivate:[CheckTrainerGuard]},
+  {path: 'admin/editProduct/:id', component: AdminEditProductComponent, canActivate:[CheckTrainerGuard]},
   {path: 'store/product/:id', component: ProductDetailComponent},
   {path: 'store', component: StoreComponent},
 

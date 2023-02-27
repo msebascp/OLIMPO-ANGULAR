@@ -28,12 +28,10 @@ export class AdminBlogComponent {
   ) {
   }
   ngOnInit() {
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getAllPosts();
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.getAllPosts();
     this.postForm = this.formBuilder.group(
       {
         title: ["", [Validators.required]],
