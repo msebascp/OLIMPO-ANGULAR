@@ -26,6 +26,8 @@ import {StoreComponent} from "./general/store/store.component";
 import {ProductDetailComponent} from "./general/product-detail/product-detail.component";
 import { AdminEditAccountComponent } from './admin/admin-edit-account/admin-edit-account.component';
 import { CustomerEditAccountComponent } from './customer/customer-edit-account/customer-edit-account.component';
+import {CheckCustomerGuard} from "./guards/check-customer.guard";
+import {CheckTrainerGuard} from "./guards/check-trainer.guard";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
