@@ -43,12 +43,10 @@ export class AdminEditProductComponent {
 
 
   ngOnInit(): void {
-    this.auth.checkLoginTrainer().then((isLogin: any) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getProductById();
-      }
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
     });
+    this.getProductById();
   }
 
   public getProductById(): void {

@@ -21,7 +21,6 @@ export class StoreComponent {
 
   ngOnInit(): void {
     this.getAllProducts()
-    this.auth.checkDouble().subscribe(data  => console.log(data))
   }
 
 

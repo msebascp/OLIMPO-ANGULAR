@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthPassportService } from '../../database/auth-passport.service';
-import { debounceTime, distinctUntilChanged,  Observable, of, Subject, switchMap } from 'rxjs';
 import { DatabaseService } from '../../database/database.service';
 import { Trainings } from '../../interfaces/trainings';
 import Swal from 'sweetalert2';
@@ -22,12 +21,10 @@ export class AdminEditTrainingsComponent {
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getAllTrainingsByCustomer()
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.getAllTrainingsByCustomer()
   }
 
   public getAllTrainingsByCustomer() {
@@ -53,7 +50,7 @@ export class AdminEditTrainingsComponent {
       background: '#1F2937'
     }).then((result:any) => {
       if (result.isConfirmed) {
-        // Recogemos el id que tiene el boton
+        // Recogemos el 'id' que tiene el boton
         this.databaseService.deleteTraining(id).subscribe( _ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Borrado' + "</h5>",

@@ -37,12 +37,10 @@ export class AdminEditAccountComponent {
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getTrainer()
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.getTrainer()
     this.trainerForm = this.formBuilder.group(
       {
         name: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],

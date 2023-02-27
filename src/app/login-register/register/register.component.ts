@@ -25,12 +25,10 @@ export class RegisterComponent {
   }
 
   ngOnInit() {
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getAllTrainers();
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.getAllTrainers()
     this.registerForm = this.formBuilder.group(
       {
         name: ["", [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],

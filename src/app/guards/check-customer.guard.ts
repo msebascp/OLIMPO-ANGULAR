@@ -12,14 +12,19 @@ export class CheckCustomerGuard implements CanActivate {
     private router: Router
   ) {
   }
-
   canActivate(): Observable<boolean> {
     return this.auth.checkDouble().pipe(
       map(
         data => {
           if (data.isLogin && !data.isTrainer) {
+            this.auth.sendVariable(data.isLogin, data.isTrainer);
             return true
+          } else if (data.isLogin && data.isTrainer) {
+            this.auth.sendVariable(data.isLogin, data.isTrainer);
+            this.router.navigate(['/admin/account'])
+            return false
           } else {
+            this.auth.sendVariable(false, false);
             this.router.navigate(['/login'])
             return false
           }

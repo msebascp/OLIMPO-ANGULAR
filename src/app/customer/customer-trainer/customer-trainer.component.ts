@@ -20,12 +20,10 @@ export class CustomerTrainerComponent {
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLogin().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getTrainerByCustomer()
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.getTrainerByCustomer()
   }
 
   public getTrainerByCustomer() {

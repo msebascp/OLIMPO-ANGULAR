@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthPassportService } from '../../database/auth-passport.service';
@@ -33,12 +33,10 @@ export class AdminEditPostComponent {
 
 
   ngOnInit(): void {
-    this.auth.checkLoginTrainer().then((isLogin: any) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getPostById();
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.getPostById();
     this.postForm = this.formBuilder.group(
       {
         title: ["", [Validators.required]],
