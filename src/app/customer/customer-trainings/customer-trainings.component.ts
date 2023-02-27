@@ -20,11 +20,9 @@ export class CustomerTrainingsComponent {
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLogin().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
     this.getAllTrainingsByCustomer()
   }
 

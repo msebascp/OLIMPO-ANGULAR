@@ -17,12 +17,10 @@ export class AdminAccountComponent {
   ) {
   }
   ngOnInit(){
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.dataTrainer()
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.dataTrainer()
   }
   public dataTrainer() {
     this.auth.dataTrainer().subscribe(trainer => {
