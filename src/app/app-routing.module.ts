@@ -37,7 +37,7 @@ const routes: Routes = [
   {path: 'blog', component: BlogComponent},
   {path: 'blog/details/:id', component: BlogDetailsComponent},
   {path: 'contactUs', component: ContactUsComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate:[CheckLoginGuard]},
 
   //{path: 'customer/trainings/:id', component: CustomerTrainingsComponent},
   {path: 'customer/trainings', component: CustomerTrainingsComponent, canActivate:[CheckCustomerGuard]},
