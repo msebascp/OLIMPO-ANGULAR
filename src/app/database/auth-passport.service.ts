@@ -353,4 +353,15 @@ export class AuthPassportService {
         this.router.navigate(['/home']);
       })
   }
+
+  endPointTrainer(): void {
+    this.loadToken()
+    console.log('El endPoint de entrenadores se ejecuta');
+    this.http.get<ResponseToken>(`${this.url}/endPointTrainer`, this.options)
+      .subscribe(data => {
+        console.log(data);
+        this.sendVariable(false, false);
+        this.router.navigate(['/home']);
+      })
+  }
 }
