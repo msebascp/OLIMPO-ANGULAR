@@ -1,43 +1,72 @@
 <loading *ngIf="!isLogin"></loading>
-<navbar-admin *ngIf="isLogin"></navbar-admin>
-<form *ngIf="isLogin" [formGroup]="imcForm" (ngSubmit)="onSubmit()" class="py-6 flex flex-row justify-center sm:py-12 space-x-56">
-    <div class="relative py-3 my-32">
+<form *ngIf="isLogin" [formGroup]="imcForm" (ngSubmit)="onSubmit()" class="py-6 flex flex-col md:flex-row items-center justify-center sm:py-12 gap-24">
+    <div class="relative py-3 mx-10">
         <div
-            class="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl">
+            class="absolute inset-0 bg-gradient-to-r from-red-500 to-red-800 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl">
         </div>
-        <div class="relative px-4 py-10 bg-white shadow-lg rounded-3xl sm:p-20">
-            <div class="max-w-md mx-auto">
+        <div class="relative bg-white shadow-lg rounded-3xl p-12">
+            <div class="max-w-md mx-auto gap-10">
                 <div>
-                    <h1 class="text-2xl font-semibold"></h1>
+                    <h1 class="text-2xl font-semibold text-center">Calcular IMC</h1>
                 </div>
                 <div class="divide-y divide-gray-200">
-                    <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                    <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 gap-10">
                         <div class="relative">
-                            <input type="text" id="nombre" name="nombre"
-                                class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                                placeholder="Nombre" [(ngModel)]="selectedCustomer.name" formControlName="name"/>
-                            <label for="nombre"
-                                class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Nombre</label>
+                            <div class="flex flex-row justify-center items-center align-middle my-5">
+                                <h1 class="relative p-4">Cliente: <span class="underline mx-2">{{ selectedCustomer.name}} {{selectedCustomer.surname}}</span></h1>
+                            </div>
                         </div>
-                        <div class="relative">
-
+                        <div class="flex flex-col justify-center align-middle items-center">
+                            <h3 class="text-lg text-gray-800">Altura</h3>
+                            <div class="flex flex-row justify-center align-middle items-center">
+                                <button type="button" (click)="restarAltura()" (mousedown)="startLessAltura()" (mouseup)="stopLessAltura()" class="bg-red-500 hover:bg-red-400  rounded-lg px-4 py-1 mx-3 my-1 shadow-2xl"><i class="fa fa-minus text-lg text-black"></i></button>
+                                <span *ngIf="imcRecord.height !== null">{{ imcRecord.height }} cm</span>
+                                <input class="hidden" type="text" name="height" [(ngModel)]="imcRecord.height" formControlName="height">
+                                <span *ngIf="imcRecord.height === null">150 cm</span>
+                                <button type="button"  (click)="sumarAltura()" (mousedown)="startIncrementAltura()" (mouseup)="stopIncrementAltura()" class="bg-red-500 hover:bg-red-400  rounded-lg px-4 py-1 mx-3 my-1 shadow-2xl"><i class="fa fa-plus text-lg text-black"></i></button>
+                            </div>
                         </div>
-                        <div class="relative">
-
+                        <div class="flex flex-col justify-center align-middle items-center">
+                            <h3 class="text-lg text-gray-800">Peso</h3>
+                            <div class="flex flex-row justify-center align-middle items-center">
+                                <button type="button"  (click)="restarPeso()" (mousedown)="startLessPeso()" (mouseup)="stopLessPeso()" class="bg-red-500 hover:bg-red-400  rounded-lg px-4 py-1 mx-3 my-1 shadow-2xl"><i class="fa fa-minus text-lg text-black"></i></button>
+                                <span *ngIf="imcRecord.weight !== null">{{ imcRecord.weight }} kg</span>
+                                <input class="hidden" type="text" name="weight" [(ngModel)]="imcRecord.weight" formControlName="weight">
+                                <span *ngIf="imcRecord.weight === null">50 kg</span>
+                                <button type="button"  (click)="sumarPeso()" (mousedown)="startIncrementPeso()" (mouseup)="stopIncrementPeso()" class="bg-red-500 hover:bg-red-400 rounded-lg px-4 py-1 mx-3 my-1 shadow-2xl"><i class="fa fa-plus text-lg text-black"></i></button>
+                            </div>
                         </div>
-                        <div class="relative">
-
-                        </div>
-                        <div class="relative">
-                            <p class="text-center font-semibold"></p>
+                        <div class="flex flex-row justify-center align-middle items-center gap-5">
+                            <button type="button" (click)="borrar()" class="text-white rounded-md px-2 py-1 bg-red-500 hover:bg-red-400">Borrar</button>
+                            <button type="submit" class="text-white rounded-md px-2 py-1 bg-green-500 hover:bg-green-400">Calcular</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="relative px-4 py-10 bg-white shadow-lg rounded-3xl sm:p-20">
-        <div class="relative">
-        </div>
+    <div class="bg-white rounded-xl p-10 flex flex-col justify-center items-center align-middle mx-6">
+        <h1 class="text-black text-2xl m-2 text-center">Historial de {{ selectedCustomer.name }} {{ selectedCustomer.surname }}</h1>
+        <ul>
+            <li class="mb-3 text-center border-b-2 p-2 border-gray-600" *ngFor="let imc of imcRecords">
+                <span *ngIf="imc !== undefined">El día {{imc.weighing_date | date:'dd/MM/yyyy'}} media {{imc.height}} cm, pesaba {{imc.weight}} kg y su IMC era de {{ imc.imc }} </span>
+            </li>
+        </ul>
+        <button type="button" (click)="deleteImcRecord()"
+        class=" m-5 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-r from-red-400 to-red-700 hover:from-red-300 hover:to-red-600 hover:text-white text-white  focus:outline-none focus:ring-pink-200 ">
+            <span
+            class="relative px-5 py-2.5 transition-all ease-in duration-75  rounded-md">
+            Borrar historial
+            </span>
+        </button>
     </div>
 </form>
+<div *ngIf="isLogin" class="flex justify-center items-center align-middle">
+    <button type="button" (click)="goBack()"
+    class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-r from-red-300 to-red-600 group-hover:from-red-300 group-hover:to-red-600 hover:text-white text-white  focus:outline-none focus:ring-pink-200 ">
+        <span
+        class="relative px-5 py-2.5 transition-all ease-in duration-75  bg-gray-800 rounded-md group-hover:bg-opacity-0">
+        Volver
+        </span>
+    </button>
+</div>

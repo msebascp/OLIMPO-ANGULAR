@@ -24,12 +24,10 @@ export class AdminAllPaymentsComponent {
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getCustomerById()
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.getCustomerById();
   }
 
   public getCustomerById(): void {

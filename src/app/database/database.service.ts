@@ -13,6 +13,7 @@ import { DataBlogs } from '../interfaces/dataBlogs';
 import {BasicResponse} from "../interfaces/BasicResponse";
 import { Payments } from '../interfaces/payments';
 import { DataPayments } from '../interfaces/dataPayments';
+import { ImcRecord } from '../interfaces/imcRecord';
 
 
 @Injectable({
@@ -72,6 +73,45 @@ export class DatabaseService {
     let url = this.API_URL + `/customers`;
     if (id !== undefined) {
       url += `/${id}/trainers`
+    }
+    return this.http.get<DataCustomer>(url).pipe(
+      map((data: DataCustomer) => {
+        return data.data;
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
+  }
+
+  public deleteImcRecord(id: number): Observable<ImcRecord> {
+    return this.http.delete<ImcRecord>(this.API_URL+`/imcRecords/${id}`).pipe(
+      catchError(e => {
+        console.error(e);
+        return [];
+      })
+    );
+  }
+
+  public createIMCcalculation(imcForm: ImcRecord): Observable<ImcRecord> {
+    let url = this.API_URL + `/imcRecords?height=${imcForm.height}&weight=${imcForm.weight}&imc=${imcForm.imc}&customer_id=${imcForm.customer_id}`
+  
+    return this.http.post<ImcRecord>(url, imcForm).pipe(
+      map((data: ImcRecord) => {
+        return data;
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
+  }
+
+  public getImcrecordByCustomer(id: number): Observable<Customer> {
+    let url = this.API_URL + `/customers`;
+    if (id !== undefined) {
+      url += `/${id}/imcRecords`
     }
     return this.http.get<DataCustomer>(url).pipe(
       map((data: DataCustomer) => {

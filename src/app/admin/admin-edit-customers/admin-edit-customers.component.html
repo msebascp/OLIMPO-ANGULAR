@@ -55,23 +55,21 @@
             placeholder="Entrenamiento no asignado" [(ngModel)]="selectedCustomer.typeTraining"
             formControlName="typeTraining">
     </div>
-    <h3 *ngIf="showInvalidSubmit"
-    class="text-red-600 mt-1">
-    Rellena correctamente el formulario (*)
+    <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1">
+        Rellena correctamente el formulario (*)
     </h3>
+    <button type="submit" (blur)="showInvalidSubmit = false"
+        class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
+        <span
+            class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0">
+            Editar Cliente
+        </span>
+    </button>
     <button type="button" (click)="goBack()"
         class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-white  focus:outline-none focus:ring-pink-200 ">
         <span
             class="relative px-5 py-2.5 transition-all ease-in duration-75  bg-gray-800 rounded-md group-hover:bg-opacity-0">
             Cancelar
-        </span>
-    </button>
-    <button type="submit"
-        (blur)="showInvalidSubmit = false"
-        class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
-        <span
-            class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0">
-            Editar Cliente
         </span>
     </button>
 </form>

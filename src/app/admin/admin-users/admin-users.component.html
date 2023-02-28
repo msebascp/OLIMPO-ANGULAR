@@ -75,7 +75,7 @@
             {{ customer.name }}
           </th>
           <td *ngIf="customer.typeTraining === null" class="px-6 py-4">
-            Entrenamiento no asignado
+            Ninguno
           </td>
           <td *ngIf="customer.typeTraining !== null" class="px-6 py-4">
             {{ customer.typeTraining }}
@@ -84,7 +84,7 @@
             {{ customer.trainer.name }}
           </td>
           <td *ngIf="customer.trainer === undefined" class="px-6 py-4">
-            Entrenador no asignado
+            Ninguno
           </td>
           <td class="px-6 py-4">
             <div *ngFor="let payment of customer.payment ? customer.payment : []" class="flex">
@@ -118,40 +118,42 @@
             {{ customer.nextPayment | date:'dd/MM/yyyy' }}
           </td>
           <td class="px-6 py-4">
-            <input (change)="onFileChange($event, customer.id)"
+            <div class="flex flex-row justify-center items-center align-middle">
+              <input (change)="onFileChange($event, customer.id)"
               class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
               type="file">
             <button><i (click)="saveTraining()"
-                class="fa fa-upload px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                class="fa fa-upload px-2 text-xl text-gray-300 hover:text-gray-500"></i><span
                 class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip translate-x-12 -translate-y-9">Subir
                 Entrenamiento</span>
             </button>
+            </div>
           </td>
-          <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
+          <td class="px-6 py-4 flex flex-row justify-end items-center align-middle">
             <button (click)="pay(customer.id)">
-              <i class="fa fa-euro px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+              <i class="fa fa-euro px-2 text-2xl text-gray-300 hover:text-gray-500"></i><span
                 class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip -translate-x-12 -translate-y-9">Pagar</span>
             </button>
             <button>
-              <i routerLink="/admin/allPayments/{{ customer.id }}" class="fa fa-file px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+              <i routerLink="/admin/allPayments/{{ customer.id }}" class="fa fa-file px-2 text-2xl text-gray-300 hover:text-gray-500"></i><span
                 class="absolute bg-gray-900 text-sm text-white p-2 rounded tailwind-tooltip -translate-x-32 -translate-y-9">Historial de Pagos</span>
             </button>
             <button><i routerLink="/admin/editTraining/{{ customer.id }}"
-                class="fa fa-file-pdf-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                class="fa fa-file-pdf-o px-2 text-2xl text-gray-300 hover:text-gray-500"></i><span
                 class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-36 md:-translate-x-44 -translate-y-9">Editar
                 Entrenamientos</span>
             </button>
             <button><i routerLink="/admin/editImc/{{ customer.id }}"
-              class="fa fa-calculator px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+              class="fa fa-calculator px-2 text-2xl text-gray-300 hover:text-gray-500"></i><span
               class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 md:-translate-x-32 -translate-y-9">Calcular IMC</span>
             </button>
             <button><i routerLink="/admin/editCustomer/{{ customer.id }}"
-                class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                class="fa fa-pencil-square-o px-2 text-2xl text-gray-300 hover:text-gray-500"></i><span
                 class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 md:-translate-x-24 -translate-y-9">Editar
                 Cliente</span>
             </button>
             <button><i (click)="deleteCustomer(customer.id)"
-                class="fa fa-trash px-2 text-xl text-gray-700 hover:text-gray-400"></i><span
+                class="fa fa-trash px-2 text-2xl text-gray-300 hover:text-gray-500"></i><span
                 class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 -translate-y-12">Borrar
                 Cliente</span>
             </button>
