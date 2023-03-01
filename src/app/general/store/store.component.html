@@ -1,23 +1,60 @@
-<div class="flex justify-center flex-col items-center">
-  <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white md:text-2xl lg:text-4xl text-center my-6">
-    <span class="uppercase text-transparent bg-clip-text bg-gradient-to-r to-white from-red-800 text-3xl">PRODUCTOS</span>
-    <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
-      ¡Bienvenidos a nuestro blog de deporte y salud! Aquí encontrarás todo lo que necesitas para llevar una vida activa y saludable,
-      desde consejos de entrenamiento y nutrición hasta las últimas noticias y tendencias en el mundo del fitness. Únete a nuestra
-      comunidad y comienza a vivir tu mejor vida hoy mismo.
-    </p>
-  </h2>
-  <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 w-full px-5 md:px-14 gap-5">
-    <li *ngFor="let product of products">
-      <a routerLink="/store/product/{{ product.id }}">
-        <div class=" w-full bg-center h-52 md:h-72 mb-24 rounded hover:ease-in duration-300 hover:scale-105 bg-gray-100">
-          <p class="font-extrabold text-2xl text-black border-white border-t-4 border-r-4 border-l-4 p-3 text-center rounded-t ">{{ product.name }}</p>
-          <div  class="  hover:contrast-125 flex justify-center items-center bg-no-repeat w-full bg-center bg-cover h-full  rounded" style="background-image: url('http://localhost:8000{{product.photo}}');">
-          </div>
-          <p routerLink="/store/product/{{product.id}}" class="bg-gray-100 align-bottom w-full h-10 items-end rounded-b border-r-4 border-l-4 text-black border-white p-3 border-b-4 font-semibold">Ver más...</p>
-        </div>
-      </a>
-    </li>
-  </ul>
+<input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden=""
+  checked="checked">
+<div class="carousel-item absolute opacity-0" style="height:50vh;">
+  <div class="block h-full w-full mx-auto pt-6 md:pt-0 md:items-center bg-cover bg-right"
+    style="background-image: url('https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">
+
+    <div class="container mx-auto">
+      <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
+        <p class="text-white text-2xl my-4">Stripy Zig Zag Jigsaw Pillow and Duvet Set</p>
+        <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-red-700 hover:border-"
+          href="#">view product</a>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+<section class="bg-transparent py-8">
+
+  <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+
+    <nav id="store" class="w-full z-30 top-0 px-6 py-1 text-center items-center">
+      <div class="w-full container mx-auto flex flex-wrap text-center items-center justify-center mt-0 px-2 py-3">
+
+        <h2 class="uppercase tracking-wide font-bold text-center text-neutral-300 text-xl ">
+          Productos que podrás encontrar en nuestro gimnasio
+        </h2>
+      </div>
+    </nav>
+
+    <div class="w-full rounded-lg bg-neutral-800 opacity-80 mx-6">
+      <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 w-full px-5 md:px-14 gap-5">
+        <li *ngFor="let product of products">
+          <img class="hover:grow hover:shadow-lg rounded-lg" src='http://localhost:8000{{product.photo}}'>
+          <a routerLink="/store/product/{{ product.id }}">
+            <p class="text-white hover:text-red-700">
+              {{product.name}}
+            </p>
+            <p class="text-neutral-400">
+              {{product.price}} €
+            </p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="bg-transparent py-3 text-center">
+
+  <div class="container py-8 px-6 mx-auto">
+
+    <p class="my-4 text-red-700">En nuestro gimnasio tratamos la filosofía del tú a tú, por lo tanto estos
+      productos solo están disponible para comprar en físico.
+    </p>
+
+  </div>
+
+</section>
 <app-footer></app-footer>
