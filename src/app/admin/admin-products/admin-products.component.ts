@@ -28,12 +28,10 @@ export class AdminProductsComponent {
   ) {
   }
   ngOnInit() {
-    this.auth.checkLoginTrainer().then((isLogin) => {
-      if (isLogin) {
-        this.isLogin = true;
-        this.getAllProducts();
-      }
-    });
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
+    this.getAllProducts();
     this.productForm = this.formBuilder.group(
       {
         name: ["", [Validators.required]],
