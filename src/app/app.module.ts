@@ -39,6 +39,7 @@ import { NavbarOlimpoComponent } from './navs/navbar-olimpo/navbar-olimpo.compon
 import { AdminEditImcComponent } from './admin/admin-edit-imc/admin-edit-imc.component';
 import { AdminAllPaymentsComponent } from './admin/admin-all-payments/admin-all-payments.component';
 import { ForgotPasswordComponent } from './login-register/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './login-register/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { ForgotPasswordComponent } from './login-register/forgot-password/forgot
     AdminEditImcComponent,
     AdminAllPaymentsComponent,
     ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

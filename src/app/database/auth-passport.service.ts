@@ -11,7 +11,6 @@ import {Trainer} from '../interfaces/trainer';
 import {RegisterTrainerData} from "../interfaces/registerTrainerData";
 import {Customer} from '../interfaces/customer';
 import {DataCustomers} from '../interfaces/dataCustomers';
-import {data} from "autoprefixer";
 
 @Injectable({
   providedIn: 'root'

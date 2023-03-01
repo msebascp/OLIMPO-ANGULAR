@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ResponseToken} from "../../interfaces/responseToken";
-import {AuthPassportService} from "../../database/auth-passport.service";
 import {Router} from "@angular/router";
-import Swal from "sweetalert2";
+import {ResetPasswordService} from "../../database/reset-password.service";
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,16 +11,15 @@ import Swal from "sweetalert2";
 })
 export class ForgotPasswordComponent {
   showInvalidSubmit: boolean = false
-  token: string = ''
-  loginForm!: FormGroup
+  emailForm!: FormGroup
   response!: ResponseToken
 
   constructor(
-    private auth: AuthPassportService,
+    private passwordMethods: ResetPasswordService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {
-    this.loginForm = this.formBuilder.group(
+    this.emailForm = this.formBuilder.group(
       {
         email: ["", [Validators.required, Validators.email]]
       }
@@ -32,14 +30,15 @@ export class ForgotPasswordComponent {
   }
 
   get form() {
-    return this.loginForm.controls
+    return this.emailForm.controls
   }
 
   sendEmail(){
-    if (this.loginForm.invalid) {
+    if (this.emailForm.invalid) {
       this.showInvalidSubmit = true
       return;
     }
-    console.log('hola')
+    let email = this.emailForm.get('email')?.value
+    this.passwordMethods.forgotPassword(email)
   }
 }
