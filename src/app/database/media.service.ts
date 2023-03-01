@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, catchError, map, Observable } from 'rxjs';
+import { Information } from '../interfaces/information';
+import { DataInformation } from '../interfaces/dataInformation';
 
 @Injectable({
   providedIn: 'root'
@@ -7,39 +10,31 @@ import { Injectable } from '@angular/core';
 export class MediaService {
   constructor(
     private http: HttpClient
-  ) {
-  }
-  instagram: string = 'instagram.com/olimpogymorihuela/'; // Declarar la propiedad y asignarle un valor inicial
-  facebook: string = 'facebook.com/olimpogymorihuela/'; // Declarar la propiedad y asignarle un valor inicial
-  luMiVi: string = '09:00 - 12:00 / 15:00 - 21:00';
-  maJu: string = '17:00 - 21:00'
+  ) { }
+  private API_URL = 'http://localhost:8000/api';
 
-  mostrarValorInsta(): string {
-    return this.instagram // Acceder al valor de la propiedad
-  }
-
-  editedText: string = '';
-  editing: boolean = false;
-
-
-  mostrarValorFacebook(): string {
-    return this.facebook // Acceder al valor de la propiedad
-
+  getMedia(): Observable<Information[]> {
+    return this.http.get<DataInformation>(this.API_URL + '/information').pipe(
+      map((data: DataInformation) => {
+        return data.data;
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    );
   }
 
-  mostrarValorLuMiVi() : string {
-    return this.luMiVi
-  }
-
-  mostrarValormaJu() : string {
-    return this.maJu
+  editMedia(id: number, media: Information): Observable<Information> {
+    return this.http.post<Information>(this.API_URL + `/information/${id}?instagram=${media.instagram}&facebook=${media.facebook}&horario1=${media.horario1}&horario2=${media.horario2}`, media).pipe(
+      map((data: Information) => {
+        return data;
+      }),
+      catchError(e => {
+        console.error(e);
+        return [];
+      }),
+    )
   }
 
 }
-
-
-//variable para insta y face tipo string
-
-// funcion para opterner
-//función para edit
-

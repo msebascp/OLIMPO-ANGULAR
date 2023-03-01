@@ -1,92 +1,61 @@
 <loading *ngIf="!isLogin"></loading>
-<div *ngIf="isLogin" class="w-full h-full">
-   <div class="w-full border-b-4 mt-4 border-white">
-      <a class="md:text-lg lg:text-xl mt-20 md:font-normal text-3xl ml-5 md:border-0 text-red-600">GESTIÓN DE REDES
-         SOCIALES</a>
-   </div>
-   <div class="h-96 relative mt-">
-      <div class="w-96 mx-auto" style="scroll-snap-type: x mandatory;">
-         <div class="">
-            <input class="sr-only peer" type="radio" name="carousel" id="carousel-1" checked />
-            <div
-               class="w-96 absolute flex-row justify-center items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent rounded-lg shadow-lg transition-all duration-300 opacity-0 peer-checked:opacity-100 peer-checked:z-10 z-0">
-               <img class="m-24 w-44 h-44 items-center"
-                    src="../../../assets/instagram-logo-png-transparent-background-1024x1024-1.png" alt="" />
-               <div class="py-4 px-8">
-                  <h1 class="hover:cursor-pointer mt-2 text-white font-bold text-2xl tracking-tight">INSTAGRAM
-                  </h1>
-                  <input class="w-80 pl-5 pr-5" type="text" [(ngModel)]="instagram">
-                     <button><i routerLink=""
-                        class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-400"></i></button>
-                        <div class="absolute top-1/2 w-full flex justify-between z-20">
-                           <label for="carousel-2"
-                              class="inline-block text-red-600 cursor-pointer -translate-x-5 bg-white rounded-full shadow-md active:translate-y-0.5">
-                              <svg class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-                                 <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
-                                    clip-rule="evenodd" />
-                              </svg>
-                           </label>
-                           <label for="carousel-2"
-                              class="inline-block text-red-600 cursor-pointer translate-x-5 bg-white rounded-full shadow-md active:translate-y-0.5">
-                              <svg class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-                                 <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
-                                    clip-rule="evenodd" />
-                              </svg>
-                           </label>
-                        </div>
+<form *ngIf="isLogin" [formGroup]="aboutForm" (ngSubmit)="onSubmit()" class="w-full h-full">
+   <div class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-transparent mx-20 rounded-lg">
+      <div class="max-w-4xl flex justify-center items-center h-auto flex-wrap mx-auto my-20 rounded-lg">
+         <div class="bg-white p-4 rounded-3xl bg-opacity-80 shadow-xl flex justify-center align-middle items-center mb-14 md:mb-10">
+            <h1 class="text-black text-3xl font-bold text-center">REDES SOCIALES</h1>
+         </div>
+         <div class="w-full rounded-lg shadow-2xl bg-white opacity-75 mx-0">
+            <div class="p-4 md:p-12 text-center lg:text-left">
+               <div class="flex flex-col md:flex-row justify-center items-center align-middle gap-20">
+                  <div>
+                     <div class="block rounded-full shadow-xl mx-auto -mt-16 h-24 w-24 md:h-48 md:w-48 bg-cover bg-center"
+                        style="background-image: url('../../../assets/instagram-logo-png-transparent-background-1024x1024-1.png')">
                      </div>
+                     <h1 class="text-lg md:text-3xl font-bold pt-8 ">INSTAGRAM</h1>
+                     <div class="mx-auto  w-4/5 pt-3 border-b-2 border-red-800 opacity-25"></div>
+                     <input type="text" [(ngModel)]="media.instagram" formControlName="instagram">
                   </div>
-                  <!-- second -->
-                  <div class="">
-                     <input class="sr-only peer" type="radio" name="carousel" id="carousel-2" />
-                     <!-- content #2 -->
-                     <div
-                        class="w-96 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-transparent rounded-lg shadow-lg transition-all duration-300 opacity-0 peer-checked:opacity-100 peer-checked:z-10 z-0">
-                        <img class="m-24 rounded-t-lg w-44 h-44 items-center" src="../../../assets/Logo_de_Facebook.png" alt="" />
-                        <div class="py-4 px-8">
-                           <h1 class="hover:cursor-pointer mt-2 text-white font-bold text-2xl tracking-tight">
-                              FACEBOOK
-                           </h1>
-                           <input class="w-80 pl-5 pr-5" type="text" [(ngModel)]="facebook">
-                     <button><i routerLink=""
-                        class="fa fa-pencil-square-o px-2 text-xl text-gray-400 hover:text-blue-400"></i></button>
-                        </div>
-                        <!-- controls -->
-                        <div class="absolute top-1/2 w-full flex justify-between z-20">
-                           <label for="carousel-1"
-                              class="inline-block text-blue-600 cursor-pointer -translate-x-5 bg-white rounded-full shadow-md active:translate-y-0.5">
-                              <svg class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-                                 <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
-                                    clip-rule="evenodd" />
-                              </svg>
-                           </label>
-                           <label for="carousel-2"
-                              class="inline-block text-blue-600 cursor-pointer translate-x-5 bg-white rounded-full shadow-md active:translate-y-0.5">
-                              <svg class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-                                 <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
-                                    clip-rule="evenodd" />
-                              </svg>
-                           </label>
-                        </div>
+                  <div>
+                     <div class="block rounded-full shadow-xl mx-auto -mt-16 h-24 w-24 md:h-48 md:w-48 bg-cover bg-center"
+                        style="background-image: url('../../../assets/Logo_de_Facebook.png')">
                      </div>
+                     <h1 class="text-lg md:text-3xl font-bold pt-8 ">FACEBOOK</h1>
+                     <div class="mx-auto  w-4/5 pt-3 border-b-2 border-red-800 opacity-25"></div>
+                     <input type="text" [(ngModel)]="media.facebook" formControlName="facebook">
                   </div>
                </div>
             </div>
          </div>
-         <div class="w-full border-b-4 mt-4 border-white">
-            <a class="md:text-lg lg:text-xl mt-20 md:font-normal text-3xl ml-5 md:border-0 text-red-600">HORARIO DEL GIMNASIO</a>
+      </div>
+   </div>
+   <div class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-transparent mx-20 rounded-lg">
+      <div class="max-w-4xl flex justify-center items-center h-auto flex-wrap mx-auto my-20 rounded-lg">
+         <div class="bg-white p-4 rounded-3xl bg-opacity-80 shadow-xl flex justify-center align-middle items-center my-3">
+            <h1 class="text-black text-3xl font-bold text-center">HORARIO</h1>
          </div>
-
-         <div class="flex flex-col items-center align-middle w-full p-6 border shadow-lg border-gray-800 rounded-lg bg-transparent h-96">
-          
-            <h3 class="mb-2 text-xl font-bold tracking-tight text-red-800 text-center">LUNES, MIÉRCOLES Y VIERNES:</h3>
-            <input class="mb-2 text-xl font-bold tracking-tight w-72 pl-5 pr-5 text-center" type="text" [(ngModel)]="luMiVi">
-            <h3 class="mb-2 text-xl font-bold tracking-tight text-red-800 text-center">MARTES Y JUEVES:</h3>
-            <input class="mb-2 text-xl font-bold tracking-tight w-72 pl-5 pr-5 text-center" type="text" [(ngModel)]="maJu">
-        </div>
-         
-</div>
+         <div class="w-full rounded-lg shadow-2xl bg-white opacity-75 mx-0">
+            <div class="p-4 md:p-12 text-center lg:text-left">
+               <div class="flex flex-col md:flex-row justify-center items-center align-middle gap-20">
+                  <div>
+                     <h1 class="text-xl md:text-3xl font-bold pt-8 text-center">LUNES, MIÉRCOLES Y VIERNES:</h1>
+                     <div class="mx-auto w-4/5 pt-3 border-b-2 border-red-800 opacity-25"></div>
+                     <input type="text" [(ngModel)]="media.horario1" formControlName="horario1" class="w-full text-center">
+                  </div>
+                  <div>
+                     <h1 class="text-xl md:text-3xl font-bold pt-8 text-center">MARTES Y JUEVES:</h1>
+                     <div class="mx-auto w-4/5 pt-3 border-b-2 border-red-800 opacity-25"></div>
+                     <input type="text" [(ngModel)]="media.horario2" formControlName="horario2" class="w-full text-center">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1">
+      Rellena correctamente el formulario (*)
+   </h3>
+   <div class="flex justify-center align-middle items-center">
+      <button (blur)="showInvalidSubmit = false" class="bg-white p-4 rounded-3xl border-4 bg-opacity-60 text-3xl font-bold border-white hover:bg-opacity-90 text-black shadow-xl flex justify-center align-middle items-center mb-5 mx-52" type="submit">Actualizar datos</button>
+   </div>
+</form>

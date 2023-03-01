@@ -1,6 +1,7 @@
 <loading *ngIf="!isLogin"></loading>
-<div *ngIf="isLogin" class="flex flex-row w-full justify-center items-center align-middle gap-9 sm:gap-32 my-9">
-  <div class="flex ml-5 sm:ml-0 w-72 md:w-96">
+<div *ngIf="isLogin" class="flex flex-col-reverse md:flex-row w-full justify-between items-center align-middle my-9">
+  <div></div>
+  <div class="flex  w-72 md:w-96 md:ml-56">
     <input placeholder="Buscar por nombre" #inputSearch (input)="search(inputSearch.value)" type="text"
       id="input-search"
       class="border text-sm rounded-l block w-full p-2.5 bg-gray-500 border-gray-600 placeholder-gray-400 text-white ">
@@ -26,20 +27,22 @@
       </ul>
     </div>
   </div>
-  <button routerLink="/admin/register"
-    class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
+  <div class="flex justify-end align-middle items-end mb-4 md:mb-0 md:mr-3">
+    <button routerLink="/admin/register"
+    class="flex items-center align-middle justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
     <span
-      class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0 text-lg">
-      <i class="fa fa-plus"></i> Cliente
+      class="py-1 px-1 md:py-3 md:px-2 flex flex-row justify-center align-middle items-center transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0 text-lg">
+      <i class="fa fa-plus mr-2"></i> Cliente
     </span>
   </button>
   <button routerLink="/admin/registerTrainer"
-    class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
+    class=" flex items-center align-middle justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
     <span
-      class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0 text-lg">
-      <i class="fa fa-plus"></i> Entrenador
+      class="py-1 px-1 md:py-3 md:px-2 flex flex-row justify-center align-middle items-center transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0 text-lg">
+      <i class="fa fa-plus mr-2"></i> Entrenador
     </span>
   </button>
+  </div>
 </div>
 <div *ngIf="isLogin" class="w-full h-full">
   <div class="relative overflow-x-auto shadow-md rounded sm:rounded-lg m-5">

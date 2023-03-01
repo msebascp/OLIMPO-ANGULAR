@@ -43,6 +43,7 @@ import { ResetPasswordComponent } from './login-register/reset-password/reset-pa
 import {RegisterGeneralComponent} from "./general/register-general/register-general.component";
 import { ForgotPasswordTrainerComponent } from './login-register/forgot-password-trainer/forgot-password-trainer.component';
 import { ResetPasswordTrainerComponent } from './login-register/reset-password-trainer/reset-password-trainer.component';
+import { FooterComponent } from './navs/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { ResetPasswordTrainerComponent } from './login-register/reset-password-t
     RegisterGeneralComponent,
     ForgotPasswordTrainerComponent,
     ResetPasswordTrainerComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
