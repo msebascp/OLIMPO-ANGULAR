@@ -38,7 +38,9 @@ import { CustomerEditAccountComponent } from './customer/customer-edit-account/c
 import { NavbarOlimpoComponent } from './navs/navbar-olimpo/navbar-olimpo.component';
 import { AdminEditImcComponent } from './admin/admin-edit-imc/admin-edit-imc.component';
 import { AdminAllPaymentsComponent } from './admin/admin-all-payments/admin-all-payments.component';
-
+import { ForgotPasswordComponent } from './login-register/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './login-register/reset-password/reset-password.component';
+import {RegisterGeneralComponent} from "./general/register-general/register-general.component";
 
 @NgModule({
   declarations: [
@@ -76,6 +78,9 @@ import { AdminAllPaymentsComponent } from './admin/admin-all-payments/admin-all-
     NavbarOlimpoComponent,
     AdminEditImcComponent,
     AdminAllPaymentsComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    RegisterGeneralComponent,
   ],
   imports: [
     BrowserModule,

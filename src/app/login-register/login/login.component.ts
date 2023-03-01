@@ -12,8 +12,6 @@ import {FormGroup, Validators, FormBuilder} from "@angular/forms";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  @Output() variableEnviada = new EventEmitter<boolean>();
-
   isLogin: boolean = true
   showInvalidSubmit: boolean = false
   token: string = ''

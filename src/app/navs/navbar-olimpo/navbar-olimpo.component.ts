@@ -9,7 +9,7 @@ import { AuthPassportService } from 'src/app/database/auth-passport.service';
 })
 export class NavbarOlimpoComponent {
   showOptions: boolean = false
-  showOptions2: boolean = false
+  showSettingsOptions: boolean = false
   showDropdown: boolean = false
   infoAuth!: { isLogin:boolean, isTrainer:boolean };
 
@@ -36,6 +36,12 @@ export class NavbarOlimpoComponent {
   hide() {
     setTimeout(() => {
       this.showOptions = false
+    }, 150);
+  }
+
+  hideSettingsOptions() {
+    setTimeout(() => {
+      this.showSettingsOptions = false
     }, 150);
   }
 

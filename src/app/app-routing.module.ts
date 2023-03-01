@@ -31,6 +31,9 @@ import { AdminAllPaymentsComponent } from './admin/admin-all-payments/admin-all-
 import {CheckCustomerGuard} from "./guards/check-customer.guard";
 import {CheckTrainerGuard} from "./guards/check-trainer.guard";
 import {CheckLoginGuard} from "./guards/check-login.guard";
+import {ForgotPasswordComponent} from "./login-register/forgot-password/forgot-password.component";
+import {ResetPasswordComponent} from "./login-register/reset-password/reset-password.component";
+import {RegisterGeneralComponent} from "./general/register-general/register-general.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -39,6 +42,7 @@ const routes: Routes = [
   {path: 'blog', component: BlogComponent},
   {path: 'blog/details/:id', component: BlogDetailsComponent},
   {path: 'contactUs', component: ContactUsComponent},
+  {path: 'register', component: RegisterGeneralComponent},
   {path: 'login', component: LoginComponent, canActivate:[CheckLoginGuard]},
 
   //{path: 'customer/trainings/:id', component: CustomerTrainingsComponent},
@@ -68,6 +72,10 @@ const routes: Routes = [
   {path: 'admin/editProduct/:id', component: AdminEditProductComponent, canActivate:[CheckTrainerGuard]},
   {path: 'store/product/:id', component: ProductDetailComponent},
   {path: 'store', component: StoreComponent},
+
+  //Recuperar contraseña
+  {path: 'forgotPassword', component: ForgotPasswordComponent},
+  {path: 'resetPassword', component: ResetPasswordComponent},
 
   {path: '**', redirectTo: 'home', pathMatch:'full'},
 ];
