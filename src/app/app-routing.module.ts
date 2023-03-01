@@ -33,6 +33,7 @@ import {CheckTrainerGuard} from "./guards/check-trainer.guard";
 import {CheckLoginGuard} from "./guards/check-login.guard";
 import {ForgotPasswordComponent} from "./login-register/forgot-password/forgot-password.component";
 import {ResetPasswordComponent} from "./login-register/reset-password/reset-password.component";
+import {RegisterGeneralComponent} from "./general/register-general/register-general.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path: 'blog', component: BlogComponent},
   {path: 'blog/details/:id', component: BlogDetailsComponent},
   {path: 'contactUs', component: ContactUsComponent},
+  {path: 'register', component: RegisterGeneralComponent},
   {path: 'login', component: LoginComponent, canActivate:[CheckLoginGuard]},
 
   //{path: 'customer/trainings/:id', component: CustomerTrainingsComponent},

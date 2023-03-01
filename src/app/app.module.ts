@@ -40,6 +40,7 @@ import { AdminEditImcComponent } from './admin/admin-edit-imc/admin-edit-imc.com
 import { AdminAllPaymentsComponent } from './admin/admin-all-payments/admin-all-payments.component';
 import { ForgotPasswordComponent } from './login-register/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './login-register/reset-password/reset-password.component';
+import {RegisterGeneralComponent} from "./general/register-general/register-general.component";
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ResetPasswordComponent } from './login-register/reset-password/reset-pa
     AdminAllPaymentsComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    RegisterGeneralComponent,
   ],
   imports: [
     BrowserModule,

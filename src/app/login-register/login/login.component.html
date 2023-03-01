@@ -33,14 +33,14 @@
           class="text-red-600 mt-1">
         La contraseña es obligatoria
       </h3>
-      <a class="block mt-1 hover:text-red-800 hover:underline" href="">¿Has olvidado la contraseña?</a>
+      <a class="block mt-1 hover:text-red-800 hover:underline" routerLink="/forgotPassword">¿Has olvidado la contraseña?</a>
     </div>
     <h3 *ngIf="showInvalidSubmit"
         class="text-red-600 mt-1">
       Rellena correctamente el formulario (*)
     </h3>
     <div class="sm:flex sm:justify-between">
-      <a href="" class="block mb-1 hover:text-red-800 hover:underline sm:order-2 sm:self-center sm:mb-0 ">¿No tienes cuenta?</a>
+      <a routerLink="/register" class="block mb-1 hover:text-red-800 hover:underline sm:order-2 sm:self-center sm:mb-0 ">¿No tienes cuenta?</a>
       <button (click)="login()" class="p-2 rounded-lg bg-red-800/50 hover:bg-red-800 sm:order-1"
               (blur)="showInvalidSubmit = false">
         Iniciar sesión
