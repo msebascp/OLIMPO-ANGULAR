@@ -41,6 +41,8 @@ import { AdminAllPaymentsComponent } from './admin/admin-all-payments/admin-all-
 import { ForgotPasswordComponent } from './login-register/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './login-register/reset-password/reset-password.component';
 import {RegisterGeneralComponent} from "./general/register-general/register-general.component";
+import { ForgotPasswordTrainerComponent } from './login-register/forgot-password-trainer/forgot-password-trainer.component';
+import { ResetPasswordTrainerComponent } from './login-register/reset-password-trainer/reset-password-trainer.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import {RegisterGeneralComponent} from "./general/register-general/register-gene
     ForgotPasswordComponent,
     ResetPasswordComponent,
     RegisterGeneralComponent,
+    ForgotPasswordTrainerComponent,
+    ResetPasswordTrainerComponent,
   ],
   imports: [
     BrowserModule,

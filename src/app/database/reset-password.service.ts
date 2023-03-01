@@ -36,4 +36,22 @@ export class ResetPasswordService {
         console.log(data);
       })
   }
+
+  forgotPasswordTrainer(email: string): void {
+    console.log('Recuperando contraseña');
+    this.http.post<BasicResponse>(`${this.API_URL}/forgotPasswordTrainer`,
+      {email: email}, this.options)
+      .subscribe(data => {
+        console.log(data);
+      })
+  }
+
+  resetPasswordTrainer(password: string, token: string): void {
+    console.log('Cambiando contraseña');
+    this.http.post<BasicResponse>(`${this.API_URL}/resetPasswordTrainer`,
+      {password: password, token: token}, this.options)
+      .subscribe(data => {
+        console.log(data);
+      })
+  }
 }

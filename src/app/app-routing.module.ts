@@ -34,6 +34,10 @@ import {CheckLoginGuard} from "./guards/check-login.guard";
 import {ForgotPasswordComponent} from "./login-register/forgot-password/forgot-password.component";
 import {ResetPasswordComponent} from "./login-register/reset-password/reset-password.component";
 import {RegisterGeneralComponent} from "./general/register-general/register-general.component";
+import {
+  ForgotPasswordTrainerComponent
+} from "./login-register/forgot-password-trainer/forgot-password-trainer.component";
+import {ResetPasswordTrainerComponent} from "./login-register/reset-password-trainer/reset-password-trainer.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -76,6 +80,8 @@ const routes: Routes = [
   //Recuperar contraseña
   {path: 'forgotPassword', component: ForgotPasswordComponent},
   {path: 'resetPassword', component: ResetPasswordComponent},
+  {path: 'admin/forgotPassword', component: ForgotPasswordTrainerComponent},
+  {path: 'admin/resetPassword', component: ResetPasswordTrainerComponent},
 
   {path: '**', redirectTo: 'home', pathMatch:'full'},
 ];

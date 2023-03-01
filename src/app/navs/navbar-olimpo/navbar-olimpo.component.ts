@@ -19,9 +19,11 @@ export class NavbarOlimpoComponent {
   ) {}
 
   ngOnInit(){
+    this.auth.checkDouble().subscribe(data  => {
+      this.auth.sendVariable(data.isLogin, data.isTrainer);
+    })
     this.auth.getVariable().subscribe(infoAuth => {
       this.infoAuth = infoAuth;
-      console.log("la variable es " + infoAuth.isLogin + " y " + infoAuth.isTrainer);
     });
   }
 
