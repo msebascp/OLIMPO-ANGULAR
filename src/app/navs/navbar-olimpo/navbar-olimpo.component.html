@@ -19,66 +19,90 @@
               *ngIf="!infoAuth.isLogin">
         <i class="fa fa-user text-3xl"></i>
       </button>
-      <!--Botón cliente logueado-->
-      <button (click)="showOptions = !showOptions" (blur)="hide()"
-              *ngIf="infoAuth.isLogin && !infoAuth.isTrainer">
-        <i class="fa fa-user text-3xl"></i>
-      </button>
-      <ul [ngStyle]="{'display': showOptions ? 'block' : 'none'}"
-          class="absolute z-50 right-0 p-2 rounded-md bg-gray-600"
-          *ngIf="infoAuth.isLogin && !infoAuth.isTrainer">
-        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
-            routerLink="customer/account">
-          Mi cuenta
-        </li>
-        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
-            routerLink="customer/trainings">
-          Mis entrenamientos
-        </li>
-        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
-            routerLink="customer/trainer">
-          Mi entrenador
-        </li>
-        <li class="block w-max">
-          <button class="hover:bg-red-800 rounded-md p-2" (click)="logout()">
-            Cerrar sesión
-          </button>
-        </li>
-      </ul>
-      <!--Botón administrador logueado-->
-      <button (click)="showOptions = !showOptions" (blur)="hide()"
-              *ngIf="infoAuth.isLogin && infoAuth.isTrainer">
-        <i class="fa fa-user text-3xl"></i>
-      </button>
-      <ul [ngStyle]="{'display': showOptions ? 'block' : 'none'}"
-          class="absolute z-50 right-0 p-2 rounded-md bg-gray-600"
-          *ngIf="infoAuth.isLogin && infoAuth.isTrainer">
-        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
-            routerLink="admin/account">
-          Mi cuenta
-        </li>
-        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
-            routerLink="admin/users">
-          Usuarios
-        </li>
-        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
-            routerLink="admin/editBlog">
-          Blog
-        </li>
-        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
-            routerLink="admin/aboutSettings">
-          Sobre el gimnasio
-        </li>
-        <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
-            routerLink="admin/products">
-          Productos
-        </li>
-        <li class="block w-max">
-          <button class="hover:bg-red-800 rounded-md p-2" (click)="logout()">
-            Cerrar sesión
-          </button>
-        </li>
-      </ul>
+      <!--Cliente logueado-->
+      <div class="relative flex gap-1" *ngIf="infoAuth.isLogin && !infoAuth.isTrainer">
+        <!--Rueda settings-->
+        <button (click)="showSettingsOptions = !showSettingsOptions" (blur)="hideSettingsOptions()"
+                class="inline mr-4">
+          <i class="fa fa-cog text-3xl"></i>
+        </button>
+        <!--Lista opciones settings-->
+        <ul [ngStyle]="{'display': showSettingsOptions ? 'block' : 'none'}"
+            class="absolute z-50 right-0 p-2 rounded-md bg-gray-600 top-9 right-10">
+          <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+              routerLink="customer/trainings">
+            Mis entrenamientos
+          </li>
+          <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+              routerLink="customer/trainer">
+            Mi entrenador
+          </li>
+        </ul>
+        <!--Silueta usuario-->
+        <button (click)="showOptions = !showOptions" (blur)="hide()"
+                class="inline">
+          <i class="fa fa-user text-3xl"></i>
+        </button>
+        <!--Lista opciones usuario-->
+        <ul [ngStyle]="{'display': showOptions ? 'block' : 'none'}"
+            class="absolute z-50 right-0 p-2 rounded-md bg-gray-600 top-9">
+          <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+              routerLink="customer/account">
+            Mi cuenta
+          </li>
+          <li class="block w-max">
+            <button class="hover:bg-red-800 rounded-md p-2" (click)="logout()">
+              Cerrar sesión
+            </button>
+          </li>
+        </ul>
+      </div>
+      <!--Administrador logueado-->
+      <div class="relative flex gap-1" *ngIf="infoAuth.isLogin && infoAuth.isTrainer">
+        <!--(Admin)Rueda settings-->
+        <button (click)="showSettingsOptions = !showSettingsOptions" (blur)="hideSettingsOptions()"
+                class="inline mr-4">
+          <i class="fa fa-cog text-3xl"></i>
+        </button>
+        <!--(Admin)Lista opciones settings-->
+        <ul [ngStyle]="{'display': showSettingsOptions ? 'block' : 'none'}"
+            class="absolute z-50 right-0 p-2 rounded-md bg-gray-600 top-9 right-10">
+          <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+              routerLink="admin/users">
+            Usuarios
+          </li>
+          <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+              routerLink="admin/editBlog">
+            Blog
+          </li>
+          <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+              routerLink="admin/aboutSettings">
+            Sobre el gimnasio
+          </li>
+          <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+              routerLink="admin/products">
+            Productos
+          </li>
+        </ul>
+        <!--(Admin)Silueta usuario-->
+        <button (click)="showOptions = !showOptions" (blur)="hide()"
+                class="inline">
+          <i class="fa fa-user text-3xl"></i>
+        </button>
+        <!--(Admin)Lista opciones usuario-->
+        <ul [ngStyle]="{'display': showOptions ? 'block' : 'none'}"
+            class="absolute z-50 right-0 p-2 rounded-md bg-gray-600 top-9">
+          <li class="block w-full hover:bg-red-800 rounded-md p-2 cursor-pointer"
+              routerLink="admin/account">
+            Mi cuenta
+          </li>
+          <li class="block w-max">
+            <button class="hover:bg-red-800 rounded-md p-2" (click)="logout()">
+              Cerrar sesión
+            </button>
+          </li>
+        </ul>
+      </div>
     </li>
     <!--lista de enlaces-->
     <li class="w-full
