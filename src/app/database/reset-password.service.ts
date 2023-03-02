@@ -54,4 +54,26 @@ export class ResetPasswordService {
         console.log(data);
       })
   }
+
+  changePassword(password: string): void {
+    console.log('Cambiando contraseña');
+    let optionsChangePassword = this.options
+    optionsChangePassword.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    this.http.post<BasicResponse>(`${this.API_URL}/changePassword`,
+      {password: password}, optionsChangePassword)
+      .subscribe(data => {
+        console.log(data);
+      })
+  }
+
+  changePasswordTrainer(password: string): void {
+    console.log('Cambiando contraseña');
+    let optionsChangePassword = this.options
+    optionsChangePassword.headers = this.options.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+    this.http.post<BasicResponse>(`${this.API_URL}/changePasswordTrainer`,
+      {password: password}, optionsChangePassword)
+      .subscribe(data => {
+        console.log(data);
+      })
+  }
 }
