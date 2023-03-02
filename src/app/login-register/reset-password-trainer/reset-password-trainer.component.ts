@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ResponseToken} from "../../interfaces/responseToken";
 import {ResetPasswordService} from "../../database/reset-password.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -23,9 +23,20 @@ export class ResetPasswordTrainerComponent {
   ) {
     this.passwordForm = this.formBuilder.group(
       {
-        password: ["", [Validators.required]]
+        password: ["", [Validators.required]],
+        confirmPassword: ["", [Validators.required, this.matchPassword.bind(this)]],
       }
     )
+  }
+
+  matchPassword(control: AbstractControl): {[key: string]: boolean} | null {
+    const password = control.parent?.get('password')?.value;
+    const confirmPassword = control.value;
+    if (password !== confirmPassword) {
+      return {'passwordMismatch': true};
+    } else {
+      return null;
+    }
   }
 
   ngOnInit(){

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BasicResponse} from "../interfaces/BasicResponse";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {SweetAlertsService} from "./sweet-alerts.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class ResetPasswordService {
 
   constructor(
     private http: HttpClient,
+    private alert: SweetAlertsService
   ) {
   }
 
@@ -33,7 +35,10 @@ export class ResetPasswordService {
     this.http.post<BasicResponse>(`${this.API_URL}/resetPassword`,
       {password: password, token: token}, this.options)
       .subscribe(data => {
-        console.log(data);
+        console.log(data)
+        if (data.success) {
+          this.alert.basicTitleAlert(data.message)
+        }
       })
   }
 
@@ -51,7 +56,9 @@ export class ResetPasswordService {
     this.http.post<BasicResponse>(`${this.API_URL}/resetPasswordTrainer`,
       {password: password, token: token}, this.options)
       .subscribe(data => {
-        console.log(data);
+        if (data.success) {
+          this.alert.basicTitleAlert(data.message)
+        }
       })
   }
 
@@ -62,7 +69,9 @@ export class ResetPasswordService {
     this.http.post<BasicResponse>(`${this.API_URL}/changePassword`,
       {password: password}, optionsChangePassword)
       .subscribe(data => {
-        console.log(data);
+        if (data.success) {
+          this.alert.basicTitleAlert(data.message)
+        }
       })
   }
 
@@ -73,7 +82,9 @@ export class ResetPasswordService {
     this.http.post<BasicResponse>(`${this.API_URL}/changePasswordTrainer`,
       {password: password}, optionsChangePassword)
       .subscribe(data => {
-        console.log(data);
+        if (data.success) {
+          this.alert.basicTitleAlert(data.message)
+        }
       })
   }
 }
