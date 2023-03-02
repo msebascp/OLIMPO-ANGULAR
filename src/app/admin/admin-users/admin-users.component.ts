@@ -64,7 +64,7 @@ export class AdminUsersComponent {
               }
             }
           }
-        })        
+        })
       })
       this.allCustomers = this.customers
     })
@@ -274,5 +274,11 @@ export class AdminUsersComponent {
     boxInfo.style.display = 'flex'
     let boxEdit = box.lastChild as HTMLElement
     boxEdit.style.display = 'none'
+  }
+
+  hide() {
+    setTimeout(() => {
+      this.showFilterOptions = false
+    }, 100);
   }
 }

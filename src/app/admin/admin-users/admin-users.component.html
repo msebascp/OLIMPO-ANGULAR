@@ -5,12 +5,17 @@
     <input placeholder="Buscar por nombre" #inputSearch (input)="search(inputSearch.value)" type="text"
       id="input-search"
       class="border text-sm rounded-l block w-full p-2.5 bg-gray-500 border-gray-600 placeholder-gray-400 text-white ">
-    <div class="relative">
-      <button class="text-white bg-gray-500 border border-gray-600 rounded-r px-2 h-full"
-        (click)="showFilterOptions = !showFilterOptions">
-        Filtrar
+    <div class="relative text-white">
+      <button class="bg-gray-500 border border-gray-600 rounded-r px-2 h-full"
+              (click)="showFilterOptions = !showFilterOptions"
+              (blur)="hide()">
+        <p class="hidden md:block">
+          Filtrar
+        </p>
+        <i class="fa fa-caret-down text-xl md:hidden">
+        </i>
       </button>
-      <ul class="text-white absolute right-0 z-50 bg-gray-500 p-2 rounded"
+      <ul class="absolute right-0 z-50 bg-gray-500 p-2 rounded"
         [ngStyle]="{'display': showFilterOptions ? 'block' : 'none'}">
         <li class="flex items-center gap-3 w-full mb-2 hover:bg-red-600 rounded">
           <button (click)="filterPaidCustomers()" class="p-2 rounded hover:bg-red-600 w-full"
@@ -90,22 +95,19 @@
             Ninguno
           </td>
           <td class="px-6 py-4">
-            <div class="flex">
-              <div id="boxInfoPayment" class="flex">
-                <p *ngIf="customer.lastPayment === undefined">
-                  No hay fecha de último pago
-                </p>
+            <div>
+              <div id="boxInfoPayment" class="flex justify-between">
                 <p *ngIf="customer.lastPayment !== undefined">
                   {{ customer.lastPayment.payment_date | date:'dd/MM/yyyy' }}
                 </p>
-                <button *ngIf="customer.lastPayment !== undefined" (click)="paymentEdit(customer.lastPayment.id, $event)">
+                <button *ngIf="customer.lastPayment !== undefined"
+                        (click)="paymentEdit(customer.lastPayment.id, $event)">
                   <i class="fa fa-pencil-square-o px-2 text-xl">
                   </i>
                 </button>
               </div>
               <div  id="boxEditPayment" style="display: none">
-                <input type="date" name="lastPaymentDate" [(ngModel)]="newDatePayment"
-                  value="{{ customer.lastPayment.payment_date  | date:'dd/MM/yyyy' }}">
+                <input type="date" name="lastPaymentDate" [(ngModel)]="newDatePayment">
                 <button  (click)="confirmEdit(customer.lastPayment.id, $event, true)">
                   <i class="fa fa-check px-2 text-xl">
                   </i>
