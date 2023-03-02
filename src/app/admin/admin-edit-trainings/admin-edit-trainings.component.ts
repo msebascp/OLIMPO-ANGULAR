@@ -4,6 +4,7 @@ import { AuthPassportService } from '../../database/auth-passport.service';
 import { DatabaseService } from '../../database/database.service';
 import { Trainings } from '../../interfaces/trainings';
 import Swal from 'sweetalert2';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-admin-edit-trainings',
@@ -17,7 +18,8 @@ export class AdminEditTrainingsComponent {
   constructor (
     private route: ActivatedRoute,
     private databaseService: DatabaseService,
-    private auth: AuthPassportService
+    private auth: AuthPassportService,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -63,5 +65,8 @@ export class AdminEditTrainingsComponent {
         });
       }
     })
+  }
+  public goBack(): void {
+    this.location.back();
   }
 }
