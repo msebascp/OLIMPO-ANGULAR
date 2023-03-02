@@ -20,7 +20,7 @@
             <tbody>
                 <tr *ngFor="let payment of payments" class="border-b border-gray-200 dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                        {{ payment.payment_date }}
+                        {{ payment.payment_date | date:'dd/MM/yyyy'}}
                     </th>
                     <td class="px-6 py-4 bg-gray-300 text-black">
                         {{ payment.payment_type }}

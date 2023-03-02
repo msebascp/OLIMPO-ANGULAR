@@ -55,19 +55,16 @@ export class AdminUsersComponent {
         }
         this.databaseService.getPaymentByCustomer(customer.id).subscribe(payments => {
           if (payments.payment.length !== 0) {
-            let payment = payments.payment[payments.payment.length -1];
-            if (payment.customer_id === customer.id) {
+            let latestPayment = payments.payment[payments.payment.length -1];
+            if (latestPayment.customer_id === customer.id) {
               for (let i = 0; i < this.customers.length; i++) {
                 if (this.customers[i].id === customer.id) {
-                  this.customers[i].payment = [
-                    ...(this.customers[i].payment || []),
-                    payment,
-                  ];
+                  this.customers[i].lastPayment = latestPayment;
                 }
               }
             }
           }
-        })
+        })        
       })
       this.allCustomers = this.customers
     })

@@ -90,27 +90,27 @@
             Ninguno
           </td>
           <td class="px-6 py-4">
-            <div *ngFor="let payment of customer.payment ? customer.payment : []" class="flex">
+            <div class="flex">
               <div id="boxInfoPayment" class="flex">
-                <p *ngIf="payment === undefined">
+                <p *ngIf="customer.lastPayment === undefined">
                   No hay fecha de último pago
                 </p>
-                <p *ngIf="payment !== undefined">
-                  {{ payment.payment_date | date:'dd/MM/yyyy' }}
+                <p *ngIf="customer.lastPayment !== undefined">
+                  {{ customer.lastPayment.payment_date | date:'dd/MM/yyyy' }}
                 </p>
-                <button (click)="paymentEdit(payment.id, $event)">
+                <button *ngIf="customer.lastPayment !== undefined" (click)="paymentEdit(customer.lastPayment.id, $event)">
                   <i class="fa fa-pencil-square-o px-2 text-xl">
                   </i>
                 </button>
               </div>
-              <div id="boxEditPayment" style="display: none">
+              <div  id="boxEditPayment" style="display: none">
                 <input type="date" name="lastPaymentDate" [(ngModel)]="newDatePayment"
-                  value="{{ payment.payment_date  | date:'dd/MM/yyyy' }}">
-                <button (click)="confirmEdit(payment.id, $event, true)">
+                  value="{{ customer.lastPayment.payment_date  | date:'dd/MM/yyyy' }}">
+                <button  (click)="confirmEdit(customer.lastPayment.id, $event, true)">
                   <i class="fa fa-check px-2 text-xl">
                   </i>
                 </button>
-                <button (click)="confirmEdit(payment.id, $event, false)">
+                <button (click)="confirmEdit(customer.lastPayment.id, $event, false)">
                   <i class="fa fa-close px-2 text-xl">
                   </i>
                 </button>
