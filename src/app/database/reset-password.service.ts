@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BasicResponse} from "../interfaces/BasicResponse";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SweetAlertsService} from "./sweet-alerts.service";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class ResetPasswordService {
 
   constructor(
     private http: HttpClient,
-    private alert: SweetAlertsService
+    private alert: SweetAlertsService,
+    private router: Router
   ) {
   }
 
@@ -26,7 +28,12 @@ export class ResetPasswordService {
     this.http.post<BasicResponse>(`${this.API_URL}/forgotPassword`,
       {email: email}, this.options)
       .subscribe(data => {
-        console.log(data);
+        console.log(data)
+        if (data.success) {
+          console.log(data.success)
+          this.alert.basicTitleAlert(data.message)
+        }
+        console.log(data.message)
       })
   }
 
@@ -35,9 +42,9 @@ export class ResetPasswordService {
     this.http.post<BasicResponse>(`${this.API_URL}/resetPassword`,
       {password: password, token: token}, this.options)
       .subscribe(data => {
-        console.log(data)
         if (data.success) {
           this.alert.basicTitleAlert(data.message)
+          this.router.navigate(['/login'])
         }
       })
   }
@@ -47,7 +54,9 @@ export class ResetPasswordService {
     this.http.post<BasicResponse>(`${this.API_URL}/forgotPasswordTrainer`,
       {email: email}, this.options)
       .subscribe(data => {
-        console.log(data);
+        if (data.success) {
+          this.alert.basicTitleAlert(data.message)
+        }
       })
   }
 
@@ -58,6 +67,7 @@ export class ResetPasswordService {
       .subscribe(data => {
         if (data.success) {
           this.alert.basicTitleAlert(data.message)
+          this.router.navigate(['/admin/login'])
         }
       })
   }
