@@ -38,6 +38,7 @@ import {
   ForgotPasswordTrainerComponent
 } from "./login-register/forgot-password-trainer/forgot-password-trainer.component";
 import {ResetPasswordTrainerComponent} from "./login-register/reset-password-trainer/reset-password-trainer.component";
+import {ChangePasswordComponent} from "./login-register/change-password/change-password.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -82,6 +83,7 @@ const routes: Routes = [
   {path: 'resetPassword', component: ResetPasswordComponent},
   {path: 'admin/forgotPassword', component: ForgotPasswordTrainerComponent},
   {path: 'admin/resetPassword', component: ResetPasswordTrainerComponent},
+  {path: 'changePassword', component: ChangePasswordComponent},
 
   {path: '**', redirectTo: 'home', pathMatch:'full'},
 ];

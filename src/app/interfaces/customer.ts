@@ -14,5 +14,6 @@ export interface Customer {
     photo: string,
     trainer: Trainer,
     imc_record: ImcRecord[],
-    payment: Payments[]
+    payment: Payments[],
+    lastPayment: Payments
 }
