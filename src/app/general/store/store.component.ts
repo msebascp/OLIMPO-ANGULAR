@@ -27,6 +27,7 @@ export class StoreComponent {
   public getAllProducts(): void {
     this.productService.getAllProducts().subscribe(products => {
       this.products = products;
+      console.log(products)
     })
   }
 }

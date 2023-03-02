@@ -5,47 +5,48 @@
         <input type="text" id="nombre"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             [(ngModel)]="selectedPost.title" formControlName="title">
-            <h3 *ngIf="form['title'].touched && form['title'].hasError('required')" class="text-red-600 mt-1">
-                El título es obligatorio
-            </h3>
+        <h3 *ngIf="form['title'].touched && form['title'].hasError('required')" class="text-red-600 mt-1">
+            El título es obligatorio
+        </h3>
     </div>
     <div class="mb-6">
-        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
+        <label for="description"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
         <textarea id="description" rows="4"
-        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Escribe la descripción aquí..." [(ngModel)]="selectedPost.description" formControlName="description"></textarea>
-        <h3 *ngIf="form['description'].touched && form['description'].hasError('required')"
-        class="text-red-600 mt-1">
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Escribe la descripción aquí..." [(ngModel)]="selectedPost.description"
+            formControlName="description"></textarea>
+        <h3 *ngIf="form['description'].touched && form['description'].hasError('required')" class="text-red-600 mt-1">
             La descripción es obligatoria
         </h3>
     </div>
+    <div class="mb-6">
+        <label class="block mb-2 text-xl font-medium text-gray-900 dark:text-white" for="photo">Subir Foto</label>
+        <input (change)="onFileChange($event)"
+            class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            id="photo" type="file">
+    </div>
     <div class="mb-6 flex flex-col items-center align-middle">
-        <div class="mb-6">
-            <label class="block mb-2 text-xl font-medium text-gray-900 dark:text-white" for="photo">Subir Foto</label>
-            <input (change)="onFileChange($event)"
-                class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                id="photo" type="file">
-        </div>
         <label for="photo" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Imagen</label>
-        <img *ngIf="selectedImage === ''" class="h-96 md:h-[600px] rounded-xl" [src]="'http://localhost:8000' + selectedPost.photo">
-        <img *ngIf="selectedImage" [src]="selectedImage" class="h-96 md:h-[600px] rounded-xl" >
+        <img *ngIf="selectedImage === ''" class="h-96 md:h-[600px] rounded-xl"
+            [src]="'http://localhost:8000' + selectedPost.photo">
+        <img *ngIf="selectedImage" [src]="selectedImage" class="h-96 md:h-[600px] rounded-xl">
     </div>
     <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1">
         Rellena correctamente el formulario (*)
     </h3>
+    <button type="submit" (blur)="showInvalidSubmit = false"
+        class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
+        <span
+            class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0">
+            Editar Post
+        </span>
+    </button>
     <button type="button" (click)="goBack()"
         class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-white  focus:outline-none focus:ring-pink-200 ">
         <span
             class="relative px-5 py-2.5 transition-all ease-in duration-75  bg-gray-800 rounded-md group-hover:bg-opacity-0">
             Cancelar
-        </span>
-    </button>
-    <button type="submit"
-        (blur)="showInvalidSubmit = false"
-        class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
-        <span
-            class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-800 rounded-md group-hover:bg-opacity-0">
-            Editar Post
         </span>
     </button>
 </form>
