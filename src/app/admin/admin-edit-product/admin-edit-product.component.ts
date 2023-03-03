@@ -14,13 +14,12 @@ import {SweetAlertsService} from "../../database/sweet-alerts.service";
 })
 export class AdminEditProductComponent {
   isLogin: boolean = false;
-  public selectedProduct!: Product;
-  public image!: File;
-  public updatedProduct: Product = {id: 0, name: '', price: '0', description: '', photo: ''};
-
+  public selectedProduct: Product = {id: 0, name: '', price: '0', description: '', photo: ''}
+  public updatedProduct: Product = {id: 0, name: '', price: '0', description: '', photo: ''}
   productForm!: FormGroup
+  public image!: File;
   showInvalidSubmit: boolean = false
-  public selectedImage: string = ''
+  public newImage: string = ''
 
   constructor(
     private route: ActivatedRoute,
@@ -31,20 +30,21 @@ export class AdminEditProductComponent {
     private formBuilder: FormBuilder,
     private alerts: SweetAlertsService
   ) {
-    this.productForm = this.formBuilder.group(
-      {
-        name: ["", [Validators.required]],
-        description: ["", [Validators.required]],
-        price: ["", [Validators.required]],
-      }
-    )
   }
 
 
   ngOnInit(): void {
     this.auth.getVariable().subscribe(infoAuth => {
       this.isLogin = infoAuth.isLogin
-    });
+    })
+    this.productForm = this.formBuilder.group(
+      {
+        name: ["", [Validators.required]],
+        description: ["", [Validators.required]],
+        price: ["", [Validators.required]],
+        image: ["",],
+      }
+    )
     this.getProductById();
   }
 
@@ -52,11 +52,14 @@ export class AdminEditProductComponent {
     let idString = this.route.snapshot.paramMap.get('id');
     if (idString) {
       let id: number = +idString;
-
       this.productService.getProductById(id).subscribe(product => {
-        this.selectedProduct = product;
-        console.log(product)
-      });
+        this.selectedProduct = product
+        this.productForm.patchValue({
+          name: this.selectedProduct.name,
+          description: this.selectedProduct.description,
+          price: this.selectedProduct.price
+        })
+      })
     } else {
       console.error("No se ha encontrado el parámetro 'id' en la ruta");
     }
@@ -68,8 +71,8 @@ export class AdminEditProductComponent {
       const reader = new FileReader();
       reader.readAsDataURL(this.image);
       reader.onload = () => {
-        this.selectedImage = reader.result as string;
-      };
+        this.newImage = reader.result as string;
+      }
     }
   }
 

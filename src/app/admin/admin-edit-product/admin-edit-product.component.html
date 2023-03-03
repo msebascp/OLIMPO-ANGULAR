@@ -6,7 +6,7 @@
     </label>
     <input type="text" id="nombre"
            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-           [(ngModel)]="selectedProduct.name" formControlName="name">
+           formControlName="name">
     <h3 *ngIf="form['name'].touched && form['name'].hasError('required')" class="text-red-600 mt-1">
       El título es obligatorio
     </h3>
@@ -17,11 +17,11 @@
     </label>
     <textarea id="description" rows="4"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Escribe la descripción aquí..." [(ngModel)]="selectedProduct.description"
+              placeholder="Escribe la descripción aquí..."
               formControlName="description">
     </textarea>
     <h3 *ngIf="form['description'].touched && form['description'].hasError('required')" class="text-red-600 mt-1">
-      La descripción es obligatorio
+      La descripción es obligatoria
     </h3>
   </div>
   <div class="mb-6">
@@ -30,7 +30,7 @@
     </label>
     <input type="text" id="price"
            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-           [(ngModel)]="selectedProduct.price" formControlName="price">
+           formControlName="price">
     <h3 *ngIf="form['price'].touched && form['price'].hasError('required')" class="text-red-600 mt-1">
       El precio es obligatorio
     </h3>
@@ -41,15 +41,21 @@
     </label>
     <input (change)="onFileChange($event)"
            class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-           id="photo" type="file">
+           id="image" type="file"
+           formControlName="image">
   </div>
   <div class="mb-6 flex flex-col items-center align-middle">
     <label for="photo" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">
       Imagen
     </label>
-    <img *ngIf="selectedImage === ''" alt="" class="h-96 md:h-[600px] rounded-xl"
+    <img alt="" id="photo"
+         *ngIf="!newImage && selectedProduct.photo !== ''"
+         class="h-96 md:h-[600px] rounded-xl"
          [src]="'http://localhost:8000' + selectedProduct.photo">
-    <img *ngIf="selectedImage" [src]="selectedImage" class="h-96 md:h-[600px] rounded-xl" alt="">
+    <img alt="" id=""
+         *ngIf="newImage"
+         class="h-96 md:h-[600px] rounded-xl"
+         [src]="newImage">
   </div>
   <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1">
     Rellena correctamente el formulario (*)
