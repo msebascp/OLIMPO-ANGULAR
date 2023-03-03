@@ -79,9 +79,9 @@ const routes: Routes = [
   {path: 'store', component: StoreComponent},
 
   //Recuperar contraseña
-  {path: 'forgotPassword', component: ForgotPasswordComponent},
+  {path: 'forgotPassword', component: ForgotPasswordComponent, canActivate:[CheckLoginGuard]},
   {path: 'resetPassword', component: ResetPasswordComponent},
-  {path: 'admin/forgotPassword', component: ForgotPasswordTrainerComponent},
+  {path: 'admin/forgotPassword', component: ForgotPasswordTrainerComponent, canActivate:[CheckLoginGuard]},
   {path: 'admin/resetPassword', component: ResetPasswordTrainerComponent},
   {path: 'changePassword', component: ChangePasswordComponent},
 

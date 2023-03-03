@@ -60,12 +60,9 @@ export class AuthPassportService {
 
   loginTrainer(email: string, password: string): Observable<ResponseToken> {
     this.loadToken()
-    console.log('El login de admins se ejecuta');
     return this.http.post<ResponseToken>(`${this.url}/trainer/login`, {
-      grant_type: 'password',
       email: email,
       password: password,
-      scope: ''
     }, this.options).pipe(
       catchError((error) => {
         console.log(error.error);
@@ -76,10 +73,8 @@ export class AuthPassportService {
 
   logout(): void {
     this.loadToken()
-    console.log('El logout de clientes se ejecuta');
     this.http.get<ResponseToken>(`${this.url}/logout`, this.options)
       .subscribe(data => {
-        console.log(data);
         this.sendVariable(false, false);
         this.router.navigate(['/home']);
       })
@@ -88,7 +83,6 @@ export class AuthPassportService {
   logoutTrainer(): void {
     this.http.get<ResponseToken>(`${this.url}/trainer/logout`, this.options)
       .subscribe(data => {
-        console.log(data);
         this.sendVariable(false, false);
         this.router.navigate(['/home']);
       })
@@ -133,22 +127,15 @@ export class AuthPassportService {
   }
 
   register(registerData: RegisterData): Observable<ResponseToken> {
-    console.log('El registro del cliente se ejecuta');
-    console.log(registerData);
     return this.http.post<ResponseToken>(`${this.url}/register`, registerData, this.options)
   }
 
   registerTrainer(registerData: RegisterTrainerData): Observable<ResponseToken> {
-    console.log('El registro del cliente se ejecuta');
-    console.log(registerData);
     return this.http.post<ResponseToken>(`${this.url}/trainer/register`, registerData, this.options)
   }
 
   pay(id: number): void {
     this.http.get<ResponseToken>(`${this.url}/customer/${id}/pay`, this.options)
-      .subscribe(data => {
-        console.log(data);
-      })
   }
 
   dataTrainer(): Observable<Trainer> {
@@ -165,7 +152,7 @@ export class AuthPassportService {
       )
   }
 
-  public updatedTrainer( trainer: Trainer, image: File): Observable<Trainer> {
+  updatedTrainer( trainer: Trainer, image: File): Observable<Trainer> {
     this.loadToken()
     let url = this.url + `/trainer/editAccount`;
     const formData: FormData = new FormData();
@@ -191,7 +178,7 @@ export class AuthPassportService {
     );
   }
 
-  public updatedCustomer( customer: Customer, image: File): Observable<Customer> {
+  updatedCustomer( customer: Customer, image: File): Observable<Customer> {
     this.loadToken()
     let url = this.url + `/customer/editAccount`;
 
@@ -239,7 +226,6 @@ export class AuthPassportService {
 
   checkLogin2(): Observable<{ isLogin: boolean, isTrainer: boolean }> {
     this.loadToken()
-    console.log('Se ejecuta el check login de cliente');
     return this.http.get<ResponseToken>(`${this.url}/isLogin`, this.options)
       .pipe(
         map(data => {
@@ -251,7 +237,6 @@ export class AuthPassportService {
 
   checkLoginTrainer2(): Observable<{ isLogin: boolean, isTrainer: boolean }> {
     this.loadToken()
-    console.log('Se ejecuta el check login de cliente');
     return this.http.get<ResponseToken>(`${this.url}/trainer/isLogin`, this.options)
       .pipe(
         map(data => {
