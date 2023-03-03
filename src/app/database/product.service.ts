@@ -76,7 +76,7 @@ export class ProductService {
     );
   }
 
-  public updatePost(id: number, product: Product, image: File): Observable<Product> {
+  public updateProduct(id: number, product: Product, image: File): Observable<Product> {
     const formData = new FormData();
     formData.append('name', product.name)
     formData.append('description', product.description)
@@ -85,7 +85,6 @@ export class ProductService {
       formData.append('photo', product.photo)
     } else {
       formData.append('photo', image, image.name);
-
     }
 
     let url = this.API_URL + `/updateProduct`;

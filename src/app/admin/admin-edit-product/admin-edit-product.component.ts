@@ -14,12 +14,13 @@ import {SweetAlertsService} from "../../database/sweet-alerts.service";
 })
 export class AdminEditProductComponent {
   isLogin: boolean = false;
-  selectedProduct: Product = {id: 0, name: '', price: '0', description: '', photo: ''}
-  image!: File
-  updatedProduct: Product = {id: 0, name: '', price: '0', description: '', photo: ''}
+  public selectedProduct!: Product;
+  public image!: File;
+  public updatedProduct: Product = {id: 0, name: '', price: '0', description: '', photo: ''};
+
   productForm!: FormGroup
   showInvalidSubmit: boolean = false
-  selectedImage: string = ''
+  public selectedImage: string = ''
 
   constructor(
     private route: ActivatedRoute,
@@ -30,38 +31,34 @@ export class AdminEditProductComponent {
     private formBuilder: FormBuilder,
     private alerts: SweetAlertsService
   ) {
+    this.productForm = this.formBuilder.group(
+      {
+        name: ["", [Validators.required]],
+        description: ["", [Validators.required]],
+        price: ["", [Validators.required]],
+      }
+    )
   }
+
 
   ngOnInit(): void {
     this.auth.getVariable().subscribe(infoAuth => {
       this.isLogin = infoAuth.isLogin
-    })
-    this.productForm = this.formBuilder.group(
-      {
-        name: [this.selectedProduct.name, [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
-        description: [this.selectedProduct.description, [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)]],
-        price: [this.selectedProduct.price, [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
-        image: [""]
-      }
-    )
-    this.getProductById()
+    });
+    this.getProductById();
   }
 
   public getProductById(): void {
     let idString = this.route.snapshot.paramMap.get('id');
     if (idString) {
       let id: number = +idString;
-      this.productService.getProductById(id).subscribe(
-        product => {
-          this.selectedProduct = product
-          this.productForm.patchValue({
-            name: this.selectedProduct.name,
-            description: this.selectedProduct.description,
-            price: this.selectedProduct.price
-          });
-        })
+
+      this.productService.getProductById(id).subscribe(product => {
+        this.selectedProduct = product;
+        console.log(product)
+      });
     } else {
-      console.error("No se ha encontrado el parámetro 'id' en la ruta")
+      console.error("No se ha encontrado el parámetro 'id' en la ruta");
     }
   }
 
@@ -76,6 +73,7 @@ export class AdminEditProductComponent {
     }
   }
 
+
   public onSubmit(): void {
     if (this.productForm.invalid) {
       this.showInvalidSubmit = true
@@ -84,16 +82,17 @@ export class AdminEditProductComponent {
     this.alerts.confirmAlert('¿Seguro que quieres modificar el producto?').subscribe(
       data => {
         if (data) {
-          let name = this.productForm.get('name')?.value || ''
-          let description = this.productForm.get('description')?.value || ''
-          let price = this.productForm.get('price')?.value || ''
-          this.updatedProduct.name = name
-          this.updatedProduct.description = description
-          this.updatedProduct.price = price
+          let name = this.productForm.get('name')?.value || '';
+          let description = this.productForm.get('description')?.value || '';
+          let price = this.productForm.get('price')?.value || '';
+
+          this.updatedProduct.name = name;
+          this.updatedProduct.description = description;
+          this.updatedProduct.price = price;
           this.updatedProduct.photo = this.selectedProduct.photo
 
-          this.productService.updatePost(this.selectedProduct.id, this.updatedProduct, this.image).subscribe(_ => {
-            this.alerts.basicTitleAlert('Modificado', 'El producto ha sido modificado')
+          this.productService.updateProduct(this.selectedProduct.id, this.updatedProduct, this.image).subscribe(_ => {
+            this.alerts.basicTitleAlert('Modificado', 'El post ha sido modificado')
             this.location.back();
           })
         }

@@ -6,10 +6,9 @@
     </label>
     <input type="text" id="nombre"
            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-           formControlName="name">
-    <h3 *ngIf="form['name'].touched && (form['name'].hasError('required') || form['name'].hasError('pattern'))"
-        class="text-red-600 mt-1">
-      El nombre es obligatorio y no admite caracteres inválidos
+           [(ngModel)]="selectedProduct.name" formControlName="name">
+    <h3 *ngIf="form['name'].touched && form['name'].hasError('required')" class="text-red-600 mt-1">
+      El título es obligatorio
     </h3>
   </div>
   <div class="mb-6">
@@ -18,13 +17,11 @@
     </label>
     <textarea id="description" rows="4"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Escribe la descripción aquí..."
+              placeholder="Escribe la descripción aquí..." [(ngModel)]="selectedProduct.description"
               formControlName="description">
     </textarea>
-    <h3 *ngIf="form['description'].touched &&
-          (form['description'].hasError('required') || form['description'].hasError('pattern'))"
-        class="text-red-600 mt-1">
-      La descripción es obligatoria y no admite caracteres inválidos
+    <h3 *ngIf="form['description'].touched && form['description'].hasError('required')" class="text-red-600 mt-1">
+      La descripción es obligatorio
     </h3>
   </div>
   <div class="mb-6">
@@ -33,11 +30,9 @@
     </label>
     <input type="text" id="price"
            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-           formControlName="price">
-    <h3 *ngIf="form['price'].touched &&
-          (form['price'].hasError('required') || form['price'].hasError('pattern'))"
-        class="text-red-600 mt-1">
-      El precio es obligatorio y el decimal se indica con punto
+           [(ngModel)]="selectedProduct.price" formControlName="price">
+    <h3 *ngIf="form['price'].touched && form['price'].hasError('required')" class="text-red-600 mt-1">
+      El precio es obligatorio
     </h3>
   </div>
   <div class="mb-6">
@@ -46,7 +41,6 @@
     </label>
     <input (change)="onFileChange($event)"
            class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-           formControlName="image" accept=".jpg,.jpeg,.png"
            id="photo" type="file">
   </div>
   <div class="mb-6 flex flex-col items-center align-middle">
@@ -58,7 +52,7 @@
     <img *ngIf="selectedImage" [src]="selectedImage" class="h-96 md:h-[600px] rounded-xl" alt="">
   </div>
   <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1">
-    Revisa que todos los campos se han rellenado correctamente (*)
+    Rellena correctamente el formulario (*)
   </h3>
   <button type="submit" (blur)="showInvalidSubmit = false"
           class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
