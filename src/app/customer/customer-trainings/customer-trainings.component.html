@@ -1,12 +1,12 @@
 <loading *ngIf="!isLogin"></loading>
 <div *ngIf="isLogin" class="w-full h-full">
     <div  class=" bg-no-repeat w-full bg-center bg-cover h-full rounded-lg" style="background-image: url('../../../assets/LOGO.png');">
-        <div class="flex flex-col justify-center items-center h-full bg-opacity-80 bg-gray-600 rounded-lg  w-full py-10">
-            <h2 class="text-white uppercase text-4xl font-bold m-5 p-10">Mis Entrenamientos</h2>
+        <div class="flex flex-col justify-between items-center h-full bg-opacity-80 bg-gray-600 rounded-lg  w-full py-10">
+            <h2 class="text-white uppercase text-4xl font-bold m-5 p-10 text-center">Mis Entrenamientos</h2>
             <div class="flex flex-row justify-between align-middle items-center">
                 <ul class="gap-6">
                     <li class="m-5 p-10" *ngFor="let training of trainings">
-                        <a class="text-black underline cursor-pointer text-2xl" (click)="downloadPDF(training.pdfTraining)"> <i class="fa fa-file-pdf-o text-4xl mr-5"></i> {{ training.name }} </a>
+                        <a class="text-white underline text-left cursor-pointer text-2xl" (click)="downloadPDF(training.pdfTraining)"> <i class="fa fa-file-pdf-o text-4xl mr-5"></i> {{ training.name }} </a>
                     </li>
                 </ul>
             </div>

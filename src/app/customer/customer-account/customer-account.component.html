@@ -2,11 +2,11 @@
 <div *ngIf="isLogin">
 
 
-  <div class="bg-transparent antialiased">
+  <div class="bg-transparent flex justify-center flex-col align-middle items-center">
     <div class="container mb-2 mt-24">
       <div>
 
-        <div class="bg-white relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
+        <div class="bg-white relative shadow rounded-lg mx-auto md:mx-32 lg:mx-52 xl:mx-80">
           <div class="flex justify-center">
             <img *ngIf="customer?.photo !== '/storage/'" [src]="'http://localhost:8000' + customer?.photo"
               class="bg-white rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white ">

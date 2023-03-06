@@ -26,7 +26,7 @@
             <label class="text-left block mb-2 text-xl font-medium text-gray-900 dark:text-white" for="photo">Subir Foto</label>
             <input (change)="onFileChange($event)"
                 class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                id="photo" type="file">
+                id="photo" type="file" accept=".jpg,.jpeg,.png">
         </div>
         <div class="mb-6 flex flex-col items-center align-middle">
             <img [src]="selectedImage" class="h-96 md:h-[600px] rounded-xl" *ngIf="selectedImage"/>
