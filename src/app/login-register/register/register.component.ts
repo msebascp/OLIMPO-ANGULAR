@@ -5,6 +5,7 @@ import {Trainer} from "../../interfaces/trainer";
 import {DatabaseService} from "../../database/database.service";
 import {RegisterData} from "../../interfaces/registerData";
 import Swal from "sweetalert2";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent {
   constructor(
     private auth: AuthPassportService,
     private databaseService: DatabaseService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private location: Location,
   ) {
   }
 
@@ -67,7 +69,6 @@ export class RegisterComponent {
           }
         },
         error: error => {
-          console.log(error.error.errors)
           let errorMessages = "";
           for (let key in error.error.errors) {
             errorMessages += error.error.errors[key] + ' ';
@@ -99,5 +100,9 @@ export class RegisterComponent {
     this.registerForm.get('email')?.reset()
     this.registerForm.get('typeTraining')?.setValue('Ninguno')
     this.registerForm.get('trainer')?.setValue('')
+  }
+
+  public goBack(): void {
+    this.location.back();
   }
 }

@@ -5,6 +5,7 @@ import {AuthPassportService} from "../../database/auth-passport.service";
 import {DatabaseService} from "../../database/database.service";
 import Swal from "sweetalert2";
 import {RegisterTrainerData} from "../../interfaces/registerTrainerData";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-register-trainer',
@@ -20,7 +21,8 @@ export class RegisterTrainerComponent {
   constructor(
     private auth: AuthPassportService,
     private databaseService: DatabaseService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private location: Location,
   ) {
   }
 
@@ -58,7 +60,6 @@ export class RegisterTrainerComponent {
           }
         },
         error: error => {
-          console.log(error.error.errors)
           let errorMessages = "";
           for (let key in error.error.errors) {
             errorMessages += error.error.errors[key] + ' ';
@@ -81,7 +82,6 @@ export class RegisterTrainerComponent {
       this.showInvalidSubmit = true
       return;
     }
-    console.log(JSON.stringify(this.registerForm.value, null, 5))
     this.register()
   }
 
@@ -90,5 +90,9 @@ export class RegisterTrainerComponent {
     this.registerForm.get('surname')?.reset()
     this.registerForm.get('email')?.reset()
     this.registerForm.get('specialty')?.reset()
+  }
+
+  public goBack(): void {
+    this.location.back();
   }
 }

@@ -13,9 +13,9 @@ import {SweetAlertsService} from "../../database/sweet-alerts.service";
 })
 export class AdminProductsComponent {
   productForm!: FormGroup
-  public newProduct: Product = {id: 0, name: '', price: '', description: '', photo: '' };
+  public newProduct: Product = {id: 0, name: '', price: '', description: '', photo: '' }
   public products!: Product[]
-  public image!: File;
+  public image!: File
   public selectedImage!: string
   isLogin: boolean = false
   showInvalidSubmit: boolean = false

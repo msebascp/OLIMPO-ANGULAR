@@ -35,8 +35,7 @@ export class AdminUsersComponent {
     this.auth.getVariable().subscribe(infoAuth => {
       this.isLogin = infoAuth.isLogin
     })
-    this.today = new Date();
-    console.log(this.today.getTime())
+    this.today = new Date()
     this.getClientes()
     this.searchCustomers()
   }
@@ -251,7 +250,6 @@ export class AdminUsersComponent {
         if (result.isConfirmed) {
           this.databaseService.updatePayment(id,  this.newDatePayment).subscribe(
             data  => {
-              console.log(data)
               if (data.success) {
                 this.getClientes()
               }

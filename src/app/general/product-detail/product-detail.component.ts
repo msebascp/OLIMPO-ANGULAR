@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
-import {DatabaseService} from "../../database/database.service";
 import {Product} from "../../interfaces/product";
 import {ProductService} from "../../database/product.service";
 
@@ -11,7 +10,7 @@ import {ProductService} from "../../database/product.service";
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent {
-  public selectedProduct!: Product;
+  public selectedProduct: Product = {id: 0, name: '', price: '', description: '', photo: '' }
 
   constructor (
     private route: ActivatedRoute,

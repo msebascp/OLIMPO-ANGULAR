@@ -1,4 +1,5 @@
 <loading *ngIf="!isLogin"></loading>
+<button type="button" (click)="goBack()"><i class="fa fa-arrow-left text-4xl text-white mx-5 my-4"></i></button>
 <div *ngIf="isLogin" class="h-[600px] flex justify-center">
   <form (ngSubmit)="onSubmit()"
         [formGroup]="registerForm" id="formulario"
