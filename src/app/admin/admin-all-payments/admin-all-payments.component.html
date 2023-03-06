@@ -1,7 +1,7 @@
 <loading *ngIf="!isLogin"></loading>
 <navbar-admin *ngIf="isLogin"></navbar-admin>
 
-<div *ngIf="isLogin" class="flex flex-col justify-center">
+<div *ngIf="isLogin" class="flex flex-col justify-center font-sans Roboto">
     <div class="flex flex-row justify-center items-center align-middle my-5">
         <h1 class="relative bg-white shadow-xl rounded-3xl p-4">Cliente: <span class="underline mx-2">{{ selectedCustomer?.name}} {{selectedCustomer?.surname}}</span></h1>
     </div>
