@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Customer } from '../../interfaces/customer';
 import { DatabaseService } from '../../database/database.service';
-import { debounceTime, distinctUntilChanged,  Observable, of, Subject, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Trainings } from '../../interfaces/trainings';
-import {AuthPassportService} from "../../database/auth-passport.service";
+import { AuthPassportService } from "../../database/auth-passport.service";
 
 @Component({
   selector: 'app-admin-users',
@@ -18,13 +18,13 @@ export class AdminUsersComponent {
   public allCustomers: Customer[] = [];
   public pdfFile!: File;
   public newDatePayment!: string;
-  public training: Trainings = {id: 0, name : 'Entrenamiento prueba', pdfTraining: '', id_customer: 1}
+  public training: Trainings = { id: 0, name: 'Entrenamiento prueba', pdfTraining: '', id_customer: 1 }
 
   isLogin: boolean = false;
-  showFilterOptions:boolean = false
-  paid:boolean = false
-  noPaid:boolean = false
-  today!:Date;
+  showFilterOptions: boolean = false
+  paid: boolean = false
+  noPaid: boolean = false
+  today!: Date;
 
   constructor(
     private databaseService: DatabaseService,
@@ -54,7 +54,7 @@ export class AdminUsersComponent {
         }
         this.databaseService.getPaymentByCustomer(customer.id).subscribe(payments => {
           if (payments.payment.length !== 0) {
-            let latestPayment = payments.payment[payments.payment.length -1];
+            let latestPayment = payments.payment[payments.payment.length - 1];
             if (latestPayment.customer_id === customer.id) {
               for (let i = 0; i < this.customers.length; i++) {
                 if (this.customers[i].id === customer.id) {
@@ -94,23 +94,21 @@ export class AdminUsersComponent {
             if (customer.trainer_id === values.id) {
               Object.assign(customer, { trainer: values });
             }
-            this.databaseService.getPaymentByCustomer(customer.id).subscribe(payments => {
-              if (payments.payment.length !== 0) {
-                let payment = payments.payment[payments.payment.length -1];
-                if (payment.customer_id === customer.id) {
-                  for (let i = 0; i < this.customers.length; i++) {
-                    if (this.customers[i].id === customer.id) {
-                      this.customers[i].payment = [
-                        ...(this.customers[i].payment || []),
-                        payment,
-                      ];
-                    }
-                  }
+          })
+        }
+        this.databaseService.getPaymentByCustomer(customer.id).subscribe(payments => {
+          if (payments.payment.length !== 0) {
+            let latestPayment = payments.payment[payments.payment.length - 1];
+            if (latestPayment.customer_id === customer.id) {
+              for (let i = 0; i < this.customers.length; i++) {
+                if (this.customers[i].id === customer.id) {
+                  this.customers[i].lastPayment = latestPayment;
                 }
               }
-            })
-          });
-        }
+            }
+          }
+        })
+
       })
     });
 
@@ -132,10 +130,10 @@ export class AdminUsersComponent {
       cancelButtonColor: '#3085d6',
       confirmButtonText: 'Borrar',
       background: '#1F2937'
-    }).then((result:any) => {
+    }).then((result: any) => {
       if (result.isConfirmed) {
         // Recogemos el 'id' que tiene el boton
-        this.databaseService.deleteCustomer(id).subscribe( _ => {
+        this.databaseService.deleteCustomer(id).subscribe(_ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Borrado' + "</h5>",
             text: 'El cliente ha sido borrado',
@@ -166,7 +164,7 @@ export class AdminUsersComponent {
   }
 
   saveTraining() {
-    this.databaseService.savePdf( this.pdfFile, this.training)
+    this.databaseService.savePdf(this.pdfFile, this.training)
       .subscribe(_ => {
         Swal.fire({
           title: "<h5 style='color:white'>" + 'Subido' + "</h5>",
@@ -180,8 +178,8 @@ export class AdminUsersComponent {
   filterPaidCustomers() {
     this.paid = !this.paid
     this.noPaid = false
-    if(this.paid) {
-      this.customers = this.allCustomers.filter( customer => {
+    if (this.paid) {
+      this.customers = this.allCustomers.filter(customer => {
         customer.nextPayment = new Date(customer.nextPayment)
         return customer.nextPayment.getTime() > this.today.getTime()
       })
@@ -193,8 +191,8 @@ export class AdminUsersComponent {
   filterNoPaidCustomers() {
     this.noPaid = !this.noPaid
     this.paid = false
-    if(this.noPaid) {
-      this.customers = this.allCustomers.filter( customer => {
+    if (this.noPaid) {
+      this.customers = this.allCustomers.filter(customer => {
         customer.nextPayment = new Date(customer.nextPayment)
         return customer.nextPayment.getTime() <= this.today.getTime()
       })
@@ -213,7 +211,7 @@ export class AdminUsersComponent {
       cancelButtonColor: '#FF0000',
       confirmButtonText: 'Sí',
       background: '#1F2937'
-    }).then((result:any) => {
+    }).then((result: any) => {
       if (result.isConfirmed) {
         this.auth.pay(id)
         Swal.fire({
@@ -226,7 +224,7 @@ export class AdminUsersComponent {
     })
   }
 
-  paymentEdit(id:number, event: Event) {
+  paymentEdit(id: number, event: Event) {
     let button = event.target as HTMLElement
     let box = button!.parentElement!.parentElement!.parentElement as HTMLElement
     let boxInfo = box.firstChild as HTMLElement
@@ -235,8 +233,8 @@ export class AdminUsersComponent {
     boxEdit.style.display = 'flex'
   }
 
-  confirmEdit(id:number, event: Event, confirm: boolean) {
-    if (confirm){
+  confirmEdit(id: number, event: Event, confirm: boolean) {
+    if (confirm) {
       Swal.fire({
         title: "<h5 style='color:white'>" + 'Confirmar cambios' + "</h5>",
         icon: 'warning',
@@ -248,8 +246,8 @@ export class AdminUsersComponent {
         background: '#1F2937'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.databaseService.updatePayment(id,  this.newDatePayment).subscribe(
-            data  => {
+          this.databaseService.updatePayment(id, this.newDatePayment).subscribe(
+            data => {
               if (data.success) {
                 this.getClientes()
               }
