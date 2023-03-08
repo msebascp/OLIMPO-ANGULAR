@@ -35,8 +35,8 @@
       </div>
     </nav>
 
-    <div class="w-full rounded-lg bg-neutral-800 opacity-80 mx-6">
-      <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 w-full px-5 md:px-14 gap-5">
+    <div class="w-full rounded-lg bg-neutral-800 opacity-80 mx-6 ">
+      <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 w-full px-5 md:px-14 gap-5 ">
         <li *ngFor="let product of products">
           <a routerLink="/store/product/{{ product.id }}">
           <img class="hover:grow hover:shadow-lg rounded-lg" src='http://localhost:8000{{product.photo}}'>
