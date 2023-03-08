@@ -20,7 +20,12 @@ export class StoreComponent {
 
   public getAllProducts(): void {
     this.productService.getAllProducts().subscribe(products => {
-      this.products = products
+      for (let product of products){
+        let priceFloat: number = parseFloat(product.price)
+        let priceFormatted = priceFloat.toFixed(2)
+        product.price = priceFormatted.toString()
+        this.products.push(product)
+      }
     })
   }
 }

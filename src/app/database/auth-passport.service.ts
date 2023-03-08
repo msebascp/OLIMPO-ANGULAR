@@ -16,9 +16,9 @@ import {DataCustomers} from '../interfaces/dataCustomers';
   providedIn: 'root'
 })
 export class AuthPassportService {
-  /**InfoAuth contiene la información sobre si el usuario está logueado o no, y si es un entrenador o no
-   * Se ha usado BehaviorSubject por lo mismo que usamos Subject con el plus de que podemos darle
-   * un valor por defecto*/
+  /**InfoAuth contains the information about whether the user is logged in or not, and whether he is a trainer or not
+   * BehaviorSubject has been used for the same reason that we use Subject with the plus that we can give it
+   * a default value*/
   private infoAuth = new BehaviorSubject<{ isLogin: boolean, isTrainer: boolean }>({isLogin: false, isTrainer: false});
   private url: string = 'http://localhost:8000/api';
   private options = {

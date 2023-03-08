@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthPassportService} from "../../database/auth-passport.service";
 import {Router} from "@angular/router";
@@ -13,8 +13,8 @@ import {SweetAlertsService} from "../../database/sweet-alerts.service";
 })
 export class AdminProductsComponent {
   productForm!: FormGroup
-  public newProduct: Product = {id: 0, name: '', price: '', description: '', photo: '' }
-  public products!: Product[]
+  public newProduct: Product = {id: 0, name: '', price: '0', description: '', photo: '' }
+  public products: Product[] = []
   public image!: File
   public selectedImage!: string
   isLogin: boolean = false
@@ -71,13 +71,13 @@ export class AdminProductsComponent {
           let price = this.productForm.get('price')?.value || ''
           this.newProduct.name = name
           this.newProduct.description = description
-          this.newProduct.price = price
+          this.newProduct.price =  price
 
           this.productService.createProduct(this.image, this.newProduct)
             .subscribe(_ => {
               this.alerts.basicTitleAlert('Producto creado correctamente')
-              this.getAllProducts();
-              this.onReset();
+              this.getAllProducts()
+              this.onReset()
             })
         }
       }
@@ -90,7 +90,12 @@ export class AdminProductsComponent {
 
   public getAllProducts(): void {
     this.productService.getAllProducts().subscribe(products => {
-      this.products = products;
+      for (let product of products){
+        let priceFloat: number = parseFloat(product.price)
+        let priceFormatted = priceFloat.toFixed(2)
+        product.price = priceFormatted.toString()
+        this.products.push(product)
+      }
     })
   }
 
