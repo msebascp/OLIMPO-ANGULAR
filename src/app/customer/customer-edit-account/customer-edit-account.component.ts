@@ -95,7 +95,7 @@ export class CustomerEditAccountComponent {
         const name = this.customerForm.get('name')?.value || '';
         const email = this.customerForm.get('email')?.value || '';
         const surname = this.customerForm.get('surname')?.value || '';
-
+        console.log(name)
         const updatedCustomer: Customer = {
           ...this.selectedCustomer,
           name,
