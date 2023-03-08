@@ -133,7 +133,7 @@ export class AdminUsersComponent {
     }).then((result: any) => {
       if (result.isConfirmed) {
         // Recogemos el 'id' que tiene el boton
-        this.databaseService.deleteCustomer(id).subscribe(_ => {
+        this.databaseService.deleteCustomer(id).subscribe( _ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Borrado' + "</h5>",
             text: 'El cliente ha sido borrado',
