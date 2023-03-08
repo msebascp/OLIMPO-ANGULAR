@@ -203,7 +203,7 @@ export class AdminUsersComponent {
 
   pay(id: number) {
     Swal.fire({
-      title: "<h5 style='color:white'>" + '¿Seguro que quieres añadir un pago del cliente?' + "</h5>",
+      title: "<h5 style='color:white'>" + '¿Seguro que quieres añadir un pago al cliente?' + "</h5>",
       icon: 'warning',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',

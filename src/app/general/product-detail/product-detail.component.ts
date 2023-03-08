@@ -19,16 +19,19 @@ export class ProductDetailComponent {
   ) { }
 
   ngOnInit(): void {
-    this.getPostById()
+    this.getProductById()
   }
 
-  public getPostById(): void {
+  public getProductById(): void {
     const idString = this.route.snapshot.paramMap.get('id');
     if (idString) {
       const id:number = +idString;
 
       this.productService.getProductById(id).subscribe(product => {
-        this.selectedProduct = product;
+        this.selectedProduct = product
+        let priceFloat: number = parseFloat(this.selectedProduct.price)
+        let priceFormatted = priceFloat.toFixed(2)
+        this.selectedProduct.price = priceFormatted.toString()
       });
     } else {
       console.error("No se ha encontrado el parámetro 'id' en la ruta");
