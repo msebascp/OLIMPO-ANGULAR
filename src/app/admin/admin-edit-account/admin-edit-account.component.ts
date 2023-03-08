@@ -102,7 +102,7 @@ export class AdminEditAccountComponent {
         const surname = this.trainerForm.get('surname')?.value || '';
         const email = this.trainerForm.get('email')?.value || '';
         const specialty = this.trainerForm.get('specialty')?.value || '';
-
+        
         this.editTrainer = {
           ...this.selectedTrainer,
           name,
