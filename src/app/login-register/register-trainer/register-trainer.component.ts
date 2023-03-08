@@ -46,6 +46,7 @@ export class RegisterTrainerComponent {
       surname: this.registerForm.get('surname')?.value,
       email: this.registerForm.get('email')?.value,
       specialty: this.registerForm.get('typeTraining')?.value ? this.registerForm.get('typeTraining')?.value : null,
+      password: this.generatePassword()
     }
     this.auth.registerTrainer(registerData)
       .subscribe({
@@ -53,6 +54,7 @@ export class RegisterTrainerComponent {
           if (data.success) {
             Swal.fire({
               title: "<h5 style='color:white'>" + 'Entrenador registrado correctamente' + "</h5>",
+              text: "La contraseña es: " + registerData.password ,
               icon: 'success',
               background: '#1F2937'
             })
@@ -94,5 +96,15 @@ export class RegisterTrainerComponent {
 
   public goBack(): void {
     this.location.back();
+  }
+
+  public generatePassword(): string {
+    const allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    let password = ""
+    let length = 8
+    for (let i = 0; i < length; i++) {
+      password += allowedChars.charAt(Math.floor(Math.random() * allowedChars.length))
+    }
+    return password
   }
 }

@@ -3,4 +3,5 @@ export interface RegisterTrainerData {
   surname: string;
   email: string;
   specialty: string | null;
+  password: string;
 }
