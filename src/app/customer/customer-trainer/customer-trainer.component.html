@@ -1,28 +1,52 @@
 <loading *ngIf="!isLogin"></loading>
 <div *ngIf="isLogin" class="w-full h-full font-sans Roboto">
-    <div class="flex justify-center flex-col align-middle items-center m-20 rounded-lg shadow-xl bg-white transform duration-200 easy-in-out">
-        <div class="flex justify-center px-5  -mt-12">
-            <img *ngIf="trainer?.photo === '/storage/'" class="h-32 w-32 bg-white p-2 rounded-full" src="../../../assets/perfil.png"/>
-            <img *ngIf="trainer?.photo !== '/storage/'" class="h-32 w-32 bg-white p-2 rounded-full" [src]="'http://localhost:8000' + trainer?.photo"/>        </div>
+    <div
+        class="flex justify-center flex-col align-middle items-center m-20 rounded-lg shadow-xl bg-white transform duration-200 easy-in-out">
+        <div *ngIf="trainer !== undefined" class="flex justify-center px-5  -mt-12">
+            <img *ngIf="trainer?.photo === '/storage/'" class="h-32 w-32 bg-white p-2 rounded-full"
+                src="../../../assets/perfil.png" />
+            <img *ngIf="trainer?.photo !== '/storage/'" class="h-32 w-32 bg-white p-2 rounded-full"
+                [src]="'http://localhost:8000' + trainer.photo" />
+        </div>
+        <div *ngIf="trainer === undefined" class="flex justify-center px-5  -mt-12">
+            <img class="h-32 w-32 bg-white p-2 rounded-full"
+                src="../../../assets/perfil.png" />
+        </div>
         <div>
-            <div class="text-center px-14 py-6">
-                <h2 class="text-gray-800 text-3xl font-bold">{{trainer?.name}}</h2>
-                <a class="text-gray-500 mt-2 hover:text-blue-500 cursor-pointer" href="mailto:{{trainer?.email}}">{{trainer?.email}}</a>
-                <p class="mt-2 text-gray-700 text-sm md:text-lg">
-                    ¡Hola! Mi nombre es {{ trainer?.name }} {{ trainer?.surname }}, soy un entrenador altamente calificado y
-                    con años de experiencia en el mundo del fitness. Ofrezco servicios
-                    personalizados para ayudarte a alcanzar tus metas de salud y bienestar, ya sea que quieras perder peso, ganar masa muscular,
-                    mejorar tu rendimiento deportivo o simplemente adoptar un estilo de vida más saludable.
-                    Mi enfoque se basa en el trabajo duro, la disciplina y la constancia, pero también en la diversión y la motivación.
-                    Me aseguro de crear programas de entrenamiento efectivos y personalizados que se ajusten a tus necesidades y objetivos específicos.
-                    Si tienes alguna pregunta o si estás interesado en trabajar conmigo, no dudes en contactarme. Estoy aquí para ayudarte
-                    en cada paso del camino hacia una vida más activa y saludable.
-                </p>
-            </div>
-            <div class="text-center px-14 py-4 flex justify-center">
-                <a *ngIf="trainer?.email === 'alex@elcampico.org'" href="https://t.me/Alex_Olimpo" class="telegram-button flex flex-row align-middle items-center justify-center text-center gap-5 w-52"><i class="fa fa-telegram text-2xl"></i> Contáctame por Telegram</a>
-                <a *ngIf="trainer?.email === 'rafa@elcampico.org'" href="mailto:{{trainer?.email}}" class="gmail-button flex flex-row align-middle items-center justify-center text-center gap-5 w-52"><i class="fa fa-envelope text-2xl"></i> Contáctame por Email</a>
+            <div>
+                <div *ngIf="trainer !== undefined" class="text-center px-14 py-6">
+                    <h2 class="text-gray-800 text-3xl font-bold">{{trainer.name}}</h2>
+                    <a class="text-gray-500 mt-2 hover:text-blue-500 cursor-pointer"
+                        href="mailto:{{trainer.email}}">{{trainer.email}}</a>
+                    <p  class="mt-2 text-gray-700 text-sm md:text-lg">
+                        ¡Hola! Mi nombre es {{ trainer.name }} {{ trainer.surname }}, soy un entrenador altamente
+                        calificado y
+                        con años de experiencia en el mundo del fitness. Ofrezco servicios
+                        personalizados para ayudarte a alcanzar tus metas de salud y bienestar, ya sea que quieras
+                        perder peso, ganar masa muscular,
+                        mejorar tu rendimiento deportivo o simplemente adoptar un estilo de vida más saludable.
+                        Mi enfoque se basa en el trabajo duro, la disciplina y la constancia, pero también en la
+                        diversión y la motivación.
+                        Me aseguro de crear programas de entrenamiento efectivos y personalizados que se ajusten a tus
+                        necesidades y objetivos específicos.
+                        Si tienes alguna pregunta o si estás interesado en trabajar conmigo, no dudes en contactarme.
+                        Estoy aquí para ayudarte
+                        en cada paso del camino hacia una vida más activa y saludable.
+                    </p>
+                </div>
+                <div *ngIf="trainer !== undefined" class="text-center px-14 py-4 flex justify-center">
+                    <a *ngIf="trainer.email === 'alex@elcampico.org'" target="_blank" href="https://t.me/Alex_Olimpo"
+                        class="telegram-button flex flex-row align-middle items-center justify-center text-center gap-5 w-52"><i
+                            class="fa fa-telegram text-2xl"></i> Contáctame por Telegram</a>
+                    <a *ngIf="trainer.email === 'rafa@elcampico.org'" target="_blank" href="mailto:{{trainer.email}}"
+                        class="gmail-button flex flex-row align-middle items-center justify-center text-center gap-5 w-52"><i
+                            class="fa fa-envelope text-2xl"></i> Contáctame por Email</a>
+                </div>
+                <div *ngIf="trainer === undefined" class="text-center px-14 py-6">
+                    <p  class="mt-2 font-bold text-gray-700 text-sm md:text-lg">
+                        No tienes un entrenador asignado
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</div>
