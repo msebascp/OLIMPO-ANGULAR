@@ -35,17 +35,20 @@
       </div>
     </nav>
 
-    <div class="w-full rounded-lg bg-neutral-800 opacity-80 mx-6 ">
+    <div class="w-full h-full rounded-lg  mx-6 my-6 py-6 px-6 bg-neutral-800 opacity-80">
       <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 w-full px-5 md:px-14 gap-5 ">
-        <li *ngFor="let product of products">
+        <li class="h-52 md:h-72 w-full bg-center rounded" *ngFor="let product of products">
           <a routerLink="/store/product/{{ product.id }}">
-          <img src='http://localhost:8000{{product.photo}}'>
-            <p class="text-white hover:text-red-700">
-              {{product.name}}
-            </p>
-            <p class="text-neutral-400 text-xl">
-              {{product.price}}€
-            </p>
+            <div  class=" flex justify-center items-center bg-no-repeat w-full bg-center bg-cover h-40 md:h-60  rounded" style="background-image: url('http://localhost:8000{{product.photo}}');">
+            </div>
+            <div class="flex flex-col justify-start align-middle items-start ">
+              <p class="text-white hover:text-red-700">
+                {{product.name}}
+              </p>
+              <p class="text-neutral-400 text-xl">
+                {{product.price}}€
+              </p>
+            </div>
           </a>
         </li>
       </ul>
