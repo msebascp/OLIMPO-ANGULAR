@@ -9,7 +9,7 @@ export class SweetAlertsService {
 
   constructor() { }
 
-  basicTitleAlert(title: string, text: string = '') {
+  basicAlert(title: string, text: string = '') {
     Swal.fire({
       title: "<h5 style='color:white'>" + title + "</h5>",
       text: text,

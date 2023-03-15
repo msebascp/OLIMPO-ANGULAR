@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap 
 import Swal from 'sweetalert2';
 import { Trainings } from '../../interfaces/trainings';
 import { AuthPassportService } from "../../database/auth-passport.service";
+import {SweetAlertsService} from "../../database/sweet-alerts.service";
 
 @Component({
   selector: 'app-admin-users',
@@ -28,7 +29,8 @@ export class AdminUsersComponent {
 
   constructor(
     private databaseService: DatabaseService,
-    private auth: AuthPassportService
+    private auth: AuthPassportService,
+    private alerts: SweetAlertsService
   ) { }
 
   ngOnInit(): void {
@@ -202,26 +204,20 @@ export class AdminUsersComponent {
   }
 
   pay(id: number) {
-    Swal.fire({
-      title: "<h5 style='color:white'>" + '¿Seguro que quieres añadir un pago al cliente?' + "</h5>",
-      icon: 'warning',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#FF0000',
-      confirmButtonText: 'Sí',
-      background: '#1F2937'
-    }).then((result: any) => {
-      if (result.isConfirmed) {
-        this.auth.pay(id)
-        Swal.fire({
-          title: "<h5 style='color:white'>" + 'Pago realiazado correctamente' + "</h5>",
-          icon: 'success',
-          background: '#1F2937'
-        })
-        this.getClientes()
+    this.alerts.confirmAlert('¿Seguro que quieres añadir un pago al cliente?').subscribe(
+      data => {
+        if (data) {
+          this.auth.pay(id).subscribe(
+            data => {
+              if (data.success) {
+                this.getClientes()
+                this.alerts.basicAlert(data.message)
+              }
+          }
+          )
+        }
       }
-    })
+    )
   }
 
   paymentEdit(id: number, event: Event) {
@@ -234,18 +230,9 @@ export class AdminUsersComponent {
   }
 
   confirmEdit(id: number, event: Event, confirm: boolean) {
-    if (confirm) {
-      Swal.fire({
-        title: "<h5 style='color:white'>" + 'Confirmar cambios' + "</h5>",
-        icon: 'warning',
-        showCancelButton: true,
-        cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#FF0000',
-        confirmButtonText: 'Sí',
-        background: '#1F2937'
-      }).then((result) => {
-        if (result.isConfirmed) {
+    this.alerts.confirmAlert('Confirmar cambios').subscribe(
+      data => {
+        if (data) {
           this.databaseService.updatePayment(id, this.newDatePayment).subscribe(
             data => {
               if (data.success) {
@@ -256,14 +243,10 @@ export class AdminUsersComponent {
               console.log(error)
             },
           )
-          Swal.fire({
-            title: "<h5 style='color:white'>" + 'Fecha cambiada correctamente' + "</h5>",
-            icon: 'success',
-            background: '#1F2937'
-          })
+          this.alerts.basicAlert('Fecha cambiada correctamente')
         }
-      })
-    }
+      }
+    )
     let button = event.target as HTMLElement
     let box = button!.parentElement!.parentElement!.parentElement as HTMLElement
     let boxInfo = box.firstChild as HTMLElement

@@ -75,7 +75,7 @@ export class AdminProductsComponent {
 
           this.productService.createProduct(this.image, this.newProduct)
             .subscribe(_ => {
-              this.alerts.basicTitleAlert('Producto creado correctamente')
+              this.alerts.basicAlert('Producto creado correctamente')
               this.getAllProducts()
               this.onReset()
             })
@@ -104,7 +104,7 @@ export class AdminProductsComponent {
       data  => {
         if (data) {
           this.productService.deleteProduct(id).subscribe( _ => {
-            this.alerts.basicTitleAlert('Borrado', 'El producto ha sido borrado')
+            this.alerts.basicAlert('Borrado', 'El producto ha sido borrado')
             this.products = this.products.filter(product => product.id !== id);
             this.getAllProducts();
           });

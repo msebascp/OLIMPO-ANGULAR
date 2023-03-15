@@ -11,6 +11,7 @@ import {Trainer} from '../interfaces/trainer';
 import {RegisterTrainerData} from "../interfaces/registerTrainerData";
 import {Customer} from '../interfaces/customer';
 import {DataCustomers} from '../interfaces/dataCustomers';
+import {BasicResponse} from "../interfaces/BasicResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -134,8 +135,8 @@ export class AuthPassportService {
     return this.http.post<ResponseToken>(`${this.url}/trainer/register`, registerData, this.options)
   }
 
-  pay(id: number): void {
-    this.http.get<ResponseToken>(`${this.url}/customer/${id}/pay`, this.options)
+  pay(id: number): Observable<BasicResponse> {
+    return this.http.get<BasicResponse>(`${this.url}/customer/${id}/pay`, this.options)
   }
 
   dataTrainer(): Observable<Trainer> {

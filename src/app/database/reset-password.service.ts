@@ -31,7 +31,7 @@ export class ResetPasswordService {
         console.log(data)
         if (data.success) {
           console.log(data.success)
-          this.alert.basicTitleAlert(data.message)
+          this.alert.basicAlert(data.message)
         }
         console.log(data.message)
       })
@@ -43,7 +43,7 @@ export class ResetPasswordService {
       {password: password, token: token}, this.options)
       .subscribe(data => {
         if (data.success) {
-          this.alert.basicTitleAlert(data.message)
+          this.alert.basicAlert(data.message)
           this.router.navigate(['/login'])
         }
       })
@@ -55,7 +55,7 @@ export class ResetPasswordService {
       {email: email}, this.options)
       .subscribe(data => {
         if (data.success) {
-          this.alert.basicTitleAlert(data.message)
+          this.alert.basicAlert(data.message)
         }
       })
   }
@@ -66,7 +66,7 @@ export class ResetPasswordService {
       {password: password, token: token}, this.options)
       .subscribe(data => {
         if (data.success) {
-          this.alert.basicTitleAlert(data.message)
+          this.alert.basicAlert(data.message)
           this.router.navigate(['/admin/login'])
         }
       })
@@ -80,7 +80,7 @@ export class ResetPasswordService {
       {password: password}, optionsChangePassword)
       .subscribe(data => {
         if (data.success) {
-          this.alert.basicTitleAlert(data.message)
+          this.alert.basicAlert(data.message)
         }
       })
   }
@@ -93,7 +93,7 @@ export class ResetPasswordService {
       {password: password}, optionsChangePassword)
       .subscribe(data => {
         if (data.success) {
-          this.alert.basicTitleAlert(data.message)
+          this.alert.basicAlert(data.message)
         }
       })
   }

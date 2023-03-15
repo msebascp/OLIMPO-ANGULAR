@@ -95,7 +95,7 @@ export class AdminEditProductComponent {
           this.updatedProduct.photo = this.selectedProduct.photo
 
           this.productService.updateProduct(this.selectedProduct.id, this.updatedProduct, this.image).subscribe(_ => {
-            this.alerts.basicTitleAlert('Modificado', 'El producto ha sido modificado')
+            this.alerts.basicAlert('Modificado', 'El producto ha sido modificado')
             this.location.back();
           })
         }

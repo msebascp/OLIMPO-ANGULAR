@@ -1,8 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { DatabaseService } from '../../database/database.service';
 import { Location } from "@angular/common";
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Trainer } from '../../interfaces/trainer';
 import Swal from 'sweetalert2';
 import { AuthPassportService } from 'src/app/database/auth-passport.service';
@@ -33,7 +32,6 @@ export class AdminEditAccountComponent {
     private location: Location,
     private auth: AuthPassportService,
     private formBuilder: FormBuilder,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -102,6 +100,7 @@ export class AdminEditAccountComponent {
         const surname = this.trainerForm.get('surname')?.value || '';
         const email = this.trainerForm.get('email')?.value || '';
         const specialty = this.trainerForm.get('specialty')?.value || '';
+        console.log(name)
         this.editTrainer = {
           ...this.selectedTrainer,
           name,
