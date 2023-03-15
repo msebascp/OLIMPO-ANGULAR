@@ -230,23 +230,25 @@ export class AdminUsersComponent {
   }
 
   confirmEdit(id: number, event: Event, confirm: boolean) {
-    this.alerts.confirmAlert('Confirmar cambios').subscribe(
-      data => {
-        if (data) {
-          this.databaseService.updatePayment(id, this.newDatePayment).subscribe(
-            data => {
-              if (data.success) {
-                this.getClientes()
-              }
-            },
-            error => {
-              console.log(error)
-            },
-          )
-          this.alerts.basicAlert('Fecha cambiada correctamente')
+    if (confirm){
+      this.alerts.confirmAlert('Confirmar cambios').subscribe(
+        data => {
+          if (data) {
+            this.databaseService.updatePayment(id, this.newDatePayment).subscribe(
+              data => {
+                if (data.success) {
+                  this.getClientes()
+                }
+              },
+              error => {
+                console.log(error)
+              },
+            )
+            this.alerts.basicAlert('Fecha cambiada correctamente')
+          }
         }
-      }
-    )
+      )
+    }
     let button = event.target as HTMLElement
     let box = button!.parentElement!.parentElement!.parentElement as HTMLElement
     let boxInfo = box.firstChild as HTMLElement

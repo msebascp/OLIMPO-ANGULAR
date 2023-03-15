@@ -1,5 +1,4 @@
-<loading *ngIf="!isLogin"></loading>
-<div *ngIf="isLogin" class="w-full h-full font-sans Roboto">
+<div class="w-full h-full font-sans Roboto">
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="bg-gray-400 m-5 rounded-lg p-5">
     <h2 class="text-black text-center text-3xl font-bold">Crear Nuevo Producto</h2>
     <div class="mb-6">

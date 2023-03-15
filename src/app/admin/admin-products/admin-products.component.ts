@@ -29,9 +29,6 @@ export class AdminProductsComponent {
   ) {
   }
   ngOnInit() {
-    this.auth.getVariable().subscribe(infoAuth => {
-      this.isLogin = infoAuth.isLogin
-    })
     this.getAllProducts();
     this.productForm = this.formBuilder.group(
       {
@@ -89,6 +86,7 @@ export class AdminProductsComponent {
   }
 
   public getAllProducts(): void {
+    this.products = []
     this.productService.getAllProducts().subscribe(products => {
       for (let product of products){
         let priceFloat: number = parseFloat(product.price)
@@ -104,10 +102,9 @@ export class AdminProductsComponent {
       data  => {
         if (data) {
           this.productService.deleteProduct(id).subscribe( _ => {
-            this.alerts.basicAlert('Borrado', 'El producto ha sido borrado')
-            this.products = this.products.filter(product => product.id !== id);
-            this.getAllProducts();
-          });
+            this.alerts.basicAlert('El producto ha sido borrado')
+            this.products = this.products.filter(product => product.id !== id)
+          })
         }
       }
     )
