@@ -60,17 +60,6 @@ export class RegisterTrainerComponent {
             })
             this.onReset()
           }
-        },
-        error: error => {
-          let errorMessages = "";
-          for (let key in error.error.errors) {
-            errorMessages += error.error.errors[key] + ' ';
-          }
-          Swal.fire({
-            title: "<h5 style='color:white'>" + errorMessages + "</h5>",
-            icon: 'error',
-            background: '#1F2937'
-          })
         }
       })
   }
