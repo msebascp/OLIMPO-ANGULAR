@@ -45,18 +45,10 @@ export class AuthPassportService {
 
   login(email: string, password: string): Observable<ResponseToken> {
     this.loadToken()
-    console.log('El login de clientes se ejecuta');
     return this.http.post<ResponseToken>(`${this.url}/login`, {
-      grant_type: 'password',
       email: email,
       password: password,
-      scope: ''
-    }, this.options).pipe(
-      catchError((error) => {
-        console.log(error.error);
-        return of(error.error as ResponseToken);
-      })
-    );
+    }, this.options)
   }
 
   loginTrainer(email: string, password: string): Observable<ResponseToken> {
@@ -64,12 +56,7 @@ export class AuthPassportService {
     return this.http.post<ResponseToken>(`${this.url}/trainer/login`, {
       email: email,
       password: password,
-    }, this.options).pipe(
-      catchError((error) => {
-        console.log(error.error);
-        return of(error.error as ResponseToken);
-      })
-    );
+    }, this.options)
   }
 
   logout(): void {

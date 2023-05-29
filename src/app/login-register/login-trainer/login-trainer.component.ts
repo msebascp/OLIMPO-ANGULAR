@@ -55,7 +55,7 @@ export class LoginTrainerComponent {
           this.token = data.data.token;
           localStorage.setItem('access_token', this.token);
           this.auth.sendVariable(data.data.isLogin, true);
-          this.router.navigate(['/admin/account']);
+          this.router.navigate(['/admin/users']);
         }
         else {
           Swal.fire(data.message);
