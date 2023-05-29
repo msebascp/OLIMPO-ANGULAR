@@ -1,19 +1,17 @@
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { DataCustomer } from '../interfaces/dataCustomer';
-import { catchError, map, Observable, of } from 'rxjs';
-import { Customer } from '../interfaces/customer';
-import { Trainer } from '../interfaces/trainer';
-import { DataCustomers } from '../interfaces/dataCustomers';
-import { DataTrainers } from '../interfaces/DataTrainers';
-import { Trainings } from '../interfaces/trainings';
-import { DataTrainings } from '../interfaces/dataTrainings';
-import { Blog } from '../interfaces/blog';
-import { DataBlogs } from '../interfaces/dataBlogs';
+import {Injectable} from '@angular/core';
+import {DataCustomer} from '../interfaces/dataCustomer';
+import {map, Observable, of} from 'rxjs';
+import {Customer} from '../interfaces/customer';
+import {Trainer} from '../interfaces/trainer';
+import {DataCustomers} from '../interfaces/dataCustomers';
+import {DataTrainers} from '../interfaces/DataTrainers';
+import {Trainings} from '../interfaces/trainings';
+import {DataTrainings} from '../interfaces/dataTrainings';
+import {Blog} from '../interfaces/blog';
+import {DataBlogs} from '../interfaces/dataBlogs';
 import {BasicResponse} from "../interfaces/BasicResponse";
-import { Payments } from '../interfaces/payments';
-import { DataPayments } from '../interfaces/dataPayments';
-import { ImcRecord } from '../interfaces/imcRecord';
+import {ImcRecord} from '../interfaces/imcRecord';
 
 
 @Injectable({
@@ -23,7 +21,8 @@ export class DatabaseService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   private API_URL = 'http://localhost:8000/api';
 
@@ -32,10 +31,6 @@ export class DatabaseService {
     return this.http.get<DataCustomers>(url).pipe(
       map((data: DataCustomers) => {
         return data.data;
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
       }),
     );
   }
@@ -49,10 +44,6 @@ export class DatabaseService {
       map((data: DataCustomer) => {
         return data.data;
       }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
     );
   }
 
@@ -61,10 +52,6 @@ export class DatabaseService {
     return this.http.get<DataTrainers>(url).pipe(
       map((data: DataTrainers) => {
         return data.data;
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
       }),
     );
   }
@@ -78,32 +65,19 @@ export class DatabaseService {
       map((data: DataCustomer) => {
         return data.data;
       }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
     );
   }
 
   public deleteImcRecord(id: number): Observable<ImcRecord> {
-    return this.http.delete<ImcRecord>(this.API_URL+`/imcRecords/${id}`).pipe(
-      catchError(e => {
-        console.error(e);
-        return [];
-      })
-    );
+    return this.http.delete<ImcRecord>(this.API_URL + `/imcRecords/${id}`)
   }
 
   public createIMCcalculation(imcForm: ImcRecord): Observable<ImcRecord> {
     let url = this.API_URL + `/imcRecords?height=${imcForm.height}&weight=${imcForm.weight}&imc=${imcForm.imc}&customer_id=${imcForm.customer_id}`
-  
+
     return this.http.post<ImcRecord>(url, imcForm).pipe(
       map((data: ImcRecord) => {
         return data;
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
       }),
     );
   }
@@ -116,21 +90,12 @@ export class DatabaseService {
     return this.http.get<DataCustomer>(url).pipe(
       map((data: DataCustomer) => {
         return data.data;
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
+      })
     );
   }
 
   public deleteCustomer(id: number): Observable<Customer> {
-    return this.http.delete<Customer>(this.API_URL + `/customers` + `/${id}`).pipe(
-      catchError(e => {
-        console.error(e);
-        return [];
-      })
-    );
+    return this.http.delete<Customer>(this.API_URL + `/customers` + `/${id}`)
   }
 
   public searchCustomers(text: string): Observable<Customer[]> {
@@ -154,10 +119,6 @@ export class DatabaseService {
       map((data: DataCustomer) => {
         return data.data;
       }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
     );
   }
 
@@ -169,10 +130,6 @@ export class DatabaseService {
     return this.http.get<DataCustomer>(url).pipe(
       map((data: DataCustomer) => {
         return data.data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
       }),
     )
   }
@@ -188,10 +145,6 @@ export class DatabaseService {
       map((data: Trainings) => {
         return data
       }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
     );
   }
 
@@ -200,12 +153,7 @@ export class DatabaseService {
     if (id !== undefined) {
       url += `/${id}`
     }
-    return this.http.delete<Trainings>(url).pipe(
-      catchError(e => {
-        console.error(e);
-        return [];
-      })
-    )
+    return this.http.delete<Trainings>(url)
   }
 
   public getAllTrainingsByCustomer(id: number): Observable<Trainings[]> {
@@ -216,17 +164,13 @@ export class DatabaseService {
     return this.http.get<DataTrainings>(url).pipe(
       map((data: DataTrainings) => {
         return data.data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
+      })
     )
   }
 
   public downloadTraining(fileName: string): Observable<any> {
     let url = this.API_URL + `/customers/download/pdf/${fileName}`;
-    return this.http.get(url, { responseType: 'blob' });
+    return this.http.get(url, {responseType: 'blob'});
   }
 
   public createPost(image: File, post: Blog): Observable<Blog> {
@@ -240,10 +184,6 @@ export class DatabaseService {
       map((data: Blog) => {
         return data
       }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
     );
   }
 
@@ -251,12 +191,7 @@ export class DatabaseService {
     let url = this.API_URL + '/blog';
     return this.http.get<DataBlogs>(url).pipe(
       map((data: DataBlogs) => {
-
         return data.data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
       }),
     )
   }
@@ -269,10 +204,6 @@ export class DatabaseService {
     return this.http.get<DataBlogs>(url).pipe(
       map((data: DataBlogs) => {
         return data.data[0];
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
       }),
     );
   }
@@ -296,10 +227,6 @@ export class DatabaseService {
       map((data: Blog) => {
         return data;
       }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
     );
   }
 
@@ -308,12 +235,7 @@ export class DatabaseService {
     if (id !== undefined) {
       url += `/deletePost/${id}`
     }
-    return this.http.delete<Blog>(url).pipe(
-      catchError(e => {
-        console.error(e);
-        return [];
-      })
-    );
+    return this.http.delete<Blog>(url)
   }
 
   public updatePayment(id: number, date: string): Observable<BasicResponse> {
@@ -321,17 +243,13 @@ export class DatabaseService {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     })
-    return this.http.post<BasicResponse>(this.API_URL + `/payments/${id}/update`, {'date': date}, { headers: headers })
+    return this.http.post<BasicResponse>(this.API_URL + `/payments/${id}/update`, {'date': date}, {headers: headers})
   }
 
   public getAllPaymentsById(id: number): Observable<Customer> {
     return this.http.get<DataCustomer>(this.API_URL + `/customers/${id}/payments`).pipe(
       map((data: DataCustomer) => {
         return data.data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
       }),
     )
   }
