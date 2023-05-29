@@ -13,11 +13,10 @@ import {SweetAlertsService} from "../../database/sweet-alerts.service";
 })
 export class AdminProductsComponent {
   productForm!: FormGroup
-  public newProduct: Product = {id: 0, name: '', price: '0', description: '', photo: '' }
-  public products: Product[] = []
   public image!: File
   public selectedImage!: string
-  isLogin: boolean = false
+  public newProduct: Product = {id: 0, name: '', price: '0', description: '', photo: '' }
+  public products: Product[] = []
   showInvalidSubmit: boolean = false
 
   constructor(
@@ -28,6 +27,7 @@ export class AdminProductsComponent {
     private alerts: SweetAlertsService
   ) {
   }
+
   ngOnInit() {
     this.getAllProducts();
     this.productForm = this.formBuilder.group(
@@ -46,19 +46,19 @@ export class AdminProductsComponent {
 
   public onFileChange(event: any) {
     if (event.target.files && event.target.files.length) {
-      this.image = event.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(this.image);
+      this.image = event.target.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(this.image)
       reader.onload = () => {
-        this.selectedImage = reader.result as string;
-      };
+        this.selectedImage = reader.result as string
+      }
     }
   }
 
   public onSubmit(): void {
     if (this.productForm.invalid) {
       this.showInvalidSubmit = true
-      return;
+      return
     }
     this.alerts.confirmAlert('¿Seguro que quieres crear un nuevo producto?').subscribe(
       data => {
@@ -83,6 +83,7 @@ export class AdminProductsComponent {
 
   public onReset() {
     this.productForm.reset()
+    this.selectedImage = ''
   }
 
   public getAllProducts(): void {
