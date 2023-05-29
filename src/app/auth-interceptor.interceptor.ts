@@ -6,21 +6,25 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import Swal from "sweetalert2";
-import {catchError, Observable, throwError} from 'rxjs';
+import {catchError, finalize, Observable, throwError} from 'rxjs';
+import {LoadingService} from "./database/loading.service";
 
 @Injectable()
 export class AuthInterceptorInterceptor implements HttpInterceptor {
 
-  constructor() {
+  constructor(private loading: LoadingService) {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    this.loading.show()
     return next.handle(request).pipe(
+      finalize(() => {
+        this.loading.hide()
+      }),
       catchError(error => {
         if (error.status === 401) {
           Swal.fire(error.error.message);
-        }
-        else if(error.status === 422){
+        } else if (error.status === 422) {
           let errorMessages = "";
           for (let key in error.error.errors) {
             errorMessages += error.error.errors[key] + ' ';
