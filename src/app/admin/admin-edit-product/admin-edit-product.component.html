@@ -1,5 +1,4 @@
-<loading *ngIf="!isLogin"></loading>
-<form *ngIf="isLogin" [formGroup]="productForm" (ngSubmit)="onSubmit()" class="bg-gray-500 m-5 rounded-lg p-5 font-sans Roboto">
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="bg-gray-500 m-5 rounded-lg p-5 font-sans Roboto">
   <div class="mb-6">
     <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
       Nombre
@@ -49,13 +48,13 @@
       Imagen
     </label>
     <img alt="" id="photo"
-         *ngIf="!newImage && selectedProduct.photo !== ''"
+         *ngIf="!newImageString && selectedProduct.photo !== ''"
          class="h-96 md:h-[600px] rounded-xl"
          [src]="'http://localhost:8000' + selectedProduct.photo">
     <img alt="" id=""
-         *ngIf="newImage"
+         *ngIf="newImageString"
          class="h-96 md:h-[600px] rounded-xl"
-         [src]="newImage">
+         [src]="newImageString">
   </div>
   <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1">
     Rellena correctamente el formulario (*)

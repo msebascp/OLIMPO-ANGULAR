@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { Trainings } from '../../interfaces/trainings';
 import { AuthPassportService } from "../../database/auth-passport.service";
 import {SweetAlertsService} from "../../database/sweet-alerts.service";
+import {LoadingService} from "../../database/loading.service";
 
 @Component({
   selector: 'app-admin-users',
@@ -20,22 +21,22 @@ export class AdminUsersComponent {
   public pdfFile!: File;
   public newDatePayment!: string;
   public training: Trainings = { id: 0, name: 'Entrenamiento prueba', pdfTraining: '', id_customer: 1 }
-
-  isLogin: boolean = false;
   showFilterOptions: boolean = false
   paid: boolean = false
   noPaid: boolean = false
   today!: Date;
+  isLoading: boolean = false
 
   constructor(
     private databaseService: DatabaseService,
     private auth: AuthPassportService,
-    private alerts: SweetAlertsService
+    private alerts: SweetAlertsService,
+    private isLoadingService: LoadingService
   ) { }
 
   ngOnInit(): void {
-    this.auth.getVariable().subscribe(infoAuth => {
-      this.isLogin = infoAuth.isLogin
+    this.isLoadingService.getVariable().subscribe(isLoading => {
+      this.isLoading = isLoading
     })
     this.today = new Date()
     this.getClientes()

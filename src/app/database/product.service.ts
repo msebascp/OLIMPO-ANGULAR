@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {Product} from "../interfaces/product";
 import {ProductsGetAll} from "../interfaces/productsGetAll";
 
@@ -20,11 +20,7 @@ export class ProductService {
     return this.http.get<ProductsGetAll>(url).pipe(
       map((data: ProductsGetAll) => {
         return data.data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
+      })
     )
   }
 
@@ -36,11 +32,7 @@ export class ProductService {
     return this.http.get<ProductsGetAll>(url).pipe(
       map((data: ProductsGetAll) => {
         return data.data[0];
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
+      })
     );
   }
 
@@ -55,11 +47,7 @@ export class ProductService {
     return this.http.post<Product>(url, formData).pipe(
       map((data: Product) => {
         return data
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
+      })
     );
   }
 
@@ -68,12 +56,7 @@ export class ProductService {
     if (id !== undefined) {
       url += `/deleteProduct/${id}`
     }
-    return this.http.delete<Product>(url).pipe(
-      catchError(e => {
-        console.error(e);
-        return [];
-      })
-    );
+    return this.http.delete<Product>(url)
   }
 
   public updateProduct(id: number, product: Product, image: File): Observable<Product> {
@@ -95,11 +78,7 @@ export class ProductService {
     return this.http.post<Product>(url, formData).pipe(
       map((data: Product) => {
         return data;
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
+      })
     );
   }
 

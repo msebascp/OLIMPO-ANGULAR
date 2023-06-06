@@ -16,7 +16,7 @@ import { NavbarAdminComponent } from './navs/navbar-admin/navbar-admin.component
 import { AdminAccountComponent } from './admin/admin-account/admin-account.component';
 import { AdminBlogComponent } from './admin/admin-blog/admin-blog.component';
 import { AdminAboutComponent } from './admin/admin-about/admin-about.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 import {AdminEditCustomersComponent} from "./admin/admin-edit-customers/admin-edit-customers.component";
 import { CustomerAccountComponent } from './customer/customer-account/customer-account.component';
@@ -46,6 +46,7 @@ import { ResetPasswordTrainerComponent } from './login-register/reset-password-t
 import { FooterComponent } from './navs/footer/footer.component';
 import { ChangePasswordComponent } from './login-register/change-password/change-password.component';
 import { CheckoutPageComponent } from './general/checkout-page/checkout-page.component';
+import {AuthInterceptorInterceptor} from "./auth-interceptor.interceptor";
 
 @NgModule({
   declarations: [
@@ -99,7 +100,13 @@ import { CheckoutPageComponent } from './general/checkout-page/checkout-page.com
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
