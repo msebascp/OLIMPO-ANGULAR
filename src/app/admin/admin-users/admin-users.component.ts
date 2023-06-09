@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { Customer } from '../../interfaces/customer';
-import { DatabaseService } from '../../database/database.service';
-import { debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap } from 'rxjs';
+import {Component} from '@angular/core';
+import {Customer} from '../../interfaces/customer';
+import {DatabaseService} from '../../database/database.service';
+import {debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap} from 'rxjs';
 import Swal from 'sweetalert2';
-import { Trainings } from '../../interfaces/trainings';
-import { AuthPassportService } from "../../database/auth-passport.service";
+import {Trainings} from '../../interfaces/trainings';
+import {AuthPassportService} from "../../database/auth-passport.service";
 import {SweetAlertsService} from "../../database/sweet-alerts.service";
 import {LoadingService} from "../../database/loading.service";
 
@@ -20,23 +20,22 @@ export class AdminUsersComponent {
   public allCustomers: Customer[] = [];
   public pdfFile!: File;
   public newDatePayment!: string;
-  public training: Trainings = { id: 0, name: 'Entrenamiento prueba', pdfTraining: '', id_customer: 1 }
+  public training: Trainings = {id: 0, name: 'Entrenamiento prueba', pdfTraining: '', id_customer: 1}
+  public showInactiveCustomers: boolean = false
+  isLogin: boolean = false;
   showFilterOptions: boolean = false
-  paid: boolean = false
-  noPaid: boolean = false
   today!: Date;
-  isLoading: boolean = false
 
   constructor(
     private databaseService: DatabaseService,
     private auth: AuthPassportService,
-    private alerts: SweetAlertsService,
-    private isLoadingService: LoadingService
-  ) { }
+    private alerts: SweetAlertsService
+  ) {
+  }
 
   ngOnInit(): void {
-    this.isLoadingService.getVariable().subscribe(isLoading => {
-      this.isLoading = isLoading
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
     })
     this.today = new Date()
     this.getClientes()
@@ -95,7 +94,7 @@ export class AdminUsersComponent {
           this.databaseService.getTrainerByCustomer(customer.id).subscribe(trainer => {
             const values = Object.values(trainer)[9];
             if (customer.trainer_id === values.id) {
-              Object.assign(customer, { trainer: values });
+              Object.assign(customer, {trainer: values});
             }
           })
         }
@@ -124,26 +123,54 @@ export class AdminUsersComponent {
 
   public deleteCustomer(id: number): void {
     Swal.fire({
-      title: "<h5 style='color:white'>" + '¿Quieres eliminar el cliente?' + "</h5>",
-      text: 'No podrás revertirlo',
+      title: "<h5 style='color:white'>" + '¿Quieres dar de baja al cliente?' + "</h5>",
+      text: 'Sí podrás revertirlo',
       icon: 'warning',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Borrar',
+      confirmButtonText: 'Dar de baja',
       background: '#1F2937'
     }).then((result: any) => {
       if (result.isConfirmed) {
         // Recogemos el 'id' que tiene el boton
-        this.databaseService.deleteCustomer(id).subscribe( _ => {
+        this.databaseService.deleteCustomer(id).subscribe(_ => {
           Swal.fire({
-            title: "<h5 style='color:white'>" + 'Borrado' + "</h5>",
-            text: 'El cliente ha sido borrado',
+            title: "<h5 style='color:white'>" + 'Dado de baja' + "</h5>",
+            text: 'El cliente ha sido dado de baja',
             icon: 'success',
             background: '#1F2937'
           })
           this.customers = this.customers.filter(customer => customer.id !== id);
+          this.getClientes();
+        });
+      }
+    })
+  }
+
+  public activeCustomer(id: number): void {
+    Swal.fire({
+      title: "<h5 style='color:white'>" + '¿Quieres dar de alta al cliente?' + "</h5>",
+      text: 'Sí podrás revertirlo',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Dar de alta',
+      background: '#1F2937'
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        // Recogemos el 'id' que tiene el boton
+        this.databaseService.activeCustomer(id).subscribe(_ => {
+          Swal.fire({
+            title: "<h5 style='color:white'>" + 'Dado de alta' + "</h5>",
+            text: 'El cliente ha sido dado de alta',
+            icon: 'success',
+            background: '#1F2937'
+          })
+          this.showInactiveCustomers = false
           this.getClientes();
         });
       }
@@ -178,30 +205,34 @@ export class AdminUsersComponent {
       })
   }
 
+  filterActiveCustomers() {
+    this.showInactiveCustomers = false
+    this.customers = this.allCustomers.filter(customer => {
+      return customer.active
+    })
+  }
+
   filterPaidCustomers() {
-    this.paid = !this.paid
-    this.noPaid = false
-    if (this.paid) {
-      this.customers = this.allCustomers.filter(customer => {
-        customer.nextPayment = new Date(customer.nextPayment)
-        return customer.nextPayment.getTime() > this.today.getTime()
-      })
-    } else {
-      this.customers = this.allCustomers
-    }
+    this.showInactiveCustomers = false
+    this.customers = this.allCustomers.filter(customer => {
+      customer.nextPayment = new Date(customer.nextPayment)
+      return customer.nextPayment.getTime() > this.today.getTime()
+    })
   }
 
   filterNoPaidCustomers() {
-    this.noPaid = !this.noPaid
-    this.paid = false
-    if (this.noPaid) {
-      this.customers = this.allCustomers.filter(customer => {
-        customer.nextPayment = new Date(customer.nextPayment)
-        return customer.nextPayment.getTime() <= this.today.getTime()
-      })
-    } else {
-      this.customers = this.allCustomers
-    }
+    this.showInactiveCustomers = false
+    this.customers = this.allCustomers.filter(customer => {
+      customer.nextPayment = new Date(customer.nextPayment)
+      return customer.nextPayment.getTime() <= this.today.getTime()
+    })
+  }
+
+  filterDownAccountCustomers() {
+    this.showInactiveCustomers = true
+    this.customers = this.allCustomers.filter(customer => {
+      return !customer.active
+    })
   }
 
   pay(id: number) {
@@ -214,7 +245,7 @@ export class AdminUsersComponent {
                 this.getClientes()
                 this.alerts.basicAlert(data.message)
               }
-          }
+            }
           )
         }
       }
@@ -231,7 +262,7 @@ export class AdminUsersComponent {
   }
 
   confirmEdit(id: number, event: Event, confirm: boolean) {
-    if (confirm){
+    if (confirm) {
       this.alerts.confirmAlert('Confirmar cambios').subscribe(
         data => {
           if (data) {

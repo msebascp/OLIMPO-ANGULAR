@@ -98,6 +98,10 @@ export class DatabaseService {
     return this.http.delete<Customer>(this.API_URL + `/customers` + `/${id}`)
   }
 
+  public activeCustomer(id: number): Observable<Customer> {
+    return this.http.get<Customer>(this.API_URL + `/customers/active` + `/${id}`);
+  }
+
   public searchCustomers(text: string): Observable<Customer[]> {
     let url = this.API_URL + `/customers/search`;
     if (!text.trim()) {

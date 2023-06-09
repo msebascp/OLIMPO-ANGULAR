@@ -49,13 +49,13 @@
                             </label>
                             <h3 *ngIf="form['email'].touched && form['email'].hasError('required')"
                             class="text-red-600 mt-1">
-                                La Email es obligatorio
+                                El Email es obligatorio
                             </h3>
                         </div>
                         <div class="flex text-center items-center flex-col justify-center">
                             <label for="specialty" class="font-bold text-center text-3xl text-gray-900">
                                 <input type="text" id="specialty" placeholder="Especialidad"
-                                    class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
+                                    class="text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
                                     [(ngModel)]="selectedTrainer.specialty" formControlName="specialty">
                             </label>
                         </div>
