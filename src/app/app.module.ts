@@ -47,6 +47,7 @@ import { FooterComponent } from './navs/footer/footer.component';
 import { ChangePasswordComponent } from './login-register/change-password/change-password.component';
 import { CheckoutPageComponent } from './general/checkout-page/checkout-page.component';
 import {AuthInterceptorInterceptor} from "./auth-interceptor.interceptor";
+import { ShoppingCartComponent } from './general/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import {AuthInterceptorInterceptor} from "./auth-interceptor.interceptor";
     FooterComponent,
     ChangePasswordComponent,
     CheckoutPageComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,

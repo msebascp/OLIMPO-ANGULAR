@@ -18,7 +18,8 @@
 
   <div class="container py-1 text-center px-6 mx-auto mt-4 m-2 text-xl">
 
-    <i class="text-yellow-500  fa fa-exclamation-triangle" aria-hidden="true"> En nuestro gimnasio tratamos la filosofía del tú a tú, por lo tanto estos
+    <i class="text-yellow-500  fa fa-exclamation-triangle" aria-hidden="true"> En nuestro gimnasio tratamos la filosofía
+      del tú a tú, por lo tanto estos
       productos solo están disponible para comprar en físico.</i>
 
   </div>
@@ -37,19 +38,26 @@
 
     <div class="w-full h-full rounded-lg  mx-6 my-6 py-6 px-6 bg-neutral-800 opacity-80">
       <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 w-full px-5 md:px-14 gap-5 ">
-        <li class="h-52 md:h-72 w-full bg-center rounded" *ngFor="let product of products">
-          <a routerLink="/store/product/{{ product.id }}">
-            <div  class=" flex justify-center items-center bg-no-repeat w-full bg-center bg-cover h-40 md:h-60  rounded" style="background-image: url('http://localhost:8000{{product.photo}}');">
+        <li class="h-52 md:h-72 w-full bg-center rounded m-4" *ngFor="let product of products">
+          <div class="cursor-pointer" routerLink="/store/product/{{ product.id }}">
+            <div  class=" flex justify-center items-center bg-no-repeat w-full bg-center bg-cover h-40 md:h-60  rounded"
+              style="background-image: url('http://localhost:8000{{product.photo}}');">
             </div>
-            <div class="flex flex-col justify-start align-middle items-start ">
-              <p class="text-white hover:text-red-700">
-                {{product.name}}
-              </p>
-              <p class="text-neutral-400 text-xl">
-                {{product.price}}€
-              </p>
+            <div class="flex flex-row justify-between align-middle items-center ">
+              <div class="flex align-middle items-start flex-col justify-start">
+                <p class="text-white hover:text-red-700">
+                  {{product.name}}
+                </p>
+                <p class="text-neutral-400 text-xl">
+                  {{product.price}}€
+                </p>
+              </div>
             </div>
-          </a>
+          </div>
+            <div *ngIf="infoAuth.isLogin" (click)="addShoppingProduct(product.id)" class="tooltip -mt-7 flex justify-end items-end align-middle text-white mr-3 text-xl cursor-pointer hover:text-gray-400">
+              <i class="fa fa-shopping-cart"></i>
+              <span class="absolute bg-gray-300 text-sm text-black p-2 rounded tailwind-tooltip translate-x-12 translate-y-10">Añadir al carrito</span>
+            </div>
         </li>
       </ul>
     </div>

@@ -1,0 +1,29 @@
+.telegram-button {
+  background-color: #0088cc;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  text-decoration: none;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+.telegram-button:hover {
+  background-color: #005580;
+}
+
+.gmail-button {
+  background-color: #D14836;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  text-decoration: none;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+.gmail-button:hover {
+  background-color: #B8311F;
+}

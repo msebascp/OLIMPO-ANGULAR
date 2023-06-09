@@ -2,27 +2,42 @@
   <button type="button" (click)="goBack()"><i class="fa fa-arrow-left text-4xl text-white mx-5 my-4"></i></button>
   <div class="container px-5 py-5 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap w-full rounded-lg bg-neutral-800 opacity-80">
-      <img [src]="'http://localhost:8000' + selectedProduct.photo" alt=""
-           *ngIf="selectedProduct.photo !== ''"
-           class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200">
+      <img [src]="'http://localhost:8000' + selectedProduct.photo" alt="" *ngIf="selectedProduct.photo !== ''"
+        class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-        <h1 class="text-white text-3xl title-font font-medium mb-1">{{selectedProduct.name}}</h1>
+        <div class="flex flex-row justify-between align-middle items-center">
+          <h1 class="text-white text-3xl title-font font-medium mb-1">{{selectedProduct.name}}</h1>
+          <div *ngIf="infoAuth.isLogin" (click)="addShoppingProduct(selectedProduct.id)" class="tooltip -mt-7 flex justify-end items-end align-middle text-white mr-3 text-xl cursor-pointer hover:text-gray-400">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="absolute bg-gray-300 text-sm text-black p-2 rounded tailwind-tooltip translate-x-12 translate-y-10">Añadir al carrito</span>
+          </div>
+        </div>
         <div class="flex mb-4">
           <span class="flex items-center">
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+              </path>
             </svg>
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+              </path>
             </svg>
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+              </path>
             </svg>
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+              </path>
             </svg>
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+              </path>
             </svg>
             <span class="text-gray-200 ml-3">4 estrellas</span>
           </span>
@@ -35,3 +50,4 @@
     </div>
   </div>
 </section>
+<app-footer></app-footer>

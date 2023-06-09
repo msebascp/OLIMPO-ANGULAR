@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html, body {
+  font-family: "Gloock", serif;
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(./assets/fondo1.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
