@@ -39,6 +39,8 @@ import {
 } from "./login-register/forgot-password-trainer/forgot-password-trainer.component";
 import {ResetPasswordTrainerComponent} from "./login-register/reset-password-trainer/reset-password-trainer.component";
 import {ChangePasswordComponent} from "./login-register/change-password/change-password.component";
+import { CheckoutPageComponent } from './general/checkout-page/checkout-page.component';
+import { ShoppingCartComponent } from './general/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -49,6 +51,9 @@ const routes: Routes = [
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'register', component: RegisterGeneralComponent},
   {path: 'login', component: LoginComponent, canActivate:[CheckLoginGuard]},
+  {path: 'shopping-cart', component: ShoppingCartComponent, canActivate:[CheckCustomerGuard]},
+  {path: 'checkout', component: CheckoutPageComponent, canActivate:[CheckCustomerGuard]},
+
 
   //{path: 'customer/trainings/:id', component: CustomerTrainingsComponent},
   {path: 'customer/trainings', component: CustomerTrainingsComponent, canActivate:[CheckCustomerGuard]},

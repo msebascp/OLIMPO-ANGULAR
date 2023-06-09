@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "OLIMPO";
+  src: url("../../../assets/CapitalisTypOasis.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+#fuente {
+  font-family: "OLIMPO";
+}

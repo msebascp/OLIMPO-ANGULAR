@@ -13,13 +13,20 @@
            routerLink="/home">
     </li>
     <!--Icono usuario, funcionalidad de login-->
-    <li class="relative pr-3 md:order-3">
+    <li class="flex gap-5 flex-row pr-3 md:order-3">
+      <button routerLink="/shopping-cart"
+      [ngClass]="{'text-red-700' : router.url == '/shopping-cart'}"
+      class="hover:text-red-700 text-3xl cursor-pointer"
+      *ngIf="infoAuth.isLogin">
+      <i class="fa fa-shopping-cart"></i>
+    </button>
       <!--Botón sin loguear-->
       <button routerLink="/login" class="hover:text-red-700"
               [ngClass]="{'text-red-700' : router.url == '/login'}"
               *ngIf="!infoAuth.isLogin">
         <i class="fa fa-user text-3xl"></i>
       </button>
+
       <!--Cliente logueado-->
       <div class="relative flex gap-1" *ngIf="infoAuth.isLogin && !infoAuth.isTrainer">
         <!--Rueda settings-->

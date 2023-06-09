@@ -1,0 +1,7 @@
+.tailwind-tooltip {
+  display: none;
+}
+
+button:hover .tailwind-tooltip {
+  display: block;
+}
