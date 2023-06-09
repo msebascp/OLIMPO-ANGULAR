@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ResponseToken} from "../interfaces/responseToken";
-import {Observable, catchError, of, map, BehaviorSubject, forkJoin} from "rxjs";
+import {Observable, map, BehaviorSubject, forkJoin} from "rxjs";
 import {Router} from "@angular/router";
 import {Trainings} from "../interfaces/trainings";
 import {DataTrainings} from "../interfaces/dataTrainings";
@@ -45,18 +45,10 @@ export class AuthPassportService {
 
   login(email: string, password: string): Observable<ResponseToken> {
     this.loadToken()
-    console.log('El login de clientes se ejecuta');
     return this.http.post<ResponseToken>(`${this.url}/login`, {
-      grant_type: 'password',
       email: email,
       password: password,
-      scope: ''
-    }, this.options).pipe(
-      catchError((error) => {
-        console.log(error.error);
-        return of(error.error as ResponseToken);
-      })
-    );
+    }, this.options)
   }
 
   loginTrainer(email: string, password: string): Observable<ResponseToken> {
@@ -64,18 +56,13 @@ export class AuthPassportService {
     return this.http.post<ResponseToken>(`${this.url}/trainer/login`, {
       email: email,
       password: password,
-    }, this.options).pipe(
-      catchError((error) => {
-        console.log(error.error);
-        return of(error.error as ResponseToken);
-      })
-    );
+    }, this.options)
   }
 
   logout(): void {
     this.loadToken()
     this.http.get<ResponseToken>(`${this.url}/logout`, this.options)
-      .subscribe(data => {
+      .subscribe(_ => {
         this.sendVariable(false, false);
         this.router.navigate(['/home']);
       })
@@ -83,7 +70,7 @@ export class AuthPassportService {
 
   logoutTrainer(): void {
     this.http.get<ResponseToken>(`${this.url}/trainer/logout`, this.options)
-      .subscribe(data => {
+      .subscribe(_ => {
         this.sendVariable(false, false);
         this.router.navigate(['/home']);
       })
@@ -97,10 +84,6 @@ export class AuthPassportService {
         map((data: DataTrainer) => {
           return data.data
         }),
-        catchError(e => {
-          console.error(e);
-          return [];
-        }),
       )
   }
 
@@ -111,10 +94,6 @@ export class AuthPassportService {
       .pipe(
         map((data: DataTrainings) => {
           return data.data
-        }),
-        catchError(e => {
-          console.error(e);
-          return [];
         }),
       )
   }
@@ -146,10 +125,6 @@ export class AuthPassportService {
         map((data: DataTrainer) => {
           return data.data
         }),
-        catchError(e => {
-          console.error(e);
-          return [];
-        }),
       )
   }
 
@@ -171,10 +146,6 @@ export class AuthPassportService {
     return this.http.post<Trainer>(url, formData, this.options2).pipe(
       map((data: Trainer) => {
         return data;
-      }),
-      catchError(e => {
-        console.error(e);
-        return [];
       }),
     );
   }
@@ -199,10 +170,6 @@ export class AuthPassportService {
       map((data: Customer) => {
         return data;
       }),
-      catchError(e => {
-        console.error(e);
-        return [];
-      }),
     );
   }
 
@@ -217,10 +184,6 @@ export class AuthPassportService {
         map((data: DataCustomers) => {
           return data.data[0]
 
-        }),
-        catchError(e => {
-          console.error(e);
-          return [];
         }),
       )
   }

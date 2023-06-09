@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import {Trainings} from '../../interfaces/trainings';
 import {AuthPassportService} from "../../database/auth-passport.service";
 import {SweetAlertsService} from "../../database/sweet-alerts.service";
+import {LoadingService} from "../../database/loading.service";
 
 @Component({
   selector: 'app-admin-users',
@@ -24,6 +25,7 @@ export class AdminUsersComponent {
   isLogin: boolean = false;
   showFilterOptions: boolean = false
   today!: Date;
+  isLoading: boolean = false
 
   constructor(
     private databaseService: DatabaseService,
@@ -33,8 +35,8 @@ export class AdminUsersComponent {
   }
 
   ngOnInit(): void {
-    this.auth.getVariable().subscribe(infoAuth => {
-      this.isLogin = infoAuth.isLogin
+    this.isLoadingService.getVariable().subscribe(isLoading => {
+      this.isLoading = isLoading
     })
     this.today = new Date()
     this.getClientes()

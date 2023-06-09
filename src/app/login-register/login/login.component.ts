@@ -50,15 +50,11 @@ export class LoginComponent {
     let password = this.loginForm.get('password')?.value
     this.auth.login(email, password).subscribe(
       data  => {
-        console.log(data);
         if (data.success) {
           this.token = data.data.token;
           localStorage.setItem('access_token', this.token);
           this.auth.sendVariable(data.data.isLogin, false);
-          this.router.navigate(['/customer/account']);
-        }
-        else {
-          Swal.fire(data.message);
+          this.router.navigate(['/customer/trainings']);
         }
       }
     );
