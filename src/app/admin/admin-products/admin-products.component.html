@@ -1,115 +1,129 @@
-<div class="w-full h-full font-sans Roboto">
-  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="bg-gray-400 m-5 rounded-lg p-5">
-    <h2 class="text-black text-center text-3xl font-bold">Crear Nuevo Producto</h2>
-    <div class="mb-6">
-      <label for="title" class="block mb-2 text-xl font-medium text-black">Nombre</label>
-      <input type="text" id="title"
-        class=" border  text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400"
-        formControlName="name">
-      <h3 *ngIf="form['name'].touched && (form['name'].hasError('required') || form['name'].hasError('pattern'))"
-          class="text-red-600 mt-1">
-        El nombre es obligatorio y no admite caracteres inválidos
-      </h3>
-    </div>
-    <div class="mb-6">
-      <label for="description" class="block mb-2 text-sm font-medium text-black">Descripción</label>
-      <textarea id="description" rows="4"
-        class="block p-2.5 w-full text-sm text-black rounded-lg border focus:ring-blue-500 focus:border-blue-500 bg-gray-200 border-gray-600 placeholder-gray-400"
-        placeholder="Escribe la descripción aquí..." formControlName="description"></textarea>
-      <h3 *ngIf="form['description'].touched &&
+<div class="font-sans Roboto">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="font-sans Roboto">
+    <div class="container mb-6">
+      <div class="bg-white relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
+        <h2 class="text-gray-900 dark:text-black text-center text-3xl font-bold my-4 py-4 mt-4">Crear Nuevo Producto
+        </h2>
+        <div class="mb-2">
+          <div class="flex text-center items-center flex-col justify-center">
+            <label for="name" class="font-bold  text-3xl text-gray-900">
+              <input type="text" id="name" placeholder="Nombre"
+                class="text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
+                formControlName="name">
+            </label>
+            <h3 *ngIf="form['name'].touched && (form['name'].hasError('required') || form['name'].hasError('pattern'))"
+              class="text-red-600 mt-1">
+              El nombre es obligatorio y no admite caracteres inválidos
+            </h3>
+          </div>
+        </div>
+        <div class="mb-2">
+          <div class="flex text-center items-center flex-col justify-center">
+            <label for="description" class="font-bold  text-3xl text-gray-900">
+              <input type="text" id="description" placeholder="Descripción"
+                class="text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
+                formControlName="description">
+            </label>
+            <h3 *ngIf="form['description'].touched &&
           (form['description'].hasError('required') || form['description'].hasError('pattern'))"
-          class="text-red-600 mt-1">
-        La descripción es obligatoria y no admite caracteres inválidos
-      </h3>
+              class="text-red-600 mt-1">
+              La descripción es obligatoria y no admite caracteres inválidos
+            </h3>
+          </div>
+        </div>
+        <div class="mb-2">
+          <div class="flex text-center items-center flex-col justify-center">
+            <label for="price" class="font-bold  text-3xl text-gray-900">
+              <input type="text" id="price" placeholder="Precio"
+                class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
+                formControlName="price">
+            </label>
+            <h3 *ngIf="form['price'].touched &&
+          (form['price'].hasError('required') || form['price'].hasError('pattern'))" class="text-red-600 mt-1">
+              El precio es obligatorio y el decimal se indica con punto
+            </h3>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="flex text-center items-center flex-col justify-center">
+            <label for="photo" class="font-bold  text-3xl text-gray-900">
+              <input (change)="onFileChange($event)"
+                class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
+                formControlName="image" accept=".jpg,.jpeg,.png" id="photo" type="file">
+            </label>
+          </div>
+        </div>
+        <div class="mb-2 flex justify-center align-middle items-center">
+          <img [src]="selectedImage" class="h-96 md:h-[400px] rounded-xl" *ngIf="selectedImage" alt="" />
+        </div>
+        <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1">
+          Revisa que todos los campos se han rellenado correctamente (*)
+        </h3>
+        <div class="items-center text-center pt-2 pb-5">
+          <button type="submit" (blur)="showInvalidSubmit = false">
+            <span class="bg-red-600 hover:bg-red-700 text-white font-bold mr-3 ml-3 py-2 px-4 rounded-full">
+              Subir producto
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="mb-6">
-      <label for="price" class="block mb-2 text-xl font-medium text-black">Precio</label>
-      <input type="text" id="price"
-             class=" border  text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400"
-             formControlName="price">
-      <h3 *ngIf="form['price'].touched &&
-          (form['price'].hasError('required') || form['price'].hasError('pattern'))"
-          class="text-red-600 mt-1">
-        El precio es obligatorio y el decimal se indica con punto
-      </h3>
+    </form>
+    <div class="relative overflow-x-auto rounded-lg m-5 bg-white shadow  w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
+      <h2 class="text-center text-3xl text-black font-bold p-4">Productos</h2>
+      <table class="w-full text-sm text-left text-gray-900 ">
+        <thead class="text-xs text-gray-900 uppercase bg-white ">
+          <tr>
+            <th scope="col" class="px-6 py-3">
+              Foto
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Nombre
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Precio
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Descripción
+            </th>
+            <th scope="col" class="px-6 py-3">
+              <span class="sr-only">Edit</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products" class="border-b bg-white ">
+            <td class="px-6 py-4 font-medium text-black whitespace-nowrap  w-52">
+              <div class="flex-shrink-0">
+                <img class="w-full h-20 sm:w-24 sm:h-24 rounded" alt="" [src]="'http://localhost:8000' + product.photo">
+              </div>
+            </td>
+            <td class="px-6 py-4 font-bold text-black whitespace-nowrap ">
+              {{ product.name }}
+            </td>
+            <td class="px-6 py-4 text-black">
+              {{ product.price }}€
+            </td>
+            <td class="px-6 py-4 text-black">
+              {{ product.description }}
+            </td>
+            <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
+              <button class="mt-8">
+                <i routerLink="/admin/editProduct/{{ product.id }}"
+                  class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-300"></i>
+                <span
+                  class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-24  md:-translate-x-28 -translate-y-9">
+                  EditarProducto
+                </span>
+              </button>
+              <button class="mt-8"><i (click)="deleteProduct(product.id)"
+                  class="fa fa-trash px-2 text-xl text-gray-700 hover:text-gray-300"></i><span
+                  class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 -translate-y-12">Borrar
+                  Producto</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="mb-6">
-      <label class="block mb-2 text-xl font-medium text-black" for="photo">Subir Foto</label>
-      <input (change)="onFileChange($event)"
-             class="block w-full text-lg text-black border  rounded-lg cursor-pointer focus:ring-blue-500 focus:border-blue-500  bg-gray-200 border-gray-600 placeholder-gray-400"
-             formControlName="image" accept=".jpg,.jpeg,.png"
-             id="photo" type="file">
     </div>
-    <div class="mb-6 flex justify-center align-middle items-center">
-      <img [src]="selectedImage" class="h-96 md:h-[600px] rounded-xl" *ngIf="selectedImage" alt="" />
-    </div>
-    <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1">
-      Revisa que todos los campos se han rellenado correctamente (*)
-    </h3>
-    <button type="submit" (blur)="showInvalidSubmit = false"
-      class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white text-white focus:outline-none focus:ring-0 ">
-      <span
-        class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-600 rounded-md group-hover:bg-opacity-0">
-        Subir producto
-      </span>
-    </button>
-  </form>
-
-  <div class="relative overflow-x-auto rounded sm:rounded-lg m-5 bg-gray-400">
-    <h2 class="text-center text-3xl text-black font-bold p-4">Productos</h2>
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-500 ">
-        <tr>
-          <th scope="col" class="px-6 py-3">
-            Foto
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Nombre
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Precio
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Descripción
-          </th>
-          <th scope="col" class="px-6 py-3">
-            <span class="sr-only">Edit</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products" class="border-b bg-gray-400 border-gray-600">
-          <td class="px-6 py-4 font-medium text-black whitespace-nowrap  w-52">
-            <div class="flex-shrink-0">
-              <img class="w-full h-20 sm:w-24 sm:h-24 rounded" alt="" [src]="'http://localhost:8000' + product.photo">
-            </div>
-          </td>
-          <td class="px-6 py-4 font-bold text-black whitespace-nowrap ">
-            {{ product.name }}
-          </td>
-          <td class="px-6 py-4 text-black">
-            {{ product.price }}€
-          </td>
-          <td class="px-6 py-4 text-black">
-            {{ product.description }}
-          </td>
-          <td class="px-6 py-4 text-right flex justify-end items-center align-middle">
-            <button class="mt-8">
-              <i routerLink="/admin/editProduct/{{ product.id }}"
-                class="fa fa-pencil-square-o px-2 text-xl text-gray-700 hover:text-gray-300"></i>
-              <span
-                class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-24  md:-translate-x-28 -translate-y-9">
-                EditarProducto
-              </span>
-            </button>
-            <button class="mt-8"><i (click)="deleteProduct(product.id)"
-                class="fa fa-trash px-2 text-xl text-gray-700 hover:text-gray-300"></i><span
-                class="absolute text-sm bg-gray-900 text-white p-2 rounded tailwind-tooltip -translate-x-16 -translate-y-12">Borrar
-                Producto</span>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>

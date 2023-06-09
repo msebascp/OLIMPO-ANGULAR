@@ -96,7 +96,7 @@ export class DatabaseService {
 
   public createIMCcalculation(imcForm: ImcRecord): Observable<ImcRecord> {
     let url = this.API_URL + `/imcRecords?height=${imcForm.height}&weight=${imcForm.weight}&imc=${imcForm.imc}&customer_id=${imcForm.customer_id}`
-  
+
     return this.http.post<ImcRecord>(url, imcForm).pipe(
       map((data: ImcRecord) => {
         return data;
@@ -126,6 +126,15 @@ export class DatabaseService {
 
   public deleteCustomer(id: number): Observable<Customer> {
     return this.http.delete<Customer>(this.API_URL + `/customers` + `/${id}`).pipe(
+      catchError(e => {
+        console.error(e);
+        return [];
+      })
+    );
+  }
+
+  public activeCustomer(id: number): Observable<Customer> {
+    return this.http.get<Customer>(this.API_URL + `/customers/active` + `/${id}`).pipe(
       catchError(e => {
         console.error(e);
         return [];
