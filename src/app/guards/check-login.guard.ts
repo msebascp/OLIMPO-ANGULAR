@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
-import {map, Observable} from 'rxjs';
+import {finalize, map, Observable} from 'rxjs';
 import {AuthPassportService} from "../database/auth-passport.service";
+import {LoadingService} from "../database/loading.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,19 @@ import {AuthPassportService} from "../database/auth-passport.service";
 export class CheckLoginGuard implements CanActivate {
   constructor(
     private auth: AuthPassportService,
-    private router: Router
+    private router: Router,
+    private loading: LoadingService,
   ) {
   }
+
   canActivate(): Observable<boolean> {
+    this.loading.show();
     return this.auth.checkDouble().pipe(
+      finalize(() => {
+        setTimeout(() => {
+          this.loading.hide()
+        }, 200)
+      }),
       map(
         data => {
           if (data.isLogin && !data.isTrainer) {

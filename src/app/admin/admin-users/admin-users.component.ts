@@ -1,12 +1,11 @@
-import {Component} from '@angular/core';
-import {Customer} from '../../interfaces/customer';
-import {DatabaseService} from '../../database/database.service';
-import {debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap} from 'rxjs';
+import { Component } from '@angular/core';
+import { Customer } from '../../interfaces/customer';
+import { DatabaseService } from '../../database/database.service';
+import { debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
-import {Trainings} from '../../interfaces/trainings';
-import {AuthPassportService} from "../../database/auth-passport.service";
+import { Trainings } from '../../interfaces/trainings';
+import { AuthPassportService } from "../../database/auth-passport.service";
 import {SweetAlertsService} from "../../database/sweet-alerts.service";
-import {LoadingService} from "../../database/loading.service";
 
 @Component({
   selector: 'app-admin-users',
@@ -29,7 +28,7 @@ export class AdminUsersComponent {
   constructor(
     private databaseService: DatabaseService,
     private auth: AuthPassportService,
-    private alerts: SweetAlertsService
+    private alerts: SweetAlertsService,
   ) {
   }
 
@@ -94,7 +93,7 @@ export class AdminUsersComponent {
           this.databaseService.getTrainerByCustomer(customer.id).subscribe(trainer => {
             const values = Object.values(trainer)[9];
             if (customer.trainer_id === values.id) {
-              Object.assign(customer, {trainer: values});
+              Object.assign(customer, { trainer: values });
             }
           })
         }
@@ -134,7 +133,7 @@ export class AdminUsersComponent {
       background: '#1F2937'
     }).then((result: any) => {
       if (result.isConfirmed) {
-        // Recogemos el 'id' que tiene el boton
+        // Recogemos el 'id' que tiene el botón
         this.databaseService.deleteCustomer(id).subscribe(_ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Dado de baja' + "</h5>",
@@ -162,7 +161,7 @@ export class AdminUsersComponent {
       background: '#1F2937'
     }).then((result: any) => {
       if (result.isConfirmed) {
-        // Recogemos el 'id' que tiene el boton
+        // Recogemos el 'id' que tiene el botón
         this.databaseService.activeCustomer(id).subscribe(_ => {
           Swal.fire({
             title: "<h5 style='color:white'>" + 'Dado de alta' + "</h5>",

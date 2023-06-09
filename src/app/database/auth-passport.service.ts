@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ResponseToken} from "../interfaces/responseToken";
-import {Observable, map, BehaviorSubject, forkJoin} from "rxjs";
+import {Observable, map, BehaviorSubject, forkJoin, finalize} from "rxjs";
 import {Router} from "@angular/router";
 import {Trainings} from "../interfaces/trainings";
 import {DataTrainings} from "../interfaces/dataTrainings";
@@ -12,6 +12,7 @@ import {RegisterTrainerData} from "../interfaces/registerTrainerData";
 import {Customer} from '../interfaces/customer';
 import {DataCustomers} from '../interfaces/dataCustomers';
 import {BasicResponse} from "../interfaces/BasicResponse";
+import {LoadingService} from "./loading.service";
 
 @Injectable({
   providedIn: 'root'
@@ -39,24 +40,39 @@ export class AuthPassportService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private loading: LoadingService,
   ) {
   }
 
   login(email: string, password: string): Observable<ResponseToken> {
+    this.loading.show()
     this.loadToken()
     return this.http.post<ResponseToken>(`${this.url}/login`, {
       email: email,
       password: password,
-    }, this.options)
+    }, this.options).pipe(
+      finalize(() => {
+        setTimeout(() => {
+          this.loading.hide()
+        }, 400)
+      })
+    )
   }
 
   loginTrainer(email: string, password: string): Observable<ResponseToken> {
+    this.loading.show()
     this.loadToken()
     return this.http.post<ResponseToken>(`${this.url}/trainer/login`, {
       email: email,
       password: password,
-    }, this.options)
+    }, this.options).pipe(
+      finalize(() => {
+        setTimeout(() => {
+          this.loading.hide()
+        }, 400)
+      })
+    )
   }
 
   logout(): void {
