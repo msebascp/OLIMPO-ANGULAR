@@ -25,7 +25,6 @@ export class AdminUsersComponent {
   isLogin: boolean = false;
   showFilterOptions: boolean = false
   today!: Date;
-  isLoading: boolean = false
 
   constructor(
     private databaseService: DatabaseService,
@@ -35,8 +34,8 @@ export class AdminUsersComponent {
   }
 
   ngOnInit(): void {
-    this.isLoadingService.getVariable().subscribe(isLoading => {
-      this.isLoading = isLoading
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
     })
     this.today = new Date()
     this.getClientes()

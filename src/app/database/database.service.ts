@@ -99,12 +99,7 @@ export class DatabaseService {
   }
 
   public activeCustomer(id: number): Observable<Customer> {
-    return this.http.get<Customer>(this.API_URL + `/customers/active` + `/${id}`).pipe(
-      catchError(e => {
-        console.error(e);
-        return [];
-      })
-    );
+    return this.http.get<Customer>(this.API_URL + `/customers/active` + `/${id}`);
   }
 
   public searchCustomers(text: string): Observable<Customer[]> {

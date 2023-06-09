@@ -19,7 +19,8 @@ export class AdminEditProductComponent {
   newImage!: File
   newImageString: string = ''
   productForm!: FormGroup
-
+  isLogin: boolean = false;
+  
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -32,6 +33,9 @@ export class AdminEditProductComponent {
   }
 
   ngOnInit(): void {
+    this.auth.getVariable().subscribe(infoAuth => {
+      this.isLogin = infoAuth.isLogin
+    })
     this.productForm = this.formBuilder.group(
       {
         name: ["", [Validators.required]],
