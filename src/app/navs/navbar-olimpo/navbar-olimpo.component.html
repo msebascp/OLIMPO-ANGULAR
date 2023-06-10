@@ -17,7 +17,7 @@
       <button routerLink="/shopping-cart"
       [ngClass]="{'text-red-700' : router.url == '/shopping-cart'}"
       class="hover:text-red-700 text-3xl cursor-pointer"
-      *ngIf="infoAuth.isLogin">
+      *ngIf="infoAuth.isLogin && !infoAuth.isTrainer">
       <i class="fa fa-shopping-cart"></i>
     </button>
       <!--Botón sin loguear-->
