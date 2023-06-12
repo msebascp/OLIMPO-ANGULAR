@@ -1,10 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
 import { AuthPassportService } from 'src/app/database/auth-passport.service';
 import { Customer } from 'src/app/interfaces/customer';
-import { Trainer } from 'src/app/interfaces/trainer';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,21 +13,19 @@ import Swal from 'sweetalert2';
 })
 export class CustomerEditAccountComponent {
   isLogin: boolean = false;
-  public selectedCustomer!: Customer;
-
+  selectedCustomer!: Customer;
   customerForm!: FormGroup;
   showInvalidSubmit: boolean = false;
   @ViewChild('fileInput')
   fileInput!: ElementRef;
-  public image!: File;
-  public selectedImage: string = ''
+  image!: File;
+  selectedImage: string = ''
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private auth: AuthPassportService,
     private formBuilder: FormBuilder,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -95,7 +92,6 @@ export class CustomerEditAccountComponent {
         const name = this.customerForm.get('name')?.value || '';
         const email = this.customerForm.get('email')?.value || '';
         const surname = this.customerForm.get('surname')?.value || '';
-        console.log(name)
         const updatedCustomer: Customer = {
           ...this.selectedCustomer,
           name,

@@ -1,72 +1,75 @@
 <loading *ngIf="!isLogin"></loading>
 <div *ngIf="isLogin" class="w-full h-full font-sans Roboto">
-    <div class="bg-transparent antialiased">
-        <div class="container mb-2 mt-24">
-            <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
-                <div class="bg-white relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
-                    <div class="flex justify-center">
-                        <img *ngIf="selectedCustomer.photo !== '/storage/' && selectedImage === ''"
-                            [src]="'http://localhost:8000' + selectedCustomer.photo"
-                            (click)="changeImg()"
-                            class="bg-white cursor-pointer  rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110 z-10">
-                        <img *ngIf="selectedCustomer.photo === '/storage/'" src="../../../assets/perfil.png"
-                            (click)="changeImg()"
-                            class="bg-white cursor-pointer  hover:opacity-50 rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110 z-10">
-                        <img *ngIf="selectedImage" [src]="selectedImage"
-                            (click)="changeImg()"
-                            class="bg-white cursor-pointer  rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110 z-10">
-                        <input type="file" #fileInput class="hidden" (change)="onFileSelected($event)">
-                    </div>
-                    <div class="mt-16">
-                        <div class="flex flex-col items-center text-center justify-center">
-                            <label for="name" class="font-bold  text-3xl text-gray-900">
-                                <input type="text" id="name" placeholder="Nombre"
-                                    class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
-                                    [(ngModel)]="selectedCustomer.name" formControlName="name">
-                            </label>
-                            <h3 *ngIf="form['name'].touched && form['name'].hasError('required')" class="text-red-600 mt-1">
-                                El nombre es obligatorio
-                            </h3>
-                        </div>
-                        <div class="flex flex-col items-center text-center justify-center">
-                            <label for="surname" class="font-bold text-center text-3xl text-gray-900">
-                                <input type="text" id="surname" placeholder="Apellido"
-                                    class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
-                                    [(ngModel)]="selectedCustomer.surname" formControlName="surname">
-                            </label>
-                            <h3 *ngIf="form['surname'].touched && form['surname'].hasError('required')"
-                            class="text-red-600 mt-1">
-                            El apellido es obligatorio
-                        </h3>
-                        </div>
-                        <div class="flex flex-col items-center text-center justify-center">
-                            <label for="email" class="font-bold text-center text-3xl text-gray-900">
-                                <input type="text" id="email" placeholder="Email"
-                                    class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
-                                    [(ngModel)]="selectedCustomer.email" formControlName="email">
-                            </label>
-                            <h3 *ngIf="form['email'].touched && form['email'].hasError('required')"
-                            class="text-red-600 mt-1">
-                            El apellido es obligatorio
-                            </h3>
-                        </div>
-                        <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1 text-center">
-                            Rellena correctamente el formulario (*)
-                        </h3>
-                        <div class="items-center text-center pt-5 pb-5">
-                            <button type="submit"
-                                class="bg-red-600 hover:bg-red-700 text-white font-bold mr-3 ml-3 py-2 px-4 rounded-full">
-                                Guardar
-                            </button>
-                            <button (click)="goBack()" type="button"
-                                class="bg-red-600 hover:bg-red-700 text-white font-bold mr-3 ml-3 py-2 px-4 rounded-full">
-                                Volver
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
+  <div class="bg-transparent antialiased">
+    <div class="container mb-2 mt-24">
+      <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+        <div class="bg-white relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
+          <div class="flex justify-center">
+            <img *ngIf="selectedCustomer && selectedCustomer.photo !== '/storage/' && selectedImage === ''"
+                 [src]="'http://localhost:8000' + selectedCustomer.photo"
+                 (click)="changeImg()"
+                 class="bg-white cursor-pointer  rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110 z-10"
+                 alt="imageProfile">
+            <img *ngIf="selectedCustomer && selectedCustomer.photo === '/storage/'" src="../../../assets/perfil.png"
+                 (click)="changeImg()"
+                 class="bg-white cursor-pointer  hover:opacity-50 rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110 z-10"
+                 alt="imageProfile">
+            <img *ngIf="selectedImage" [src]="selectedImage"
+                 (click)="changeImg()"
+                 class="bg-white cursor-pointer  rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110 z-10"
+                 alt="imageProfile">
+            <input type="file" #fileInput class="hidden" (change)="onFileSelected($event)">
+          </div>
+          <div class="mt-16">
+            <div class="flex flex-col items-center text-center justify-center">
+              <label for="name" class="font-bold  text-3xl text-gray-900">
+                <input *ngIf="selectedCustomer" type="text" id="name" placeholder="Nombre"
+                       class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
+                       [(ngModel)]="selectedCustomer.name" formControlName="name">
+              </label>
+              <h3 *ngIf="form['name'].touched && form['name'].hasError('required')" class="text-red-600 mt-1">
+                El nombre es obligatorio
+              </h3>
+            </div>
+            <div class="flex flex-col items-center text-center justify-center">
+              <label for="surname" class="font-bold text-center text-3xl text-gray-900">
+                <input *ngIf="selectedCustomer" type="text" id="surname" placeholder="Apellido"
+                       class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
+                       [(ngModel)]="selectedCustomer.surname" formControlName="surname">
+              </label>
+              <h3 *ngIf="form['surname'].touched && form['surname'].hasError('required')"
+                  class="text-red-600 mt-1">
+                El apellido es obligatorio
+              </h3>
+            </div>
+            <div class="flex flex-col items-center text-center justify-center">
+              <label for="email" class="font-bold text-center text-3xl text-gray-900">
+                <input *ngIf="selectedCustomer" type="text" id="email" placeholder="Email"
+                       class=" text-center justify-center border border-gray-300 text-sm rounded-lg block w-72 my-1 p-2.5"
+                       [(ngModel)]="selectedCustomer.email" formControlName="email">
+              </label>
+              <h3 *ngIf="form['email'].touched && form['email'].hasError('required')"
+                  class="text-red-600 mt-1">
+                El apellido es obligatorio
+              </h3>
+            </div>
+            <h3 *ngIf="showInvalidSubmit" class="text-red-600 mt-1 text-center">
+              Rellena correctamente el formulario (*)
+            </h3>
+            <div class="items-center text-center pt-5 pb-5">
+              <button type="submit"
+                      class="bg-red-600 hover:bg-red-700 text-white font-bold mr-3 ml-3 py-2 px-4 rounded-full">
+                Guardar
+              </button>
+              <button (click)="goBack()" type="button"
+                      class="bg-red-600 hover:bg-red-700 text-white font-bold mr-3 ml-3 py-2 px-4 rounded-full">
+                Volver
+              </button>
+            </div>
+          </div>
         </div>
+      </form>
+
     </div>
+  </div>
 </div>
