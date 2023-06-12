@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class AdminEditPostComponent {
   isLogin: boolean = false;
-  public selectedPost!: Blog;
+  public selectedPost: Blog = {id: 0, title: '', description: '', photo: '' };
   public image!: File;
   public updatedPost: Blog = {id: 0, title: '', description: '', photo: '' };
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { loadStripe, Stripe, StripeAddressElementChangeEvent } from "@stripe/stripe-js";
+import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { AuthPassportService } from 'src/app/database/auth-passport.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -31,7 +31,7 @@ export class CheckoutPageComponent implements OnInit {
     const payment_checkout = elements.create('card');
     const payment_email = elements.create('address', {
       mode: 'shipping',
-    });;
+    });
     payment_email.mount('.payment-address')
 
     payment_email.on('change', (event) => {

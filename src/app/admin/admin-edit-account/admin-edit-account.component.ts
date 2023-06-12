@@ -1,14 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { Location } from "@angular/common";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Trainer } from '../../interfaces/trainer';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {Location} from "@angular/common";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Trainer} from '../../interfaces/trainer';
 import Swal from 'sweetalert2';
-import { AuthPassportService } from 'src/app/database/auth-passport.service';
-
-
-
-
+import {AuthPassportService} from 'src/app/database/auth-passport.service';
 
 @Component({
   selector: 'admin-edit-account',
@@ -17,8 +13,8 @@ import { AuthPassportService } from 'src/app/database/auth-passport.service';
 })
 export class AdminEditAccountComponent {
   isLogin: boolean = false;
-  public editTrainer: Trainer = { id: 0, name: '', surname: '', email: '', specialty: '', photo: '', customer: [] };
-  public selectedTrainer !: Trainer
+  editTrainer: Trainer = {id: 0, name: '', surname: '', email: '', specialty: '', photo: '', customer: []};
+  selectedTrainer: Trainer = {id: 0, name: '', surname: '', email: '', specialty: '', photo: '', customer: []}
 
   trainerForm!: FormGroup
   showInvalidSubmit: boolean = false;
@@ -32,7 +28,8 @@ export class AdminEditAccountComponent {
     private location: Location,
     private auth: AuthPassportService,
     private formBuilder: FormBuilder,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.auth.getVariable().subscribe(infoAuth => {
@@ -100,7 +97,6 @@ export class AdminEditAccountComponent {
         const surname = this.trainerForm.get('surname')?.value || '';
         const email = this.trainerForm.get('email')?.value || '';
         const specialty = this.trainerForm.get('specialty')?.value || '';
-        console.log(name)
         this.editTrainer = {
           ...this.selectedTrainer,
           name,
