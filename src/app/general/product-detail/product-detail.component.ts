@@ -54,7 +54,7 @@ export class ProductDetailComponent {
 
 
   public dataCustomer() {
-    if (this.infoAuth.isLogin) {
+    if (this.infoAuth.isLogin && !this.infoAuth.isTrainer) {
     this.auth.dataCustomer().subscribe(customer => {
       this.customer = customer;
     });
@@ -63,7 +63,7 @@ export class ProductDetailComponent {
   
 
 public endPoint() {
-  if (this.infoAuth.isLogin) {
+  if (this.infoAuth.isLogin && !this.infoAuth.isTrainer) {
     this.auth.endPointCustomer();
   } 
 }
