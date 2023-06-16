@@ -44,6 +44,14 @@ export class ShoppingService {
     return this.http.delete<Shopping>(url)
   }
 
+  public deleteProductByIdProduct(id: number): Observable<Shopping> {
+    let url = this.API_URL;
+    if (id !== undefined) {
+      url += `/deleteShoppingByIdProduct/${id}`
+    }
+    return this.http.delete<Shopping>(url)
+  }
+
   public updateProduct(id: number, cantidad: number): Observable<Shopping> {
     const formData = new FormData();
     formData.append('cantidad', cantidad.toString())

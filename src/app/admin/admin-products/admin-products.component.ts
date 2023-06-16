@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Product} from "../../interfaces/product";
 import {ProductService} from "../../database/product.service";
 import {SweetAlertsService} from "../../database/sweet-alerts.service";
+import { ShoppingService } from 'src/app/database/shopping.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -24,7 +25,8 @@ export class AdminProductsComponent {
     private router: Router,
     private productService: ProductService,
     private formBuilder: FormBuilder,
-    private alerts: SweetAlertsService
+    private alerts: SweetAlertsService,
+    private shoppingService: ShoppingService
   ) {
   }
 
@@ -102,9 +104,11 @@ export class AdminProductsComponent {
     this.alerts.confirmAlert('¿Quieres eliminar el producto?', 'No podrás revertirlo',).subscribe(
       data  => {
         if (data) {
-          this.productService.deleteProduct(id).subscribe( _ => {
-            this.alerts.basicAlert('El producto ha sido borrado')
-            this.products = this.products.filter(product => product.id !== id)
+          this.shoppingService.deleteProductByIdProduct(id).subscribe( _ => {
+            this.productService.deleteProduct(id).subscribe( _ => {
+              this.alerts.basicAlert('El producto ha sido borrado')
+              this.products = this.products.filter(product => product.id !== id)
+            })
           })
         }
       }
